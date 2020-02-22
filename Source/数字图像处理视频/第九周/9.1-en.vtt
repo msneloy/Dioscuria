@@ -1,0 +1,426 @@
+WEBVTT
+
+1
+00:00:00.012 --> 00:00:04.707
+Hello and welcome back to a new week on 
+image and video processing. 
+
+2
+00:00:04.707 --> 00:00:07.697
+The topic of this week is medical 
+imaging. 
+
+3
+00:00:07.697 --> 00:00:13.340
+Medical imaging is a fascinating area. 
+The challenges are incredible and so are 
+
+4
+00:00:13.340 --> 00:00:16.646
+the rewards. 
+When we solve problems in medical 
+
+5
+00:00:16.646 --> 00:00:21.862
+imaging, we are basically helping 
+humanity and that's a great reward. 
+
+6
+00:00:21.862 --> 00:00:27.172
+Now, medical imaging is very, very 
+different than many other areas of image 
+
+7
+00:00:27.172 --> 00:00:30.597
+processing. 
+One of the differences is that very 
+
+8
+00:00:30.597 --> 00:00:36.042
+often, we start the investigation, we 
+started working medical imaging with a 
+
+9
+00:00:36.042 --> 00:00:41.187
+problem presented to us. 
+Let's see a couple of examples of that. 
+
+10
+00:00:41.187 --> 00:00:46.847
+Here, we see images of skin. 
+Basically, just regular pictures of the 
+
+11
+00:00:46.847 --> 00:00:51.728
+skin with potential lesions, potential 
+cancer lesions. 
+
+12
+00:00:51.728 --> 00:00:58.483
+So, maybe a doctor knocks the door in our 
+office and says, could you please help 
+
+13
+00:00:58.483 --> 00:01:00.563
+me? 
+What I need to do is I need to 
+
+14
+00:01:00.563 --> 00:01:04.170
+automatically segment out the lesion. 
+I want to measure it. 
+
+15
+00:01:04.170 --> 00:01:07.530
+I want to measure its area. 
+I want to measure some of its 
+
+16
+00:01:07.530 --> 00:01:11.248
+characteristics inside and sometimes I 
+even want to track it. 
+
+17
+00:01:11.248 --> 00:01:16.142
+I want the patient to come again, let's 
+say, after a year or after a few months 
+
+18
+00:01:16.142 --> 00:01:22.542
+or after a certain period and control how 
+that lesion, how that region is changing. 
+
+19
+00:01:22.542 --> 00:01:28.337
+but the problem is very specific. 
+So, you think, and you say, I know I have 
+
+20
+00:01:28.337 --> 00:01:33.762
+learned how to do image segmentation. 
+One of those techniques is active 
+
+21
+00:01:33.762 --> 00:01:37.692
+contours. 
+So, you can start with the contour and 
+
+22
+00:01:37.692 --> 00:01:43.147
+you can let that curve deform towards the 
+boundary of the object, 
+
+23
+00:01:43.147 --> 00:01:49.267
+this yellow curve, and all these three 
+images were actually segmented out with 
+
+24
+00:01:49.267 --> 00:01:53.817
+active contours. 
+You might think, oh, but this image is 
+
+25
+00:01:53.817 --> 00:01:57.672
+actually extremely noisy. 
+These are hertz. 
+
+26
+00:01:57.672 --> 00:02:02.392
+But these hertz are, from the point of 
+view of image processing, noise. 
+
+27
+00:02:02.392 --> 00:02:05.644
+But you also know, know how to do image 
+denoising. 
+
+28
+00:02:05.644 --> 00:02:09.904
+So maybe before you apply active 
+contours, you basically do image 
+
+29
+00:02:09.904 --> 00:02:13.322
+denoising. 
+So, this is a very important application. 
+
+30
+00:02:13.322 --> 00:02:18.547
+And a particular example where we are 
+applying our knowledge in image 
+
+31
+00:02:18.547 --> 00:02:23.682
+processing to a particular problem. 
+Let's see another example. 
+
+32
+00:02:23.682 --> 00:02:27.982
+Here is another example in the area of 
+cystic fibrosis. 
+
+33
+00:02:27.982 --> 00:02:34.837
+And without going into too many details, 
+this is a patch that is basically put on 
+
+34
+00:02:34.837 --> 00:02:42.183
+the skin and it basically measures the 
+amount of sweat and the concentration of 
+
+35
+00:02:42.183 --> 00:02:48.151
+chloride in the sweat. 
+And the basic idea, the challenge here is 
+
+36
+00:02:48.151 --> 00:02:55.402
+to detect this curve and detect this 
+curve and compute the ratio of the areas 
+
+37
+00:02:55.402 --> 00:02:59.079
+that are inside this curve and inside 
+this curve. 
+
+38
+00:02:59.079 --> 00:03:04.445
+So, once again, the scenario is that a 
+doctor knocks your door and asks you, 
+
+39
+00:03:04.445 --> 00:03:09.144
+explains to you the problem, and asks you 
+a particular question. 
+
+40
+00:03:09.144 --> 00:03:14.942
+And says, you need to detect this curve 
+and you need to detect this curve for me. 
+
+41
+00:03:14.942 --> 00:03:20.239
+Once we detect the curves, we can compute 
+the area and that area gives us 
+
+42
+00:03:20.239 --> 00:03:24.888
+information about the concentration of 
+chloride in the sweat. 
+
+43
+00:03:24.888 --> 00:03:30.484
+So, you think for a while and you say, 
+this curve looks very elliptical to me. 
+
+44
+00:03:30.484 --> 00:03:36.055
+Can I assume that that's an ellipse or a 
+circle? You ask the doctor, this is a 
+
+45
+00:03:36.055 --> 00:03:40.442
+process of communication between two 
+different disciplines. 
+
+46
+00:03:40.442 --> 00:03:45.736
+If the answer is yes, you say, I know how 
+to detect those type of curves, they're 
+
+47
+00:03:45.736 --> 00:03:50.959
+half transformed, the half transformed is 
+great to detect parametric curves. 
+
+48
+00:03:50.959 --> 00:03:56.756
+So, you apply a half transform not to the 
+image but to the edges of the image and 
+
+49
+00:03:56.756 --> 00:04:01.836
+you get this curve, perfect. 
+Now, this is non-parametric so you can 
+
+50
+00:04:01.836 --> 00:04:07.948
+either apply active contours or you can 
+try obtuse threshold algorithm to see if 
+
+51
+00:04:07.948 --> 00:04:12.967
+you can get this region. 
+Once you get this region, you compute the 
+
+52
+00:04:12.967 --> 00:04:18.559
+ratio of areas and you have solved an 
+extremely important problem. 
+
+53
+00:04:18.559 --> 00:04:24.836
+Now often, in medical imaging, we don't 
+really attack problems like these ones 
+
+54
+00:04:24.836 --> 00:04:30.040
+that I just mentioned, 
+but we basically address basic research 
+
+55
+00:04:30.040 --> 00:04:35.532
+issues with data that comes from medical 
+data or biological data. 
+
+56
+00:04:35.532 --> 00:04:40.983
+An example of that is here. 
+These are basically surfaces that 
+
+57
+00:04:40.983 --> 00:04:47.746
+represent the gray matter in our brain. 
+In the brain of the subject that went 
+
+58
+00:04:47.746 --> 00:04:52.490
+into an MRI scanner. 
+And here, we see what are called the 
+
+59
+00:04:52.490 --> 00:04:57.032
+sulci. 
+So basically, our brain, our gray matter 
+
+60
+00:04:57.032 --> 00:05:01.177
+is folded. 
+And these are basically the bottom of the 
+
+61
+00:05:01.177 --> 00:05:04.102
+folds. 
+And from, for many reasons in 
+
+62
+00:05:04.102 --> 00:05:08.327
+neuroscience, these curves are extremely 
+important. 
+
+63
+00:05:08.327 --> 00:05:13.222
+So, here is a challenge for image 
+processing in 3 dimensions, 
+
+64
+00:05:13.222 --> 00:05:19.778
+how to automatically compute these sulci 
+curves not for a particular medical 
+
+65
+00:05:19.778 --> 00:05:26.502
+problem, or medical application, but for 
+a basic research, basic science, basic 
+
+66
+00:05:26.502 --> 00:05:31.706
+neuroscience question. 
+Once you compute these, you can create 
+
+67
+00:05:31.706 --> 00:05:38.535
+very interesting networks of these sulci, 
+which again, have a very important 
+
+68
+00:05:38.535 --> 00:05:44.217
+neuroscience problem, 
+is a very important information for many 
+
+69
+00:05:44.217 --> 00:05:49.486
+neuroscience applications. 
+Some of them actually related to 
+
+70
+00:05:49.486 --> 00:05:54.398
+particular problems, but some of them are 
+related to research. 
+
+71
+00:05:54.398 --> 00:05:57.929
+So, these are just some examples of 
+medical imaging. 
+
+72
+00:05:57.929 --> 00:06:00.917
+We're going to see much more in the next 
+videos. 
+
+73
+00:06:00.917 --> 00:06:05.855
+But one of the fascinating areas of 
+medical imaging is that it's a constant 
+
+74
+00:06:05.855 --> 00:06:09.929
+learning experience. 
+This is not done just by people that are 
+
+75
+00:06:09.929 --> 00:06:15.047
+experts in image processing, 
+you have to work very close with doctors, 
+
+76
+00:06:15.047 --> 00:06:19.642
+with people in Biology, with 
+neuroscientists, with people that 
+
+77
+00:06:19.642 --> 00:06:25.222
+basically have the medical imaging 
+challenges, and that basically forces you 
+
+78
+00:06:25.222 --> 00:06:31.085
+to learn new problems all the time, and 
+forces them to learn new techniques, and 
+
+79
+00:06:31.085 --> 00:06:35.660
+basically forces both groups to work 
+close with each other, 
+
+80
+00:06:35.660 --> 00:06:41.134
+which actually is a lot of fun because as 
+I say, it's a constant learning 
+
+81
+00:06:41.134 --> 00:06:44.935
+experiance. 
+I'm going to try to teach you some of the 
+
+82
+00:06:44.935 --> 00:06:50.040
+challeges in medical imaging. 
+It's a huge area so I'm going to pick a 
+
+83
+00:06:50.040 --> 00:06:55.164
+few examples in the next videos to 
+illustrate some of the problems, some of 
+
+84
+00:06:55.164 --> 00:06:59.870
+the challenges, and some of the rewards 
+when you work in medical imaging. 
+
+85
+00:06:59.870 --> 00:07:02.831
+See you in the next videos. 
+Thank you very much. 

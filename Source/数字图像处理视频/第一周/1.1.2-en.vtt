@@ -1,0 +1,685 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.269
+Welcome back to the Image and Video 
+Processing class. In the previous video, 
+
+2
+00:00:04.269 --> 00:00:08.653
+we saw a number of examples that show 
+what image and video processing can do 
+
+3
+00:00:08.653 --> 00:00:11.386
+for us. 
+Now we are going to see a few additional 
+
+4
+00:00:11.386 --> 00:00:14.062
+examples. 
+We're going to start again from consumer 
+
+5
+00:00:14.062 --> 00:00:18.218
+images, images of the type that you are 
+familar with, and then we're going to 
+
+6
+00:00:18.218 --> 00:00:22.659
+move to a couple of examples of medical 
+imaging, an area where image and video 
+
+7
+00:00:22.659 --> 00:00:27.043
+processing has been extremely successful 
+and a very important area by itself. 
+
+8
+00:00:27.043 --> 00:00:31.370
+So once again, a couple of additional 
+examples of consumer images and videos. 
+
+9
+00:00:31.370 --> 00:00:36.321
+So this is a very interesting example of 
+what video processing can do for us. 
+
+10
+00:00:36.321 --> 00:00:41.402
+Let us watch this movies for a second. 
+So here we have two kids in one video and 
+
+11
+00:00:41.402 --> 00:00:45.132
+two kids in another video doing exactly 
+the same activity. 
+
+12
+00:00:45.132 --> 00:00:50.020
+We want the computer to automatically 
+identify that, although, these are very 
+
+13
+00:00:50.020 --> 00:00:52.850
+different people, very different 
+backgrounds, 
+
+14
+00:00:52.850 --> 00:00:57.607
+in completely different jumping gear, 
+and a house in one, and no house in the 
+
+15
+00:00:57.607 --> 00:01:01.113
+other in the background. 
+We want to make sure the computer 
+
+16
+00:01:01.113 --> 00:01:05.871
+understands that in spite of all those 
+different things, the activity is the 
+
+17
+00:01:05.871 --> 00:01:07.812
+same activity. 
+Kids keeps jumping. 
+
+18
+00:01:07.812 --> 00:01:12.507
+We want the computer to actually be able 
+to say that that activity is very 
+
+19
+00:01:12.507 --> 00:01:16.794
+different than this one, 
+which is actually a person playing with a 
+
+20
+00:01:16.794 --> 00:01:22.163
+ball, but this particular one should be 
+identified to be exactly the same at this 
+
+21
+00:01:22.163 --> 00:01:26.008
+other one, which is another person 
+playing with a football. 
+
+22
+00:01:26.008 --> 00:01:31.245
+So, we want the computer to automatically 
+classify these videos for us based on 
+
+23
+00:01:31.245 --> 00:01:36.614
+what activity is happening in the videos. 
+Let's just see another very interesting 
+
+24
+00:01:36.614 --> 00:01:39.663
+example. 
+I'm going to play this video in a second. 
+
+25
+00:01:39.663 --> 00:01:42.995
+If you see different frames surrounding 
+the person, 
+
+26
+00:01:42.995 --> 00:01:47.551
+so green and red, that would mean that 
+the computer has identified that 
+
+27
+00:01:47.551 --> 00:01:50.824
+basically the person is doing a different 
+activity. 
+
+28
+00:01:50.824 --> 00:01:55.893
+If you see exactly the same color of the 
+frame, so maybe both green or both red, 
+
+29
+00:01:55.893 --> 00:02:01.090
+means that the computer has automatically 
+identified that the person is actually 
+
+30
+00:02:01.090 --> 00:02:04.491
+doing the same activity or the same type 
+of activity. 
+
+31
+00:02:04.491 --> 00:02:09.072
+So let's watch this movie. 
+So different colors, that means different 
+
+32
+00:02:09.072 --> 00:02:12.198
+activities. 
+And now, same colors, meaning same 
+
+33
+00:02:12.198 --> 00:02:15.002
+activities. 
+And one more example. 
+
+34
+00:02:15.002 --> 00:02:20.078
+In this case, we actually have three 
+different persons at, at three different 
+
+35
+00:02:20.078 --> 00:02:23.284
+rows and we have in the left, the grand 
+truth. 
+
+36
+00:02:23.284 --> 00:02:28.626
+That happens very often in this type of 
+[INAUDIBLE] in image and video processing 
+
+37
+00:02:28.626 --> 00:02:34.036
+where you know what you expect, so you 
+can verify if your algorithms are working 
+
+38
+00:02:34.036 --> 00:02:37.375
+properly. 
+On the right, we actually have the actual 
+
+39
+00:02:37.375 --> 00:02:42.451
+recite of the algorithm. And once again, 
+if you see frames of the same color, 
+
+40
+00:02:42.451 --> 00:02:47.277
+mean, means that in spite of the fact 
+people are the different people, that 
+
+41
+00:02:47.277 --> 00:02:50.978
+computer has identified that they are 
+doing exactly the same activity. 
+
+42
+00:02:50.978 --> 00:02:55.277
+If you see different frames, different 
+colors, means the computer has identified 
+
+43
+00:02:55.277 --> 00:02:59.720
+they're doing different activities. 
+So let's just watch the movie. 
+
+44
+00:02:59.720 --> 00:03:06.231
+So look that three of them are green and 
+now this move to yellow which means that 
+
+45
+00:03:06.231 --> 00:03:12.340
+the computer understood that the person 
+changed his or her own activity, move 
+
+46
+00:03:12.340 --> 00:03:17.565
+from running to jumping. 
+So that's another thing that we want the 
+
+47
+00:03:17.565 --> 00:03:22.790
+computer to do for us, to identify what's 
+happening in the images. 
+
+48
+00:03:22.790 --> 00:03:26.569
+Sometimes we actually want much simpler 
+things. 
+
+49
+00:03:26.569 --> 00:03:32.498
+For example, here, we might just want 
+these very poorly acquire image to become 
+
+50
+00:03:32.498 --> 00:03:36.601
+this very nice image. 
+This is something that happens to us all 
+
+51
+00:03:36.601 --> 00:03:39.645
+the time. 
+We take an image that is not, it doesn't 
+
+52
+00:03:39.645 --> 00:03:44.344
+look as good as we want it to look. 
+For example, this, this is an extreme 
+
+53
+00:03:44.344 --> 00:03:49.109
+case, We're going to understand what 
+happened actually in this image and we 
+
+54
+00:03:49.109 --> 00:03:54.205
+want to automatically, after we have 
+taken the image, we don't want to go back 
+
+55
+00:03:54.205 --> 00:03:58.109
+and take again that image. 
+We actually want the computer do 
+
+56
+00:03:58.109 --> 00:04:01.220
+automatically for us give us a very nice 
+image. 
+
+57
+00:04:01.220 --> 00:04:04.769
+These aren't just examples of things we 
+are familiar with. 
+
+58
+00:04:04.769 --> 00:04:09.664
+A more complicated example is here, yet 
+another movie, but basically what we want 
+
+59
+00:04:09.664 --> 00:04:13.825
+is to be able to identify everything that 
+is happening in the movie. 
+
+60
+00:04:13.825 --> 00:04:18.659
+This is sometimes called computer vision 
+and not image processing, although, the 
+
+61
+00:04:18.659 --> 00:04:22.820
+two areas are close really, really, 
+really close related and we are going to 
+
+62
+00:04:22.820 --> 00:04:25.390
+discuss that during the next coming 
+weeks. 
+
+63
+00:04:25.390 --> 00:04:31.961
+All this has been about consumer imaging. 
+Image and video processing, in 
+
+64
+00:04:31.961 --> 00:04:37.566
+particular, image processing, but also a 
+bit more in these recent days and recent 
+
+65
+00:04:37.566 --> 00:04:42.610
+years, video processing is extremely 
+important in medical and biological 
+
+66
+00:04:42.610 --> 00:04:45.972
+images. 
+And let me give you a couple of examples 
+
+67
+00:04:45.972 --> 00:04:51.086
+that are very exciting applications, 
+where image and video processing can 
+
+68
+00:04:51.086 --> 00:04:54.870
+actually make tremendous impact in 
+society and health. 
+
+69
+00:04:54.870 --> 00:04:59.341
+So this is a particular application. 
+We're going to talk about this 
+
+70
+00:04:59.341 --> 00:05:02.695
+application, actually, the last week of 
+the class. 
+
+71
+00:05:02.695 --> 00:05:07.516
+And, this is a particular application 
+that is related to neurosurgery. 
+
+72
+00:05:07.516 --> 00:05:12.757
+I'm going to describe this application 
+again, as I said, in the last week of 
+
+73
+00:05:12.757 --> 00:05:15.691
+this class. 
+But the basic idea is that the 
+
+74
+00:05:15.691 --> 00:05:22.179
+neurosurgeon implants in the brain an 
+electrode and sends some excitation to 
+
+75
+00:05:22.179 --> 00:05:27.060
+that electrode, 
+and this is extremely important for many, 
+
+76
+00:05:27.060 --> 00:05:33.250
+many problems, like Parkinson, tremor, 
+depression or or, or other problems. 
+
+77
+00:05:33.250 --> 00:05:38.544
+But a fundamental problem is that a 
+neurosurgeon needs to see inside the 
+
+78
+00:05:38.544 --> 00:05:42.398
+brain, 
+needs to know where he or she is going 
+
+79
+00:05:42.398 --> 00:05:46.255
+inside the brain. 
+And in order to do that, we actually, in 
+
+80
+00:05:46.255 --> 00:05:52.741
+order to know where to implant the 
+electrode, and where exactly to go. 
+
+81
+00:05:52.741 --> 00:05:58.899
+The neurosurgeon will take images of our 
+inside of the brain through MRI, CT, or 
+
+82
+00:05:58.899 --> 00:06:04.901
+other disciplines, and try to get a map, 
+try to get basically what we see from 
+
+83
+00:06:04.901 --> 00:06:10.124
+Google Maps or from other images. 
+They want to know, have a map from inside 
+
+84
+00:06:10.124 --> 00:06:13.397
+our brain. 
+So they want to be able to know 
+
+85
+00:06:13.397 --> 00:06:17.061
+everything that is happening in our brain 
+here. 
+
+86
+00:06:17.061 --> 00:06:22.700
+So one of areas that they want to implant 
+electrodes, we find it here. 
+
+87
+00:06:22.700 --> 00:06:28.378
+So, this is the, this fancy and beautiful 
+in color images that you see here is a 
+
+88
+00:06:28.378 --> 00:06:33.696
+combination of multiple modalities that 
+are used to look inside our brain. 
+
+89
+00:06:33.696 --> 00:06:38.296
+They are put together with techniques 
+that we are going to discuss, 
+
+90
+00:06:38.296 --> 00:06:43.975
+and then, you can create these beautiful 
+images that localize and also tell you 
+
+91
+00:06:43.975 --> 00:06:48.360
+how different parts of the brain are 
+actually connected. 
+
+92
+00:06:48.360 --> 00:06:54.015
+Once you do that, you can actually map, 
+as I mention, you can actually map the 
+
+93
+00:06:54.015 --> 00:06:59.893
+brain and understand these are actually 
+electrodes that were implanted and you 
+
+94
+00:06:59.893 --> 00:07:05.102
+can localize where exactly is the 
+electrodes are touching in the brain. 
+
+95
+00:07:05.102 --> 00:07:11.054
+So it's really seeing inside our head and 
+a lot of image processing needs to go 
+
+96
+00:07:11.054 --> 00:07:16.338
+behind this to make this possible. 
+And, as I say, this is a very exciting 
+
+97
+00:07:16.338 --> 00:07:21.770
+area, because the contribution of new 
+image processing here is tremendous. 
+
+98
+00:07:21.770 --> 00:07:26.741
+Similarly, we can look HIV research. 
+Again, we're going to discuss this more, 
+
+99
+00:07:26.741 --> 00:07:32.063
+at the end, the last week of class. 
+We're going to have entire lecture of 
+
+100
+00:07:32.063 --> 00:07:36.264
+this particular problem and the image 
+processing challenges. 
+
+101
+00:07:36.264 --> 00:07:41.656
+So this is a, basically a virus and this 
+is a schematic of an HIV virus. And for 
+
+102
+00:07:41.656 --> 00:07:46.557
+reasons that we're going to discuss 
+later, we need to identify the actual 
+
+103
+00:07:46.557 --> 00:07:48.798
+shape of this, 
+this is schematic. 
+
+104
+00:07:48.798 --> 00:07:53.909
+You might say, why is this so difficult? 
+I'm going to show you that in just a 
+
+105
+00:07:53.909 --> 00:07:59.116
+second. 
+The basic, idea is that we need to be 
+
+106
+00:07:59.116 --> 00:08:04.603
+able to identify that what I've just 
+marked to you looks like this. 
+
+107
+00:08:04.603 --> 00:08:11.400
+This is a three-dimensional rendering of 
+exactly that what's marked in the picture 
+
+108
+00:08:11.400 --> 00:08:18.197
+as the gp120 and the gp41. So that's what 
+called the envelope and that's a very 
+
+109
+00:08:18.197 --> 00:08:24.830
+important part of the virus that a virus 
+uses to basically latch into the next 
+
+110
+00:08:24.830 --> 00:08:29.580
+cell and identifying that shape is, is 
+very, very important. 
+
+111
+00:08:31.080 --> 00:08:35.214
+What's behind the scenes? 
+So why is this so difficult? 
+
+112
+00:08:35.214 --> 00:08:39.115
+Because actually what you get is images 
+like this. 
+
+113
+00:08:39.115 --> 00:08:44.420
+basically this is what the schematic of 
+what I showed you before, 
+
+114
+00:08:44.420 --> 00:08:48.789
+and these are, these small envelopes I 
+showed you before. 
+
+115
+00:08:48.789 --> 00:08:52.222
+Okay? 
+And from images like this one, you need 
+
+116
+00:08:52.222 --> 00:08:58.240
+to be able to do reconstructions like, 
+like the ones I'm showing you now. 
+
+117
+00:08:58.240 --> 00:09:05.692
+Okay? So this is basic science that has a 
+tremendous potential contribution into 
+
+118
+00:09:05.692 --> 00:09:11.840
+the development of vaccines or the 
+understanding of different viruses. 
+
+119
+00:09:13.340 --> 00:09:18.108
+Finally, sometimes image processing, as 
+we saw that, that it can help 
+
+120
+00:09:18.108 --> 00:09:22.733
+neurosurgery can help others kinds of 
+surgery to make them safer. 
+
+121
+00:09:22.733 --> 00:09:28.284
+This is a particular application where 
+it's important to understand where the 
+
+122
+00:09:28.284 --> 00:09:31.579
+esophagus is. 
+So, cardiac ablation which is a very 
+
+123
+00:09:31.579 --> 00:09:34.869
+common surgery, 
+when it's done, it avoids basically 
+
+124
+00:09:34.869 --> 00:09:39.476
+touching it and maybe damaging it. 
+So once again, in our application of 
+
+125
+00:09:39.476 --> 00:09:43.623
+image processing, which we're going to 
+discuss during this week. 
+
+126
+00:09:43.623 --> 00:09:47.242
+We are going to discuss different type of 
+applications. 
+
+127
+00:09:47.242 --> 00:09:52.112
+We're going to touch on some of them. 
+We won't be able to touch on all the 
+
+128
+00:09:52.112 --> 00:09:57.343
+medical imaging applications out there, 
+but we're going to touch enough to give 
+
+129
+00:09:57.343 --> 00:10:02.930
+you an idea of why image processing is so 
+important in the area of medical imaging 
+
+130
+00:10:02.930 --> 00:10:07.844
+and biological data. 
+So to conclude, we have, in these two 
+
+131
+00:10:07.844 --> 00:10:13.517
+videos, we have seen a large number of 
+examples going from scientific data from 
+
+132
+00:10:13.517 --> 00:10:19.333
+Mars to consumer videos and images like 
+in the movies or like images that you, we 
+
+133
+00:10:19.333 --> 00:10:23.426
+take with our own cameras all the way to 
+medical imaging. 
+
+134
+00:10:23.426 --> 00:10:28.811
+And we're going to discuss during the 
+next, nine weeks starting with this week, 
+
+135
+00:10:28.811 --> 00:10:34.484
+the basic techniques that we need to be 
+able to achieve all what, we've just seen 
+
+136
+00:10:34.484 --> 00:10:37.800
+that we want or we need to do with 
+images. 
+
+137
+00:10:37.800 --> 00:10:40.287
+So, see you in the next video. 

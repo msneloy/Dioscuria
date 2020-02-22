@@ -1,0 +1,191 @@
+Hello and welcome back to our image and 
+video processing class. This is our second week of class and we 
+are going to talk about image and video in compression which is probably one of 
+the most successful areas of image and video processing compression is used, all 
+around and is actually an enabling technology as we are going to see. 
+If you have some background in information theory or previous background 
+in signal processing, some of the topics in this unit will be easier for you. 
+But if you don't have background in those areas, don't worry because the unit is 
+going to be self contained and I'm going to teach you about the concepts that you 
+need from those areas of information and theory and signal processing so we can 
+basically understand how image compression, JPEG, MPEG and our 
+technologies work. So let's start by illustrating why do we 
+need image compression. This is not too hard to explain so let us do some 
+numbers. Let just think that we have a image that 
+has a 1000 x 1000 pixels. We know these actually, in today's 
+standards, is actually what we call a low resolution image. 
+But let's just use it for the sake of some numbering. 
+And let's just assume that we need 8 bits as is normally standard. 
+8 bits to represent each one of the colors, 
+which means that we need 20 bits per pixel. 
+So we have an array, which is 1000 x 1000 and 20 bits to represent the three 
+colors. So this is one image. 
+And if we are doing video, it's just one frame. 
+We actually need 30 of these to get one second of video. 
+We get 60 of these to get one minute of video and then we have to multiply by 120 
+to get basically about two hours of our regular movie. 
+So, what's these? These, the result of this is a very large 
+number, very, very large number. And you can do offline the computation, 
+but you're going to basically agree. It's a very large number even for a 
+relatively low resolution image. So if we only have one image, we still 
+have a very large number here. And we won't be able to basically save a 
+lot of these images in our cell phones or in our computers if we don't do 
+compression. So, the moment we start talking about 
+images and video, we immediately get very, very large numbers. 
+And that's why we need image compression. We need to make possible to save those 
+images, to save those videos, without occupying so many bits in our computer or 
+in our cell phone. So that's a reason we need, basically, 
+image and video compression. The question is, why can we do image and 
+video compression? And there are many reasons. 
+And we are going to talk about many of them. 
+So one of the reasons is what normally is called redundancy and that's one of the 
+first things that we are going to see. They are not every pixel value is equal, 
+some pixel values appear more, some pixel values appear less. 
+As we can see in this image there is a lot of great values represent in this 
+star, and only a few representing these white lines and may be none representing 
+certain colors. So we actually see that there is one, 
+two, three, four colors here. So if this is represented with 8 bits, it 
+comes up ways to use 8 bits, 256 possibilities to just represent 4. 
+So we're going to exploit that. There is another reason that we can do 
+compression and there is on this a lot of redundancy. 
+And this is illustrated in this image. So let's assume that one of these lines 
+has the constant grey value. Let's just say 128 for the sake of the 
+example. And let's imagine that this line is very, 
+very long. Let's assume, 10,000 pixels. 
+So, they're are two ways at least, two extreme ways to basically represent this. 
+One is to 10,000 times say a 128. That will take us 10,000 bytes or 10,000 
+times 8 bits. So, we're going to say 128, 128, 128, 128 
+for 10,000 times. That looks like a lot of waste. 
+On the other hand, if I say, starting here I say, 10,000 times 128. 
+So I just give a number that says how many times I'm going to repeat 128. 
+That's much smaller amount of memory to save that. 
+I need to save the 128, which is the pixel value, and I need to save the 
+10,000, the number of times that, that 128 appears. 
+And that's certainly much less to saving those two numbers than 10,000 times 
+saving 128. So this an extreme case, but a very 
+important, and this happens often in images that we have uniform regions and 
+basically some geometric coherence in the image that we can exploit it to do 
+compression. So that's the second reason we can do 
+compression and that also happens, by the way, in video as we're going to see. 
+The third reason we can do compression is right here. 
+This is a flat image constant value. So basically, there is a lot of 
+irrelevant information in images. There's a lot of information that we 
+actually don't care to save, or we don't care to save in a slightly different 
+fashion. For example, if this is 128, maybe I 
+don't care if I tell you it's 127. Okay? 
+And or maybe I don't care of it at all. So I might not care about the exact 
+value, I might not care too much about the information at all. 
+So there is a lot of unnecessary information, information which is 
+irrelevant. So this are the three reasons that we can 
+compress. And we're going to exploit all these 
+reasons. And then we're going to get very large 
+amounts of compression. There is a lot of compression as they say 
+in the literature and part of the success of image compression is that it became 
+standard. And that's very important because if I 
+save an image in my digital camera, I want every computer to be able to read 
+it. I want to e-mail it to my friends and 
+collegues and I want them to be able to read it. 
+So the way I save my image has to be compatible with the way that others read 
+it. And that's why there are so many, 
+basically compression standards. In still images, these are three of the 
+most popular, of course you know a lot about JPEG. 
+JPEG is what they say most should have commerce use, and its going to be. 
+basically, the way that we are going to teach a lot of the image processing, 
+image compression, in the next hour or so. 
+There is a JPEG-LS a less which that's what's called a loss less compression so 
+exactly what you see is what you compress so in that case there is no irrelevant 
+information everything will be compressed. 
+And there is the new standard JPEG-2000 so we're going to talk a lot about JPEG 
+and JPEG-LS. In video, there is also standards. 
+So once again, when I take a video, save it to my phone and send it to my friends, 
+I want them to be able to read it. For that, they need to know how I did my 
+compression. And of course, 
+the most common ones are the MPEG family. Although, there are other techniques, as 
+listed here. So. 
+It's kind of a two sized trait. Image and video compression has been so 
+successful, that it made it to standards that everybody uses the same techniques. 
+the fact that everybody uses the same techniques also made it very, very 
+successful and very popular. Now, digital camera manufacturers can 
+confidently, with confidence, basically use JPEG because they know that everybody 
+will be able to read it. And that's why they are comfortable using 
+it. General image impression techniques, that 
+exploit all the types of issues, that I mentioned a couple of slides, slides ago, 
+work as follows. There is, so you start from the image. 
+Under is a mapper, so we take this array that we talked in the previous week, of 
+let's say 1,000 by a 1,000 points and we transform it in a way that is more 
+friendly to compression. And we're going to talk about these maps. 
+Some of these maps are going to be related to fully transforms, and is 
+actually a cosine transform. Some of these maps are going to be 
+actually in the spatial domain, just looking at neighbor, neighboring pixels. 
+We're going to talk about that. Then after that mapping, which basically 
+brings the image into a space friendly to compression, 
+there is quantization. We have already talked about 
+quantization. Quantization is the main step that 
+introduces error. That introduces something that helps the 
+compression, but limits me from being able to reconstruct exactly the image. 
+So, for example, we might have a pixel value, as we saw last time about 17. 
+And my quantication technique might say that I need to divide by 2. 
+And basically round it to the closest integer from below and then multiply by 
+two, something that we talked last time. So I will end that with reconstructing, 
+instead of 17, I will reconstruct 16. So I introduce error by doing 
+quantization. And we're going to describe some of the 
+best rechniques to do quantization, and actually also the quantization that is 
+used in JPEG which is basically of the type I just wrote here. 
+The last part is the symbol in color. Okay. 
+I have done my, I have done my mapping, I have done my quantization. 
+Now I have a value in my hand that I need to transmit. 
+And I want the receiver on the other side to get exactly that number. 
+That's where information theory comes into play because information theory 
+tells us how to do this very, very efficiently, both in computational time 
+and to achieve compression. This is the one that's going to basically 
+exploit the redundancy that there is in the image from the point of view of using 
+some pixel values more than others. And we're actually going to start from 
+this. That basically says, now I have done 
+everything I need to do to my image. I want you to store or to transmit that 
+pixel. Then, once you have compressed the image, 
+you basically have a file with a compression that's the encoder. 
+The one that takes the image and compresses it. 
+The decoder will basically decode the symbol. 
+It won't do, basically, a quantization, because the quantization is done and then 
+colored. It might reverse it, for example, 
+multiplying back by two. And then it will do the inverse of the 
+map, and it will give you an image that might be the exact image if this is a 
+lossless compression with no error, or it might be an approximation of the image, 
+very often an approximation that we cannot, with our naked eyes, actually 
+realize the difference. So it would be a great approximation, 
+like in JPEG or MPEG. So, that's basically the whole steps. 
+And this also explains why we need standards. 
+If I use certain mapper the decoder needs to understand the mapper so he can, he or 
+she can invert it and I need to explain to the decoder the symbols coding that 
+are used so the decoder can do the reverse of that symbol code. 
+JPEG is an example of this. And as I say, we're going to basically 
+explain how JPEG works. JPEG takes an image, and divides it in 
+sub images. I mean, it would take a whole image, and 
+will divide it in blocks. In particular, these blocks are going to 
+be 8 by 8 pixels and we're going to see why is that. 
+Then that's a transform. This is the mapping we just took. 
+In this case just going to be a discrete, close entrance form, and we're going to 
+explicitly talk about it, write down the formula's, and explain why this is a 
+transform that is used. It's going to do quantization of the type 
+I just mentioned. Basically a JPEG is going to divide by a 
+number and, and basically round it. Okay? it's going to divide by different 
+numbers there's going to be some adaptation that we are going to explain. 
+And then, once it has done that, it's going to do a symbol in color which is 
+half man code which we're going to explain this way. 
+But this is all what is done in JPEG. And you're going to see one of the 
+optional homeworks I give you for the end of this unit is actually to implement 
+JPEG in your computer. It's not very hard as you're going to 
+see. And that's part of the reason this 
+algorithm is so successful. The decoder is going to decode this. 
+It's going to do the inverse transform of the DCT. 
+It's going to put the blocks one next to each other, and it's going to show you 
+the image. Okay? 
+And we're going to talk, this is down for one color. 
+We're also going to also talk how the different colors, the RGB are basically 
+exploited. Also by basically using some redundancy 
+between the colors, we can actually get even more compression. 
+So, JPEG is basically example of the prototype of the techniques of image 
+compression with the mapping, that is this part, a quantization and a 
+symbol encoder. So and a very successful example of this 
+technique. So I think it's time now to basically go 
+and talk about each one of these blocks in the text.

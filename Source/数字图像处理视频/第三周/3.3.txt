@@ -1,0 +1,246 @@
+Hello and welcome back to our image and 
+video processing class. In the previous video, we saw in real 
+time, histogram equalization. We saw how it improves the image and how 
+we managed to get a non-uniform histogram and make it a uniform histogram. 
+So, let's see in detail how we do that. I'm going to show you exactly the math 
+behind that and you will see how simple it is. 
+You would be able to go right away and program that in your own computer if you 
+wish to do so. So, let's just dive into it. 
+So, first of all, let's just go again and talk about histograms. 
+Here we see a very dark image and here we see the histogram. 
+As we see most of the distribution of the pixels value, of the pixel values are in 
+the low end of the histogram, there's not a lot of bright values and we see that 
+the histogram basically, they are, the count of pixels there is very, very low. 
+Here, we see the other way around, a very bright image and most of the count is in 
+the high part of the histogram. So, there is not a lot of pixels with low 
+values. Here, we see kind of a great low contrast 
+image and then we see that the pixels are actually concentrated in the middle, 
+while here, we see an image that looks much nicer. 
+These are all the same images, this looks much nicer and we have kind of a uniform 
+distribution. We're occupying the whole space of pixel 
+values, more or less uniformly, and then the image looks much, much nicer. 
+So, we want to be able to learn how to go from a distribution like this to a 
+distribution like this. And again, as I say, it's a very, very 
+simple operation, as we're going to see in just a minute. 
+So, our goal is to draw form a given distribution to a uniform distribution 
+assuming that our pixel values can go from zero to L minus 1. 
+For example, standard L is 256, so we can go from zero dark to 255 very bright or 
+white. And we want to get a uniform 
+distribution. So, basically, the probability or if we 
+don't normalize the count, but let's just think normalize is just 
+easier, the probability is one over L minus 1. 
+That's basically the probability of having a pixel achieve that gray value. 
+So, we want to go from this to this. That's basically our goal. 
+In order to achieve that, what we needs to find a transform that takes basically 
+the pixel values of the original image and transforms them to pixel values of a 
+different image. So, having an image and you'd basically 
+to decide, for every pixel in the image, I want to see its value and I want to 
+transform it to exactly the same place but with a new value. 
+And remember, so far, we are only making decisions based on the pixel value. 
+Not on the neighborhood, just on the values. 
+If the value is seven, we need to decid what we transform seven to regardless of 
+what are the pixel values around it. So, we need a transform that takes us 
+from any pixel value to a new pixel value in such a way that we get a uniform 
+distribution. There is going to be one requirement of 
+this transform and we are going to make an increase in transform and the reason 
+is we don't want to reverse the pixel values. 
+So, we want this to be a monotonic increasing transform. 
+If seven goes to ten, eight should go to a value at least ten, may be above ten. 
+But we don't want it to go below ten and then we actually kind of flip the content 
+of the image and that's not the intention of histogram equalization. 
+So, we are going to have increase in functions and finding these functions is 
+our goal. Now, sometimes we have strictly monotonic 
+increasing functions that every pixel values goes to a different pixel value. 
+Sometimes, we have an increasing function that is monotonic that some of the pixel 
+value might end up with the same target. And we would see that that will happen in 
+histogram equalization. In particular, when we work with these 
+great images and its great pixel values. So, we are going to end up with a 
+transform of this style and not to transform of this style. 
+That's basically a problem with histogram equalization in this [UNKNOWN] computers, 
+something that we must have, we cannot avoid, as we're going to see in the next. 
+So, how do we achieve this? The basic idea is very simple. 
+We can think about an histogram as basically a distribution s. 
+So, this is where you need a little bit of background in probability. 
+But don't worry because even if you don't have that background, I think it's going 
+to be almost self ex, self-explanatory, what I show next. 
+So, we have a distribution. The histogram is nothing else than a 
+distribution. What's the probability of a given pixel 
+value? We have, we now want to obtain a new one. 
+We actually have the current one. So basically, we have a new, a different 
+distribution. And remember, what we are looking is for 
+a map from r to s. We are looking for this transform. 
+So, it turns out, this is a basic result of probability that if we have such a 
+map, then the relationship between these, to this division, is as follows. 
+This is the relationship. So, the new probability distribution is 
+the old probability distribution times the absolute value of these derivative. 
+That's a well-known result from probability distribution and it's what 
+you need to understand the rest of the derivation. 
+So, let us assume, for a second, and I'm going to prove you that this is the 
+transform the we're looking for. Let's assume for a second that this is my 
+transform. So, s is a transform. 
+So, from any pixel value, I will get a new pixel value. 
+And let's write it as L minus one times the integral from zero to r. 
+And I'm going to explain the actual interpretation of what I'm writing in a 
+second of the current histogram or current probability distribution, 
+P(w)dw. So, what am I doing here? 
+I'm basically integrating the mass, the number of pixels that achieve a given 
+gray value from zero to r. And then, I'm doing this because I'm 
+using probability functions, so I'm normalized between zero and one, and I 
+want to get back gray values. So, let's look again at the transform. 
+You count, if we are in a discrete space, your going to count, if you want to know 
+to which pixel value should I transform the value r equals seven, 
+you count how many pixels are at zero, how many at one, at two, and three, and 
+so on until seven and that gives you the transform. 
+I have to prove to you that this is the right transform to do histogram 
+equalization. So, let us do that. 
+In order to do that, I'm going to compute this derivative. 
+And the basic idea is very simple. So, we are going to actually do ds/dr. 
+Now, we have the explicit transform here, so we can compute this derivative. 
+It's basically d of T(r)/dr and we have here the expression, so it's the 
+derivative according to r of this expression that we have here, 
+L minus 1 times the integral from zero to r, 
+Pr(w)dw. I apologize that the lines, that rows are going one on top of the other, 
+but I think it's very clear. So, we need to compute this derivative 
+and if you remember basic Calculus, this is a constant so it will go out, 
+okay? And then, the derivative of this integral 
+is what's inside the integral. So, this is equal to L minus one times 
+and I'm going to write this here in the next line, 
+Pr(r). So, we obtain that the derivative of s 
+according to r is L minus one times the probability, basically, the original 
+histogram. Now, what we are going to do, 
+I'm going to erase this in a second but what we are going to do is basically 
+include this here and see what happens. So, I'm going to plug this in here but 
+look what we have here, we have dr/ds and I have here. 
+ds/dr. S,o we need to invert that, it would be 
+one over this. And I hope that you can see what's going 
+to happen, so let's see actually what's going to happen. 
+Again, we have P, the new probability that we are looking 
+is the old probability, dr/ds, absolute value. 
+We computed dr/ds just a second ago. So, this is the Pr(r), absolute value of 
+one over L minus 1, that was our normalization, Pr(r). 
+Now, probabilities are positive and this is positive, certainly positive because L 
+is greater than one. So, I can get rid of the absolute value 
+and then I see that this will basically cancel with this and I've got one over L 
+minus 1 and that's exactly what I wanted. Exactly what I wanted is to have a 
+uniform, a constant probability distribution for my new image, 
+okay? So, once again, I'm going to write again what's actually the, the actual 
+transform is, which is a map of r is L minus 1, 
+the integral from zero to r of the original probability distribution of 
+function or histogram. So, it's a very simple function. 
+You go and you count how many pixels have a value up to r and that's your 
+transform. Very, very simple operation. 
+It's basically a one-line code in almost any programming language. 
+And that will achieve us histogram equalization. 
+So, let's see this in action. First, let's just take a, basically, an 
+artificial sample, where we have eight different values here. 
+This is a counting, so we have 790 pixels that have value zero. 
+And 1,023 pixels that have value one, and so on, and we just transformed these into 
+a probability, and because we have been working with probabilities and this is 
+the probability that we are going to get, we plug that into the formula that I just 
+showed you, and this is what we're going to get. 
+So, first of all. This is the original instagram, Pr. 
+This is the distribution that we have. If you plug that into the formula which I 
+showed, this is going to be the transform. 
+Note, it's going to be monotonic. And we know that because we are 
+integrating. And let me just write that again. 
+The basic operation was to integrate from zero to r. 
+So, the more I integrate, because what I have in here is positive, it's clearly an 
+increasing function. I'm only adding more and more positive 
+numbers so it has to be positive. So, it's an increasing function, and what 
+it tells me, it tells me that zero goes to this number. 
+One goes to this number, and so on. So, it becomes a very, very simple map. 
+And this is going to be the new histogram. 
+Now, you may wonder, it looks more uniform and one of the things that 
+happens because we are working with discrete data, we're working with images 
+in the computer, we're going to have to round numbers. 
+So, for example, the 4.2 will become four. 
+So, we end up actually with less peaks than we have here because this ones here 
+at the end, will merge into the same integer number. 
+And that's a price we play, we pay for working with this great images. 
+We cannot represent 6.7 and 6.8, will both become, although the formula tells 
+us they should go to different numbers, they will both become, let's say, seven. 
+In a similar fashion, Let me ask the following question which I'm going to ask 
+you to think for a second and then respond to me. 
+Let's just look at an histogram that has the following form. 
+It has only two different pixel values, these two. 
+It doesn't matter what exactly are the values here, but this is the original 
+distribution, of pixel values. There are only two values in the image. 
+This is a binary image with only two different colors, two different pixel 
+values. And I'm going to ask you what's the 
+relationship between the map for a pixel value here and a pixel value here? 
+So, let's just call this A, let's just call this B, and I'm asking you the 
+relationship between T(a) and T(b). Are they equal? 
+Are they different? Is T(a) greater than T(b)? Is T(a) less 
+than T(b)? So, just think for a second and give me 
+your answer and I'm going to come back right away and give you the explanation 
+for the correct answer. So, let's look at what is the correct 
+answer. Remember, what we are doing in histogram 
+equalization is we are integrating, okay? 
+So, I ask you, what's the relationship between these two, are equal, less, or 
+greater? We know first of all that T(b) should be 
+greater or equal, than T(a) because we have a monotonically increase in 
+function. But let's just look a bit more in detail, what happened. 
+This actually is going to integrate the whole mass up to here. 
+So, basically its going to integrate only this. 
+Here, is going to integrate everything up to b. 
+But there is no new mass between a and b. Since there is no new mass then what 
+happens is that T(a) would equal to T(b). And as an extra exercise, you can think 
+about what's going to be actually to transform for this one and what's going 
+to be the transform for this particular one. 
+And especially, you can relate it to the average in the image, just do that as an 
+exercise on the side. But this is very important illustration 
+that the basically, transform that we're looking for, even before we have to round 
+or quantize because we're working with these great images. 
+Even before that, it's not strictly monotonic, there might be more than one 
+values that end up with the same transform. 
+You can, of course, say, we don't really care too much about that, because in the 
+original image there were no pixels with initial gray value a. 
+And that's correct but I want to show this both to illustrate that the 
+transform does not have to be monotonically, strictly monotonically 
+increasing. It has to be monotonically increasing but 
+not strictly. And also to illustrate once again that 
+all what the histogram equalization is doing is basically counting the number of 
+pixels after the value that you want to mark. 
+So, I'm counting the value, the number of pixels up to a and then the number of 
+pixels up to b. So, after this exercise, let's just see 
+few additional examples. We, of course, saw examples with the 
+online demo, but let's just illustrate one more example, 
+which I think is very useful. I'm going back to the images that we 
+started. This was dark. 
+This is what's happening after histogram equalization and the histogram looks much 
+nicer than before. So, let's just look at the map. 
+This is the map. Pixels value form here can map to here, 
+okay? So, this is my r and this is my s. 
+And look at the map. The map is basically is very, it has a 
+very, very high slope because it's trying to very fast map very dark pixels to 
+brighter pixels. So, it has a very, very sharp slope. 
+Let's look for example at this one. This one was pretty good to start from. 
+It hasn't changed a lot and actually this is the map. 
+It's almost unislope, in mapping the diagonal, there's almost no changes in 
+the pixel values. And similar interpretations for the other 
+two maps. This one actually needed, needs to darken 
+the pixels and we see that in the corresponding map, that basically, look 
+what happens here. And this one needed to stretch the 
+pixels. Remember, they were in the middle, it 
+needs to stretch them and we actually observe that here. 
+It's stretching the pixels from the middle. 
+They were all around here to start from and it's going to stretch them and we see 
+that it actually occupies the whole range from this which was the very big, very 
+narrow band, that it occupies the original histogram with very low contrast 
+is actually mapping out to the whole spectrum from zero to 255 and we see that 
+in the map as well. And, of course, we end up with images 
+that are very similar, regardless of where we started because these images 
+actually were created from these images, from an original, 
+let's say, this one, just by changing the contrast. And then after we equalize 
+them, they look much closer. And that's a technique that is used very 
+often to make images that we're taking under different conditions look much more 
+similar. We equalize the histogram, at the same 
+time, we're making the images look much more similar and then we can compare 
+between them in a, in a much more friendly fashion. 
+So, this is basically instagram equalization. 
+What we are going to do next in the next video is instagram transform. 
+What happens if I don't want to equalize an histogram? 
+I want to transform it to an histogram that I know is going to be very good for 
+my image. We are going to see that in the next very 
+short video that is also a very, very simple operation. 
+Thank you.

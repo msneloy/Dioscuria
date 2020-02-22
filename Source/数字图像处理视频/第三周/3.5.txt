@@ -1,0 +1,87 @@
+When we were talking about histogram 
+modification, either equalization or matching, we were replacing the grey 
+value of a pixel only based on its actual grey value. 
+And we weren't looking at the surrounding area of the image. 
+What we're going to do next is we're going to do spatial operations. 
+So, we're going to basically replace the pixel value at the given pixel depending 
+on what's happening around the pixel. So, there's going to be influence of the 
+neighborhood. So if we have a complete image, we're 
+going to look at the pixel and we see here magnifications of that, or let us 
+observe here. We're going to decide what to replace the 
+pixel value here with depending on what's happening around it. 
+So, it's not going to be any more just okay, I decide how am I going to change 
+depending on my own pixel value. We're going to say how these pixel's going to 
+change depending on neighborhood pixels. And the simplest of those operations is 
+basically averaging. So, we are going to replace the pixel 
+here by the average of let's say, a three by three neighborhood around it. 
+Of course, we have to normalize. If we are averaging nine pixels, we have 
+to divide by nine. We can also do weighted averages, so we 
+can average in a sense that, yourself, the pixel its self, 
+waits four. And those that are in four neighborhood, 
+remember we talked about four and eight neighborhood structures, those are, are 
+in four will count double and those that are in diagonal, we just count single. 
+And then, we basically align sixteen things, 1 + 2 is 3, + 1 is 4, + 2 is 6, 
+and so on. So, we will have to normalize by sixteen. 
+So this is just an average, this is a weighted average. 
+Let's see their facts of this in a real image. 
+What we have here is an image, and this is a good image because it has structures 
+of different sizes. And what we are going to see for each one 
+of these other images is that local average, and we take neighborhoods of 
+different sizes. We go from three to thirteen. 
+So this is 3, 5, 9, 15, and 35. So we go from three to 35. 
+The, the larger the neighborhood, the more pixels we are averaging. 
+And we see the effect of that. Here when we average by three we don't 
+see much of a change, there is some change here within the defined structure, 
+but let's just jump to the 35. So this is a window of 35, a neighborhood 
+of 35 and we see that a lot of things get blurred and I'm going to explain in a 
+second why, give you the intuition behind that. 
+So a lot of the structure gets blurred. If we are using a neighborhood of only 
+15, less things get blurred. We see that here, for example, this is 
+much easier to distinguish the bars here than it is here. 
+And, that depends on the distance between the objects. 
+So, why are we getting blur? Because here, for example, this point. 
+Imagine that we have a 35 by 35 window around it. 
+So, we end up averaging the block of the pixel with the grey around it, and then 
+it gets a bit brighter. So this was very dark, black. 
+This is bright, and if we're averaging pixels around it, the average basically 
+goes up for this pixel. And when we're averaging here, because 
+some of the pixels in the neighbor, in the neighborhood are dark, the average 
+here would basically go down. And then, we're clarifying this blurring 
+effect. Let me just illustrate with that one 
+dimensional function. If I'm basically averaging this with 
+this, and this, clearly the pixel value of this goes down because of the effect 
+of this. So, this will be replaced by something 
+around here. This one, 
+if I'm averaging with this one and maybe with a pixel here, then it goes slightly 
+up. And then, this perfectly sharp profile 
+becomes a bit of a smooth profile because I'm averaging things on the side. 
+We're going to see later towards the second part of this course, how to 
+basically average without rating these blurring effect. 
+But this is just to illustrate a very simple operation which is local 
+averaging, and how neighbors, and basically the size 
+of the neighbors affect what's happening on the pixel. 
+Now, you might wonder, is this operation important? 
+Yes, it is. Although, it's going to blur. 
+The basic idea is that we are not going to average with a window size of 35. 
+We need to design window sizes that are appropriate for the particular problem. 
+For example, if we have this image and we want to get rid of some of the very small 
+objects in the image. We, maybe they're noise or maybe they're 
+basically stars or particles that we don't care about them too much. 
+Then, we can do a local filter of this image. 
+In this case, it was used a 15 by 15 image. 
+We're blurring the image but we're somehow getting rid of these small 
+particles. So, a small particle here will be 
+basically average with a lot of black pixels around it. 
+And then, it's value will go so much down, so much close to zero then when I 
+threshold I get basically only the regions of interest, the larger and the 
+very bright regions. So, we first blur and then we threshold. 
+And we got rid of all these which we consider noise and we only get the really 
+important objects in scene. So this very simple operation is very 
+powerful for tasks like this. More interesting, this very simple 
+averaging operation has really interesting mathematical properties that 
+I'm going to explain next. And those are important because they're 
+going to help us to develop other type of averaging operations that, for example, 
+do not blur edges. And we're going to do that explanation of 
+the mathematical properties and relationships that this simple averaging 
+has with other structures in the next video. 
+Thank you.

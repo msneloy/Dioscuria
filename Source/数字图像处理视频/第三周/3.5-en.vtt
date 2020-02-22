@@ -1,0 +1,431 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.890
+When we were talking about histogram 
+modification, either equalization or 
+
+2
+00:00:04.890 --> 00:00:10.115
+matching, we were replacing the grey 
+value of a pixel only based on its actual 
+
+3
+00:00:10.115 --> 00:00:13.666
+grey value. 
+And we weren't looking at the surrounding 
+
+4
+00:00:13.666 --> 00:00:17.150
+area of the image. 
+What we're going to do next is we're 
+
+5
+00:00:17.150 --> 00:00:21.504
+going to do spatial operations. 
+So, we're going to basically replace the 
+
+6
+00:00:21.504 --> 00:00:26.730
+pixel value at the given pixel depending 
+on what's happening around the pixel. 
+
+7
+00:00:26.730 --> 00:00:30.080
+So, there's going to be influence of the 
+neighborhood. 
+
+8
+00:00:30.080 --> 00:00:34.985
+So if we have a complete image, we're 
+going to look at the pixel and we see 
+
+9
+00:00:34.985 --> 00:00:38.459
+here magnifications of that, or let us 
+observe here. 
+
+10
+00:00:38.459 --> 00:00:44.046
+We're going to decide what to replace the 
+pixel value here with depending on what's 
+
+11
+00:00:44.046 --> 00:00:47.793
+happening around it. 
+So, it's not going to be any more just 
+
+12
+00:00:47.793 --> 00:00:52.834
+okay, I decide how am I going to change 
+depending on my own pixel value. We're 
+
+13
+00:00:52.834 --> 00:00:58.012
+going to say how these pixel's going to 
+change depending on neighborhood pixels. 
+
+14
+00:00:58.012 --> 00:01:02.100
+And the simplest of those operations is 
+basically averaging. 
+
+15
+00:01:02.100 --> 00:01:07.602
+So, we are going to replace the pixel 
+here by the average of let's say, a three 
+
+16
+00:01:07.602 --> 00:01:12.118
+by three neighborhood around it. 
+Of course, we have to normalize. 
+
+17
+00:01:12.118 --> 00:01:16.175
+If we are averaging nine pixels, we have 
+to divide by nine. 
+
+18
+00:01:16.175 --> 00:01:21.491
+We can also do weighted averages, so we 
+can average in a sense that, yourself, 
+
+19
+00:01:21.491 --> 00:01:23.560
+the pixel its self, 
+waits four. 
+
+20
+00:01:23.560 --> 00:01:29.486
+And those that are in four neighborhood, 
+remember we talked about four and eight 
+
+21
+00:01:29.486 --> 00:01:36.029
+neighborhood structures, those are, are 
+in four will count double and those that 
+
+22
+00:01:36.029 --> 00:01:42.316
+are in diagonal, we just count single. 
+And then, we basically align sixteen 
+
+23
+00:01:42.316 --> 00:01:47.974
+things, 1 + 2 is 3, + 1 is 4, + 2 is 6, 
+and so on. 
+
+24
+00:01:47.974 --> 00:01:54.026
+So, we will have to normalize by sixteen. 
+So this is just an average, this is a 
+
+25
+00:01:54.026 --> 00:01:58.348
+weighted average. 
+Let's see their facts of this in a real 
+
+26
+00:01:58.348 --> 00:02:02.633
+image. 
+What we have here is an image, and this 
+
+27
+00:02:02.633 --> 00:02:08.129
+is a good image because it has structures 
+of different sizes. 
+
+28
+00:02:08.129 --> 00:02:15.156
+And what we are going to see for each one 
+of these other images is that local 
+
+29
+00:02:15.156 --> 00:02:19.931
+average, and we take neighborhoods of 
+different sizes. 
+
+30
+00:02:19.931 --> 00:02:26.327
+We go from three to thirteen. 
+So this is 3, 5, 9, 15, and 35. 
+
+31
+00:02:26.327 --> 00:02:31.027
+So we go from three to 35. 
+The, the larger the neighborhood, the 
+
+32
+00:02:31.027 --> 00:02:34.890
+more pixels we are averaging. 
+And we see the effect of that. 
+
+33
+00:02:34.890 --> 00:02:40.013
+Here when we average by three we don't 
+see much of a change, there is some 
+
+34
+00:02:40.013 --> 00:02:44.930
+change here within the defined structure, 
+but let's just jump to the 35. 
+
+35
+00:02:44.930 --> 00:02:50.677
+So this is a window of 35, a neighborhood 
+of 35 and we see that a lot of things get 
+
+36
+00:02:50.677 --> 00:02:56.147
+blurred and I'm going to explain in a 
+second why, give you the intuition behind 
+
+37
+00:02:56.147 --> 00:02:59.193
+that. 
+So a lot of the structure gets blurred. 
+
+38
+00:02:59.193 --> 00:03:04.110
+If we are using a neighborhood of only 
+15, less things get blurred. 
+
+39
+00:03:04.110 --> 00:03:09.885
+We see that here, for example, this is 
+much easier to distinguish the bars here 
+
+40
+00:03:09.885 --> 00:03:14.106
+than it is here. 
+And, that depends on the distance between 
+
+41
+00:03:14.106 --> 00:03:16.994
+the objects. 
+So, why are we getting blur? 
+
+42
+00:03:16.994 --> 00:03:23.206
+Because here, for example, this point. 
+Imagine that we have a 35 by 35 window 
+
+43
+00:03:23.206 --> 00:03:27.754
+around it. 
+So, we end up averaging the block of the 
+
+44
+00:03:27.754 --> 00:03:32.352
+pixel with the grey around it, and then 
+it gets a bit brighter. 
+
+45
+00:03:32.352 --> 00:03:37.128
+So this was very dark, black. 
+This is bright, and if we're averaging 
+
+46
+00:03:37.128 --> 00:03:41.614
+pixels around it, the average basically 
+goes up for this pixel. 
+
+47
+00:03:41.614 --> 00:03:47.404
+And when we're averaging here, because 
+some of the pixels in the neighbor, in 
+
+48
+00:03:47.404 --> 00:03:52.252
+the neighborhood are dark, the average 
+here would basically go down. 
+
+49
+00:03:52.252 --> 00:03:55.653
+And then, we're clarifying this blurring 
+effect. 
+
+50
+00:03:55.653 --> 00:04:00.140
+Let me just illustrate with that one 
+dimensional function. 
+
+51
+00:04:00.140 --> 00:04:06.847
+If I'm basically averaging this with 
+this, and this, clearly the pixel value 
+
+52
+00:04:06.847 --> 00:04:11.052
+of this goes down because of the effect 
+of this. 
+
+53
+00:04:11.052 --> 00:04:15.432
+So, this will be replaced by something 
+around here. 
+
+54
+00:04:15.432 --> 00:04:19.812
+This one, 
+if I'm averaging with this one and maybe 
+
+55
+00:04:19.812 --> 00:04:24.320
+with a pixel here, then it goes slightly 
+up. 
+
+56
+00:04:24.320 --> 00:04:31.182
+And then, this perfectly sharp profile 
+becomes a bit of a smooth profile because 
+
+57
+00:04:31.182 --> 00:04:36.224
+I'm averaging things on the side. 
+We're going to see later towards the 
+
+58
+00:04:36.224 --> 00:04:41.482
+second part of this course, how to 
+basically average without rating these 
+
+59
+00:04:41.482 --> 00:04:45.372
+blurring effect. 
+But this is just to illustrate a very 
+
+60
+00:04:45.372 --> 00:04:48.397
+simple operation which is local 
+averaging, 
+
+61
+00:04:48.397 --> 00:04:54.303
+and how neighbors, and basically the size 
+of the neighbors affect what's happening 
+
+62
+00:04:54.303 --> 00:04:57.963
+on the pixel. 
+Now, you might wonder, is this operation 
+
+63
+00:04:57.963 --> 00:04:59.360
+important? 
+Yes, it is. 
+
+64
+00:04:59.360 --> 00:05:03.480
+Although, it's going to blur. 
+The basic idea is that we are not going 
+
+65
+00:05:03.480 --> 00:05:08.996
+to average with a window size of 35. 
+We need to design window sizes that are 
+
+66
+00:05:08.996 --> 00:05:14.930
+appropriate for the particular problem. 
+For example, if we have this image and we 
+
+67
+00:05:14.930 --> 00:05:19.837
+want to get rid of some of the very small 
+objects in the image. 
+
+68
+00:05:19.837 --> 00:05:25.768
+We, maybe they're noise or maybe they're 
+basically stars or particles that we 
+
+69
+00:05:25.768 --> 00:05:31.082
+don't care about them too much. 
+Then, we can do a local filter of this 
+
+70
+00:05:31.082 --> 00:05:35.088
+image. 
+In this case, it was used a 15 by 15 
+
+71
+00:05:35.088 --> 00:05:38.245
+image. 
+We're blurring the image but we're 
+
+72
+00:05:38.245 --> 00:05:41.711
+somehow getting rid of these small 
+particles. 
+
+73
+00:05:41.711 --> 00:05:47.180
+So, a small particle here will be 
+basically average with a lot of black 
+
+74
+00:05:47.180 --> 00:05:51.570
+pixels around it. 
+And then, it's value will go so much 
+
+75
+00:05:51.570 --> 00:05:57.346
+down, so much close to zero then when I 
+threshold I get basically only the 
+
+76
+00:05:57.346 --> 00:06:01.951
+regions of interest, the larger and the 
+very bright regions. 
+
+77
+00:06:01.951 --> 00:06:07.883
+So, we first blur and then we threshold. 
+And we got rid of all these which we 
+
+78
+00:06:07.883 --> 00:06:13.269
+consider noise and we only get the really 
+important objects in scene. 
+
+79
+00:06:13.269 --> 00:06:18.284
+So this very simple operation is very 
+powerful for tasks like this. 
+
+80
+00:06:18.284 --> 00:06:22.489
+More interesting, this very simple 
+averaging operation has really 
+
+81
+00:06:22.489 --> 00:06:26.629
+interesting mathematical properties that 
+I'm going to explain next. 
+
+82
+00:06:26.629 --> 00:06:31.739
+And those are important because they're 
+going to help us to develop other type of 
+
+83
+00:06:31.739 --> 00:06:35.361
+averaging operations that, for example, 
+do not blur edges. 
+
+84
+00:06:35.361 --> 00:06:39.954
+And we're going to do that explanation of 
+the mathematical properties and 
+
+85
+00:06:39.954 --> 00:06:45.064
+relationships that this simple averaging 
+has with other structures in the next 
+
+86
+00:06:45.064 --> 00:06:46.099
+video. 
+Thank you. 

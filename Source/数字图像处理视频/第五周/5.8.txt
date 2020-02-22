@@ -1,0 +1,118 @@
+Hello, and welcome back. 
+In this video, I want to discuss a very important technique for image, and also 
+video segmentation and other image processing techniques. 
+And that's what is called graph cats, as we see here. 
+And I'm going to illustrate that with a very simple figure and then we're 
+going to provide some examples. So, what is graph cats? 
+Let's start from a simple image. White and black. 
+And the basic idea of graph cut is to borrow tools from graph theory to 
+partition this image into foreground and background. 
+So we are going to tilt the image, just for the sake of illustration, and we're 
+going to take one line across the image, as we see here. 
+So we take one line. And basically, we're going to represent 
+that line here. Every pixel is going to be a node on a 
+graph that we are going to build in just a second. 
+So these represent pixels in a very cold fashion. 
+Just to illustrate, every pixel, one node in the image. 
+And now we're going to add two nodes. One, which we call the sink and that's 
+going to be represent by background pixels. 
+And the other is going to be the source, and that's going to be representing the 
+foreground pixels. Once again, we have, for every pixel in 
+the image a note, so there would be a lot of notes here. 
+You can think about a graph that is planar, 
+in, for those images, and then you can think about basically 
+putting a source and a sink. So we have a lot of here, we have a lot 
+of basically planar nodes and we have a node on the top and a node on the bottom. 
+So now we have the nodes on the graphs, on the graph, we need now to construct 
+the edges. How do we connect these nodes? 
+First of all, how do we connect every node representing a pixel to the 
+foreground, source, and to the background sink? 
+And the basic idea is that we connect them with some measurement of the 
+probability of the node, meaning the pixel being background, 
+or being foreground. So for every pixel in the image, we've 
+got a node, and we look at that node, 
+and somehow we say, what's your probability of being foreground? 
+And we connect that to the source with the weight related to that probability. 
+That's the weight of the edge. And then we ask, what's your probability 
+of being background? And we use that probability to connect, 
+to define the weight of the age that connects to the background sink. 
+How can we compute those probabilities? For example as we saw in the previous 
+video if we are in an interactive system we can get different scribbles, exactly 
+as we saw in the previous video. You can use information of this 
+surrounding pixels. So that's very open, and it's part of the sign of the 
+algorithm but the simplest is as we saw in the previous video to use information 
+from the scribbles. So now we have connected every node, 
+meaning every pixel to the source, and to the background sink. 
+Next, we need to connect the pixels among themselves. 
+So we are going to also construct edges connecting pixels among themselves. 
+In particular we are only going to connect to the neighboring pixels, 
+meaning the neighboring nodes. So the one on your right, the one above 
+you, below you, on your left, maybe diagonals. 
+We talked very early on in this class about for neighborhood and a 
+neighborhood. We will probably use only one of those. 
+And now the question is, what's the weight on these edges? 
+And I want you to think for a second, what would you put here. 
+Has to be something that helps you in the segmentation. 
+So why don't you think for a second, and write it in the inline quiz that I'm 
+presenting and tell me what do you think should be there, the weights. 
+Thank you very much for thinking about the question I just asked. 
+The weight basically has to be something that promote pixels that are very similar 
+to stay together to stay in the same segment, and pixels that are very 
+different promotes them to become different segments, foreground and 
+background. For example, we could put weights that 
+are proportional to the gradient. We can put weights that are proportional 
+to the difference of pixel values or the difference of the pixel values in the 
+neighborhood of the pixel. So anything that will promote similar 
+pixels, and we have to define similarity depending on the application, anything 
+that promotes similar pixels to stay together, 
+and different pixels to become a part foreground and background. 
+Once we have constructed a whole graph, then we call graph theory, 
+and we're going to partition that graph. So we're going to create what's called a 
+mint cut. That's a cut with minimal effort, minimal 
+price, and it's going to try, to cut, foreground from, notes, that are very 
+weak, so this had a high probability of being back ground, low, of being fore 
+ground, so the graph can is going to try to cut it out, cut it out, it's going to 
+try to go. Once we are on the plane of the plane 
+that corresponds to the pixels values is going to try to go through edges that 
+basically, we told the algorithm that those edges are connecting pixels that 
+are very different. And they are probably should be in 
+different regions. So it's going to try to cut the weak 
+edges, because it's going to add the price the cut pace, is the addition of 
+the weights of the edges it's. cutting through. So it's going to try to 
+cut through weak edges, and in that, and in that way, it's 
+going to separate the foreground from the background. 
+Now, there are good techniques to do that, and that can achieve this in 
+polynomial time, so there are very efficient ways to solve this mean cut 
+problem, and. By that, we got the seperation between 
+the foreground and the background, this technique, can be actually extended, to 
+multiple objects in the image, not just foreground and background, and, other 
+type of input data. But it's easier to illustrate when we 
+think about just, one source and one sink, meaning foreground. 
+And background separate. So, two steps, basically. 
+One is construct the graph. Second step, produce the main cut. 
+The second step, basically, a very good algorithms in 
+graph theory. The first step of constructing the graph 
+is what the image processing information comes into the graph. 
+Let us illustrate a few examples. So, here we see examples where basically 
+in the examples I'm showing they borrow, as I say at the very beginning, from the 
+graph cut technique, that provides kind of a scribble in the background, and here 
+we see the segmentation. A second example here and a third example 
+here. And once again, these can be run very, 
+very fast. And here I'm going to illustrate a very 
+nice example an application of this. So we go into one picture of this trip 
+and segment it out. And put it in the large picture and then 
+you do the same for the next one. Segment it out using the technique I just 
+explained and go and put it in the picture. 
+And then you repeat it for the other ones. 
+And you end up having, a new, image that is basically a composite of multiple 
+images through this, cut and paste. I think it's a very nice example, and a 
+very nice application of this. Interactive type of image segmentation in 
+this particular case through prod cards which is a particular implementation a 
+very smart technique really to this minimum card or this graph cards 
+technique. What I want to conclude is by explaining 
+to you that this type of technique actually is incorporated in Microsoft 
+Office. So this is very modern image processing 
+that as we have seen in other examples and we are going to see in future 
+examples actually right after, this video, these techniques get into 
+some of the very popular pieces of software that many people use. 
+Thank you very much. See you in the next video.

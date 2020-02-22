@@ -1,0 +1,340 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.566
+Now that we have finished the back end of 
+image compression, the simple coding that 
+
+2
+00:00:06.566 --> 00:00:12.895
+we do with Hoffman coding, in the example 
+that I presented, let's go to the front 
+
+3
+00:00:12.895 --> 00:00:17.958
+end of image compression. 
+Basically what we're going to describe in 
+
+4
+00:00:17.958 --> 00:00:23.022
+this video is this part. 
+So let's just start with this component. 
+
+5
+00:00:23.022 --> 00:00:30.240
+What we have is an image, 
+and the fur think that at J big dash or a 
+
+6
+00:00:30.240 --> 00:00:38.140
+law see transfer compression does is 
+divides the image into blocks. 
+
+7
+00:00:38.140 --> 00:00:45.360
+Each one of these blocks has n by n 
+pixels, and we're going to talk, we're 
+
+8
+00:00:45.360 --> 00:00:50.661
+going to give examples of what's the 
+value of N, but just to give you an idea, 
+
+9
+00:00:50.661 --> 00:00:55.105
+a JPEG uses eight by eight. 
+So, basically, jpeg codes almost 
+
+10
+00:00:55.105 --> 00:00:59.609
+independently every eight by eight block 
+of the image. 
+
+11
+00:00:59.609 --> 00:01:06.032
+These are non-overlapping block, so here 
+are eight, then eight, then eight, then 
+
+12
+00:01:06.032 --> 00:01:06.950
+eight. 
+Okay. 
+
+13
+00:01:06.950 --> 00:01:11.239
+And we go all the way. 
+And there are techniques what to do if 
+
+14
+00:01:11.239 --> 00:01:15.037
+your image width is not a multiple of 
+eight and so on. 
+
+15
+00:01:15.037 --> 00:01:17.920
+So, don't worry about that for the 
+moment. 
+
+16
+00:01:17.920 --> 00:01:22.914
+Those are just technical details. 
+So we take an N by N block, and we are 
+
+17
+00:01:22.914 --> 00:01:27.344
+going to encode each one of those N by N, 
+eight by eight blocks. 
+
+18
+00:01:27.344 --> 00:01:30.931
+And as I say that are encoded almost 
+independently. 
+
+19
+00:01:30.931 --> 00:01:36.557
+Now, this is what you do with one image, 
+but this is if you only have a black and 
+
+20
+00:01:36.557 --> 00:01:41.249
+white image. 
+What happens if I have an RGB image? 
+
+21
+00:01:41.249 --> 00:01:47.657
+So jpeg is what's called color blind. 
+Jpeg doesn't know how to deal with color. 
+
+22
+00:01:47.657 --> 00:01:53.080
+The standard itself, but there's some 
+assumptions that are made. 
+
+23
+00:01:53.080 --> 00:01:56.977
+Originally what you could do is you just 
+take the red. 
+
+24
+00:01:56.977 --> 00:02:01.163
+Remember every channel is a 
+two-dimensional array of pixels. 
+
+25
+00:02:01.163 --> 00:02:05.781
+So the red looks like this. 
+You divide the red in eight by eight 
+
+26
+00:02:05.781 --> 00:02:10.039
+blocks and you code the red. 
+You do the same with the green, 
+
+27
+00:02:10.039 --> 00:02:14.514
+you do the same with the blue, 
+and that's perfectly legitimate. 
+
+28
+00:02:14.514 --> 00:02:19.411
+Now, normally there's, 
+basically a lot of correlation between 
+
+29
+00:02:19.411 --> 00:02:23.919
+the channels. 
+So what basically jpeg does, instead of 
+
+30
+00:02:23.919 --> 00:02:28.920
+calling RGB, 
+it goes in to what's called Y. 
+
+31
+00:02:28.920 --> 00:02:32.277
+Cb, CR. 
+I'm going to tell you in a second how to 
+
+32
+00:02:32.277 --> 00:02:35.940
+do that. 
+But these are, instead of three channels 
+
+33
+00:02:35.940 --> 00:02:39.756
+RGB, you have three channels which are Y, 
+CB, and CR. 
+
+34
+00:02:39.756 --> 00:02:45.784
+This is a luminance channel, which is 
+basically what you will see if you have a 
+
+35
+00:02:45.784 --> 00:02:49.447
+black and white TV or a black and white 
+monitor. 
+
+36
+00:02:49.447 --> 00:02:55.476
+You will get a color image, but you will 
+only see, basically, the black and white 
+
+37
+00:02:55.476 --> 00:03:00.700
+component, the luminous component, of it. 
+And these are the colors. 
+
+38
+00:03:00.700 --> 00:03:04.153
+Okay. 
+And this is a very simple transform. 
+
+39
+00:03:04.153 --> 00:03:08.280
+This is actually done by a three by 
+three, matrix. 
+
+40
+00:03:09.340 --> 00:03:14.000
+So you basically are going to have your 
+y. 
+
+41
+00:03:14.000 --> 00:03:25.326
+Cb, CR, as a column. 
+You have a three by three matrix here, 
+
+42
+00:03:25.326 --> 00:03:31.935
+three by three, 
+and you have your RGB values. So the y is 
+
+43
+00:03:31.935 --> 00:03:38.760
+a linear combination of the rgb, the cbr 
+is a linear combination. 
+
+44
+00:03:38.760 --> 00:03:45.754
+The CB a linear combination, and the CR 
+another, and this matrix is invertible, 
+
+45
+00:03:45.754 --> 00:03:53.202
+so once you decode a YCBCR, you multiply 
+by the inverse of this matrix and you get 
+
+46
+00:03:53.202 --> 00:03:57.925
+back the RGB. 
+So the very first thing that jpeg does, 
+
+47
+00:03:57.925 --> 00:04:05.010
+it takes your color image, mulitplies it 
+by a matrix, so basically every pixel. 
+
+48
+00:04:05.010 --> 00:04:09.672
+Let's say 100, 1650, 200. 
+You multiply by the coefficients here. 
+
+49
+00:04:09.672 --> 00:04:14.271
+This is a constant matrix, that is given 
+is very well known. 
+
+50
+00:04:14.271 --> 00:04:20.584
+It appears all over, if you just, Google 
+YCBCR, you're going to get the values of 
+
+51
+00:04:20.584 --> 00:04:25.219
+this matrix. 
+So it goes over every single pixel of the 
+
+52
+00:04:25.219 --> 00:04:31.297
+image and transforms it from red, green, 
+blue arrays into YCbCr arrays. 
+
+53
+00:04:31.297 --> 00:04:38.168
+Once again, 2-dimensional arrays where 
+every pixel, now instead being an RGB is 
+
+54
+00:04:38.168 --> 00:04:42.308
+a YCbCr. 
+So it has those, and then it's going to 
+
+55
+00:04:42.308 --> 00:04:46.360
+encode each one of these arrays 
+independently. 
+
+56
+00:04:46.360 --> 00:04:50.020
+So let's look at Y. 
+It will go into Y. 
+
+57
+00:04:50.020 --> 00:04:54.780
+And it will divide it in eight by eight 
+blocks. 
+
+58
+00:04:54.780 --> 00:04:59.932
+Okay, and that's all what's going to do. 
+And then it's going to take each one of 
+
+59
+00:04:59.932 --> 00:05:03.814
+these eight by eight blocks, and it's 
+going to encode them. 
+
+60
+00:05:03.814 --> 00:05:08.613
+As I say, almost independently, 
+but for the sake of this presentation, 
+
+61
+00:05:08.613 --> 00:05:11.436
+we're going to consider them 
+independently. 
+
+62
+00:05:11.436 --> 00:05:15.530
+So it's going to encode a lot of eight by 
+eight small images. 
+
+63
+00:05:15.530 --> 00:05:19.835
+And how it's going to do that, 
+It's going to do that with a discrete 
+
+64
+00:05:19.835 --> 00:05:23.932
+cosine transform, a transform. 
+Then a quantization, and then what, a 
+
+65
+00:05:23.932 --> 00:05:27.752
+symbol encoding. 
+As we have seen so many times with the 
+
+66
+00:05:27.752 --> 00:05:31.572
+diagram of jpeg. 
+So now, we have an eight by eight block. 
+
+67
+00:05:31.572 --> 00:05:37.058
+And all that we need to think about now 
+is that we have a small eight by eight 
+
+68
+00:05:37.058 --> 00:05:37.475
+image. 

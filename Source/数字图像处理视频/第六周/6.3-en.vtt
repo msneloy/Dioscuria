@@ -1,0 +1,746 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.839
+Hello and welcome back. 
+I just want to spend a few minutes 
+
+2
+00:00:04.839 --> 00:00:10.073
+explaining some of the concepts that we 
+learn about curves on the plane, but now 
+
+3
+00:00:10.073 --> 00:00:13.671
+surfaces in 3D. 
+so its going to be a much shorter video 
+
+4
+00:00:13.671 --> 00:00:19.402
+than the previous one, and we're going to 
+be discussing Surfaces instead of curves. 
+
+5
+00:00:19.402 --> 00:00:24.377
+Just a couple of concepts. 
+Surfaces are really beautiful, and we 
+
+6
+00:00:24.377 --> 00:00:30.536
+could spend years, some people spend all 
+their life, studying surfaces, but once 
+
+7
+00:00:30.536 --> 00:00:36.932
+again, we only have time for a few key 
+concepts that will help us to understand, 
+
+8
+00:00:36.932 --> 00:00:42.539
+for example, active surfaces, how to do 
+segmentation of volumes in three 
+
+9
+00:00:42.539 --> 00:00:47.812
+dimensional images. 
+again, just a few concepts. 
+
+10
+00:00:47.812 --> 00:00:54.275
+We have a surface us on a surface. 
+Basically, we are only going to be 
+
+11
+00:00:54.275 --> 00:00:58.879
+talking about, talking about surfaces in 
+three dimensions, 
+
+12
+00:00:58.879 --> 00:01:04.371
+and basically on the surface we can draw 
+curves. Here we have curves. 
+
+13
+00:01:04.371 --> 00:01:10.509
+Now basically, each one of these curves 
+is in 3D now, so you have to have X, Y 
+
+14
+00:01:10.509 --> 00:01:13.740
+and Z. 
+But we basically have the surface. 
+
+15
+00:01:13.740 --> 00:01:18.624
+Imagine that the surface is basically 
+floating on a plane. 
+
+16
+00:01:18.624 --> 00:01:24.856
+So the way we parameterize the surface is 
+now with two parameters, U and V. 
+
+17
+00:01:24.856 --> 00:01:30.246
+Remember, for curves, we have only one P, 
+for surfaces we have two. 
+
+18
+00:01:30.246 --> 00:01:36.140
+So we basically are on the plane. 
+So we have U and V. 
+
+19
+00:01:36.140 --> 00:01:44.108
+On the plane, for each U and each V, we 
+have a X coordinate, Y coordinate and Z 
+
+20
+00:01:44.108 --> 00:01:49.180
+coordinate, and that's how we represent a 
+surface. 
+
+21
+00:01:49.180 --> 00:01:54.910
+Two parameters, three coordinates in 
+curves we have one parameters, 
+
+22
+00:01:54.910 --> 00:02:01.023
+two coordinates, because we were on the 
+plane we can have curves in 3D that would 
+
+23
+00:02:01.023 --> 00:02:05.250
+be one parameter, three coordinates, for 
+example this one. 
+
+24
+00:02:05.250 --> 00:02:09.903
+So that's a surface. 
+Now let's define normal area, and things 
+
+25
+00:02:09.903 --> 00:02:14.478
+like that on the surface. 
+But if we have curves, we can take 
+
+26
+00:02:14.478 --> 00:02:17.735
+derivatives, as we were doing on the 
+plane. 
+
+27
+00:02:17.735 --> 00:02:23.940
+So we can take a derivative, according to 
+the U parameter and according to the V 
+
+28
+00:02:23.940 --> 00:02:27.662
+parameter. 
+So we can basically be on a curve and 
+
+29
+00:02:27.662 --> 00:02:33.246
+basically say, let's just take a 
+derivative of that curve, according to U 
+
+30
+00:02:33.246 --> 00:02:38.615
+and according to V. 
+If we do the cross product of these two 
+
+31
+00:02:38.615 --> 00:02:44.362
+vectors, we get the third vector 
+perpendicular to these two. 
+
+32
+00:02:44.362 --> 00:02:50.888
+Once again, basic algebra. 
+So the normal is the cross product of the 
+
+33
+00:02:50.888 --> 00:02:54.512
+two. 
+So, the derivative of S according to U is 
+
+34
+00:02:54.512 --> 00:02:57.843
+tangent. 
+The derivative S according to V is 
+
+35
+00:02:57.843 --> 00:03:01.715
+tangent. 
+They will define a plane which is tangent 
+
+36
+00:03:01.715 --> 00:03:07.058
+to the surface at this point. 
+If we do the cross product between them, 
+
+37
+00:03:07.058 --> 00:03:12.402
+we get a normal to the surface. 
+And again, we are going to normalize that 
+
+38
+00:03:12.402 --> 00:03:16.120
+because we're interested in unit length 
+normals. 
+
+39
+00:03:16.120 --> 00:03:22.647
+So we have derivatives which means time 
+change and then the normal if we have 
+
+40
+00:03:22.647 --> 00:03:29.677
+derivatives we can for example define the 
+element of area we know that then once we 
+
+41
+00:03:29.677 --> 00:03:34.495
+have two vectors. 
+The determinant of the matrix composed by 
+
+42
+00:03:34.495 --> 00:03:40.438
+those vectors, basically defines the area 
+of the parallegram that we see here. 
+
+43
+00:03:40.438 --> 00:03:44.418
+So if that is infinitesimal, we have 
+elements of area. 
+
+44
+00:03:44.418 --> 00:03:49.985
+If that's integrated across multiple, 
+across long regions, then we have the 
+
+45
+00:03:49.985 --> 00:03:52.693
+total area. 
+So, same type of concepts. 
+
+46
+00:03:52.693 --> 00:03:56.228
+We have length on the plane, we have 
+areas here. 
+
+47
+00:03:56.228 --> 00:04:02.171
+We also have length, because the surface, 
+it's just a lot of curves, nothing else 
+
+48
+00:04:02.171 --> 00:04:06.158
+than that, nicely organized. 
+So once again, here is the 
+
+49
+00:04:06.158 --> 00:04:12.175
+parameterization, and here is the normal. 
+Let's see the example of something that 
+
+50
+00:04:12.175 --> 00:04:18.300
+you are familiar with, which is basically 
+graphs. The same way that we saw graphs 
+
+51
+00:04:18.300 --> 00:04:22.822
+on the plane, we can see graphs in three 
+dimensional space. 
+
+52
+00:04:22.822 --> 00:04:26.370
+So we have a coordinate system, 
+X, 
+
+53
+00:04:26.370 --> 00:04:33.200
+Y, and Z, and basically we define a graph 
+that's again floating on space. 
+
+54
+00:04:33.200 --> 00:04:39.454
+So our parametrization is XU, equal to U. 
+Basically X is one of the parameters, YV 
+
+55
+00:04:39.454 --> 00:04:45.708
+equal to V, and then Z basically the 
+height of the surface, or in this case 
+
+56
+00:04:45.708 --> 00:04:53.020
+the graph or the function, is just a 
+function of these two, a particular case. 
+
+57
+00:04:53.020 --> 00:05:00.072
+Think about an image, for example. 
+An image is a particular surface, it's a 
+
+58
+00:05:00.072 --> 00:05:04.807
+function. 
+So, the plane of the image is X and Y, or 
+
+59
+00:05:04.807 --> 00:05:09.358
+U and V. 
+The grey values of the image is the 
+
+60
+00:05:09.358 --> 00:05:13.316
+height means Z. 
+So you can think about images as 
+
+61
+00:05:13.316 --> 00:05:16.698
+surfaces, 
+in a particular case, as functions or 
+
+62
+00:05:16.698 --> 00:05:19.418
+graphs. 
+And that's a very interesting 
+
+63
+00:05:19.418 --> 00:05:22.874
+interpretation. 
+We can basically compute things. 
+
+64
+00:05:22.874 --> 00:05:28.020
+We can compute the normal of an image, as 
+we saw in the previous slide. 
+
+65
+00:05:28.020 --> 00:05:31.108
+Basically we treat the image as a 
+surface. 
+
+66
+00:05:31.108 --> 00:05:35.078
+We take derivatives, we compute the 
+normal of an image. 
+
+67
+00:05:35.078 --> 00:05:39.931
+So we bring a lot of concepts of 
+differential geometry into image 
+
+68
+00:05:39.931 --> 00:05:42.980
+processing. 
+Now what about curvatures? 
+
+69
+00:05:42.980 --> 00:05:50.233
+So the basic idea is very simple. 
+Once again we have curves. If you have a 
+
+70
+00:05:50.233 --> 00:05:53.974
+curve, 
+you can take first derivative according 
+
+71
+00:05:53.974 --> 00:05:59.870
+to our link. This is a curve in 3D, basic 
+same concept and second derivative. 
+
+72
+00:05:59.870 --> 00:06:05.690
+Second derivative would basically view 
+the curvature of that particular curve 
+
+73
+00:06:05.690 --> 00:06:08.152
+that you do. 
+For example, this one. 
+
+74
+00:06:08.152 --> 00:06:13.897
+No sometimes you want to project that 
+curvature, remember first derivative is 
+
+75
+00:06:13.897 --> 00:06:18.374
+tangent, second derivative is 
+perpendicular to the curve, not 
+
+76
+00:06:18.374 --> 00:06:23.299
+necessarily to the plane. 
+You have a curve there's a lot of things 
+
+77
+00:06:23.299 --> 00:06:29.417
+that can be perpendicular to that, so you 
+can take it and project it to the normal 
+
+78
+00:06:29.417 --> 00:06:32.850
+or the perpendicular of the plane if you 
+wish. 
+
+79
+00:06:32.850 --> 00:06:37.760
+And that's basically something that's 
+called the normal curvature. 
+
+80
+00:06:37.760 --> 00:06:43.490
+So you take the curve, you take second 
+derivative, that gives you a vector and 
+
+81
+00:06:43.490 --> 00:06:48.103
+you project that vector into the 
+perpendicular to the surface. 
+
+82
+00:06:48.103 --> 00:06:54.055
+But that's about basically maybe you are 
+thinking about a curve but if I have a 
+
+83
+00:06:54.055 --> 00:06:56.511
+point. 
+Let me just make that here. 
+
+84
+00:06:56.511 --> 00:07:01.050
+If I have a point on the surface, they're 
+are multiple curves. 
+
+85
+00:07:01.050 --> 00:07:05.620
+On the surface that go through that point 
+so look at all the curve. 
+
+86
+00:07:05.620 --> 00:07:12.334
+There are multiple of them. So what 
+exactly defines the curvature at that 
+
+87
+00:07:12.334 --> 00:07:16.565
+point? 
+It turns out that there is one of these 
+
+88
+00:07:16.565 --> 00:07:23.740
+curves, that when we treat it at a curve 
+and we compute the curvature, it's the 
+
+89
+00:07:23.740 --> 00:07:28.982
+smallest possible. 
+And there is another curve that is the 
+
+90
+00:07:28.982 --> 00:07:33.967
+largest possible. 
+So we basically define the principal 
+
+91
+00:07:33.967 --> 00:07:38.185
+curvatures of a surface in the following 
+way. 
+
+92
+00:07:38.185 --> 00:07:45.591
+You're in a point, and you basically try 
+all the possible curves on the surface 
+
+93
+00:07:45.591 --> 00:07:51.403
+that go around that point, and you basic 
+compute the curvature. 
+
+94
+00:07:51.403 --> 00:07:56.934
+Now we are talking about curves. 
+This curve has a curvature. 
+
+95
+00:07:56.934 --> 00:08:01.715
+This curve has a curvature. 
+You compute all of them. 
+
+96
+00:08:01.715 --> 00:08:05.340
+There's one, 
+which is the minimal, 
+
+97
+00:08:05.340 --> 00:08:09.415
+and one which is the maximal. Sometimes 
+there's more than one. 
+
+98
+00:08:09.415 --> 00:08:13.757
+For example a sphere might have, 
+basically have more than one, all 
+
+99
+00:08:13.757 --> 00:08:17.899
+directions are the same. 
+But you have, for regular surfaces, you 
+
+100
+00:08:17.899 --> 00:08:22.976
+have at least one which is the max and 
+there which is the min, and those are 
+
+101
+00:08:22.976 --> 00:08:28.053
+called the principal curvatures of the 
+surface and I just tell you a bit of 
+
+102
+00:08:28.053 --> 00:08:33.397
+extra information. The curve that gives 
+you the max and the curve that gives you 
+
+103
+00:08:33.397 --> 00:08:38.509
+the min are perpendicular to each other. 
+Now, and there's way of computing this. 
+
+104
+00:08:38.509 --> 00:08:41.333
+You don't really have to try all the 
+curves. 
+
+105
+00:08:41.333 --> 00:08:45.249
+There's way of computing. 
+I'm just taking about concepts here. 
+
+106
+00:08:45.249 --> 00:08:49.165
+So, there's one direction which is max. 
+The other is min. 
+
+107
+00:08:49.165 --> 00:08:55.003
+Think about the cylinder. 
+When you cut a cylinder, perpendicular to 
+
+108
+00:08:55.003 --> 00:08:59.178
+its axis, 
+there is one direction that you basically 
+
+109
+00:08:59.178 --> 00:09:01.993
+get a circle. 
+What's a curvature there? 
+
+110
+00:09:01.993 --> 00:09:06.649
+One over the radius, we know that. 
+There's another direction in the 
+
+111
+00:09:06.649 --> 00:09:10.530
+direction of the cylinder that you get a 
+straight line. 
+
+112
+00:09:10.530 --> 00:09:13.907
+What's a curvature there, we know, it's 
+zero. 
+
+113
+00:09:13.907 --> 00:09:17.600
+So in one direction we get one over the 
+radius. 
+
+114
+00:09:17.600 --> 00:09:22.237
+That's a maximum the other you get zero. 
+That's a very nice thing. 
+
+115
+00:09:22.237 --> 00:09:25.060
+it's a surface that in one of the 
+directions, 
+
+116
+00:09:25.060 --> 00:09:29.564
+THE curvature is actually zero. 
+So, on a curve, there is only one 
+
+117
+00:09:29.564 --> 00:09:32.853
+curvature. 
+You're turning, and there's only one 
+
+118
+00:09:32.853 --> 00:09:37.787
+direction to go on the curve. 
+On the surface, you can go in multiple 
+
+119
+00:09:37.787 --> 00:09:41.076
+directions. 
+And there will be one which is the 
+
+120
+00:09:41.076 --> 00:09:46.295
+maximum direction that will curve the 
+most, one is the minimal, where will 
+
+121
+00:09:46.295 --> 00:09:51.086
+curve would curves the least. 
+And actually, that basically completes 
+
+122
+00:09:51.086 --> 00:09:57.027
+which is called the min curvature, which 
+is the average of both of them, and the 
+
+123
+00:09:57.027 --> 00:10:00.903
+Gaussian curvature which is the product 
+of them. 
+
+124
+00:10:00.903 --> 00:10:04.536
+So what's a Gaussian curvature of a 
+cylinder? 
+
+125
+00:10:04.536 --> 00:10:07.519
+Zero. 
+At every point in one direction, 
+
+126
+00:10:07.519 --> 00:10:12.678
+basically it's a straight line. 
+So it's zero, and there is a lot of 
+
+127
+00:10:12.678 --> 00:10:18.240
+beautiful differential geometry on 
+surfaces, a lot of it due to Gauss. 
+
+128
+00:10:18.240 --> 00:10:23.937
+Really beautiful, but these are the basic 
+concepts. So you have the same as on the 
+
+129
+00:10:23.937 --> 00:10:25.450
+plane, 
+curving, 
+
+130
+00:10:25.450 --> 00:10:29.182
+the curving of the surface, 
+but we have curving in multiple 
+
+131
+00:10:29.182 --> 00:10:32.219
+directions. 
+We have the max, the min, and normally 
+
+132
+00:10:32.219 --> 00:10:37.281
+people say, instead of taking the max and 
+the min, let's take the average and the 
+
+133
+00:10:37.281 --> 00:10:40.128
+product. 
+From this you can of course, from the 
+
+134
+00:10:40.128 --> 00:10:45.000
+average and the product of course you can 
+go back to the max and min, or vice 
+
+135
+00:10:45.000 --> 00:10:48.595
+versa. 
+So these are basic concepts of surface 
+
+136
+00:10:48.595 --> 00:10:53.459
+differential geometry. 
+Again, we have normals, curvatures, the 
+
+137
+00:10:53.459 --> 00:10:57.746
+same kind of concepts that we had for 
+planar curves. 
+
+138
+00:10:57.746 --> 00:11:03.270
+So now after these two videos, one 
+relatively longer than the other. 
+
+139
+00:11:03.270 --> 00:11:08.405
+Your an expert in differential geometry. 
+And at least you have the tools to 
+
+140
+00:11:08.405 --> 00:11:12.816
+understand what is coming next. 
+Which is deformation of curves, meaning 
+
+141
+00:11:12.816 --> 00:11:16.911
+deformation of shapes, and their 
+relationship of that with active 
+
+142
+00:11:16.911 --> 00:11:21.952
+contours, active surfaces, and even with 
+image denoising and image enhancement as 
+
+143
+00:11:21.952 --> 00:11:23.780
+we are going to see it. 
+Remember, 
+
+144
+00:11:23.780 --> 00:11:27.694
+images are surfaces, 
+so we can treat them with the tools that 
+
+145
+00:11:27.694 --> 00:11:31.417
+we, we just learned. 
+They have curvatures, they have normals, 
+
+146
+00:11:31.417 --> 00:11:34.818
+they have the same concepts of 
+differential geometry. 
+
+147
+00:11:34.818 --> 00:11:39.054
+I'll see you in the next video. 
+This is getting real, really, really 
+
+148
+00:11:39.054 --> 00:11:41.236
+exciting. 
+I hope you're having fun. 
+
+149
+00:11:41.236 --> 00:11:43.033
+See you very soon. 
+Thank you. 

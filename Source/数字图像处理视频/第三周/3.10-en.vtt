@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.016
+Exploiting MATLAB once again, we're going 
+to illustrate an example of median 
+
+2
+00:00:06.016 --> 00:00:09.412
+filter. 
+So we're creating three images now. 
+
+3
+00:00:09.412 --> 00:00:14.537
+Image I is the original image, 
+we're going to see it in a second. 
+
+4
+00:00:14.537 --> 00:00:19.502
+Image J is this image, but we have added 
+salt and pepper noise. 
+
+5
+00:00:19.502 --> 00:00:25.748
+That's basically strong noise as we're 
+going to observe soon, that is dark and 
+
+6
+00:00:25.748 --> 00:00:29.832
+white pixels. 
+And image K is going to be the median 
+
+7
+00:00:29.832 --> 00:00:35.598
+filter operation on the noisy image. 
+And I'm going to show you I, J, and K. 
+
+8
+00:00:35.598 --> 00:00:39.840
+So let's see that. 
+We have three images. 
+
+9
+00:00:41.420 --> 00:00:46.979
+This figure is the original image, 
+this is the one with salt and pepper 
+
+10
+00:00:46.979 --> 00:00:50.147
+noise. 
+We see these black pixels, so basic 
+
+11
+00:00:50.147 --> 00:00:55.480
+pixels were completely changed their 
+pixel value to, from white to black. 
+
+12
+00:00:55.480 --> 00:00:58.360
+And here, we see the result of median 
+filtering, 
+
+13
+00:00:58.360 --> 00:01:02.391
+which is I think very impressive for such 
+a simple filter. 
+
+14
+00:01:02.391 --> 00:01:05.936
+It got completely rid of all the noise 
+that we had. 
+
+15
+00:01:05.936 --> 00:01:11.497
+It does blur a bit the image as we know 
+the actual data, as we know from when we 
+
+16
+00:01:11.497 --> 00:01:14.486
+learned the operation of the median 
+filter. 
+
+17
+00:01:14.486 --> 00:01:19.908
+But it did manage to get rid of the noise 
+and provide us a much more pleasant 
+
+18
+00:01:19.908 --> 00:01:22.549
+image. 
+So, this is an example of median 
+
+19
+00:01:22.549 --> 00:01:27.901
+filtering operating inside MATLAB and 
+with some of the images that come with 
+
+20
+00:01:27.901 --> 00:01:32.003
+the MATLAB package. 
+Thank you, and see you in the next video. 

@@ -1,0 +1,222 @@
+Now that we have images in the computer 
+represent us, we learn in the previous video discrete 2-dimensional arrays. 
+Basically, we started from a continuous picture and we finish with the 
+2-dimension discrete array. Now, we can start doing operations on 
+these images. There are network computer, there are 
+just 2-dimensional arrays of pixels we can do very different types of operations 
+to do the kind of things that we saw in the first couple of videos in this class. 
+During the next few weeks, we're going to learn very sophisticated operations. 
+But let's start with just a few very simple ones that, they are very simple 
+but they are extremely useful and will tell us how we actually can manipulate 
+images. And you can go into your computer and do 
+any of the examples that I'm going to show in the next few slides in just a few 
+minutes or, or even less if you have a, a program like Mathlab that are natural to 
+work with 2-dimensional arrays. Once we have a 2-dimensional array, one 
+of the things that we can start talking is about neighborhoods. 
+So remember, we have a 2-dimensional array, 
+and we're talking about pixels. So, this is a pixel, and I can ask where are the 
+neighbors of this pixel. And there are two types of standard 
+neighborhoods that are taken in image processing. 
+One is called a four neighborhood, and only these four are considered. 
+And that's basically, you can only go North, South, East, or West, so it's just 
+a four neighborhood. There is another very popular that is an 
+eight neighborhood, and you probably already guessed how it 
+works. So, if I'm here, 
+the neighbors, the A neighbors of this pixel are all the pixels around it. 
+So, you can go north and south, east and west, as before. 
+But you can also go like northeast and start going diagonal. 
+So, for example, if I look at this image here, this pixel, 
+in a four neighborhood relationship is not a neighbor of this one. 
+So, these two 1s are not neighbors. Because I cannot go diagonal in a four 
+neighborhood relationship. In an eight neighborhood relationship, 
+there are neighbors. And that of course translates also to a 
+group of pixels. So, this group of pixels has an eight 
+neighborhood relationship with this one. Because there is a one here, and a one 
+diagonal. And I'm allowed to go diagonal, 
+okay? Now, if I were to talk about fourth 
+neighborhood, I will say that this group of ones is not neighbor of this group of 
+ones. Because from this one, I can only go 
+south. I don't see anybody from this group, any 
+ones. I can go right, east, I don't see 
+anybody. So basically, depending on how we define 
+neighborhood in this discrete space, what kind of operations we can do. And 
+were going to see that's very important. This is the most common neighborhood 
+today used in most modern image processing. 
+But it's important to be aware of this type of neighborhood. 
+Especially, when we're going to be doing segmentation and things like that. 
+We're also going to, later on when we talk about the last week, we're going to 
+talk about 3D images. So, not images that have a great values 
+on the plane, like here, where every pixel has a great 
+value. But we're going to talk about volumetric 
+images where every point in the volume, those are going to be called voxels have 
+great values. And the neighborhood relationships are 
+very important there, for example, in medical images, 
+to decide that this organ is neighbor to this organ, we're going to have to define 
+the neighborhood relationships. And the same when we're going to do 
+segmentation. So, neighborhoods are important. 
+But now that we have 2-dimensional arrays, we can do simple operations 
+between 2-dimensional arrays. For example, we can add them. 
+Remember, every point, so if I look at this image, every point here has a value. 
+So, I can take that image and add to a second image. 
+So I can take image one, and add it to image two. 
+That means that I take, and I'm drawing a small image in purpo, on purpose, 
+this is a three by three image. I'm going to take the value here and add 
+it to the value here. So if here it say seven and here it say 
+ten I'm going to get a result which is seventeen. 
+Then, I go to the next pixel and I do the same. 
+It's a simple addition of images. That's an extremely important operation 
+by itself, very simple. 
+So here, we see that operation. We basically have NASA took images, 
+multiple images, of the same galaxy. Multiple times, they go once, and again, 
+and take more and more and more images. The images are very noisy, but all the 
+images are aligned. So they don't move the camera and nothing 
+is moving. They take one after the other, and then 
+they start adding them. And, when they add the image, when they 
+add the images, they start getting clearer and clearer. 
+So here, they basically added five, then they added ten, 
+so on until they got a hundred images. So, they did I1 + I2 a hundred times. So, 
+they have a hundred images of this galaxy and they added them together. 
+And what happens is the image starts becoming clearer and clearer because the 
+image has noise. The image is always, the actual scene is 
+always the same scene. The noise is the one that changes, that 
+changes, and when you add all those images, you're adding the same number, 
+plus the noise that is random, and then the noise gets reduced. 
+And when we talk about spatial noisy, and how to do image enhancing, we're going to 
+discuss this very, very in detail. But the basic idea is that we can simply 
+add this 2-dimensional race to do a number of interesting operations. 
+We can do other things. Basically, we can also mask them. 
+We can subtract them. So, we can have an image like this, 
+and our image like this. Let's say, two variations of the same scene, but taken 
+under different conditions. And then, we take the difference between 
+them. And look, 
+the difference shows something that might be very, very important for the doctor. 
+And this is just an enhance that we're going to talk about this, we enhance 
+images for example by changing the grey value distributions to make them more 
+clear. So, in this case, we take, we took I1, 
+I2, and we basically did I1 - I2. Sometimes, we take the absolute value if 
+you don't, if we don't care about the sign. 
+And sometimes, we just basically shift all the pixels so the negative value 
+become zero. once again, a very simple operation that 
+can have tremendous value. Some, we can also do logic operations in 
+images. So we can have basically, an image A and 
+our image B, and do AUB. So basically, we, 
+let's say that this is all 255, the rest is zero. 
+B again, is all 255, so we get the union of them. 
+We get the interception of the pixels that both objects have 255 or Y values. 
+So again, think about any type of operations that you could do with 
+2-dimensional arrays in your computer. You can start doing with images, now that 
+we know that there are nothing else in the computer than 2-dimensional arrays. 
+We can also basically take the inverse of an image, and the basic idea is that this 
+remember was zero, very black. The brightest point, 
+255. And then, we can actually invert it. 
+We can make the zero go to 255, and the 255 go to zero. 
+It would be a map like this. If this is the input and this is the 
+output, it would be something like this. 
+A zero goes to 255, 255 goes to zero. So we invert the image, and then we can, 
+using that we can find some interesting things and that might be easier to 
+observe certain objects in the image in the inverted image than it was in the 
+original image. Again, a simple operation with the arrays 
+that we have representing our images in the computer. 
+We can also do different spatial. So, this was adding images. 
+So I take an image, I take another image, 
+I add it. Or, I invert an image. 
+But, we can do more sophisticated things. We can actually take a pixel in the 
+image, and replace it by the average of its neighbors. 
+Now remember, I have to define what our neighbors, 
+okay? So, let's consider an eight neighborhood, 
+as we talk before. So I can take this pixel and replace it 
+by the average of everybody, including itself. 
+So, we just sum all the pixel values. We divide by nine and we replace that 
+pixel by that result, okay? 
+And this is the original image. We do that for every single one of the 
+pixels. So, we go to this pixel. 
+I'm going to mark it here. We go to it's eight neighborhood, and we 
+replace the value of the pixel by the pixels by the average of the pixels 
+around it. Then, we go to the next pixel, and we do 
+the same. Then, we do the overlapping. 
+I'm going to just use a different color here. 
+So, this one will use this, this, this, this, this, this, this, and this. 
+While the blue one has used this one, this one, this one. 
+So it's owned eight neighborhood, okay? So, there is overlapping because we 
+are shifting one pixel at a time. And then, we do that for every single 
+pixel in the image. You are very welcome to try this 
+exercise. And this is what we get. 
+We removed the noise but we also get a very blurry image. 
+And we are going to see why that happens. This is a very useful image processing 
+application in some cases. We're are actually going to learn how to 
+do this. So, we actually take neighbhor hoods, but 
+they're sophisticated neighborhoods in the sense that they understand when there 
+is a big change and they don't go to the other side. 
+So we're going to basically, may be end up averaging only these six, instead of 
+always averaging nine values. But this is a very simple operation. 
+Every pixel replace it by a linear combination, in this case an average of 
+the pixels around it. The other thing that can happen to 
+images, is they can be transformed. And we can do very different type of 
+transformations. We can, so, if this is my image, we can 
+do nothing to it. We can actually scale it just make it 
+larger. We can rotate, 
+we can shift it or translate many, many operations so we can take that array and 
+move it. We can take that array and rotate it. 
+We can take that array and scale it. Again, these are all 2-dimensional arrays 
+in the computer so we can do any of these operations. 
+And here's what will happen, so we are going to rotate the image. 
+So, we take this T, we rotate the whole image, but like we see some rotation of 
+the T. And here it says zoom in on the edge. 
+And this illustrates again the issues with discretization. 
+So, when I have a straight line in a discrete image, 
+and this straight line goes here, it looks very nice. 
+But when the straight line, as it happens here, goes around. 
+Goes diagonal. It gets kind of truncated like we see it 
+here, okay? 
+And the more pixels we have, the less we're going to notice this. 
+But, now we're discussing just the possibility of rotation, the possibility 
+of different operations on images. And here is the full example and I want 
+you to basically look at, at this. So this is my original image, 
+we rotate it. We can rotate it back. 
+It looks perfect to us, although it has some differences. 
+This is the difference between these two images, okay? 
+So, if I were to write down what happened here, I had an image. 
+I rotated it. I basically took this result, which is 
+this. And rotated it, in the opposite direction 
+and obtained this, and then I subtracted these two. 
+Basically, I subtracted I from this one. So this is I, this is the rotation, this 
+is the ris, the inverse rotation to the result and this is the subtraction. 
+And the reason we have difference is because of this sampling, discretization 
+of this phase that we discuss in the previous video. 
+There's one more thing that we can do on images and we're going to basically 
+discuss this next week when we talk about compression. 
+We can actually do transforms to images. And, those of you that already took the 
+SP classes know that one of the transform that we can do is a Fourier transform. 
+So we have an image, we do a Fourier transform of it. 
+And that's going to be very important in compression. 
+We're not going to do Fourier, we're going to do what's called the great 
+cosine transform. So, this is an image. 
+And, we are doing a Fourier transform of it. 
+This is the Fourier transform. And now you see noise so where it can 
+filter in the Fourier domain. And I haven't discussed any background in 
+singular processing as Fourier. We are not going to need a lot of it. 
+I'm going to discuss at every week the background that we need for that week, 
+and we are not going to do a lot of fourier. 
+So if you haven't, I mean we can do a lot of image processing without knowing 
+Fourier transform. So, if you haven't taken any of the SP 
+class, don't worry. We're going to be able to do everything but this slide 
+without knowing fourier. So, don't worry about that. 
+But those of you that are familiar with Fourier, and you will see that I can 
+filter these, for example this filter and then return. 
+So I do a transform, I filter and I come back and I get a very 
+clean image. So, once again, those of you that are 
+familiar with, with basic signal processing of Fourier transform, this is 
+nothing else than a Fourier year filter. For those of you that are not familiar 
+the thing that I took the image, I took that 2-dimensional array and I transform 
+it into a different 2-dimensional array. I did some manipulations there and I came 
+back, and I got a very clean image back. And, once again, this is only to 
+illustrate that what we are doing here is operating with 2-dimensional arrays. 
+Where at every point, we have a value that represents the brightness or the 
+color in that particular location or in that pixel. 
+So, now we know we have images as representing in the computer. 
+Now, we have seen already that the, that we 
+want to have a lot of pixels, we want to have a lot of grey values. 
+And that's going to take a lot of space. And we're going to see in the next videos 
+for the next week about compression, which is how do we deal with that large 
+amount of data that we need to have very good image quality. 
+Thank you.

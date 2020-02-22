@@ -1,0 +1,315 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.640
+Hello and welcome back. 
+Let us now talk about Video Inpainting. 
+
+2
+00:00:06.640 --> 00:00:11.734
+You basically already have all the tools 
+to do Video Inpainting. 
+
+3
+00:00:11.734 --> 00:00:17.601
+Remember, and I'm showing these in very 
+slow motion, a video is a sequence of 
+
+4
+00:00:17.601 --> 00:00:22.773
+frames, a sequence of images. 
+So, we can basically use the tools that 
+
+5
+00:00:22.773 --> 00:00:27.560
+we developed for Image Inpainting now in 
+Video Inpainting. 
+
+6
+00:00:27.560 --> 00:00:31.047
+How? 
+For example, we can take, in the Cut and 
+
+7
+00:00:31.047 --> 00:00:37.456
+Paste, instead of two-dimensional patches 
+x, y, we can consider three-dimensional 
+
+8
+00:00:37.456 --> 00:00:40.781
+patches x, y, t and look at them in the 
+video. 
+
+9
+00:00:40.781 --> 00:00:46.865
+In the whole video, that would be very 
+expensive but we can look at them in 
+
+10
+00:00:46.865 --> 00:00:51.504
+segments of the video. 
+We can also run the partial differential 
+
+11
+00:00:51.504 --> 00:00:56.100
+equations or the variational formulations 
+considering, for example, 
+
+12
+00:00:56.100 --> 00:01:00.845
+three-dimensional gradients. 
+When we talk about curvature, we can 
+
+13
+00:01:00.845 --> 00:01:06.747
+consider the videos as surfaces and talk 
+about surface curvatures like Mean 
+
+14
+00:01:06.747 --> 00:01:12.260
+curvature or Gaussian curvature. 
+So basically, the same type of concepts, 
+
+15
+00:01:12.260 --> 00:01:17.230
+Laplacian, we can take derivatives in the 
+x, y, and t directions. 
+
+16
+00:01:17.230 --> 00:01:22.051
+Some type of concepts, we can expand to 
+do Video Inpainting. 
+
+17
+00:01:22.051 --> 00:01:28.561
+And that's how today, Video Inpainting is 
+done in the literature extending those 
+
+18
+00:01:28.561 --> 00:01:33.946
+concepts that we saw for images. 
+Now, Video Inpainting has a bit of 
+
+19
+00:01:33.946 --> 00:01:37.000
+different characteristics. 
+For example, 
+
+20
+00:01:37.000 --> 00:01:41.450
+here, let me just show you with the 
+arrows. 
+
+21
+00:01:41.450 --> 00:01:49.034
+There are some objects that are static in 
+the video so they will never appear in 
+
+22
+00:01:49.034 --> 00:01:53.616
+any of the frames. 
+And there are some objects that move in 
+
+23
+00:01:53.616 --> 00:01:59.265
+the video so it's slightly different if 
+we want to remove static objects than if 
+
+24
+00:01:59.265 --> 00:02:03.900
+we want to remove moving objects. 
+For example, if we want to remove a 
+
+25
+00:02:03.900 --> 00:02:09.766
+moving object, all what we have to do is 
+wait until it's gone in one of the future 
+
+26
+00:02:09.766 --> 00:02:13.894
+frames and copy from those frames into 
+the current frame. 
+
+27
+00:02:13.894 --> 00:02:18.710
+So, I want to remove this now. 
+Look at my pointer, now it's gone. 
+
+28
+00:02:18.710 --> 00:02:25.566
+So, I basically can copy those pixels, 
+those pixels from future frames into the 
+
+29
+00:02:25.566 --> 00:02:31.267
+current frame. Because the object is 
+moving, the current background appears in 
+
+30
+00:02:31.267 --> 00:02:34.501
+some of the previous or some of the 
+future frames. 
+
+31
+00:02:34.501 --> 00:02:37.670
+When the object is fixed, it's slightly 
+different. 
+
+32
+00:02:37.670 --> 00:02:42.844
+The background is never revealed but this 
+Cut and Paste or partial differential 
+
+33
+00:02:42.844 --> 00:02:46.401
+equations or variation of formulations 
+will work there. 
+
+34
+00:02:46.401 --> 00:02:50.670
+So, you could if you want make a 
+distinction between these two and 
+
+35
+00:02:50.670 --> 00:02:55.780
+differently inpaint each region or you 
+could just let those techniques that we 
+
+36
+00:02:55.780 --> 00:02:58.820
+described for images work with all the 
+objects. 
+
+37
+00:02:58.820 --> 00:03:04.229
+Here, we see an example of this video 
+inpainted with those combination of Cut 
+
+38
+00:03:04.229 --> 00:03:11.012
+and Paste propagation of information as 
+we have seen, we basically have removed a 
+
+39
+00:03:11.012 --> 00:03:16.744
+number of objects, we have removed 
+basically this, this, and this. We have 
+
+40
+00:03:16.744 --> 00:03:23.284
+removed both static and dynamic objects 
+with those techniques without making any 
+
+41
+00:03:23.284 --> 00:03:28.098
+explicit distinction between them. 
+Here is another example. 
+
+42
+00:03:28.098 --> 00:03:32.924
+what we want to remove now, as you see, 
+is this object. 
+
+43
+00:03:32.924 --> 00:03:36.630
+Remember, for inpainting you get the 
+video, 
+
+44
+00:03:36.630 --> 00:03:41.627
+as we got the image, you have to get the 
+mask, a video with the mask. 
+
+45
+00:03:41.627 --> 00:03:47.296
+Now, of course, doing that by hand for 
+video is much more time-consuming than 
+
+46
+00:03:47.296 --> 00:03:52.890
+doing it by hand for still images. 
+But we have to mix to do segmentation in 
+
+47
+00:03:52.890 --> 00:03:58.410
+video as we have seen, for example, the 
+Roto Brush in Adobe's After Effects. 
+
+48
+00:03:58.410 --> 00:04:04.095
+And here is the, the result of basically 
+removing this person or this mask. 
+
+49
+00:04:04.095 --> 00:04:07.907
+And you see the video looks completely 
+natural. 
+
+50
+00:04:07.907 --> 00:04:14.315
+We, it's very hard to realize for us that 
+this is not the original video but it 
+
+51
+00:04:14.315 --> 00:04:20.156
+actually is not and it's actually 
+inpainted with this dynamic object. 
+
+52
+00:04:20.156 --> 00:04:26.483
+And now here, we have a second example. 
+This is an example that we have already 
+
+53
+00:04:26.483 --> 00:04:32.972
+seen in the past and once again, we are 
+basically removing one object and making 
+
+54
+00:04:32.972 --> 00:04:36.460
+you believe that it was the original 
+video. 
+
+55
+00:04:36.460 --> 00:04:43.437
+This basically concludes our presentation 
+of Image and Video Inpainting. 
+
+56
+00:04:43.437 --> 00:04:49.019
+We have seen very, very good techniques 
+for doing this and as we talked in the 
+
+57
+00:04:49.019 --> 00:04:52.890
+past, this is used a lot, for example, 
+in the movie industry. 
+
+58
+00:04:52.890 --> 00:04:58.097
+But its also used a lot to improve our 
+own pictures, our own images, and remove 
+
+59
+00:04:58.097 --> 00:05:00.968
+objects that we don't like on those 
+images. 
+
+60
+00:05:00.968 --> 00:05:04.105
+I hope you had fun, this is really a fun 
+topic. 
+
+61
+00:05:04.105 --> 00:05:08.444
+You can make a lot of nice stuff with 
+Image and Video Inpainting. 
+
+62
+00:05:08.444 --> 00:05:12.383
+Thank you very much and I am going to see 
+you again next week. 
+
+63
+00:05:12.383 --> 00:05:13.051
+Thank you. 

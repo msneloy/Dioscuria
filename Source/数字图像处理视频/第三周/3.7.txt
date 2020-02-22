@@ -1,0 +1,96 @@
+As we just saw, local averaging has some 
+very interesting mathematical properties. It's a very simple operation as well and 
+is very useful as we saw a few examples before. 
+But we have also observed that it can blur the information in the image, 
+it can blur the edges. So, how do we solve that? 
+We have a number of different directions to go. 
+One is to basically replace this local averaging by a different local operation 
+and we're going to see that very soon. The other is, we may ask ourself, are we 
+only limited to average in the local neighborhood? 
+Maybe we can do a smarter average. Remember that averaging is like a heat 
+flow. So, shall we basically average between a 
+very hot pixel and a very cold pixel or shall we try only to average between 
+pixels that are similar and try to stop averaging pixels that are very different. 
+And that's, a very interesting concept that can actually be implementing a very, 
+very variety of ways in a very different number of directions. 
+But let's just explain one which is extremely elegant. 
+In part it's elegant because it's very simple and it's actually called non-local 
+means. Instead of looking at averages in the 
+local neighborhood, we're going to look at averages in the whole image. 
+Let's see why we can do that and how we do that. 
+The idea is very simple. Let's just observe this image. 
+We actually see that images have repetition. 
+Sometimes these are called self-similarities. 
+So for example, if we look at this local neighborhood, it's very similar to this 
+local neighborhood, and very similar to this local neighborhood. 
+We also observed that here this local neighborhood is very similar to this 
+local neighborhood, even similar to this. 
+They're far away, but they're very similar, 
+the same here. So, before, we were thinking about 
+averaging only pixels inside here, maybe we should actually average neighborhoods 
+that are similar. Maybe we should average these three, so 
+we can replace this pixel by certain relationship with others, but we should 
+not mix this with these because the local neighborhoods are very different. 
+So, the basic idea of non local means or non local averaging is to try to average, 
+try to enjoy the properties of averaging but not restrict that to a local 
+neighbourhood. So why are we doing that, and how are we 
+doing that? So, the basic idea is that if we assume 
+that these are identical things, identical structures, but maybe with 
+different noise. Let's see the effects of that. 
+Let's assume that we have a certain pixel, lets call it P, that's what we 
+observed. It's the clean pixel plus some noise. 
+But the noise, basically is a random variable, 
+so it's always slightly different. So, we observed the pixel a number of 
+times. We observed one with a certain noise. 
+We observe it again, same pixel, but with a different noise. 
+And we can observe it multiple times, let's say that we observe this n times, 
+always the same pixel but with different realizations of the noise. 
+If we average all these, we can easily show these are basically 
+properties of signal analysis, that the noise goes down proportional the 
+square of the number of times that we average. 
+So we are averaging always the same pixels, 
+the noise is the random variable, and basically, the noise goes down 
+proportional to n^. The more we average, the more we reduce 
+noise. Of course, it's very important that we 
+always average exactly the same pixel. The noise is the only thing that changes. 
+So this is one of the motivations of non local means to say, okay maybe I can find 
+repeated structures that are identical or at least very similar, the noise is 
+different all around and I can reduce that noise by averaging just because of 
+this. And the basic idea then, is to look for 
+similar neighborhoods first and average them. 
+So if I want to replace this pixel in the center, here, I look at the neighborhood. 
+I look for similar neighborhoods and I replace the pixel by the center, by the 
+average of the center of the similar neighborhoods. 
+And how do I find similar neighborhoods? So there's a whole literature on non 
+local means, that basically includes two parts. 
+How do I find similar neighborhoods? That's the first part. 
+Once I found them, how do I average them? Do I weighted average them? Do I compute 
+a different relationship between them? But once again, the simplest for both 
+options is look for neighborhoods by comparing, let's say, the mean square 
+error between them and make sure that it's very small. 
+That's a very, very simple operation. You go around the image you look at 
+neighborhoods, lets say 3x3 or 5x5 or 7x7. 
+And you say, okay, who is similar to this? 
+You go to around. You find a set of them. 
+You can include all of them. You can include just the most similar 
+ones. Once you find them, you go into the 
+center of every neighborhood, and lets say you average that, and you 
+replace the pixel by the average. Then, if you want to actually clean a 
+pixel that is here, you look for similar pixel, similar neighborhoods to what's 
+running that pixel, you go around the image, 
+you find a few, and you replace this pixel by the average of the centers of 
+all the similar neighborhoods. Once again, this is just one example. 
+You could look for similar neighborhoods in a different fashion. 
+You could, actually, once you find them, instead of doing average do a weighted 
+average or do other functions but the concept is always the same. 
+Instead of just averaging to rep, instead of just averaging around the neighborhood 
+to replace this pixel, we basically look all around the image for similar 
+neighborhoods with some measure of similarity. 
+And once we find them, we combine them and in such a way we denoise the pixel 
+base on the concept I just explained. This is an extremely similar operation. 
+Once again, basically one or two common lines in [INAUDIBLE] for example. 
+You can actually perform this operation an extremely, extremely powerful and has 
+opened a lot of research, very modern research in image processing basically in 
+the last couple of years. What we're going to do next is I'm going 
+to actually run some of these examples on real images. 
+I'm going to be doing this on real time. So, see you in the next video for that.

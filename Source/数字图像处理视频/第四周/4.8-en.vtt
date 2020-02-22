@@ -1,0 +1,215 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.066
+No and welcome back. 
+Let us see the wiener filter in action 
+
+2
+00:00:04.066 --> 00:00:08.169
+once again using MATHLAB. 
+As we have done before we start by 
+
+3
+00:00:08.169 --> 00:00:11.515
+loading an image. 
+This is the same image we have seen 
+
+4
+00:00:11.515 --> 00:00:15.113
+before, this Saturn image, remember that 
+was a color image. 
+
+5
+00:00:15.113 --> 00:00:20.163
+So we're going to transform it into black 
+and white image, the same operation as we 
+
+6
+00:00:20.163 --> 00:00:23.320
+did before. 
+Then we're going to add Gaussian noise, 
+
+7
+00:00:23.320 --> 00:00:28.433
+as we see here, we have seen this before 
+when we were showing the different types 
+
+8
+00:00:28.433 --> 00:00:33.294
+of noise and we see here the variance. 
+Now, are go and apply the wiener filter. 
+
+9
+00:00:33.294 --> 00:00:38.574
+This is the operation that applies the 
+wiener filter to this image that we have 
+
+10
+00:00:38.574 --> 00:00:42.014
+just basically created by adding Gaussian 
+noise. 
+
+11
+00:00:42.014 --> 00:00:47.747
+Now before I show you the result of the 
+Wiener filter I want to compare that with 
+
+12
+00:00:47.747 --> 00:00:51.689
+a different filter. 
+Basically, I want to compare it with a 
+
+13
+00:00:51.689 --> 00:00:55.630
+local averaging. 
+For that I'm creating a disk of radius 
+
+14
+00:00:55.630 --> 00:01:00.216
+ten and then basically filtering the 
+noise image with that disk. 
+
+15
+00:01:00.216 --> 00:01:04.516
+This is basically, 
+this operation is basically computing the 
+
+16
+00:01:04.516 --> 00:01:07.390
+local average, 
+weka window of radius ten. 
+
+17
+00:01:07.390 --> 00:01:11.779
+Don't worry about this, 
+this is just a, what, is telling MATHLAB 
+
+18
+00:01:11.779 --> 00:01:16.959
+what to do at the boundary conditions. 
+So basically, we're going to have, the 
+
+19
+00:01:16.959 --> 00:01:21.923
+original image, we're going to have the 
+noisy image, we're going to have the 
+
+20
+00:01:21.923 --> 00:01:27.031
+blurry image, local averaging, and we're 
+going to have the result of Wiener 
+
+21
+00:01:27.031 --> 00:01:29.550
+filtering. 
+So let's see the results. 
+
+22
+00:01:29.550 --> 00:01:35.628
+Once again we're loading all the images. 
+And this will help us to see how nice 
+
+23
+00:01:35.628 --> 00:01:41.395
+wiener filtering can work. 
+we see again the original image, that we 
+
+24
+00:01:41.395 --> 00:01:44.980
+have seen in the past. 
+This is the noisy image. 
+
+25
+00:01:44.980 --> 00:01:52.136
+This is the result of Wiener filtering. 
+And this is the result of blurring, or 
+
+26
+00:01:52.136 --> 00:01:57.248
+local averaging. 
+So see how nicely Wiener filtering has 
+
+27
+00:01:57.248 --> 00:02:01.998
+been able to recover. 
+Restore a lot of the original image, 
+
+28
+00:02:01.998 --> 00:02:07.439
+starting from this noisy image. 
+And it has done a much better job than 
+
+29
+00:02:07.439 --> 00:02:12.102
+the local averaging. 
+Let me move the image closer, and we can 
+
+30
+00:02:12.102 --> 00:02:16.844
+see the difference. 
+This is clearly a much sharper image than 
+
+31
+00:02:16.844 --> 00:02:21.585
+what we obtained knowing basically, doing 
+the local averaging. 
+
+32
+00:02:21.585 --> 00:02:27.885
+So wiener as we see can do a fantastic 
+job when we provide some information. 
+
+33
+00:02:27.885 --> 00:02:33.030
+And in this case, actually, the wiener is 
+estimating the information. 
+
+34
+00:02:33.030 --> 00:02:36.754
+So this is the, 
+basically the implementation that we saw 
+
+35
+00:02:36.754 --> 00:02:42.276
+at the end of the previous video, the 
+simplest implementation of the wiener 
+
+36
+00:02:42.276 --> 00:02:47.798
+filtering and still able to do a great 
+job in restoring the image, starting from 
+
+37
+00:02:47.798 --> 00:02:51.180
+this noisy image. 
+Then we once again, this was the 
+
+38
+00:02:51.180 --> 00:02:57.117
+original, the noisy of course the wiener 
+filter doesn't know this original images 
+
+39
+00:02:57.117 --> 00:03:02.018
+starts from this noisy image and still 
+operating that blurry version of it, 
+
+40
+00:03:02.018 --> 00:03:06.850
+creates a really sharp version. 
+So it's doing a really, really good job. 
+
+41
+00:03:06.850 --> 00:03:13.210
+And we can see much better than the local 
+averaging that blurs. 
+
+42
+00:03:13.210 --> 00:03:17.747
+So by this we conclude that themma on the 
+wiener victory. 
+
+43
+00:03:17.747 --> 00:03:19.340
+Thank you very much. 

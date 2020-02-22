@@ -1,0 +1,346 @@
+We're going to now talk about how an 
+image is represented in the computer, how a color image is represented in the 
+computer, and how a video is represented in the 
+computer, and the very important concepts of 
+sampling, and representation, and quantization. 
+It's always very good to have in mind the images that we normally take with our 
+cameras. But please remember, while we see here 
+and we talk a few videos ago that images that we are familiar with is just a very 
+small part of the spectrum of images that we can acquire at different wavelengths 
+and with different modalities. And the concept of something in 
+quantization are relevant for basically all of those modalities, we always going 
+to have to sample, we are always going to quantize. 
+But again, it's good to have in mind when we talk about these different ideas, how 
+they apply to the images that we are most familiar with, which are the images from 
+our own digital cameras. So, the basic idea is as follows. 
+We may say half light, basic error reflecting on the objects, 
+and the light that is reflected on the objects goes into the camera. 
+And, what we have are sensors in the camera as we can see here. 
+Remember, in our eyes, we have the retina and the retina have the cones and rods, 
+those were the sensors. In digital cameras, we have sensors, 
+exactly the same way as we have sensors in our eyes. 
+So, this is just one example of a sensor. The energy is coming in, 
+there are filters, and then basically, the energy is 
+acquired and is transmitted. So, the energy is sent and transmitted. 
+And normally, what we are going to have on a regular camera is the 
+two-dimensional array of these sensors. So, each one of these is going to be one 
+of these. Okay? 
+And normally, they are arranged in a square or rectangular fashion as we see 
+it here. So, we have actually kind of a discrete 
+number that's when we go and buy each of the cameras, 
+we hear that this is about 1,000 x 1,000. It means, we're actually going to talk a 
+bit more about that in a second. It means that we have 1,000 sensors in 
+this direction, 1,000 sensors in this direction, 
+so a total of a thousand square sensors. So, once again, light is reflecting 
+objects, is projected into the camera, and is sensed by the camera, 
+but all the process has a step of discretization. 
+Some of you might be more familiar than others with this. 
+Those of you that took classes in, in digital signal processing and are aware 
+of A to D converters. This would be very simple and very familiar to you, 
+but let's just review it for those that are not so familiar with the concepts. 
+So, we see here the light represented here, is reflected from the object and it 
+goes into the sensing device. Think about your digital cameras. 
+So this is a blown-up of what we have back here. 
+It looks, the object is continuous space, everything is continuous, but we actually 
+get a discrete representation of that object and the discretization applies in 
+two different directions. One is a spatial discretization. 
+So we have a discrete number of sensors here, and basically the light. 
+One of the simplest modes is that we integrate, each one of these integrates 
+the light arriving to it, so that's a discretization in the space. 
+There's also discretization in the amplitude. 
+We're not going to be able to capture every single level of gray, every single 
+level that is reflected from the object, but we're going to have to discretize it 
+as well. So let's see. 
+Let's talk a bit more about that. This is the object as we actually see it. 
+And let, let's just look at one line. I cross this object. 
+So, we see that there it has different values, it goes from white to gray. 
+So let's just now draw the profile which is what we see here. 
+So it's very light, white, and then it becomes a bit dark, and if we see here, 
+let me just erase this so we can basically see it more clearly. 
+If we go around, I'm going to just mark it here. 
+If we're going around, we see that it's going for white then it's dark, 
+then it just becomes brighter a bit, and goes down again, 
+and then it's white again. So it has kind of these profile. 
+High is white, then it go dark, and then it goes up, down, and then it becomes 
+white again. Of course, it's not perfect. 
+It has some noise. Even when we go and buy paint and paint a 
+wall, basically, we think that it's exactly the same color. 
+But it's actually not. It has some small variations, which are 
+represented here. So again, there are two processes 
+happening here. One is sampling. 
+We are going to basically look at the values at certain discrete intervals. 
+We are not going to have the values all around. 
+We are going to have it at certain intervals. 
+Okay? That's one discretization. 
+The second discretization is, we're not going to be able to represent every 
+single possible value here. We're going to basically just represent a 
+few of them. We're going to round them. 
+So let's just give an example. A very simple illustration on how can we 
+round? Let's say that we see the value, 17.5. 
+So basically we see that this is the value that is representing a particular 
+gray value here. So how can we round this? 
+One way is just to truncate it like this. And then basically say, you know, I know 
+that what came into the sensor is 17.5, but actually I'm going to represent it by 
+17." Okay? So, there are more ways of doing this and 
+we are going to talk in more detail about quantization. 
+This is simply this conversation in this direction of the great value is called 
+quantitation. We could also consider, for example, if 
+we had 17.5 as before, we could actually divide it by 2. 
+Take this and multiply by 2. So basically we divided by 2, then we 
+round, and then we multiply by 2. And I'm just going to ask you, as a very 
+simple exercise, what's this value? And what will happen if you're still 
+dividing by 2, we basically for example, divide by 4. 
+Round down, and then multiply by 4. And I'm going to have you think about 
+this, as a simple aromatic operation, we're going to discuss a lot about this 
+particular operation in the chapter on quantization. 
+But to recap, we have two ways of sampling. 
+One is the, two ways to get ways of discretization. 
+One is sampling in the spatial domain, and the other is quanitization in the 
+gray values. So, the basic idea is that while we have 
+started from a continuous object that basically lives in the whole space and 
+has multiple gray values, we end up with a discrete object that has 
+discrete, discretization both in the spatial domain and also in the gray 
+values. The whole idea of good digital cameras is 
+to have a dense enough sampling here, and very, very fine level of 
+quantization, so we don't notice that everything is discrete. 
+But it's actually, it is discrete. So we have pixel values, 
+each one of these is called a pixel. This comes from picture, 
+element, and is denote as pixel. 
+And actually I'm going to just, if you want to Google or you want to search on 
+the web a bit, I'm going to just, you might find it 
+entertaining to find out who basically was the first person to use the term 
+pixel. It's actually a very famous statistician 
+and you can have fun looking for that on the internet or discuss about that on in 
+the blogs when you find out about that. So, everyone of these is discrete, 
+both in space and is discrete also in its grey values. 
+And that's how we get pixels. And once again, the more we have of this 
+and the more we have of the levels, the better the image it is. 
+So, regular images will be, for example, 256 x 256 spatial domain. 
+That will means that it will have 256 square pixels and maybe it's represented 
+by 8 bits. So every pixel, is represented by 8 bits, 
+which means that it can have, it's can represent 256 different gray values and 
+we are going to see how important this is. 
+Both the spatial discretization and the quantization of gray values are extremely 
+important. We can have better images, 
+for, let me just go back. We're going to have, for example, we 
+might have an image that has, instead of 256 x 256, it might have 512 x 512 and 
+still 256 letters. So it's going to take more memory to save 
+that image, but it's going to have a better quality. 
+And once again, when you're buying digital cameras, they normally tell you a 
+lot about this number, how many pixels it has, 
+and that tells you how fine the sampling is. 
+We want a lot of pixels, so they are so close to each other, that 
+we, that we can actually believe that it's a continuous domain and the same at 
+the level of the grey values. So, once again, one, each one of these is 
+a pixel and it's represented by gray values. 
+Now this is a black and white image. We actually, in our cameras, we have 
+color images. Color images are represented by three of 
+these images. One for red, 
+one for green, and one for blue. 
+So basically the cameras acquire, I'm going to explain a bit more about that in 
+a second, acquire three images. One represents the blue colors, how much 
+blue there is in the scene, the other represents the green, 
+and the other represents the red. And this is called red, 
+green, and blue, so you often going to hear images which 
+are R, G, and B. I should make one comment about this. 
+Most low-end to mid-end consumer cameras, they actually don't really capture full 
+two-dimensional rays for each one of the colors. 
+So we would like to have each one red, green and blue. 
+So that's what we would like to have red, green, 
+and blue. That would be the ideal scenario and the 
+more expensive cameras actually do that, basically they capture three full images. 
+Most consumer cameras, if you buy a low-end digital camera, actually does 
+something slightly different, something that is called mosaic. 
+And the basic idea is that it capture the pixels with interleaving in the colors, 
+will capture out a red, a green, a red, a green, and so on. And here, it will 
+capture a red here, a blue, blue, 
+red, and so on. So the next one will be red, green, red, 
+green. The next one will be blue, red, blue, 
+red. So actually, it's not having the triple 
+the amount of pixels, is actually having one pixel red, one green, one red, one 
+green. From this, we are going to have to 
+interpolate and that we're going to learn how to do those things in the 3rd and 4th 
+week weeks in this class. We're going to have to go, because to 
+represent a full color image at every pixel, we're going to have to go red, 
+green and blue. So, we do have the red, we're going have 
+to create, somehow the green and blue, and that's down from the neighboring 
+pixels. Here, we have the green, we are going to 
+have to create the red and the blue. So, we are going to have to complete the 
+three channels to be able to see a color image. 
+When you buy a digital cameras, they actually normally tell you the size on 
+this which is the size after it have done that population, although, they as they 
+as they say the regular consumer images capture this. 
+So they actually capture 1/3 of the data that they tell you that they're giving to 
+you, that the data they tell you they're 
+giving to you has been interpolated from what has been captured. 
+So we have discrete images. We have a red, green, and blue channels. 
+We're going to think about them as red, green, and blue so we already went from 
+this representation to the interpolated, by the way this is called mosaic. 
+So that's how color images are created. Now, how are videos? 
+So this is how you have a color in your, an image in your computer. 
+You have three channels, three arrays of two dimensional discrete values, one for 
+red, one for green, one for blue. So what happened with videos? 
+Videos basically repeat this. So one image has, red, 
+green, and blue. And what happen in video, you have 
+multiple of these. For example, for one second of video, in, 
+in some of the formats you're going to have 30 of these. 
+So you're going to have 30 x RGB and each one of these, remember, is one of these 
+two-dimension structures. So basically, if you are having, if you 
+want to have one second of video in your computer, you'll have 30 * 3 images. 
+30 images in 1 second and 3 because you have three colors. 
+So in 1 second, you're going to have 90 images of this type to represent 1 second 
+of video. And, of course, 90 images, so let's say 
+90 images at the resolution of 512 x 512, each an 8 bits each. 
+So this is what you need to represent at relatively very low resolution. 
+This is not very high resolution, this is pretty standard, but basically this is 
+what your going to need to represent 1 second of a video in your computer. 
+By the way, it's just saying that it's 3 * 8 bits, three times because we have 
+[INAUDIBLE] bits. Sometimes people will say that our 
+resolution is 24 bits, so we use 24 bits to represent basically 
+a pixel. Okay? 
+So this is how you have. If you go now to a computer that knows 
+how to deal a program that knows how to deal with images you're going to see 
+basically two-dimensional discrete arrays as many as seconds or frames you have in 
+your image. It's one of these 30, it's called a 
+frame, and you have 30 of this in a second or 30 images. 
+When we talk about still images, with we talk normally about images, when we talk 
+about videos, each one of these we call it a frame. 
+So this is how your images are represented. 
+Let's just look a bit more about how important and what are the effects of 
+your resolution in space, on your resolution in gray values. 
+Meaning, how many pixels you're going to have and what are the gray values that 
+you're going to use for them. So, this is again the same type of 
+representation. This is how 1 color of 1 image, or 1 
+color of 1 frame is represented. If you have the letter D, then these 
+pixels are 0. When we have 8 bits, 
+normally 0 is black and 1 or 256, 255, actually is white. 
+So if you are going with 8 bits, you can go from 0 to 255. 
+0 is black, 255 is white. Sometimes at 255 is called 1 if you want 
+to talk about the interval between 0 and 1. 
+So, although, you see this, actually the computer is represented by a 
+bunch of 0 for the black region. Then, let' say that this region is in the 
+middle of the gray value, it would be an equivalent of a 128 value 
+or a 0.5 value. So we see here 0.5 and then 1 for 
+basically the white. So this is your discrete representation 
+of this image in the computer. Okay? 
+At every pixel, you have a discrete value. 
+Now, sometimes, one of the things that happen is because you have only 256 
+different levels that you can use. Sometimes your image is too bright and 
+you might not be able to represent the small variations in brightness, there. 
+Remember, the human visual system can basically adapt to multiple level, 
+multiple levels of brightness, but not all of them at the same time. 
+The same for an image. We can capture many, many levels, maybe 
+256, but if we have to deal with a very dark 
+region and a very light region at the same time, we are in trouble. 
+And sometimes, the very small variations in this light region, we're not going to 
+be able to capture and that's called saturation. 
+So, it's going to look all white because it all got to the 255, 
+maybe it was above 255. We want it to be above 50, 
+255 because it was very bright. So that happens very often, 
+we take images and sometimes we see what's called specularities or, or very 
+strong reflections and it looks white, it looks very, very light and that's 
+because the image, the sensor has saturated. 
+So, this explains, now you know why, why that is happening. 
+You have a discrete amount of levels, a discrete amount of values to represent 
+your image, and this went above and beyond what you 
+can represent with that discrete amount of values. 
+So again, two discretizations, one in space and one in gray values. 
+And look what happened, what's the effect? 
+And you know that, because if you have a digital camera or if you see images on 
+the, on the web, on the Internet, you see images have different resolution. 
+So if you were to use a lot of pixels, you might see this. 
+So this means that you have something which is very, very fine, 
+a lot of pixels and that looks really nice. 
+On the other hand, if you have something which is much more coarse, less dense, so 
+you have less pixels, you're going to see something like this. 
+And it's very clear to see, for example, how you know, this line is very nicely 
+represented here is not so nicely represented here. 
+You can see very easily this small numbers here, not so easy here. 
+You look at these numbers here, they're not so clear here. 
+So here we only have changed the spatial resolution. 
+We have not changed the number of gray values. 
+Still, let's say we have 256. So each one of these is represented with 
+256 and each one of these is represented of 256, but we are not able, basically, 
+to represent so fine detail with this as we are with this. 
+And you can think about, once again, if I want to draw a profile. 
+If you want to represent, something that has, this profile of great value and you 
+actually want to discretize that. If you do it very coarse, you're not 
+going to be able to detect that there is a smooth variation in the gray values. 
+But if on the other hand you are able to put many more layers, 
+you're going to be able to capture its value at many, many points, instead of 
+just at a few, let me just use a different color, 
+just as a few values if you do a coarse discretization. 
+And that's why this image doesn't look as nice as this one, because this capture 
+what was going on at a very coarse levels in the discretization, 
+in the space discretization. Now, similar things happen if you 
+basically do a very coarse discretization of the gray values. 
+So let's just start, and once again, we are not changing the 
+number of pixels. All these four images and the four images 
+that are going to come next have exactly the same number of pixels. 
+Okay? So actually, it's written here, it has 452, 
+I'm going to just make it larger, times 374, 
+all the images. But, the first image is displayed with 8 
+bits, meaning 256 values. So I'm going to just write it, maybe I'm 
+just going to say it here. The first is 256 and we actually see it 
+very, very smooth and very, very nice. Here, we only use 7 bits or 128 values. 
+So basically, the value 0 and 1 become 0, 2 and 3 become 2, 
+4 and 5 become 4. Okay? 
+The easiest way to do that is you take every value here, let's say a value, 
+you divide by 2. You take basically the closest integer 
+from below and you multiply it again by 2. 
+Okay? So for example, if the value of this 
+image was 8, you divide by 2, you take, divide by 2, basic, divide. 
+Sorry. Divide by 2, 
+that's 4. Okay? 
+You multiply by 2, you got 8 again. 
+No problem with that pixel value. Okay? 
+But what happen, let's just do that here, 
+what happen if you have 9? You divide by 2, 
+that's 4 and 1/2. I have to take the closest integer from 
+below, that's 4, 
+I multiplied by 2 and this became 8. So a 9 was transformed into an 8 and 
+that's basically reduces the range and reduces the quality of the image. 
+This becomes even worse if we go into this region where we are actually only 
+using 64 different values. So, that's equivalent basically to 
+dividing by 4 then truncating and multiplying by 4. 
+And that means that you're going to start talking about basically, if you have only 
+64, every 4 values are represented with 1 number. 
+So 0, 1, 2, 3, they all become 0. 4, 5, 6, 7, they all become 4, and so on. 
+And then, you can keep going and this is only represented with 32. 
+So I hope that you're starting to see that the quality is deteriorating. 
+In particular, if you look at lines here, you start to see what's called false 
+contours. You see these lines that they're not 
+clear here. There is a smooth transition here, but 
+here you see these false contours and that's created because of these jumps 
+that I mentioned to you. So if you were going basically 1, 2, 3, 
+4, it's actually, you are going to, when you 
+taking very, very few gray values, you're going to go 0, 0, 0, 0, 4. 
+You're going to jump into that value and that's because you are basically have 
+much less resources to represent the different gray values. 
+It's just going into an even more extreme case and we keep going down. 
+Here, basically we used only 16 and now I think that you're going to be able to see 
+the false countours very clearly. Here, we go basically only to 8 values. 
+There's only 8 numbers to represent everything that is happening in this 
+picture. Okay? And that's basically a very strong 
+quantization. Here, there is basically only 4 and here 
+is basically only 2. In this very extreme case, everything 
+that was below 128 became 0, became black. 
+Everything that was above 128 became 255, white and then you see a very, very poor 
+quality data. Okay? 
+So that's how the spatial quantization and the gray value, spatial sampling, 
+sorry, and the gray value quantization effect you. 
+The more you have of samples, the better quality it is, the more you have the 
+possibility of represent many, many, many small variations. 
+In gray values, the better it is, of course, the more memory it takes into 
+your computer and that's going to be the subject of our compression unit. 
+So now we know how images are represented in the computer. 
+They represent these two-dimensional arrays. 
+Great level images are represented by one. 
+Color images are represented by three, red, green and blue. 
+Videos are represented by multiples of them, 
+let's say 30 a second, sometimes it's only 24 depending on the 
+standard that, that we have, but there are multiple of those images 
+and as we say, we call them frames and we know that everything is discrete. 
+So we have something and quantization. An image in a computer is nothing else 
+now that the two-dimensional array of discrete values. 
+Thank you.

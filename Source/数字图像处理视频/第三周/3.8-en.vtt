@@ -1,0 +1,266 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.637
+Hello and welcome back. 
+Now that we know, the underlying 
+
+2
+00:00:03.637 --> 00:00:07.671
+framework of non-vocal means, let's just 
+demo it in real time. 
+
+3
+00:00:07.671 --> 00:00:13.226
+Non-local means denoising works using the 
+resources in the image processing online 
+
+4
+00:00:13.226 --> 00:00:16.599
+journal. 
+This is a website that I have provided a 
+
+5
+00:00:16.599 --> 00:00:21.889
+link in their webpage for this class, is 
+a journal that has a lot of online 
+
+6
+00:00:21.889 --> 00:00:26.519
+algorithms for image processing. 
+And I strongly suggest that you visit it 
+
+7
+00:00:26.519 --> 00:00:31.112
+if you want to play with a lot of the 
+state of the art in image processing. 
+
+8
+00:00:31.112 --> 00:00:35.578
+So the journal has first a full 
+description of the algorithm. It has also 
+
+9
+00:00:35.578 --> 00:00:40.548
+code that you can download and use in 
+your own computer, but also has an online 
+
+10
+00:00:40.548 --> 00:00:43.191
+demo and that's what we are going to do 
+next. 
+
+11
+00:00:43.191 --> 00:00:47.909
+You can upload your own images, or you 
+can basically use the images already 
+
+12
+00:00:47.909 --> 00:00:52.628
+available on the website, just to 
+illustrate and to help you understand the 
+
+13
+00:00:52.628 --> 00:00:55.836
+algorithm better. 
+So let's just pick this image, for 
+
+14
+00:00:55.836 --> 00:00:57.181
+example. 
+And it's here. 
+
+15
+00:00:57.181 --> 00:01:01.269
+And we're going to run the algorithm. 
+We're going to add some noise to the 
+
+16
+00:01:01.269 --> 00:01:07.298
+image to see how non-local means will 
+de-noise that, and we're going to ask you 
+
+17
+00:01:07.298 --> 00:01:09.777
+to run. 
+So, now it's running, we see this. 
+
+18
+00:01:09.777 --> 00:01:14.480
+This algorithm can be made to run very 
+fast, but now it's running on a server 
+
+19
+00:01:14.480 --> 00:01:18.866
+and it's running on an implementation 
+that is not optimized for that. 
+
+20
+00:01:18.866 --> 00:01:22.871
+But here we have the result. 
+So we see, let's just illustrate the 
+
+21
+00:01:22.871 --> 00:01:25.477
+details. 
+We see here is the noisy image. 
+
+22
+00:01:25.477 --> 00:01:30.550
+Basically, the original image with the 
+other noise, and now we see the de-noised 
+
+23
+00:01:30.550 --> 00:01:33.436
+image. 
+Again, this is the noisy image, this is 
+
+24
+00:01:33.436 --> 00:01:36.389
+the de-noised image, and this is the 
+original. 
+
+25
+00:01:36.389 --> 00:01:41.572
+So we see that there are differences, but 
+certainly the de-noised image is much 
+
+26
+00:01:41.572 --> 00:01:45.967
+better than the noisy image. 
+Now, we can actually see the difference 
+
+27
+00:01:45.967 --> 00:01:49.313
+between the de-noised image and the 
+original image. 
+
+28
+00:01:49.313 --> 00:01:55.052
+Once again, this is the noisy image, 
+the de-noised image, the original image, 
+
+29
+00:01:55.052 --> 00:01:59.459
+and the difference. 
+They just run with a different image. 
+
+30
+00:01:59.459 --> 00:02:04.337
+So let's just select a new input here, 
+and we can pick a different image, for 
+
+31
+00:02:04.337 --> 00:02:08.320
+example, these dice. 
+And we can pick a different level of 
+
+32
+00:02:08.320 --> 00:02:13.413
+noise, and just put a lot of noise to see 
+what happens here, and then let's just 
+
+33
+00:02:13.413 --> 00:02:16.126
+run it. 
+Once again, while this is running, 
+
+34
+00:02:16.126 --> 00:02:19.854
+remember, the goal of non-local means is 
+to look for regions, 
+
+35
+00:02:19.854 --> 00:02:24.380
+say, okay, if I want to de-noise this 
+region, I'm going to look for similar 
+
+36
+00:02:24.380 --> 00:02:28.773
+regions around and average them. 
+The larger the noise, the more the 
+
+37
+00:02:28.773 --> 00:02:33.831
+algorithm will take, because it's goign 
+to try to average more and more patches 
+
+38
+00:02:33.831 --> 00:02:37.226
+to help us reduce the noise, the noise 
+even further. 
+
+39
+00:02:37.226 --> 00:02:41.220
+So here is, again, the noisy image the 
+algorithm has finished. 
+
+40
+00:02:41.220 --> 00:02:44.282
+This is the noisy. 
+This is the de-noised image. 
+
+41
+00:02:44.282 --> 00:02:47.397
+This is the original, 
+and this is the difference. 
+
+42
+00:02:47.397 --> 00:02:53.260
+So we think it has done a very, very good 
+job in de-noising this image. 
+
+43
+00:02:53.260 --> 00:02:55.060
+Noisy? 
+De-noise. 
+
+44
+00:02:55.060 --> 00:02:58.262
+Noisy, de-noise. 
+Original image and the difference. 
+
+45
+00:02:58.262 --> 00:03:03.450
+This image doesn't have a lot of texture. 
+And that's why these type of algorithms 
+
+46
+00:03:03.450 --> 00:03:07.357
+work really, really, well. 
+There, when there is a lot of texture, 
+
+47
+00:03:07.357 --> 00:03:12.097
+the algorithm still works very well, 
+but for every denoise image denoising 
+
+48
+00:03:12.097 --> 00:03:15.620
+algorithm, dealing with texture is a bit 
+more difficult. 
+
+49
+00:03:15.620 --> 00:03:19.602
+So let's just conclude this by showing 
+this once again. 
+
+50
+00:03:19.602 --> 00:03:22.354
+Noisy, de-noise, original, and 
+difference. 
+
+51
+00:03:22.354 --> 00:03:28.220
+And once again, you can just go into the 
+ipo.im website and play with this or any 
+
+52
+00:03:28.220 --> 00:03:33.941
+other algorithm that is available there, 
+and you can upload your own images and 
+
+53
+00:03:33.941 --> 00:03:38.069
+see how it works. 
+Thank you, and see you in the next video. 

@@ -1,0 +1,454 @@
+Hello. 
+We're going to start with some background in the area of planar differential 
+geometry, the area of differential geometry and the understanding of curves 
+on the plain. Before I do that, I want to provide some credit. 
+I work a lot in the area of partial differential equations in image 
+processing, and some time ago I wrote a book.. 
+My good colleague and friend Ron Kimmel also wrote a book in the area and we used 
+to give a lot of talks independently. I gave full semester classes, he gives 
+full semester classes and sometimes we give together tutorials on this subject. 
+A lot of the slides I am using during this week come from those tutorials and I 
+want to thank Professor Kimmel for letting me share some of his slides and 
+combining them with mine so that I can provide the topic of partial differential 
+equations in this week. Thank you Professor Kimmel for that. 
+now, let's talk about curves, so we can describe what do I mean by differential 
+geometry of curves. So what's a curve on the plane? 
+A curve on the plane will define a coordinate system, and this is for 
+convenience. We have the X axis and the Y axis and 
+then we define a curve parameterized by P, we called P the parameter. P runs 
+between zero and one, and for every value of P, we get a coordinate in this axis, 
+and a coordinate in this axis, and that's a coordinate of one point on the curve. 
+So, basically, for example, for P equals 0.1, we get this point. 
+Then for a different p like 0.7, we get another point, and so on. 
+So I'm sure you get the idea. Basically a different values of p within 
+zero and one give us different points on the curve. 
+Now, if a curve is closed like here, what we have is that c at zero. 
+Is equal to C and one. So it starts and ends basically on the 
+same point, and that's a closed curve. Now you're very familiar with this 
+concept. If maybe you're not so familiar with 
+curves but for sure you are familiar with functions. 
+So functions, you have a coordinate system, X and Y as here, and you have a 
+function, that for every value of X there's one unique value of Y. 
+That doesn't happen in normal curves. In that case your curve is parmitrized by 
+this coordinate itself so we get c of x equal. 
+The first coordinate is X by itself. That's the first coordinate, 
+and the second is some function of it. So these are just functions that you are 
+very familiar with. Again, the difference between a function 
+and a general curve is that for each one of these coordinates, each one of the 
+X's, there's only one Y, and that's why it's called a function. 
+There's a, basically a unique value. So it's a particular case of a curve. 
+We could think about curves also as a generalization of functions on the plane. 
+Now, once we understand the curve, which is parameterized by this P, and we're 
+going to discuss a lot about P in the next few minutes. 
+There's a couple of very important concepts of curves on the plane, and two 
+of them are the tangent and the normal. And also what we call the curvature, 
+which we're going to explain in a second. Let's start from the tangent. 
+Basically, we have a curve, and we can take the derivative of this curve. 
+So this is where differential equations, differential geometry starts to appear. 
+C_PP stands for the derivative of C taken by p. 
+So its basically CP. It's just a simplifying notation of the 
+derivative of C with respect to P, which is of course a vector, 
+is the derivative of x with respect to p. C is a function of p, so I'm allowed to 
+take the derivative of that, Y as a function of P. 
+so this is what we have here and we normalize by its length, we want to get 
+that unit length and that's actually very, very important. 
+As we are going to see, there is a particular parametrization called S that 
+provides us a tangent that has unit length. 
+And we're going to use that a lot. And we're going to see how we go from P 
+to S. But the basic idea is that we take a 
+derivative of this curve. And you learn in your basic calculus 
+class that the derivative of a function gives you a vector which is 
+perpendicular, but which is sorry, it's tangent. 
+To that function. In a second we are going to talk about 
+perpendicular. So once again, the derivative of a 
+function gives you a vector which is tangent to that function. 
+So the derivative. Of this curve are vectors, which are 
+tangent. And they don't have to have unit length, 
+so we normalize them, and there is one particular parmituzation we are going to 
+write s that will give us a unit length. And again we are going to see how we go 
+from one to the other. Now what we are going to, now that we 
+have the tangent, and in particular, bear with me for a second. 
+We have the curve parameterized in such a way that the tangent, meaning the 
+derivative, is always unit length. What do I mean by unit length? 
+That the, basically the magnitude of the derivative vector is equal to one. 
+Okay? Unit length. 
+Let's assume that I can basically write a curve. 
+Instead of a function of P, a function of a different parameter S that gives me 
+unit length. Now length means, 
+and I'm going to write this down and explain again, this means that the inner 
+product of the vector with itself is equal one. 
+If you don't remember what's the inner product between two vectors, is basically 
+you multiply the first coordinate of vector one by the first coordinate of 
+vector two, and to that you sum the product of the second coordinate of each 
+vector. So it's X of the first times X of the 
+second, plus Y of the first, times Y of the second. 
+So that means that we have unit length. Let's take a derivative of this. So I'm 
+going to take a derivative according to s in both sides. 
+So this is the derivative. A constant is always unit length, so this 
+becomes zero. The derivative of this is like any other 
+product, it's the derivative of the first times the second plus the derivative of 
+the second times the first but because these are equal then this is two times 
+the inner product of the first derivative with the second derivative. 
+It's like any other product, okay? The two I can eliminate, and this means 
+that the first derivative, according to arc length, is perpendicular to the 
+second derivative. Once again, just to remind you, two, the 
+inner product of two vectors is equal to zero, if and only if one vector is 
+perpendicular to the other. So from here, 
+we get that CS, the first derivative, is perpendicular to the second derivative. 
+Now the magnitude of the first derivative is one. 
+The second derivative, we have it here, is perpendicular to the first one. 
+All the time when we are taking derivatives according to s, the first is 
+unit vector, the second is perpendicular to it. 
+So this is the second derivative. Now it doesn't have to be a unit vector. 
+Most of the time it won't. And we call the magnitude of that second 
+derivative we call the curvature. This is the curvature. 
+Okay, this is one definition of the curvature. 
+It basically tells us how much the tangent is changing and it's very 
+intuitive. If it changes a lot, it means that the 
+curve is curving along there and has very high curvature. 
+It it's not curving a lot, for example a straight line has zero curvature, so 
+what's a tangent of a straight line? At every point it just changed colors. 
+At every point the tangent is in the same direction. 
+It's in the direction of the line. So the change of tangent, tangent is the 
+first derivative, second derivative is the change. 
+The change of the tangent is zero. So a planner, basically a straight line 
+has zero curvature. What's a curvature of a circle? 
+So we have to, basically again, draw the time change all the time. 
+And then see how they're changing infinitesimally when I move from one 
+point to the other. Those are derivatives. 
+Derivatives means when you're very, very close how is the tangent changing? 
+First of all, it's constant because the circle is all the same. 
+So it has to be constant curvature. And then it's not hard to prove that the 
+curvature is one over the radius. Okay, so the curvature is one over the 
+radius of the circle. The larger the circle, the more curvature 
+it has, the, the, the, sorry, the larger the circle, the more radius it has, one 
+over the radius, the smaller the curvature. 
+You could think about a straight line as a circle with infinite radius, very, very 
+large radius and then one over infinite is zero, so basically has zero curvature. 
+So there's a lot of new concepts in this very colorful slide. Let's go over them 
+again. We have the tangent which is as we know 
+from basic functional analysis, basic calculus, is basically the first 
+derivative. We want to normalize it, we want to have 
+unit length and there is a parametrization, we're going to see how 
+we get to it, that basically gives us that the first derivative is always unit 
+length. Always unit length we take a derivative 
+of that concept and we get the second derivative which is always perpendicular 
+to the first one only when we are talking derivatives taking derivatives according 
+to s. And then that second derivative has a 
+norm. Basic a demand to that vector and that's 
+curvature. Curvature is the magnitude of the second 
+derivative according to s. This is going to be called the arc 
+length, as we are going to see in a second why. 
+So we have s, the arc length. And we have. 
+This is kappa, is the Greek letter kappa, which is the curvature. 
+Now we have s and the curvature and we talk about their relationship between the 
+curvature and the radius of a circle. These are actually the only two objects 
+with constant. El cleanant curvature straight line zero 
+a circle one over the radius. Now why are these guys s and curvature 
+kappa. So important. 
+Very important, because they're going to be preserved under transformations of the 
+curve, under certain transformations. What kind of transformations can we have 
+in curves? So, I have here a curve. 
+Where's the curve? It's the boundary of my object. 
+Now we are starting to understand why differential geometry is important, 
+because curves are boundaries of objects and objects are present in images. 
+Now, I can transform these in a number of ways, but always preserving it on the 
+plane. I generally transform is, I take my 
+coordinates, which are a vector and I multiply by a matrix and I translate and 
+I get a new vector. And that's what called an define 
+transform, if I don't put any limitations in this matrix, so I take the curve and 
+with an define transform, I transform it into a new curve. 
+Now, I can also just rotate my shape. Here it has the form, it has stretch in 
+different dimensions in different directions. 
+If I only want to translate and rotate, so I rotate and translate or I translate 
+and rotate, that imposes some limitations in A and it's not hard to show that in 
+order to only allow rotations and translations, the two vectors of A, so A 
+is a two by two matrix. I have here a vector multiplied by a two 
+by two matrix. Sorry, 
+a vector that I get it by a matrix multiplying a vector. 
+This has to have columns which are orthogonal, meaning the inner product 
+means zero we just saw that in the previous slide. 
+Inner product equals zero means orthogonal, and they also have to be unit 
+vectors. So this is just not hard to prove, but 
+important thing here is that you can do a rotation and translation that's called a 
+Euclidean motion, or can you, or you can do a general transformation and that is 
+called an affine motion and of course these are too or these are also related 
+by an affine motion. Now there's a particular think in a fine 
+motions that if they the determinant of this matrix is equal to one then 
+basically those are called equal equi-affine motions, if the determinant 
+is equal to one, what happens is that the area doesn't change. 
+So you can stretch differently, in different directions. 
+You can rotate, you can translate but the area is preserved. 
+Of course if you only allow Euclidean motions, rotations and translations, the 
+area is preserved, but if you allow. A fine transformation stretches there is 
+none necessarily preserved but if the determinate of the transformation matrix 
+is equal to one. Then it's not hard to show that the area 
+of this object, so the area inside the curve or the object itself is preserved 
+and those I call equi-affine motions, equi-affine transformations, and we're 
+going to often just call them a affine and we're going to assume that we are 
+talking about those that we get with the determinant equal to one. 
+Now these are the type of linear transformations. 
+We're not going to discuss non-linear. I can take X and square log Y, things 
+like that we're not going to discuss. We're only discussing about multiplying 
+by a matrix, so that means a linear transformation. 
+So we have Euclidean and we have affine, normally equi-affine. 
+So now that we know that we can rotate, stretch and do things like that, curves, 
+meaning to shapes. Let's go back to, for a second, to 
+curvature. We talk about these two guys. 
+The arc length and the curvature. The arc length is the parametrization 
+that gives us constant unit length tangents. 
+The curvature is the magnitude of the second derivative according to the arc 
+length. So if we go around the curve, around this 
+shape, we have, for every point a given curvature and I'm drawing it here. 
+So S as the parametrization goes around the shape and for every S I have a point 
+in the curve and then I have a curvature. Now let's assume I do an Euclidean 
+transformation. I rotate and translate my shape. 
+Something very interesting happens. There are of course, corresponding 
+points, this point got rotated and translated to this one and here is the 
+beauty. There we have the same curvature, so the 
+curvature here. And the curvature here, it's going to be 
+exactly the same value. So, if you were to take the first 
+derivative, second derivative, measured the magnitudes in both corresponding 
+points, exactly the same value. That happens for all the corresponding 
+points. So here we have another pair of 
+corresponding points. We have the same curvature. 
+Sometimes the curvature will be zero, sometimes will be negative. 
+Every pair of corresponding points has exactly the same curvature. 
+Every single point. So basically if we have two shapes, that 
+are related by a rotation and translation meaning an Euclidean motion, 
+then their curvatures are identical. Of course, you have to have a starting 
+point, that is, the corresponding where is S equal zero. 
+Once you have that, exactly the same curvature. 
+So the curvature uniquely identifies the shape, actual rotation and a translation, 
+and that's beautiful. That's a theorem that basically this curve uniquely 
+identifies the curve a meaning the shape inside a curve up to a rotation and a 
+translation. It actually has been shown these are 
+beautiful results in transformational geometry that every other thing that 
+doesn't change with rotations and translations. 
+Every other differential thing is a function of S and kappa, of arc length 
+and curvature. For example we could take the curvature 
+and the derivative of the curvature, and that gives us another crazy curve on the 
+plane. So for every curvature we, we look at, 
+what's the derivative, how much is the curvature changing in that point? 
+We do that for one shape. We do a rotation and translation. 
+Voila. We get exactly the same value. 
+And that's theorem in part, basically due to Cartan, and they're extensions of the 
+theorem, some even more modern than these one's but it's the beauty of that, if you 
+have the arc of S and the curvature Kappa, you have all what are called the 
+differential invariance, functions that don't change when you basically do 
+rotations and translations. So basically they uniquely identify objects. 
+That up to rotation and translation. You cannot recover the rotation. 
+They're invariant to them. But basically they uniquely identify 
+those objects up to rotation and translation in Euclidean geometry. 
+Now what happens with affine transformations? 
+What happens when we don't just do rotations and translation, but we also 
+allow basically the curve, the shape to stretch and with different stretches in 
+different directions? Now unfortunately, or fortunately if you 
+like math, not everything in the world of image processing is rotations and 
+translation. So let's assume I have a shape like my 
+hand. If I only do things like this parallel to 
+the camera. I can model the motion of the object by a 
+rotation. The moment I tilt it towards the camera, 
+and then I do the projection of that on the camera, then this is not any longer 
+just a rotation and a translation. And one of the ways to model this is with 
+these fine transforms. So. 
+Basically, if your object is relatively. On a plane relatively to the distance to 
+the camera. Like here, for example, a drawing on a 
+plane and we are looking, this is the camera. 
+Us, is the camera. We are looking at kind of a plainer shape 
+then there is affine transform. So it is a more general multiplication by 
+a matrix once again because I'm not doing the rotation and the translations just 
+in, in pilot place to the camera I'm doing them a bit tilted. 
+And that can be model by an affine transform, a more general linear 
+transform. So, we need to extend these basic 
+concepts to basically allow for those affine transforms. 
+remember an affine transform is a more generic, 
+basically matrix. We have the x and y, but we multiply by a 
+more general matrix that normally has unit determinant. 
+We want to preserve areas just to make our life easier. 
+We don't need this. We can do all this without, basically a 
+unit determinant, but it's much easier if we assume this. 
+So, when we were talking about rotations and translations, remember, we assumed 
+that this column and this column were orthogonal. 
+So, basically, they're in a product equal to 
+zero, and they were also normalized to one. 
+And those are rotations and then we have a translation. 
+When we assume more generic things like here, just a unit determinant, 
+those are affine transformed. And we have kind of this tilting that 
+basically gives us stretchings in the different directions. 
+So I want to define this arc length and curvature for the fine case, as well. 
+Now in order to do that, let me just talk a bit more of what is parameterization. 
+So I can have a curve parameterized by p as before and can have it marameterized 
+by r by a different parameter. The curve will basically be the same. 
+By R or by P the parameterization is kind of telling me how fast are we traveling 
+the curve. Remember if you take the derivative of 
+the curve according to p you get the tangent vector with a certain magnitude. 
+If you take the derivative according to R you get the same tangent vector same 
+direction with a different magnitude. If you remember from basic physics 
+derivatives are velocity. So you're only telling me how fast are 
+you traveling the curve. But you're going from the same point to 
+the same point. So it's like you are driving the highway 
+between two points. And the speed that you drive is the 
+parametrization. But the highway is the curve. 
+The highway doesn't change. So when we take functions geometric 
+functions basically of our sorry I want one more let me come back. 
+When we take geometric functions of curve, they have to be invariant to 
+parameterizations. The distance between two points in the 
+highway does not depend on the velocity I travel on that highway. 
+So the geometric measurements that we take have to be invariant to the 
+parameterization, and they also have to be invariant to basically the 
+transformations that we want to do, either rotations or affine 
+transformation. So if you take a map and you rotate the 
+map, the distance between two cities has to remain the same distance, not just 
+because I'm looking at the map differently, it changes. 
+It has to be invariant to that. So let's use this concept to define the 
+arc length S that we saw before. Let's just explicitly define it now and 
+we are going to do the same for the affine case. 
+But let's start with Euclidean, so basically, only allowing four rotations. 
+So here is what we have, and this diagram is very good. 
+Assume that you have a curve going through here. 
+And you're going to take a very infinitesimal, very small portion of that 
+curve. So I have, I can draw a coordinate 
+system, like here and have a, very small movement in the X direction, and a very 
+small movement in the Y direction. And then because of Pythagoras, this is 
+basically X direction is perpendicular to the Y direction. 
+So we have that this distance is the square root of the X direction distance 
+and the Y direction distance, each one of them square. 
+Simple Pythagoras. So now I'm allowing to multiply and 
+divide by DP. P is my general parametrization. 
+So I multiply and divide by a small change in P. 
+Remember we're basically talking about the curve going around here. 
+So I'm going to just draw that, I have a curve and I move a tiny bit X, a tiny bit 
+Y and I measure how much I have moved there. 
+So I multiply and divide and this curve is CP. 
+So I multiply and divide by DP, just a small variation in the parameterization. 
+And that's basically quality. And now, I basically move this DP in, so 
+I get DP squared. Okay? 
+I move it in, but I move it inside a square root, so I 
+have to square it before, so I get this, okay? 
+This is DP stays and this is exactly the definition of the Euclidean distance, the 
+local, basically distance of the vector, just basically the definition of that. 
+So we got that DS is simply DP. If we want to get the arc length S, it's 
+basically the integral of that. Okay? 
+So this is the way to go basically from. A generic parameterization P to the 
+particular one S in such a way that the derivative now basically is unit length. 
+Always the derivative will be unit length. 
+It will be a unit length vector. And then the general distance of a curve, 
+the total distance, distance of a curve is the integral of everything from P 
+equals zero to P equal one of CPDP, this is the definition of the length. 
+And if you basically replace what we have here is the integral of DS from zero to 
+the length so when your parmitrizing by s your not going from zero to one your 
+going from zero to the length. Basically once again. 
+This tells us how to go from every parameterization to A, so from every 
+speed of traveling between two cities, if you're basically integrating the 
+magnitude of that speed. Along the way you're getting kind of a 
+unit length of traveling. And that's what then lead us to 
+basically. The Euclidean curvature when we took 
+basically second derivative. So this is for Euclidean. 
+Now Euclidean rotations and translations preserve length, and that's why I could 
+use length here. Now, in the affine case or in particular 
+in the equi-affine case, length is not preserve anymore. 
+What's preserved? Area. 
+So I can take areas. Now, in order to take areas, 
+I need two vectors. One vector does not define an area, I 
+need two. So, I'm basically going to take the first 
+derivative. It's always a tangent V is going to be 
+now my affine arclength. So the first derivative is not the unit 
+vector. That's a characteristic only when you 
+take derivatives according to S, to the Euclidean arc length. 
+So I take a first derivative, and a second. 
+Again, these two vectors not perpendicular in general. 
+That's a property only when you take derivatives according to arc length. 
+And then I basically define the, I look at the area and I'm going to look for the 
+parameterization V that when I take first derivative. 
+Second derivative this area is equal to one. 
+I define it that way and basically you can do all the math. 
+We take, the first derivative is a vector, 
+and the second derivative is a vector, and we put them here as vectors in a 2 by 
+2 matrix. So remember, this is a vector, this is a 
+vector, so we get the 2 by 2 matrix. It's of this form. 
+It's basically. Let me write it down explicitly. 
+X, derivative B, Y, derivative B, XVV, YVV. 
+And that creates a matrix. And I'm going to ask for the determinate 
+of this matrix the determinate of a matrix is the area of the parallelogram 
+defined by these two vectors and now I'm giving you a new concept at, at. 
+A, group of concepts that you might not be familiar with. 
+But I am defining them on the way. So they, if I have a two x two matrix, 
+this is a vector, this is a vector. The determinant of these is the area of 
+the parallelogram between these two vectors, exactly what we have here. 
+And I'm going to ask that to be equal to one. 
+And remember for euclidean we ask the length to be equal to one here we ask for 
+the area to be equal to one. I don't want to proof too many things to 
+you but any parameterization p will give a new parameterization that holds this 
+property following this integral. Okay? 
+So that's a theorem. Just believe it for now. 
+Now in particular, I can take p equal to the Euclidean arc length. 
+That's allowed to do. So I can put cs and css. 
+Now what are these two guys? This is unit length. 
+Okay, unit length, and the second derivative in the case of 
+the Euclidean arc length, is perpendicular to the first one, and it 
+has basically length equal to curvature, Euclidean. 
+So this is one, this is curvature. So, of course, this area is equal to 
+curvature. So we get that V, the, a fine arc length, 
+gets its. Obtain by the integral of the kregen 
+curvature to the one third. The S. 
+And therefore what we get is an extremely interesting relationship between the 
+Euclidean arc length and defined arc length. 
+So we have the Euclidean arc length coming from here and defined arc length 
+and they're related by the Euclidean curvature. 
+This is a beautiful relationship in differential geometry that relates 
+Euclidean differential geometry with defined differential geometry. 
+Now we have defined arc length, our next step is to find defined curvature. 
+How do we do that in a very similar fashion as we did for the kleeant case if 
+you remember in the kleeant case we started by basically doing the 
+derivative. Of the property. 
+That this was equal to one we say the length is constant and we took 
+derivatives now we have to the area is constant when we use the fine arc length 
+so here remember is a determinant of two vectors. 
+And we're going to take the derivative. The derivative of the determinant is like 
+any other product. We have to take the derivative of the 
+first vector and then put the second and then the derivative of the second and put 
+the first. So it's what we have here. 
+The derivative of the determinant of these two vectors, cv and c, vv, is the 
+determinant here, derivative of the first and we keep the second plus the 
+derivative of the second and we keep the first. 
+Now if we have a determinate with two identical columns that's zero so this 
+basically is zero that's a very basic property of linear algebra. 
+So we end up that the determinant here. Is equal to zero which means once again 
+that these two vectors are parallel. When we took derivatives here, we 
+basically had that. In their product to be zero, the two 
+vectors have to be perpendicular. For the determinant to be zero, the two 
+vectors have to be parallel. Another basic property again of linear 
+algebra. So the first and the third derivative, 
+when I'm taking derivatives according to defined arc length, these two vectors are 
+parallel. So they are basically parallel. 
+One for example goes in this direction. The other goes in this direction. 
+The ratio between them. We define as defined curvature, the same 
+way that we use the magnitude. of the second derivative, according to 
+Euclidean arc length, we use this as Euclidean curvature, the ratio between 
+these two parallel vectors is affine curvature. 
+And it's not hard to show that this new, this affine curvature is an affine 
+variant. What I mean is very simple if we take as 
+we talk before, an affine transformation preserving area remember equi-affine. 
+So we have a curve the boundary of a shape and we're taking a fine 
+transformation. We compute the fine curvature of this 
+shape as a function of the affine arc length of the shape. 
+we do the same for the new curve. And voila, they're identical. 
+So in the same way as we have Euclidean properties, with S and Kappa, Euclidean 
+arc length and Euclidean curvature, we have them with the affine arc length and 
+affine curvature. They're basically the same, and they 
+completely identify the object, up to on a fine transform. 
+So now you're an expert on planar differential geometry. 
+You know the concept of arc length. It is particular parametrization that 
+gives us some interesting property about the curve, like constant speed in the 
+Euclidean case. or constant area in the affine case, and 
+then from that, we got the curvature that is identical. 
+For the Euclidean case, after rotations. For the affine case, after affine 
+transforms. So those are very simple functions that 
+uniquely identify shapes because they uniquely identify curves. 
+Now our next step is basically, let's extend that a tiny bit to basically 
+surfaces. And we're going to do that in the next 
+video, and then you're going to have the basic 
+tools of differential geometry to go and do the formations of curves and to do 
+image processing and understand active contours. 
+So I see you in the next video for that. Thank you.

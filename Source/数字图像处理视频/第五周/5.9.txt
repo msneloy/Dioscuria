@@ -1,0 +1,70 @@
+Hello, and welcome back. 
+I want to discuss now the Mumford-Shah Image Segmentation technique, and I'm 
+going to do that with one example. Let's just look at this image. 
+We talk that image segmentation means labeling the image. 
+We want to label every segment that has some coherence in it with a different 
+name, with a different number. One way of doing that is, of course, 
+basically, painting that segment with a uniform, or a very smooth grey value. 
+And that's the type of stuff that the Mumford-Shah algorithm and technique 
+tries to do. Let's just discuss that. 
+Here, we have an original image. Don't pay attention to these two for the 
+moment. It's going to be very clear in just a few 
+seconds. And this is the result of one 
+implementation of Mumford-Shah image segmentation. 
+So, very rich gray values become just a few smooth segments. 
+Looks like almost like quantization when we talk about image compression. 
+So, the first part is that we want to approximate the original image by just a 
+few segments that are either constant or very smooth. 
+Of course, we want an approximation. So, one of the terms that this 
+Mumford-Shah needs to include is a penalty from deviating too much from the 
+original image. Of course, piece wise smooth, or piece 
+wise constant, I could make this whole image wide. 
+So, that's one very smooth segment. But it's very far, if I do that, it would 
+be very far from the original image. So, one of the things is we have to 
+somehow penalize for the difference between these two images. 
+For example, the mean square error. We already talk about it very early on in 
+this class. So, one penalty is the mean square error. 
+We want to get the piece wise smooth version of this image, but not very far 
+from it. Now, you might wonder, okay, 
+if you're going to penalize for the mean square error, why not to keep the image 
+itself? That's very clever, but we don't achieve 
+any segmentation. So, how do I know I don't achieve any 
+segmentation? Because I'm going to add a term that 
+penalizes for having too many boundaries in the segmented image. 
+So, these are the regular edges of this image. 
+Very strong edges. These are boundaries of the segments that 
+we have here. I don't want to have too many. 
+I don't want to have all these. I'm going to penalize for the number of 
+edges for how many, how much do I pay for having boundaries. 
+So that would be another term. I'm going to basically, on one hand, I 
+want to penalize for very large differences, and on the other hand, I'm 
+going to penalize for edges. So, if you have too much edges, you are 
+going to pay a price. Bec, so, if I keep the image as it is, 
+I have no error here but I have lot of edges. 
+Basically, every pixel becomes a segment, so I'm paying a very large penalty for 
+edges. If I have a flat image, I don't pay any 
+penalty for edges, but I pay a very high penalty for error. 
+And then, I have to do a compromise between these two and that's what 
+Mumford-Shah basic concept is, to write formulations that compromise between a 
+representation of the image that is too far from the original image. 
+We want to simplify representation not too far from the original image, and we 
+also don't want to pay a high price and get too many segments. 
+Now, there are many ways of doing this. There's some beautiful mathematical 
+theory behind different formulations that do this compromise. 
+Some theory relates even to compression. You have to compress this image and this 
+edges, and then you try to optimize for that, 
+yours and my, need to compare for the error. And some very beautiful techniques 
+with, in the framework of what's called variation and formulations, and, energy 
+formulations really, a lot of very beautiful mathematical theory, which 
+actually relates to the mathematical theory that we're going to be discussing 
+next week when we talk about geometric differential equations and geometric 
+varation of problems. But, 
+here's the concept. And very often in image processing, 
+you have a concept and the multiple ways of implementing that concept. 
+And I want to make sure that you basically learn during this class, the 
+concept behind Mumford-Shah. I should also mention to you that this 
+concept of approximation and penalty for too many edges applies also beyond image 
+segmentation. And people have extended the framework of 
+Mumford-Shah type of formulations to image registration and many, many other 
+image and video processing problems. Thank you very much. 
+See you in the next video.

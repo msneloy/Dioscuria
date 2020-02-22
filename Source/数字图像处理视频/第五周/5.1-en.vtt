@@ -1,0 +1,296 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.131
+Hello, and welcome to week five of our 
+image and video processing class. 
+
+2
+00:00:04.131 --> 00:00:07.680
+This is a very fun and exciting week for 
+a number of reasons. 
+
+3
+00:00:07.680 --> 00:00:11.521
+First of all, image and video 
+segmentation is a fun topic as we're 
+
+4
+00:00:11.521 --> 00:00:13.906
+going to see in the videos during this 
+week. 
+
+5
+00:00:13.906 --> 00:00:17.980
+Second, because during this week we're 
+going to be transitioning from the 
+
+6
+00:00:17.980 --> 00:00:20.947
+fundamental material to the more advanced 
+material. 
+
+7
+00:00:20.947 --> 00:00:25.609
+The fundamental material is as we talk, 
+that material that is used every day and 
+
+8
+00:00:25.609 --> 00:00:29.434
+you can not take a class in image 
+processing without knowing it. 
+
+9
+00:00:29.434 --> 00:00:34.097
+The more advanced material is material 
+that has been deviled up in the recent 
+
+10
+00:00:34.097 --> 00:00:38.706
+years and is also extremely useful. 
+And as we are going to see, it actually 
+
+11
+00:00:38.706 --> 00:00:44.087
+often forms parts of very important 
+products today in industry for image and 
+
+12
+00:00:44.087 --> 00:00:47.302
+video processing. 
+So let's just get into image 
+
+13
+00:00:47.302 --> 00:00:48.840
+segmentation. 
+As I say, 
+
+14
+00:00:48.840 --> 00:00:52.421
+it's going to be a lot of fun. 
+But what is image segmentation? 
+
+15
+00:00:52.421 --> 00:00:56.187
+We should basically first of all try to 
+answer that question. 
+
+16
+00:00:56.187 --> 00:00:59.768
+And we are going to answer that question 
+with a few examples. 
+
+17
+00:00:59.768 --> 00:01:04.276
+In image segmentation the basic idea is 
+that we want to separate objects. 
+
+18
+00:01:04.276 --> 00:01:08.660
+We want to call different objects by 
+different names, depending on some 
+
+19
+00:01:08.660 --> 00:01:12.550
+properties of those objects. 
+So for example, here we have a cat and we 
+
+20
+00:01:12.550 --> 00:01:19.144
+want to make sure that we find the 
+boundary of this cat and we can separate 
+
+21
+00:01:19.144 --> 00:01:25.228
+the cat here from it's background. 
+So here, we have to cut and here we have 
+
+22
+00:01:25.228 --> 00:01:29.602
+the background. 
+So we manage to separate objects in the 
+
+23
+00:01:29.602 --> 00:01:33.822
+image. 
+Sometimes the user is going to help us to 
+
+24
+00:01:33.822 --> 00:01:38.214
+do that. 
+For example, the user can mark this is my 
+
+25
+00:01:38.214 --> 00:01:41.600
+foreground. 
+This is what I care, the objects I care. 
+
+26
+00:01:41.600 --> 00:01:44.851
+This is the background. 
+The objects I don't care. 
+
+27
+00:01:44.851 --> 00:01:50.583
+Just two very simple marks and from that, 
+we basically need to develop a technique 
+
+28
+00:01:50.583 --> 00:01:54.771
+that will basically extract the horses 
+from the background. 
+
+29
+00:01:54.771 --> 00:01:59.882
+And sometimes, this type of segmentation 
+is called foreground background 
+
+30
+00:01:59.882 --> 00:02:03.147
+separation. 
+Once we do that, we can, for example 
+
+31
+00:02:03.147 --> 00:02:07.476
+change the background. 
+Something that is done very, very often 
+
+32
+00:02:07.476 --> 00:02:11.877
+in the movie industry. 
+Changing background of different scenes, 
+
+33
+00:02:11.877 --> 00:02:17.059
+as we are going to see in a second. 
+So this is kind of foreground background 
+
+34
+00:02:17.059 --> 00:02:20.590
+separation. 
+Sometimes, what we actually need is to 
+
+35
+00:02:20.590 --> 00:02:24.064
+label every thing that have been seen the 
+image. 
+
+36
+00:02:24.064 --> 00:02:29.638
+So to find regions in these image, which 
+is an image of neurons taking with a 
+
+37
+00:02:29.638 --> 00:02:35.573
+technique called electro microscopy that 
+we are going to discuss later in this, in 
+
+38
+00:02:35.573 --> 00:02:40.193
+the last week of this class. 
+We have a, as I say, images of neurons 
+
+39
+00:02:40.193 --> 00:02:45.450
+from electron microscopy and the idea is 
+that we want to label every pixel, 
+
+40
+00:02:45.450 --> 00:02:48.972
+according to the class that, that pixel 
+belongs to. 
+
+41
+00:02:48.972 --> 00:02:54.679
+So basically we are coloring the image. 
+We are saying all this region should have 
+
+42
+00:02:54.679 --> 00:02:57.779
+the same label. 
+It belongs to the same class, 
+
+43
+00:02:57.779 --> 00:03:01.161
+the same type of object, 
+the same type of tissue. 
+
+44
+00:03:01.161 --> 00:03:05.107
+So we are not subtracting photograph fr, 
+from background. 
+
+45
+00:03:05.107 --> 00:03:10.673
+We're basically labeling every single 
+region of the image and we get all these 
+
+46
+00:03:10.673 --> 00:03:16.010
+segments, and then we can do analysis. 
+Finally, we also have the same problems 
+
+47
+00:03:16.010 --> 00:03:20.980
+in video and we see that here. 
+And this is a video that we have already 
+
+48
+00:03:20.980 --> 00:03:27.200
+saw at the very beginning of the class, 
+they just basically run it. 
+
+49
+00:03:27.200 --> 00:03:34.745
+We have the video and we have a similar 
+video, but with a different background. 
+
+50
+00:03:34.745 --> 00:03:41.052
+For doing that, we had to extract the 
+main object here from the video. 
+
+51
+00:03:41.052 --> 00:03:45.237
+So, we are able to produce a different 
+background for that. 
+
+52
+00:03:45.237 --> 00:03:50.505
+And basically, this is what's behind a 
+very important component of one of 
+
+53
+00:03:50.505 --> 00:03:55.267
+Adobe's products, called After Effects. 
+And we are going to learn that. 
+
+54
+00:03:55.267 --> 00:04:00.895
+We are going to learn exactly what's the 
+underlying technology for basically the 
+
+55
+00:04:00.895 --> 00:04:03.710
+video segmentation in After Effects. 
+So, 
+
+56
+00:04:03.710 --> 00:04:07.837
+there are just some examples. 
+Now, what we have to do is learn how we 
+
+57
+00:04:07.837 --> 00:04:12.328
+solve all of these very interesting image 
+and video segmentation problems. 
+
+58
+00:04:12.328 --> 00:04:15.909
+And we're going to do that exactly, 
+starting in the next video. 
+
+59
+00:04:15.909 --> 00:04:17.305
+See you then, 
+thank you. 

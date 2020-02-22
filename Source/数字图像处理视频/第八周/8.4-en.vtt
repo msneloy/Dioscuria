@@ -1,0 +1,1110 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.248
+Hello, and welcome back. 
+We are now ready for last fundamental 
+
+2
+00:00:05.248 --> 00:00:09.895
+step in Sparse Modeling that this 
+dictionary learning. 
+
+3
+00:00:09.895 --> 00:00:14.566
+Let's go into that. 
+Remember what we are trying to solve. 
+
+4
+00:00:14.566 --> 00:00:19.162
+We are solving this equation, and this is 
+the dictionary. 
+
+5
+00:00:19.162 --> 00:00:24.742
+This is the data, and we already talked a 
+lot about alpha, the Sparse 
+
+6
+00:00:24.742 --> 00:00:28.681
+Representation of the data using the 
+dictionary. 
+
+7
+00:00:28.681 --> 00:00:34.285
+So what should the dictionary be? 
+The assumption in image processing, the 
+
+8
+00:00:34.285 --> 00:00:38.518
+assumption is that images are behave in a 
+sparse fashion. 
+
+9
+00:00:38.518 --> 00:00:44.383
+And we have already seen examples of that 
+using, for example, JPEG or even these 
+
+10
+00:00:44.383 --> 00:00:49.730
+exaggerated example of putting all the 
+images as part of the dictionary. 
+
+11
+00:00:49.730 --> 00:00:57.383
+So how do we design a dictionary? 
+The call is if we believe in sparsity we 
+
+12
+00:00:57.383 --> 00:01:04.834
+should decide a dictionary that 
+encourages sparsity, the more sparse, the 
+
+13
+00:01:04.834 --> 00:01:09.011
+vector alpha. 
+The better we are going to be because we 
+
+14
+00:01:09.011 --> 00:01:14.260
+are trying to create sparse models. 
+So the idea is that we are going to have 
+
+15
+00:01:14.260 --> 00:01:19.786
+to learn, or we are going to select the 
+dictionary that helps us to sparsify the 
+
+16
+00:01:19.786 --> 00:01:23.170
+signal. 
+And there are basically two directions in 
+
+17
+00:01:23.170 --> 00:01:25.550
+doing that. 
+One is to take. 
+
+18
+00:01:25.550 --> 00:01:29.968
+Off the shelf dictionaries. 
+There are very good dictionaries out 
+
+19
+00:01:29.968 --> 00:01:32.868
+there. 
+We have seen JPEG is an outstanding 
+
+20
+00:01:32.868 --> 00:01:35.767
+algorithm. 
+So we could use the cosine as a 
+
+21
+00:01:35.767 --> 00:01:38.736
+dictionary. 
+We could use Fourier, we can use 
+
+22
+00:01:38.736 --> 00:01:41.912
+Wavelength. 
+There are many, many off the shelf 
+
+23
+00:01:41.912 --> 00:01:45.379
+dictionaries. 
+The issue with those dictionaries at. 
+
+24
+00:01:45.379 --> 00:01:50.101
+They're not adapted to the signal. 
+So they will be, kind of, universal. 
+
+25
+00:01:50.101 --> 00:01:55.448
+They will be very good for the signals 
+that we are going to work with, but maybe 
+
+26
+00:01:55.448 --> 00:02:00.795
+they're not, kind of, the best possible. 
+So the other direction is basically to 
+
+27
+00:02:00.795 --> 00:02:04.892
+learn the dictionary. 
+Let's start with a lot of examples of 
+
+28
+00:02:04.892 --> 00:02:07.533
+data. 
+And let us learn the dictionary. 
+
+29
+00:02:07.533 --> 00:02:12.193
+And then we can for example, use that 
+dictionary for other images. 
+
+30
+00:02:12.193 --> 00:02:15.060
+And that's what we're going to discuss 
+now. 
+
+31
+00:02:15.060 --> 00:02:20.221
+We're going to be in the dictionary 
+learning regime and not in this regime 
+
+32
+00:02:20.221 --> 00:02:23.519
+which is the most classical signal 
+processing. 
+
+33
+00:02:23.519 --> 00:02:29.212
+And we were here when we were doing. 
+Image compression and we describe JPEG. 
+
+34
+00:02:29.212 --> 00:02:35.678
+But now it's our turn to describe this. 
+To present a dictionary that will help us 
+
+35
+00:02:35.678 --> 00:02:39.350
+to sparsify the signal. 
+So we are going to design. 
+
+36
+00:02:39.350 --> 00:02:43.093
+D. 
+And the basic idea is very, very simple 
+
+37
+00:02:43.093 --> 00:02:48.470
+in concept, and also not very difficult 
+to implement, as we're going to see. 
+
+38
+00:02:48.470 --> 00:02:53.972
+So now, instead of having one signal, we 
+have multiple signals. 
+
+39
+00:02:53.972 --> 00:03:00.556
+Each one of them is a column here. 
+So each column here is for example an 
+
+40
+00:03:00.556 --> 00:03:05.275
+image patch which is 64-dimensional, 
+eight by eight. 
+
+41
+00:03:05.275 --> 00:03:11.567
+We have one dictionary that we are 
+going to train for all these images. 
+
+42
+00:03:11.567 --> 00:03:18.137
+And then every one of these images, 
+patches, or signals have, has its own 
+
+43
+00:03:18.137 --> 00:03:23.689
+Sparse Representation. 
+So for example the first one has this 
+
+44
+00:03:23.689 --> 00:03:26.666
+one. 
+The second one has the next one. 
+
+45
+00:03:26.666 --> 00:03:32.613
+So we have moved from a single column 
+here and a single column here to a 
+
+46
+00:03:32.613 --> 00:03:36.279
+matrix. 
+What's the dimensions of these matrix. 
+
+47
+00:03:36.279 --> 00:03:41.127
+It's N. 
+So that's, again, the size that we had 
+
+48
+00:03:41.127 --> 00:03:45.173
+before. 
+And the number of signals, P. 
+
+49
+00:03:45.173 --> 00:03:48.873
+What is D? 
+Again, we have N and K. 
+
+50
+00:03:48.873 --> 00:03:55.462
+So, N here and K in destination. 
+There is nothing new here. 
+
+51
+00:03:55.462 --> 00:04:04.069
+And here, we have K in this direction And 
+p in this direction, one per signal. 
+
+52
+00:04:04.069 --> 00:04:08.751
+And the goal now is to design this 
+dictionary. 
+
+53
+00:04:08.751 --> 00:04:14.654
+What do we want? 
+We want basically a Sparse Representation 
+
+54
+00:04:14.654 --> 00:04:20.798
+for all the signals. 
+So we are basically summing over p all 
+
+55
+00:04:20.798 --> 00:04:23.010
+the sigmas. 
+This is P. 
+
+56
+00:04:23.010 --> 00:04:26.521
+Okay? 
+And we have one dictionary for all the 
+
+57
+00:04:26.521 --> 00:04:32.027
+signals and we want a Sparse 
+Representation for each one so, see that 
+
+58
+00:04:32.027 --> 00:04:37.853
+J runs from one to P, a unique dictionary 
+and all of them have to be good 
+
+59
+00:04:37.853 --> 00:04:41.831
+representations. 
+And they have to be sparse at the same 
+
+60
+00:04:41.831 --> 00:04:44.393
+time. 
+Before that, we didn't have this 
+
+61
+00:04:44.393 --> 00:04:47.510
+summation and we were just talking about 
+one. 
+
+62
+00:04:47.510 --> 00:04:52.912
+Now we have a summation and we want a 
+dictionary that is good for all of them. 
+
+63
+00:04:52.912 --> 00:04:58.107
+Now, let me just make one comment. 
+I'm going to describe how to do that when 
+
+64
+00:04:58.107 --> 00:05:03.094
+we have already picked signals and we are 
+going to learn the dictionary. 
+
+65
+00:05:03.094 --> 00:05:08.565
+Now, as the number of signals increases, 
+we can do a similar type of training of 
+
+66
+00:05:08.565 --> 00:05:11.959
+learning that I am going to show you next 
+online. 
+
+67
+00:05:11.959 --> 00:05:15.360
+Online means. 
+That we are basically. 
+
+68
+00:05:15.360 --> 00:05:19.550
+going to learn and adapt the dictionary 
+as the images are coming. 
+
+69
+00:05:19.550 --> 00:05:23.740
+So we don't have to have a huge memory to 
+save all the images. 
+
+70
+00:05:23.740 --> 00:05:26.849
+We're going to do that as the signals are 
+coming. 
+
+71
+00:05:26.849 --> 00:05:29.890
+I'm not going to describe that during 
+this week. 
+
+72
+00:05:29.890 --> 00:05:33.743
+The algorithms. 
+The implementations that I mentioned that 
+
+73
+00:05:33.743 --> 00:05:38.676
+you could download from the web. 
+Do that in an online fashion so they can 
+
+74
+00:05:38.676 --> 00:05:43.070
+deal with millions zillions of images 
+with absolutely no problem. 
+
+75
+00:05:43.070 --> 00:05:46.834
+So, now my goal is to show you how we do 
+this learning. 
+
+76
+00:05:46.834 --> 00:05:50.599
+And look at here. 
+We have to optimize, not only for the 
+
+77
+00:05:50.599 --> 00:05:55.480
+sparse code as we were doing before, 
+we're going to optimize also for the 
+
+78
+00:05:55.480 --> 00:05:58.757
+dictionary. 
+So we're going to learn the dictionary, 
+
+79
+00:05:58.757 --> 00:06:04.060
+and the Sparse Representation of the 
+signals, at the same time. 
+
+80
+00:06:04.060 --> 00:06:07.781
+And the basic idea. 
+There are a number of techniques. 
+
+81
+00:06:07.781 --> 00:06:13.293
+I'm going to explain you what's called 
+the K-SVD Algorithm that is kind of an 
+
+82
+00:06:13.293 --> 00:06:18.560
+extension of K means for clustering. 
+The basic idea is very, very simple to 
+
+83
+00:06:18.560 --> 00:06:21.038
+illustrate. 
+We have all the signals. 
+
+84
+00:06:21.038 --> 00:06:25.145
+I wrote them as x here. 
+And we're going to learn a dictionary. 
+
+85
+00:06:25.145 --> 00:06:28.614
+So we initialize the dictionary, any way 
+you want. 
+
+86
+00:06:28.614 --> 00:06:33.924
+One way of initializing is just picking, 
+randomly, some of these data points. 
+
+87
+00:06:33.924 --> 00:06:38.031
+So you pick a few data points and you put 
+as columns here. 
+
+88
+00:06:38.031 --> 00:06:43.294
+Remember that I mentioned, here is k. 
+We're going to learn K atoms. 
+
+89
+00:06:43.294 --> 00:06:47.211
+So you just. 
+Here, there are P signals, and P is 
+
+90
+00:06:47.211 --> 00:06:51.724
+larger than K. 
+Otherwise, as we talked before, just put 
+
+91
+00:06:51.724 --> 00:06:57.344
+the signals in the dictionary. 
+So just randomly pick, here, K of the 
+
+92
+00:06:57.344 --> 00:07:03.220
+signals and put them as dictionary. 
+That gives us a, an initialization. 
+
+93
+00:07:03.220 --> 00:07:08.647
+Now, the next step is we're going to 
+basically do Sparse Coding with that 
+
+94
+00:07:08.647 --> 00:07:11.627
+dictionary. 
+That we already know how to do. 
+
+95
+00:07:11.627 --> 00:07:16.431
+So we basically go every signal and we 
+solve as Sparse Coding problem. 
+
+96
+00:07:16.431 --> 00:07:21.509
+This is going to be the code for the 
+first signal, the code for the second 
+
+97
+00:07:21.509 --> 00:07:24.598
+signal. 
+Again, red means active, is part of the 
+
+98
+00:07:24.598 --> 00:07:29.058
+active set, and non-zero co-efficient. 
+So we did the sparse coding. 
+
+99
+00:07:29.058 --> 00:07:34.343
+We went all around and we basically for 
+each one of these, of them did Sparse 
+
+100
+00:07:34.343 --> 00:07:37.431
+Coding. 
+It's one of these blocks I'm going to 
+
+101
+00:07:37.431 --> 00:07:42.510
+explain a bit more in the next slide. 
+I'm just giving you the general idea. 
+
+102
+00:07:42.510 --> 00:07:47.484
+The next part is we're going to have to 
+activate the dictionary. 
+
+103
+00:07:47.484 --> 00:07:51.643
+And the basic idea is we go in the other 
+direction. 
+
+104
+00:07:51.643 --> 00:07:58.168
+For doing this Sparse Coding study, we 
+went into this direction we sparsely code 
+
+105
+00:07:58.168 --> 00:08:01.919
+every signal. 
+In the dictionary, we're going to to 
+
+106
+00:08:01.919 --> 00:08:07.227
+update one item at a time. 
+Using the codes that we have already 
+
+107
+00:08:07.227 --> 00:08:11.447
+produced. 
+So we are going to update one atom at a 
+
+108
+00:08:11.447 --> 00:08:15.237
+time. 
+Now after we have updated, we are going 
+
+109
+00:08:15.237 --> 00:08:20.320
+to let the signals to be encoded again 
+and reiterate, so we. 
+
+110
+00:08:20.320 --> 00:08:23.332
+Start with a dictionary, we do Sparse 
+Coding. 
+
+111
+00:08:23.332 --> 00:08:28.537
+We update the dictionary, we do Sparse 
+Coding again, we update the dictionary 
+
+112
+00:08:28.537 --> 00:08:33.673
+and either we converge or we do that for 
+a prefixed number of interrations 
+
+113
+00:08:33.673 --> 00:08:36.686
+depending on our computational 
+capabilities. 
+
+114
+00:08:36.686 --> 00:08:42.027
+Now, what I have to do is explain each 
+one of these blocks, and you're going to 
+
+115
+00:08:42.027 --> 00:08:45.793
+see how simple they are. 
+This we already know, basically. 
+
+116
+00:08:45.793 --> 00:08:49.839
+This is Sparse Coding. 
+Sparse Coding is very, very simple 
+
+117
+00:08:49.839 --> 00:08:53.126
+because we have discussed a number of 
+times. 
+
+118
+00:08:53.126 --> 00:08:58.205
+And look like I put here, P. 
+Because either we do zero with basically 
+
+119
+00:08:58.205 --> 00:09:04.180
+matching pursuit or orthogonal matching 
+pursuit, or we do the relaxation, P equal 
+
+120
+00:09:04.180 --> 00:09:07.542
+one. 
+So given the dictionary, we do the Sparse 
+
+121
+00:09:07.542 --> 00:09:10.903
+Coding. 
+We are going to go in this direction for 
+
+122
+00:09:10.903 --> 00:09:13.965
+every signal we get the Sparse Code. 
+Okay? 
+
+123
+00:09:13.965 --> 00:09:17.850
+So we go in that direction. 
+This is just one example. 
+
+124
+00:09:17.850 --> 00:09:24.087
+And for every signal, we have to 
+basically solve a Sparse Coding problem 
+
+125
+00:09:24.087 --> 00:09:27.898
+for that signal, and absolutely nothing 
+else. 
+
+126
+00:09:27.898 --> 00:09:32.230
+And that's, again, is here. 
+So we don't have the sum. 
+
+127
+00:09:32.230 --> 00:09:37.114
+Because we do one at, at time. 
+So, we don't have to compute the whole 
+
+128
+00:09:37.114 --> 00:09:42.655
+matrix A, this is the whole matrix A. 
+We don't compute it all at once, we just 
+
+129
+00:09:42.655 --> 00:09:48.415
+go one at a time as we have been doing 
+before and that basically solves us, the 
+
+130
+00:09:48.415 --> 00:09:52.206
+whole matrix A. 
+So, now we have this Sparse Code with 
+
+131
+00:09:52.206 --> 00:09:56.216
+this dictionary. 
+Now it's time to update the dictionary, 
+
+132
+00:09:56.216 --> 00:10:01.140
+which is the new part. 
+And again, we'll solve this by any 
+
+133
+00:10:01.140 --> 00:10:07.973
+Pursuit algorithm as I mentioned before. 
+Either the L0 with Matching Pursuit, or 
+
+134
+00:10:07.973 --> 00:10:14.460
+L1 with any of the convex solvers. 
+So now it's time to do the dictionary. 
+
+135
+00:10:14.460 --> 00:10:20.476
+Let us pick one of the adults. 
+As I say we're going to update one atom 
+
+136
+00:10:20.476 --> 00:10:23.656
+at a time. 
+How do we update this atom? 
+
+137
+00:10:23.656 --> 00:10:28.125
+The concept is very simple before I run 
+you through. 
+
+138
+00:10:28.125 --> 00:10:34.227
+We're going to basically pick all the 
+signals that have used that atom. 
+
+139
+00:10:34.227 --> 00:10:39.734
+This signal is using it. 
+This signal is using it, this signal is 
+
+140
+00:10:39.734 --> 00:10:44.327
+using, and so on. 
+So we basically are going to say, which 
+
+141
+00:10:44.327 --> 00:10:51.482
+one are the signals have nonzero entry in 
+the alpha vector corresponding to that 
+
+142
+00:10:51.482 --> 00:10:55.103
+atom. 
+And we're going to make that atom even 
+
+143
+00:10:55.103 --> 00:11:00.050
+better for those syncs. 
+So, basically we go with peak one. 
+
+144
+00:11:00.050 --> 00:11:03.853
+And we look at all the signals that are 
+using it. 
+
+145
+00:11:03.853 --> 00:11:06.570
+Okay? 
+Just that are using that atom. 
+
+146
+00:11:06.570 --> 00:11:11.693
+We have one here, another here, another 
+here, another here, and so on. 
+
+147
+00:11:11.693 --> 00:11:16.816
+Remember, this is our data. 
+And this is our matrix, this Sparse Code. 
+
+148
+00:11:16.816 --> 00:11:21.318
+So we take all of them, and we forget 
+about everybody else. 
+
+149
+00:11:21.318 --> 00:11:27.372
+We say, you signals didn't use this atom, 
+so I'm not going to pay attention to you 
+
+150
+00:11:27.372 --> 00:11:31.408
+at this moment. 
+I'm going to pay attention to you later 
+
+151
+00:11:31.408 --> 00:11:33.660
+on. 
+Remember, we iterated this. 
+
+152
+00:11:33.660 --> 00:11:39.137
+And now the goal is, as I say, we're 
+going to make this atom even better. 
+
+153
+00:11:39.137 --> 00:11:43.728
+Remember please, this atom has been used 
+by these signals. 
+
+154
+00:11:43.728 --> 00:11:47.917
+But that's not the only atom that those 
+signals use. 
+
+155
+00:11:47.917 --> 00:11:51.783
+So for example, the first one uses this 
+and this. 
+
+156
+00:11:51.783 --> 00:11:57.824
+The second one uses this and this. 
+So, I'm keeping all the signals that have 
+
+157
+00:11:57.824 --> 00:12:04.027
+used that atom but they have also used 
+other atoms but I, I'm not going to touch 
+
+158
+00:12:04.027 --> 00:12:08.277
+that. 
+The next thing I do is actually I remove 
+
+159
+00:12:08.277 --> 00:12:13.720
+the influence of dots. 
+Let me just explain that once again. 
+
+160
+00:12:13.720 --> 00:12:19.363
+For example the first signal was a 
+combination of this atom, and this atom. 
+
+161
+00:12:19.363 --> 00:12:23.330
+So I go and such drug the contribution of 
+this atom. 
+
+162
+00:12:23.330 --> 00:12:28.417
+The same for the second signal. 
+I go and subtract the contribution of 
+
+163
+00:12:28.417 --> 00:12:32.104
+this atom. 
+The same for the third, the same for the 
+
+164
+00:12:32.104 --> 00:12:35.496
+fourth. 
+So, for every signal, I basically go and 
+
+165
+00:12:35.496 --> 00:12:41.173
+subtract the contribution of all the 
+other atoms, but the one that I'm trying 
+
+166
+00:12:41.173 --> 00:12:44.122
+to change. 
+And then I ge, I have an error. 
+
+167
+00:12:44.122 --> 00:12:47.219
+Because I'm not considering, now, this 
+atom. 
+
+168
+00:12:47.219 --> 00:12:50.980
+I'm subtracting the contribution of 
+everybody else. 
+
+169
+00:12:50.980 --> 00:12:55.138
+And I just keep. 
+That contribution of this atom, and that 
+
+170
+00:12:55.138 --> 00:12:58.232
+basically gives us kind of an error. 
+Okay. 
+
+171
+00:12:58.232 --> 00:13:04.425
+And that's the error we're going to try 
+to redesign the atom to minimize that 
+
+172
+00:13:04.425 --> 00:13:09.297
+error, that error. 
+What's the contribution of this atom when 
+
+173
+00:13:09.297 --> 00:13:15.573
+we use it for those signals, lets see if 
+we can change the atom to make that 
+
+174
+00:13:15.573 --> 00:13:20.280
+contribution even better, meaning that 
+error even smaller. 
+
+175
+00:13:20.280 --> 00:13:27.317
+And so what we have here is this the 
+error, this is the residual, this is what 
+
+176
+00:13:27.317 --> 00:13:33.533
+was the contribution of this atom. 
+And now I want to change it, I want to 
+
+177
+00:13:33.533 --> 00:13:38.468
+redesign it and also I want to redesign 
+the coefficient. 
+
+178
+00:13:38.468 --> 00:13:44.426
+So, this I have. 
+This is the amount of information energy 
+
+179
+00:13:44.426 --> 00:13:50.700
+that this atom was contributing. 
+And now I'm going to basically. 
+
+180
+00:13:50.700 --> 00:13:53.952
+Try to redesign it to make it even 
+better. 
+
+181
+00:13:53.952 --> 00:13:58.753
+So this is what we have to optimize for 
+and this is very easy. 
+
+182
+00:13:58.753 --> 00:14:02.625
+It's what's called a singular value 
+decomposition. 
+
+183
+00:14:02.625 --> 00:14:07.504
+It's a standard tool in linear algebra. 
+It has a clause formula. 
+
+184
+00:14:07.504 --> 00:14:13.079
+So, once again, we pick an atom, we can 
+go one atom at a time or we can go 
+
+185
+00:14:13.079 --> 00:14:18.810
+randomly, we pick an atom, we pick all 
+the signals that have used that atom. 
+
+186
+00:14:18.810 --> 00:14:23.900
+We subtract the contribution of every 
+other atom. 
+
+187
+00:14:23.900 --> 00:14:30.188
+And then we say, how can I improve this 
+atom in such a way that it's contribution 
+
+188
+00:14:30.188 --> 00:14:33.838
+to the signal is even better? 
+And that's an SVD. 
+
+189
+00:14:33.838 --> 00:14:37.487
+So, we run an SVD for every single of the 
+atoms. 
+
+190
+00:14:37.487 --> 00:14:42.844
+We have updated the dictionary. 
+And now, as we explained in one of the 
+
+191
+00:14:42.844 --> 00:14:49.055
+previous slides, we let, again, all these 
+thing has to be encoded again with a new 
+
+192
+00:14:49.055 --> 00:14:53.316
+dictionary. 
+Then we update the dictionary and we run 
+
+193
+00:14:53.316 --> 00:14:57.469
+a few iterations. 
+So very simple, Sparse Coding, SBD. 
+
+194
+00:14:57.469 --> 00:15:01.457
+Sparse Coding, SBD. 
+That's all what we have to do. 
+
+195
+00:15:01.457 --> 00:15:05.611
+Multiple of those. 
+As many Sparse Codes as signals. 
+
+196
+00:15:05.611 --> 00:15:09.349
+As many SVDs are, as atoms in the 
+dictionary. 
+
+197
+00:15:09.349 --> 00:15:15.999
+We do that, we have a new dictionary. 
+So, what we have so far is, we started 
+
+198
+00:15:15.999 --> 00:15:23.018
+from the need of doing signal modeling. 
+That basically led us to propose Sparse 
+
+199
+00:15:23.018 --> 00:15:27.425
+Modeling as a technique. 
+We had to discuss some theory. 
+
+200
+00:15:27.425 --> 00:15:32.404
+Why is this possible? 
+And then we had to discuss, how do we do 
+
+201
+00:15:32.404 --> 00:15:36.729
+the Sparse Coding, and how do we train 
+the dictionary? 
+
+202
+00:15:36.729 --> 00:15:41.055
+And that was the topic of the last two 
+presentations. 
+
+203
+00:15:41.055 --> 00:15:45.797
+Now is, will this work? 
+Let us try with real images. 
+
+204
+00:15:45.797 --> 00:15:51.824
+And let's see if this works. 
+Let me just pay attention to one point 
+
+205
+00:15:51.824 --> 00:15:58.841
+before we go into that in order to close 
+this video about dictionary learning. 
+
+206
+00:15:58.841 --> 00:16:04.135
+Some people have basically. 
+Decided that instead of training the 
+
+207
+00:16:04.135 --> 00:16:10.020
+dictionary, as we have just said, we're 
+going to make the dictionary be a subset. 
+
+208
+00:16:11.500 --> 00:16:19.249
+Of X, of the data itself. 
+Now I mention to you that we initialize 
+
+209
+00:16:19.249 --> 00:16:25.580
+the dictionary very often by randomly 
+sampling some of these syncs. 
+
+210
+00:16:25.580 --> 00:16:31.561
+But you could actually say instead of 
+randomly sample why then I pick the best 
+
+211
+00:16:31.561 --> 00:16:35.847
+one, the one's that. 
+Everybody else is a Sparse Representation 
+
+212
+00:16:35.847 --> 00:16:39.710
+of, of those ones. 
+Those selective ones that I have picked. 
+
+213
+00:16:39.710 --> 00:16:43.371
+And there are also optimization 
+techniques to do that. 
+
+214
+00:16:43.371 --> 00:16:47.167
+So that's an alternative. 
+It's still dictionary learning. 
+
+215
+00:16:47.167 --> 00:16:50.150
+But we'll restrict the dictionary to be 
+one. 
+
+216
+00:16:50.150 --> 00:16:53.651
+Of the signals. 
+Basically, we'll restrict every atom of 
+
+217
+00:16:53.651 --> 00:16:57.671
+the dictionary to be one of the signals. 
+That's an alternative. 
+
+218
+00:16:57.671 --> 00:17:02.923
+It's just a different way of basically 
+learning a dictionary in order to get the 
+
+219
+00:17:02.923 --> 00:17:06.035
+sparsest possible representation of our 
+signals. 
+
+220
+00:17:06.035 --> 00:17:08.823
+So now it's time to show you some 
+examples. 
+
+221
+00:17:08.823 --> 00:17:11.741
+And we're going to do that in the next 
+video. 
+
+222
+00:17:11.741 --> 00:17:13.038
+Thank you very much. 

@@ -1,0 +1,965 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.360
+Hello, and welcome back.
+
+2
+00:00:02.360 --> 00:00:04.515
+I want to illustrate now how we can use
+
+3
+00:00:04.515 --> 00:00:08.805
+Sparse modeling for problems in image and video classification.
+
+4
+00:00:08.805 --> 00:00:12.735
+In particular, I want to address that very challenging problem
+
+5
+00:00:12.735 --> 00:00:17.700
+of classifying or recognizing activity in video.
+
+6
+00:00:17.700 --> 00:00:20.490
+For example, if we look at this video we want to be
+
+7
+00:00:20.490 --> 00:00:23.503
+able to say there is a person carrying an object.
+
+8
+00:00:23.503 --> 00:00:28.475
+If we look at this video we want to be able to say there's a person jumping.
+
+9
+00:00:28.475 --> 00:00:33.805
+If we look at this video we want to be able to say there is a person running.
+
+10
+00:00:33.805 --> 00:00:37.545
+And if we look at this one we want to be able to say,
+
+11
+00:00:37.545 --> 00:00:39.600
+there's a person jogging here.
+
+12
+00:00:39.600 --> 00:00:42.870
+Of course, we want to be able to say all of
+
+13
+00:00:42.870 --> 00:00:47.400
+the activities and to recognize all the activities in any video.
+
+14
+00:00:47.400 --> 00:00:53.690
+For example, here we have a movie of basically a clip of the movie Forrest Gump.
+
+15
+00:00:53.690 --> 00:00:55.710
+And we want to be able hopefully,
+
+16
+00:00:55.710 --> 00:00:59.055
+to say everything that is happening in the movie.
+
+17
+00:00:59.055 --> 00:01:02.980
+Basically, every single activity in that movie.
+
+18
+00:01:02.980 --> 00:01:05.500
+How can we do that with Sparse modeling?
+
+19
+00:01:05.500 --> 00:01:12.989
+Let's see that. We're going to start from what's called supervised classification.
+
+20
+00:01:12.989 --> 00:01:16.170
+The basic idea is that we are going to have a collection of
+
+21
+00:01:16.170 --> 00:01:20.162
+data for training and that data that comes with labels.
+
+22
+00:01:20.162 --> 00:01:24.930
+So somebody is going to basically tell us this video has this type of activity.
+
+23
+00:01:24.930 --> 00:01:27.390
+This video has this type of activity.
+
+24
+00:01:27.390 --> 00:01:29.055
+For example, we're going to have
+
+25
+00:01:29.055 --> 00:01:35.085
+this video and it comes with its own activity and its own labor.
+
+26
+00:01:35.085 --> 00:01:37.340
+And what we're going to do is we're going to
+
+27
+00:01:37.340 --> 00:01:41.165
+learn a dictionary for this type of activity.
+
+28
+00:01:41.165 --> 00:01:45.770
+One dictionary per activity or per class.
+
+29
+00:01:45.770 --> 00:01:50.265
+Now, we can just go and look at all the patches in the video and
+
+30
+00:01:50.265 --> 00:01:55.380
+try to learn for those patches as we have done in some of the previous lectures.
+
+31
+00:01:55.380 --> 00:02:00.070
+But not every patch in this video is actually interesting.
+
+32
+00:02:00.070 --> 00:02:01.955
+We need to find and we want to use
+
+33
+00:02:01.955 --> 00:02:05.955
+only the patches that have some information about the activity.
+
+34
+00:02:05.955 --> 00:02:09.425
+One way of doing that is just to take frame differences.
+
+35
+00:02:09.425 --> 00:02:11.930
+If we take frame differences when there is
+
+36
+00:02:11.930 --> 00:02:16.370
+no activity that difference will basically be very small.
+
+37
+00:02:16.370 --> 00:02:17.510
+And when the is activity,
+
+38
+00:02:17.510 --> 00:02:19.595
+when there is a person moving,
+
+39
+00:02:19.595 --> 00:02:21.905
+we will have a big difference.
+
+40
+00:02:21.905 --> 00:02:26.415
+So we just take consecutive frames and we subtract one from the other.
+
+41
+00:02:26.415 --> 00:02:33.480
+So one frame minus the previous one and so on to try to see which regions in the video,
+
+42
+00:02:33.480 --> 00:02:35.735
+in the image, in each frame,
+
+43
+00:02:35.735 --> 00:02:39.310
+do have some activity. Let me show you that.
+
+44
+00:02:39.310 --> 00:02:44.540
+So here we have basically a video of frame differences.
+
+45
+00:02:44.540 --> 00:02:47.930
+Nothing else than every frame minus the previous one.
+
+46
+00:02:47.930 --> 00:02:52.460
+And you see immediately that we can basically take
+
+47
+00:02:52.460 --> 00:02:58.980
+apart those regions that have activity from the regions that do not have activity.
+
+48
+00:02:58.980 --> 00:03:03.274
+Then what we do is we only look at patches.
+
+49
+00:03:03.274 --> 00:03:07.185
+Basically regions lets say eight by eight by five.
+
+50
+00:03:07.185 --> 00:03:11.570
+So we take eight by eight in the frame and five consecutive frames,
+
+51
+00:03:11.570 --> 00:03:15.079
+and we look at which of those have high energy.
+
+52
+00:03:15.079 --> 00:03:19.070
+Basically, have more non-zero coefficients or
+
+53
+00:03:19.070 --> 00:03:21.740
+enough high coefficients that we
+
+54
+00:03:21.740 --> 00:03:25.850
+define to go above certain threshold and they have some energy.
+
+55
+00:03:25.850 --> 00:03:28.220
+We pick only those patches and with
+
+56
+00:03:28.220 --> 00:03:32.235
+those patches we'll learn a dictionary for that class.
+
+57
+00:03:32.235 --> 00:03:34.350
+So this is the dictionary there we learn.
+
+58
+00:03:34.350 --> 00:03:38.670
+It's of course a dictionary in time because we have
+
+59
+00:03:38.670 --> 00:03:44.390
+used patches that are let's say eight by eight in space and five in time.
+
+60
+00:03:44.390 --> 00:03:48.140
+Now, this dictionary is for this class.
+
+61
+00:03:48.140 --> 00:03:50.120
+Now, we take a different class.
+
+62
+00:03:50.120 --> 00:03:54.655
+We take basically videos from a different example.
+
+63
+00:03:54.655 --> 00:03:57.465
+And we go and do basically the same.
+
+64
+00:03:57.465 --> 00:04:00.321
+We learn activities for the one.
+
+65
+00:04:00.321 --> 00:04:01.680
+We take the video,
+
+66
+00:04:01.680 --> 00:04:03.505
+it's just a different activity.
+
+67
+00:04:03.505 --> 00:04:05.342
+So we take frame differences,
+
+68
+00:04:05.342 --> 00:04:06.800
+we take all the patches that have
+
+69
+00:04:06.800 --> 00:04:10.955
+sufficient energy and we go and learn a dictionary for a day.
+
+70
+00:04:10.955 --> 00:04:20.250
+And in this way we have now a dictionary for Class 2 and another dictionary for Class 1.
+
+71
+00:04:20.250 --> 00:04:25.535
+These dictionaries are adapted to the class and we continue doing that
+
+72
+00:04:25.535 --> 00:04:31.340
+for every single class that we have in our database for training.
+
+73
+00:04:31.340 --> 00:04:36.305
+We basically are going to have another class here of
+
+74
+00:04:36.305 --> 00:04:42.584
+a different activity and we are going to have another dictionary here for that activity.
+
+75
+00:04:42.584 --> 00:04:46.235
+And we do that for as many classes as we have.
+
+76
+00:04:46.235 --> 00:04:50.330
+Now, what we end up having at the end is basically
+
+77
+00:04:50.330 --> 00:04:57.530
+a large dictionary that is the concatenation of all the previous dictionaries.
+
+78
+00:04:57.530 --> 00:05:00.915
+So we put every dictionary one after the other,
+
+79
+00:05:00.915 --> 00:05:04.755
+and like a block and then we have a large dictionary.
+
+80
+00:05:04.755 --> 00:05:12.080
+Now, we actually know that every block belongs or represents a different activity,
+
+81
+00:05:12.080 --> 00:05:17.600
+and that has been the training supervised because we have labels for every
+
+82
+00:05:17.600 --> 00:05:23.140
+single one of the classes we created one dictionary they came with labels.
+
+83
+00:05:23.140 --> 00:05:26.660
+We're going to talk about unsupervised in a little while.
+
+84
+00:05:26.660 --> 00:05:31.190
+Now, when a new video comes in we want to classify it.
+
+85
+00:05:31.190 --> 00:05:34.015
+That's actually the goal of this learning.
+
+86
+00:05:34.015 --> 00:05:36.089
+How do we do the classification?
+
+87
+00:05:36.089 --> 00:05:41.570
+Almost identical to the way we did the training but now we have the dictionary ready.
+
+88
+00:05:41.570 --> 00:05:47.015
+So basically, a new video comes in-- a new video comes,
+
+89
+00:05:47.015 --> 00:05:52.715
+for example, any of these type of videos we do the feature extraction.
+
+90
+00:05:52.715 --> 00:05:54.395
+In this case, very,
+
+91
+00:05:54.395 --> 00:05:57.170
+very simple just frame difference.
+
+92
+00:05:57.170 --> 00:06:01.009
+Then we go again to every patch, three dimensional patch,
+
+93
+00:06:01.009 --> 00:06:04.925
+in space and time and we encode
+
+94
+00:06:04.925 --> 00:06:10.085
+every single patch that has sufficient energy as we did in training.
+
+95
+00:06:10.085 --> 00:06:12.505
+We encode with this dictionary.
+
+96
+00:06:12.505 --> 00:06:18.930
+But now we remember that every block in the dictionary represents something different.
+
+97
+00:06:18.930 --> 00:06:23.030
+So we're encoding with that dictionary and then we
+
+98
+00:06:23.030 --> 00:06:28.870
+look actually which regions of the dictionary were actually active.
+
+99
+00:06:28.870 --> 00:06:32.720
+Let's say that when I encode this video most of
+
+100
+00:06:32.720 --> 00:06:38.125
+the energy of the code that I produce is in the second block.
+
+101
+00:06:38.125 --> 00:06:41.270
+That means, that the video is from the second class.
+
+102
+00:06:41.270 --> 00:06:44.345
+If most of the energy is in the seventh block,
+
+103
+00:06:44.345 --> 00:06:47.565
+then basically this is from the seventh class.
+
+104
+00:06:47.565 --> 00:06:50.575
+So basically, we look at for example,
+
+105
+00:06:50.575 --> 00:06:53.785
+the A1 in every single block.
+
+106
+00:06:53.785 --> 00:07:00.120
+And we pick the one that has basically the maximal energy.
+
+107
+00:07:00.120 --> 00:07:04.040
+There are many ways to pick the right block but the basic idea is
+
+108
+00:07:04.040 --> 00:07:08.550
+that we-- Although we're encoding with a large dictionary,
+
+109
+00:07:08.550 --> 00:07:13.595
+this dictionary is the concatenation of multiple dictionaries.
+
+110
+00:07:13.595 --> 00:07:16.340
+And then we need to observe which one of
+
+111
+00:07:16.340 --> 00:07:20.390
+the blocks of these large dictionary is the one that
+
+112
+00:07:20.390 --> 00:07:27.150
+is most active and that basically tells me which one is the class for that video.
+
+113
+00:07:27.150 --> 00:07:29.075
+Very, very simple.
+
+114
+00:07:29.075 --> 00:07:33.945
+We are basically doing dictionary learning at training stage,
+
+115
+00:07:33.945 --> 00:07:37.680
+one dictionary for each one of
+
+116
+00:07:37.680 --> 00:07:42.634
+the classes and then we're doing just encoding, sparse encoding.
+
+117
+00:07:42.634 --> 00:07:48.550
+And then we say which one was the one that you like the most that's your class.
+
+118
+00:07:48.550 --> 00:07:53.230
+Very, very simple algorithm that basically achieves some of the best results
+
+119
+00:07:53.230 --> 00:07:59.170
+that have been published for this type of activity recognition challenges.
+
+120
+00:07:59.170 --> 00:08:00.660
+Let's see some examples.
+
+121
+00:08:00.660 --> 00:08:07.815
+The examples I'm going to show you are from a database of videos collected from YouTube.
+
+122
+00:08:07.815 --> 00:08:11.125
+Every area of classification has
+
+123
+00:08:11.125 --> 00:08:16.875
+standard databases that the community uses to test their own algorithms.
+
+124
+00:08:16.875 --> 00:08:19.240
+And this is one of the most popular ones.
+
+125
+00:08:19.240 --> 00:08:23.310
+It has a lot of variability of just videos downloaded from YouTube.
+
+126
+00:08:23.310 --> 00:08:26.080
+So here are some examples for example of
+
+127
+00:08:26.080 --> 00:08:32.160
+basically two different videos of a person playing with a ball.
+
+128
+00:08:32.160 --> 00:08:34.150
+Just soccer playing, and of course,
+
+129
+00:08:34.150 --> 00:08:37.180
+we want to be able to say this belongs to the same class.
+
+130
+00:08:37.180 --> 00:08:39.459
+Some of the videos are used for training,
+
+131
+00:08:39.459 --> 00:08:41.320
+some are used for testing.
+
+132
+00:08:41.320 --> 00:08:43.450
+We also have people jumping,
+
+133
+00:08:43.450 --> 00:08:50.320
+just keeps jumping here and we will call these basically the same class.
+
+134
+00:08:50.320 --> 00:08:53.014
+Although, the videos are completely different,
+
+135
+00:08:53.014 --> 00:08:56.500
+we know that basically is the same activity.
+
+136
+00:08:56.500 --> 00:09:00.447
+We also have basically bike riding.
+
+137
+00:09:00.447 --> 00:09:04.904
+And we have just examples of horse riding,
+
+138
+00:09:04.904 --> 00:09:11.408
+and examples of basically diving in a swimming pool.
+
+139
+00:09:11.408 --> 00:09:13.705
+So different type of activities.
+
+140
+00:09:13.705 --> 00:09:16.155
+We basically train dictionaries,
+
+141
+00:09:16.155 --> 00:09:20.970
+one dictionary per activity and then we have a new video and we say,
+
+142
+00:09:20.970 --> 00:09:23.230
+"Which dictionary do you like the most?"
+
+143
+00:09:23.230 --> 00:09:24.635
+The one you like the most.
+
+144
+00:09:24.635 --> 00:09:27.865
+That's your class. Let me show you some results.
+
+145
+00:09:27.865 --> 00:09:30.510
+And the way I'm going to present you the result is
+
+146
+00:09:30.510 --> 00:09:33.690
+what's normally called a Confusion matrix.
+
+147
+00:09:33.690 --> 00:09:34.935
+So here we have
+
+148
+00:09:34.935 --> 00:09:39.770
+all the different activities and here we have the activities in the same order.
+
+149
+00:09:39.770 --> 00:09:43.470
+And in every row we basically see
+
+150
+00:09:43.470 --> 00:09:49.254
+the percentage or the probability of doing a correct classification.
+
+151
+00:09:49.254 --> 00:09:54.660
+And what you want is to be as close as possible to one in the diagonal.
+
+152
+00:09:54.660 --> 00:09:58.030
+So 91 here means that basically
+
+153
+00:09:58.030 --> 00:10:03.490
+91 percent of the videos of basketball were correctly classified.
+
+154
+00:10:03.490 --> 00:10:09.540
+Now, there was about 2 percent of the basketball that will classify as class 2,
+
+155
+00:10:09.540 --> 00:10:11.410
+class 2 is biking.
+
+156
+00:10:11.410 --> 00:10:17.070
+And then you can have here basically 1 percent will classy as class one,
+
+157
+00:10:17.070 --> 00:10:20.080
+two, three, four, five, six, seven, eight.
+
+158
+00:10:20.080 --> 00:10:22.630
+As class eight, so you look for Class eight.
+
+159
+00:10:22.630 --> 00:10:24.508
+So that's a Confusion matrix.
+
+160
+00:10:24.508 --> 00:10:27.710
+It tells you both how many times you have done right.
+
+161
+00:10:27.710 --> 00:10:31.840
+But it also tells you what type of mistakes you have done.
+
+162
+00:10:31.840 --> 00:10:35.340
+And as you can see most of the numbers are very,
+
+163
+00:10:35.340 --> 00:10:36.720
+very close to one.
+
+164
+00:10:36.720 --> 00:10:41.675
+These are actually some of the best results with these very, very simple technique.
+
+165
+00:10:41.675 --> 00:10:43.485
+We learn a dictionary per class,
+
+166
+00:10:43.485 --> 00:10:47.879
+and then we do sparse coding for the new dictionaries and we get the result.
+
+167
+00:10:47.879 --> 00:10:49.305
+And the results are really,
+
+168
+00:10:49.305 --> 00:10:52.275
+really good in spite of the variability
+
+169
+00:10:52.275 --> 00:10:55.425
+in activities videos taken with different cameras,
+
+170
+00:10:55.425 --> 00:10:57.770
+different resolutions, different qualities,
+
+171
+00:10:57.770 --> 00:11:02.265
+but have common activities and we can actually detect them.
+
+172
+00:11:02.265 --> 00:11:03.852
+Now, this is supervised.
+
+173
+00:11:03.852 --> 00:11:08.885
+What happens when we don't have supervised data to do the learning?
+
+174
+00:11:08.885 --> 00:11:11.140
+Let's talk a bit about that.
+
+175
+00:11:11.140 --> 00:11:15.015
+Let's just observe this video first and let us
+
+176
+00:11:15.015 --> 00:11:19.910
+concentrate on what's happening on the right which is the grand truth.
+
+177
+00:11:19.910 --> 00:11:24.390
+And we're going to see two people here that are running and then jumping.
+
+178
+00:11:24.390 --> 00:11:25.824
+Let's just look at that.
+
+179
+00:11:25.824 --> 00:11:27.750
+I'm going to probably run this video a number of
+
+180
+00:11:27.750 --> 00:11:30.895
+times while I'm going to explain what's happening.
+
+181
+00:11:30.895 --> 00:11:34.745
+So the people are running and they're jumping.
+
+182
+00:11:34.745 --> 00:11:37.290
+And if you see basically,
+
+183
+00:11:37.290 --> 00:11:40.369
+there was a box that was green and now it became yellow.
+
+184
+00:11:40.369 --> 00:11:42.420
+Let's just run that again.
+
+185
+00:11:42.420 --> 00:11:46.809
+It's green, that means one activity yellow.
+
+186
+00:11:46.809 --> 00:11:49.020
+That means a different activity.
+
+187
+00:11:49.020 --> 00:11:51.175
+So this is the grand truth.
+
+188
+00:11:51.175 --> 00:11:53.605
+We're basically going and mark it by hand.
+
+189
+00:11:53.605 --> 00:11:59.255
+So how can you use sparse modeling to detect this change in activity?
+
+190
+00:11:59.255 --> 00:12:03.340
+Very simple and very similar to what we have just done.
+
+191
+00:12:03.340 --> 00:12:08.135
+We basically start and we take let's say a time period of one second
+
+192
+00:12:08.135 --> 00:12:09.990
+and we learn a dictionary for that in
+
+193
+00:12:09.990 --> 00:12:13.580
+the same way that we have just done for a supervised case.
+
+194
+00:12:13.580 --> 00:12:17.475
+Then we take the next second and we'll try to encode
+
+195
+00:12:17.475 --> 00:12:22.185
+this new one second of video using the dictionary that we just learned.
+
+196
+00:12:22.185 --> 00:12:24.645
+If we can do a good encoding, meaning,
+
+197
+00:12:24.645 --> 00:12:29.105
+I encode it and basically my encoding vector is very sparse.
+
+198
+00:12:29.105 --> 00:12:31.965
+That means that that dictionary is a very good dictionary
+
+199
+00:12:31.965 --> 00:12:35.395
+for this new time period of one second.
+
+200
+00:12:35.395 --> 00:12:38.425
+That means, I probably have not change activity.
+
+201
+00:12:38.425 --> 00:12:43.260
+Now, I keep going and then I encounter one second where I try
+
+202
+00:12:43.260 --> 00:12:48.240
+to encode with the previous dictionaries and then get a very bad encoding.
+
+203
+00:12:48.240 --> 00:12:52.680
+Either I cannot reconstruct the video or I need to use many,
+
+204
+00:12:52.680 --> 00:12:58.350
+many atoms in the dictionary meaning my encoding vector is very none sparse.
+
+205
+00:12:58.350 --> 00:13:01.995
+That means that that dictionary that was trained to
+
+206
+00:13:01.995 --> 00:13:06.465
+encode a video with a given activity in a very sparse fashion,
+
+207
+00:13:06.465 --> 00:13:09.500
+is not working for this segment of the video.
+
+208
+00:13:09.500 --> 00:13:12.074
+That means, you have changed activities.
+
+209
+00:13:12.074 --> 00:13:15.419
+And what you can do is first of all call this
+
+210
+00:13:15.419 --> 00:13:20.005
+a new activity and then you can actually train a new dictionary.
+
+211
+00:13:20.005 --> 00:13:23.175
+And now you're going to have one dictionary per
+
+212
+00:13:23.175 --> 00:13:26.855
+activity that you have seen so far and you can keep going.
+
+213
+00:13:26.855 --> 00:13:29.700
+And that's basically what we are doing here.
+
+214
+00:13:29.700 --> 00:13:30.880
+And on the left is the result.
+
+215
+00:13:30.880 --> 00:13:34.230
+The grand truth was on the right.
+
+216
+00:13:34.230 --> 00:13:36.270
+Again, this is unsupervised.
+
+217
+00:13:36.270 --> 00:13:41.210
+This is just marked so we can verify if we're doing correct or not.
+
+218
+00:13:41.210 --> 00:13:45.300
+And let's see the performance of sparse modeling and as you're going to
+
+219
+00:13:45.300 --> 00:13:49.705
+see the left is basically identical to the right.
+
+220
+00:13:49.705 --> 00:13:55.635
+We automatically we're able to detect the change in activity by
+
+221
+00:13:55.635 --> 00:13:58.110
+observing that the dictionary that we learned in
+
+222
+00:13:58.110 --> 00:14:01.840
+the past is not good anymore for the new activity.
+
+223
+00:14:01.840 --> 00:14:05.760
+And therefore, we probably have changed activity and we
+
+224
+00:14:05.760 --> 00:14:10.270
+can detect this change in a completely unsupervised fashion.
+
+225
+00:14:10.270 --> 00:14:13.945
+You can take multiple people and do the same exercise.
+
+226
+00:14:13.945 --> 00:14:16.135
+You can ask, "Are these two persons,
+
+227
+00:14:16.135 --> 00:14:20.462
+these two groups of people maybe even doing the same activity?"
+
+228
+00:14:20.462 --> 00:14:22.091
+You do a dictionary for one,
+
+229
+00:14:22.091 --> 00:14:26.919
+you do a dictionary for the other and you see if you can interchange the dictionaries.
+
+230
+00:14:26.919 --> 00:14:29.650
+If you can, those dictionaries are good for
+
+231
+00:14:29.650 --> 00:14:33.810
+both activities means both activities are probably the same.
+
+232
+00:14:33.810 --> 00:14:36.470
+If you cannot interchange dictionaries,
+
+233
+00:14:36.470 --> 00:14:39.190
+the dictionaries don't work for both activities.
+
+234
+00:14:39.190 --> 00:14:41.420
+Those activities are different.
+
+235
+00:14:41.420 --> 00:14:48.105
+So this is one way basically of using sparse modeling for classification.
+
+236
+00:14:48.105 --> 00:14:51.820
+Very simple, learn dictionaries per class and then use
+
+237
+00:14:51.820 --> 00:14:56.530
+them to encode the new data and see how good is that dictionary.
+
+238
+00:14:56.530 --> 00:14:59.530
+And according to that you can do that classification.
+
+239
+00:14:59.530 --> 00:15:04.650
+So a very powerful and very simple technique for image and video classification.
+
+240
+00:15:04.650 --> 00:15:07.120
+Thank you, very much. Looking forward to seeing
+
+241
+00:15:07.120 --> 00:15:10.000
+you in one of the future videos. Thank you.

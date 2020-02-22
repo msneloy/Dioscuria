@@ -1,0 +1,1305 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.422
+Hello, and welcome back. 
+It's time now to present examples of 
+
+2
+00:00:05.422 --> 00:00:12.381
+sparse modeling in image processing. 
+Before we do that, we have to do one more 
+
+3
+00:00:12.381 --> 00:00:15.273
+thing. 
+Now, remember what we have. 
+
+4
+00:00:15.273 --> 00:00:22.051
+We have a dictionary of K elements, K 
+atoms, and every atom has N dimensions. 
+
+5
+00:00:22.051 --> 00:00:28.829
+Now, what are basically the, basically 
+the signals that we are going to process? 
+
+6
+00:00:28.829 --> 00:00:33.800
+And that's what we need to discuss just 
+for one minute. 
+
+7
+00:00:33.800 --> 00:00:40.200
+And the basic idea is very simple. 
+We're going to be talking about images. 
+
+8
+00:00:40.200 --> 00:00:44.041
+This is going to be our data, the noisy 
+image. 
+
+9
+00:00:44.041 --> 00:00:48.430
+The whole image. 
+This is what we are looking for. 
+
+10
+00:00:48.430 --> 00:00:52.772
+Now, we are not going to work on entire 
+images, 
+
+11
+00:00:52.772 --> 00:00:57.519
+we are going to work on patches. 
+And this is the r. 
+
+12
+00:00:57.519 --> 00:01:05.497
+The r is just a basic, a simple binary 
+matrix that extracts the patch around ij. 
+
+13
+00:01:05.497 --> 00:01:13.943
+So, if we have an image, for every pixel, 
+we construct a patch around it. 
+
+14
+00:01:13.943 --> 00:01:18.637
+Or, we could actually consider ij the 
+upper left corner. 
+
+15
+00:01:18.637 --> 00:01:24.440
+Anything that is good as a coordinate 
+system, and we extract patches. 
+
+16
+00:01:24.440 --> 00:01:29.476
+For example, eight by eight patches as we 
+have been talking. 
+
+17
+00:01:29.476 --> 00:01:36.047
+Now, it's very important that we do not 
+take blocks as we did on JPEG, in JPEG. 
+
+18
+00:01:36.047 --> 00:01:41.083
+We actually take all the patches that are 
+fully overlapping. 
+
+19
+00:01:41.083 --> 00:01:45.399
+So, we have an image, 
+and we take a patch, and we take the 
+
+20
+00:01:45.399 --> 00:01:48.443
+patch next to it and the patch next to 
+it. 
+
+21
+00:01:48.443 --> 00:01:52.140
+So, for every pixel, let's say the upper 
+left corner, 
+
+22
+00:01:52.140 --> 00:01:59.087
+we construct the eight by eight patch. 
+So, this is a binary matrix that extracts 
+
+23
+00:01:59.087 --> 00:02:05.858
+that patch. And it's the patch that we 
+want to have a sparse code for it with a 
+
+24
+00:02:05.858 --> 00:02:09.640
+learned dictionary. 
+So here is the sparsity. 
+
+25
+00:02:09.640 --> 00:02:15.585
+So, we're not working on the whole image 
+at once, we're working on all the 
+
+26
+00:02:15.585 --> 00:02:21.204
+overlapping patches of the image. 
+And, what we have is as we discussed 
+
+27
+00:02:21.204 --> 00:02:25.032
+before, 
+the model is for the individual patches. 
+
+28
+00:02:25.032 --> 00:02:30.652
+We're going to construct a dictionary 
+that works, for example, on all the 
+
+29
+00:02:30.652 --> 00:02:35.050
+overlapping patches of a given image at 
+the same time. 
+
+30
+00:02:35.050 --> 00:02:43.258
+And note here, we are doing basically the 
+optimization over the signal, this is the 
+
+31
+00:02:43.258 --> 00:02:47.480
+whole image. 
+We are looking for the sparse code, 
+
+32
+00:02:47.480 --> 00:02:51.623
+this is the second part. 
+And as we're going to see in a second, 
+
+33
+00:02:51.623 --> 00:02:57.171
+we're also going to learn the dictionary. 
+We could learn the dictionary offline or 
+
+34
+00:02:57.171 --> 00:03:01.947
+we could learn it and adopt it for the 
+image as we're going to explain. 
+
+35
+00:03:01.947 --> 00:03:07.425
+Once again, this is just nothing than a 
+binary measure that extracts the patch. 
+
+36
+00:03:07.425 --> 00:03:10.936
+So think like you have the image, 
+you pick a patch, 
+
+37
+00:03:10.936 --> 00:03:14.097
+you do sparse coding. 
+You pick the next patch, 
+
+38
+00:03:14.097 --> 00:03:18.030
+you do sparse coding. 
+Now, what about then the dictionary? 
+
+39
+00:03:18.030 --> 00:03:21.888
+The first option is to train on a large 
+database. 
+
+40
+00:03:21.888 --> 00:03:26.061
+So, you do that offline you train on a 
+large database. 
+
+41
+00:03:26.061 --> 00:03:32.125
+The second option, and these are not 
+contradictory as we're going to see in a 
+
+42
+00:03:32.125 --> 00:03:38.030
+second, is to use the image itself. 
+You travel all around the patches of the 
+
+43
+00:03:38.030 --> 00:03:42.125
+image, that gives you a lot of training 
+data already. 
+
+44
+00:03:42.125 --> 00:03:46.850
+And the basic idea is that normally we 
+combine both of them. 
+
+45
+00:03:46.850 --> 00:03:52.526
+That's one possibility. 
+So, you learn a dictionary with a bunch 
+
+46
+00:03:52.526 --> 00:03:59.106
+of images off the shelf offline, and that 
+you use as your initialization of the 
+
+47
+00:03:59.106 --> 00:04:03.354
+dictionary for K-SVD, and then you get 
+the new image. 
+
+48
+00:04:03.354 --> 00:04:08.435
+Even though it's noisy, you adapt the 
+dictionary to the image. 
+
+49
+00:04:08.435 --> 00:04:14.266
+So, you run a few iterations of this 
+dictionary adaptation, K-SVD, sparse 
+
+50
+00:04:14.266 --> 00:04:19.930
+coding, dictionary adaptation, sparse 
+coding for the particular image. 
+
+51
+00:04:19.930 --> 00:04:24.121
+That's one option. 
+The other is to forget completely about 
+
+52
+00:04:24.121 --> 00:04:28.090
+this and start with any visualization and 
+only run it here. 
+
+53
+00:04:28.090 --> 00:04:33.204
+So, there is many options and, depending 
+on the application, which one you can 
+
+54
+00:04:33.204 --> 00:04:36.164
+pick. 
+Now, if you are in a rush and you don't 
+
+55
+00:04:36.164 --> 00:04:41.143
+have computational time to do the 
+de-noising, you don't have to update the 
+
+56
+00:04:41.143 --> 00:04:44.507
+dictionary. 
+Basically, you train it with a database. 
+
+57
+00:04:44.507 --> 00:04:50.024
+Let's say, that you want to do faces, you 
+train it with a database of faces and you 
+
+58
+00:04:50.024 --> 00:04:54.306
+use that dictionary. 
+If you have computational time to do 
+
+59
+00:04:54.306 --> 00:04:59.887
+that, it's always better to basically 
+adapt the dictionary to the particular 
+
+60
+00:04:59.887 --> 00:05:03.253
+image. 
+And we have tons of data for that because 
+
+61
+00:05:03.253 --> 00:05:06.200
+we can use all the patches for doing 
+that. 
+
+62
+00:05:06.200 --> 00:05:12.141
+So, once again, this is our general 
+formulation but now we have D either 
+
+63
+00:05:12.141 --> 00:05:18.836
+because we are starting from scratch for 
+the particular image or because we are 
+
+64
+00:05:18.836 --> 00:05:23.606
+adopting the pre-learned dictionary to 
+the current image. 
+
+65
+00:05:23.606 --> 00:05:29.138
+We have to, this is our data. 
+And we have to, basically reconstruct the 
+
+66
+00:05:29.138 --> 00:05:34.971
+image, we have to compute the code, we 
+have to compute the common dictionary, 
+
+67
+00:05:34.971 --> 00:05:38.705
+one dictionary for all the patches in the 
+image. 
+
+68
+00:05:38.705 --> 00:05:42.516
+We are not allowed to use a dictionary 
+per patch, 
+
+69
+00:05:42.516 --> 00:05:48.115
+that would be basically ridiculous. 
+So, we have three things to optimize for 
+
+70
+00:05:48.115 --> 00:05:53.793
+and the basic idea is very simple. 
+You fix two, you optimize for the third 
+
+71
+00:05:53.793 --> 00:05:55.660
+one. 
+For example, you fix, 
+
+72
+00:05:55.660 --> 00:06:02.363
+you ignore x and basically you assume 
+that x is fixed. 
+
+73
+00:06:02.363 --> 00:06:08.930
+So you ignore this term, and you fix D, 
+and you do sparse coding. 
+
+74
+00:06:08.930 --> 00:06:15.150
+That counts the first part of K-SVD. 
+Then, you fix the code, 
+
+75
+00:06:15.150 --> 00:06:21.440
+and you update the dictionary. 
+And this is basically an iteration that's 
+
+76
+00:06:21.440 --> 00:06:26.071
+basically K-SVD. 
+So, you have the image, you go over the 
+
+77
+00:06:26.071 --> 00:06:29.508
+patches. 
+Every patch becomes the columns of the 
+
+78
+00:06:29.508 --> 00:06:32.948
+large x matrix that we saw in the 
+previous video. 
+
+79
+00:06:32.948 --> 00:06:35.897
+And then you do K-SVD for all of them, 
+okay? 
+
+80
+00:06:35.897 --> 00:06:39.478
+So you are encoding with sparse coding 
+every patch. 
+
+81
+00:06:39.478 --> 00:06:44.744
+When you're finished, you update the 
+dictionary, you encode again, you update 
+
+82
+00:06:44.744 --> 00:06:48.465
+the dictionary. 
+When you are done with the dictionary, 
+
+83
+00:06:48.465 --> 00:06:53.380
+all that's left is to compute x. 
+So, you basically don't touch the code 
+
+84
+00:06:53.380 --> 00:06:56.400
+anymore, don't touch the dictionary 
+anymore. 
+
+85
+00:06:56.400 --> 00:07:03.393
+And you have to basically solve for this 
+problem when basically D and alpha are 
+
+86
+00:07:03.393 --> 00:07:06.627
+already fixed. 
+Of course, this is gone. 
+
+87
+00:07:06.627 --> 00:07:13.620
+x only shows up here and shows up here, 
+and is very easy to show that the result 
+
+88
+00:07:13.620 --> 00:07:17.904
+is basically the weighted average of the 
+patches. 
+
+89
+00:07:17.904 --> 00:07:23.848
+So what happened is that every pixel is 
+touched by multiple patches. 
+
+90
+00:07:23.848 --> 00:07:27.520
+So let me just draw that here, for 
+example. 
+
+91
+00:07:27.520 --> 00:07:31.813
+We have an image, 
+and we have a pixel. 
+
+92
+00:07:31.813 --> 00:07:35.876
+Now, there are multiple patches that 
+touch that pixel. 
+
+93
+00:07:35.876 --> 00:07:41.703
+For example, this one that has the 
+picture kind of the, pixel, kind of the, 
+
+94
+00:07:41.703 --> 00:07:45.460
+on the bottom left corner. 
+There is also this one. 
+
+95
+00:07:45.460 --> 00:07:52.188
+basically there is also let me just use 
+the different color, there is for 
+
+96
+00:07:52.188 --> 00:07:55.427
+example, a patch here. 
+There is how many? 
+
+97
+00:07:55.427 --> 00:08:01.297
+If we have eight by eight, we have 64 
+patches that are touching that pixel, 
+
+98
+00:08:01.297 --> 00:08:05.026
+unless the pixel is at the border of the 
+image. 
+
+99
+00:08:05.026 --> 00:08:10.420
+Let's ignore those for a second. 
+And basically, for everyone of those 
+
+100
+00:08:10.420 --> 00:08:16.766
+patches, we have sparse coding with the 
+dictionary that we have learned from all 
+
+101
+00:08:16.766 --> 00:08:21.605
+the patches in the image. 
+So, that sparse coding, basically for 
+
+102
+00:08:21.605 --> 00:08:29.080
+every single one of these patches is that 
+we can reconstruct it as the alpha with 
+
+103
+00:08:29.080 --> 00:08:38.960
+the optimal alpha that we have compute 
+for every single of the patches ij. 
+
+104
+00:08:38.960 --> 00:08:43.477
+Every single one has been reconstructed. 
+How do we reconstruct the pixel? 
+
+105
+00:08:43.477 --> 00:08:48.119
+We basically average all those patches. 
+You can add weights to the average. 
+
+106
+00:08:48.119 --> 00:08:50.817
+What's basically what the theory tells 
+you. 
+
+107
+00:08:50.817 --> 00:08:55.334
+If it's, the pixel is in the center of 
+the patch, then that patch is more 
+
+108
+00:08:55.334 --> 00:09:00.102
+important than if the pixel is in the 
+corner of the patch, but that's just a 
+
+109
+00:09:00.102 --> 00:09:02.800
+technicality. 
+You can basically just do the 
+
+110
+00:09:02.800 --> 00:09:07.694
+reconstruction of every patch with the 
+sparse code and the dictionary that we 
+
+111
+00:09:07.694 --> 00:09:14.170
+have learned and just average those 64 if 
+you're using an eight by eight block. 
+
+112
+00:09:14.170 --> 00:09:20.174
+So now, this is all what you do. 
+Every patch sparse coding and K-SVD to 
+
+113
+00:09:20.174 --> 00:09:25.046
+learn the dictionary. 
+So, I think we are ready now to see 
+
+114
+00:09:25.046 --> 00:09:29.070
+examples. 
+Let's start from a image in gray values, 
+
+115
+00:09:29.070 --> 00:09:32.958
+no color. 
+This is the source image, and this is a 
+
+116
+00:09:32.958 --> 00:09:37.251
+noisy image. 
+We have add, we have added Gaussian noise 
+
+117
+00:09:37.251 --> 00:09:41.868
+with these variants. 
+Now, we can initialize the dictionary 
+
+118
+00:09:41.868 --> 00:09:47.457
+with random patches from this image. 
+We don't have this image anymore. 
+
+119
+00:09:47.457 --> 00:09:51.669
+This is just for reference. 
+This is all what we have. 
+
+120
+00:09:51.669 --> 00:09:58.104
+We can initialize with patches from here. 
+We can initialize with a dictionary that 
+
+121
+00:09:58.104 --> 00:10:03.043
+we have learned offline, 
+or we can initialize with something that 
+
+122
+00:10:03.043 --> 00:10:07.069
+we know is good, 
+Discrete Cosine Transform Dictionary. 
+
+123
+00:10:07.069 --> 00:10:12.312
+That's the one used in JPEG. 
+So we know it's reasonable a good 
+
+124
+00:10:12.312 --> 00:10:14.819
+algorithm. 
+So a, a good dictionary. 
+
+125
+00:10:14.819 --> 00:10:18.086
+In this case, we have initialized with 
+that. 
+
+126
+00:10:18.086 --> 00:10:24.620
+And basically, we update using all the 
+patches here all the possible patches. 
+
+127
+00:10:24.620 --> 00:10:29.223
+We learn the dictionary, 
+then we encode every part with the 
+
+128
+00:10:29.223 --> 00:10:35.152
+learned dictionary using sparse coding. 
+Then, we average all the patches that 
+
+129
+00:10:35.152 --> 00:10:39.911
+touch a given pixel. 
+And voila, this is the dictionary that we 
+
+130
+00:10:39.911 --> 00:10:44.124
+have learned. 
+Very interesting how it has changed from 
+
+131
+00:10:44.124 --> 00:10:49.351
+the [UNKNOWN] dictionary. 
+And here is the restored image where we 
+
+132
+00:10:49.351 --> 00:10:56.411
+basically have reduced the noise by two 
+things, one projecting every patch to the 
+
+133
+00:10:56.411 --> 00:11:03.118
+space defined by these dictionary using 
+sparse coding, and then averaging the 
+
+134
+00:11:03.118 --> 00:11:05.637
+purges. 
+And here you have a result. 
+
+135
+00:11:05.637 --> 00:11:10.936
+This was the original, this is what's 
+available to us, and this is the de-noise 
+
+136
+00:11:10.936 --> 00:11:14.170
+data. 
+Very important that the adaptation of the 
+
+137
+00:11:14.170 --> 00:11:19.606
+dictionary is down with the noisy data 
+and still the results are really, really 
+
+138
+00:11:19.606 --> 00:11:22.496
+good. 
+And I want you, once again, to observe 
+
+139
+00:11:22.496 --> 00:11:26.556
+the type of dictionary that we have 
+learned from the image. 
+
+140
+00:11:26.556 --> 00:11:32.130
+For example, it has learned that texture 
+that we have here, the different types of 
+
+141
+00:11:32.130 --> 00:11:37.360
+texture, are learned in the dictionary. 
+It was basically adapted to the image. 
+
+142
+00:11:37.360 --> 00:11:42.115
+Now, how do we deal with color? 
+There are numerous ways of dealing with 
+
+143
+00:11:42.115 --> 00:11:47.345
+color, but basically one of the simplest 
+ways is to, instead of doing eight by 
+
+144
+00:11:47.345 --> 00:11:50.334
+eight patches, we do eight by eight by 
+three. 
+
+145
+00:11:50.334 --> 00:11:54.750
+We could have done every color 
+independently, as we have done for 
+
+146
+00:11:54.750 --> 00:11:58.011
+example, for in painting or even for 
+compression. 
+
+147
+00:11:58.011 --> 00:12:02.019
+But we can also take eight by eight by 
+three patches. 
+
+148
+00:12:02.019 --> 00:12:07.521
+You know, we concatinate all the colors 
+and we do K-SVD sparse modeling in 
+
+149
+00:12:07.521 --> 00:12:11.700
+exactly the same fashion. 
+Let's see some results. So, again, we 
+
+150
+00:12:11.700 --> 00:12:16.660
+always show the original just for 
+reference because you never have it. 
+
+151
+00:12:16.660 --> 00:12:20.427
+What you have is this image, 
+this is noisy image. 
+
+152
+00:12:20.427 --> 00:12:25.372
+A noisy version of this. 
+And then, you run K-SVD on this eight by 
+
+153
+00:12:25.372 --> 00:12:31.415
+eight by three or five by five by three, 
+depending on the patch size that you 
+
+154
+00:12:31.415 --> 00:12:35.654
+decide to use, 
+and you get a very nice result of image 
+
+155
+00:12:35.654 --> 00:12:39.264
+denoising. 
+And here are just the, basically, the 
+
+156
+00:12:39.264 --> 00:12:45.386
+standard measurements of, of p, K's and R 
+in DB's to measure just the quality of 
+
+157
+00:12:45.386 --> 00:12:48.121
+the result. 
+Here is another example. 
+
+158
+00:12:48.121 --> 00:12:53.890
+We start from again the reference. 
+This is only for reference, the original 
+
+159
+00:12:53.890 --> 00:12:55.527
+image. 
+We have noises. 
+
+160
+00:12:55.527 --> 00:12:58.490
+Look how bad it is. 
+This is really bad. 
+
+161
+00:12:58.490 --> 00:13:05.039
+We have added a lot of noise and we get a 
+beautiful reconstruction from this sparse 
+
+162
+00:13:05.039 --> 00:13:09.795
+modelling technique. 
+Really, really nice reconstruction with a 
+
+163
+00:13:09.795 --> 00:13:14.332
+lot of details and a relatively high 
+quantitative measurement. 
+
+164
+00:13:14.332 --> 00:13:18.630
+Although, what's most important is the 
+qualitative quality of the 
+
+165
+00:13:18.630 --> 00:13:21.632
+reconstruction. 
+So, we went from here to here. 
+
+166
+00:13:21.632 --> 00:13:27.774
+And once again, we learn the dictionary. 
+In this case, we initialize a dictionary 
+
+167
+00:13:27.774 --> 00:13:33.372
+with an off the shelf pre-learned 
+dictionary, and then we adapt it to this 
+
+168
+00:13:33.372 --> 00:13:37.080
+noisy image for a few iterations of 
+K-SVD. 
+
+169
+00:13:37.080 --> 00:13:41.073
+Now, 
+we can also do inpainting with this. 
+
+170
+00:13:41.073 --> 00:13:46.493
+Inpainting is a particular example of 
+noise where the noise is kind of so 
+
+171
+00:13:46.493 --> 00:13:51.406
+strong that it makes some pixels 
+disappear. And, there's many ways of 
+
+172
+00:13:51.406 --> 00:13:54.875
+defining the types of challenges of 
+inpainting. 
+
+173
+00:13:54.875 --> 00:13:59.851
+One of them is to take the image and to 
+just drop 80% of the pixels. 
+
+174
+00:13:59.851 --> 00:14:05.720
+This is related to compressed sensing, 
+and we're going to talk about that at the 
+
+175
+00:14:05.720 --> 00:14:11.284
+end of this week in just one video. 
+we basically drop 80% of the pixels. 
+
+176
+00:14:11.284 --> 00:14:16.009
+You say, you're gone. 
+So that's basically represented here with 
+
+177
+00:14:16.009 --> 00:14:20.430
+dark values zero. 
+So it's like, the noise is so strong that 
+
+178
+00:14:20.430 --> 00:14:25.816
+you, basically there's nothing there. 
+And then you run basically sparse 
+
+179
+00:14:25.816 --> 00:14:31.835
+modelling and K-SVD starting with this 
+image, this is the missing part. 
+
+180
+00:14:31.835 --> 00:14:36.270
+We start from this image and here is the 
+reconstruction. 
+
+181
+00:14:36.270 --> 00:14:39.619
+Once again, a very, very interesting 
+result. 
+
+182
+00:14:39.619 --> 00:14:45.679
+We only had 20% of the pixels and we 
+managed to do a nice reconstruction. 
+
+183
+00:14:45.679 --> 00:14:51.101
+Again, we go from here to here. 
+This is just for reference, this image. 
+
+184
+00:14:51.101 --> 00:14:56.045
+Let's just see that in color. 
+Again, 80% missing and here is the 
+
+185
+00:14:56.045 --> 00:15:00.111
+reconstruction. 
+Once again, I think a very, very nice 
+
+186
+00:15:00.111 --> 00:15:03.972
+result. 
+Again, for this example, we started with 
+
+187
+00:15:03.972 --> 00:15:09.815
+a dictionary that was learned from a 
+database of natural images, then we adapt 
+
+188
+00:15:09.815 --> 00:15:16.673
+it to this image for a few iterations. 
+And then, we do this by reconstructing 
+
+189
+00:15:16.673 --> 00:15:23.109
+every patch and then averaging for every 
+pixel all the patches that touch it. 
+
+190
+00:15:23.109 --> 00:15:29.940
+Again, I think a very impressive result 
+showing the power of this technique. 
+
+191
+00:15:29.940 --> 00:15:35.854
+This is another example, instead of 
+dropping the pixels, we do the same that 
+
+192
+00:15:35.854 --> 00:15:40.348
+we did when we were talking about 
+inpainting in general. 
+
+193
+00:15:40.348 --> 00:15:45.316
+We write on top of the image, and then we 
+do the reconstruction. 
+
+194
+00:15:45.316 --> 00:15:51.467
+Again, very good results with nothing 
+else than doing sparse modeling, learning 
+
+195
+00:15:51.467 --> 00:15:57.460
+a dictionary from this noise image and 
+being able to reconstruct this image. 
+
+196
+00:15:57.460 --> 00:16:03.275
+Now, we can also do video inpainting. 
+We can drop 80% of the pixels. 
+
+197
+00:16:03.275 --> 00:16:06.575
+And now, again, we have a number of 
+options. 
+
+198
+00:16:06.575 --> 00:16:11.974
+We can do every frame by itself, 
+or we can do patches in kind of three 
+
+199
+00:16:11.974 --> 00:16:13.568
+dimensions, 
+X, Y and T. 
+
+200
+00:16:13.568 --> 00:16:19.337
+We discussed about that when we were 
+talking about video inpainting in the 
+
+201
+00:16:19.337 --> 00:16:23.262
+previous week. 
+Basically, we take patches, let's say, we 
+
+202
+00:16:23.262 --> 00:16:28.986
+take three frames together, five frames 
+together so the patches have also some 
+
+203
+00:16:28.986 --> 00:16:33.095
+temporal information. 
+After we have decided what type of 
+
+204
+00:16:33.095 --> 00:16:38.820
+patches to use, we run sparse modeling 
+with absolutely the same technique that 
+
+205
+00:16:38.820 --> 00:16:43.150
+we have been describing. 
+And I'm going to run a few of them. 
+
+206
+00:16:43.150 --> 00:16:46.480
+The original is as always, only for 
+reference. 
+
+207
+00:16:46.480 --> 00:16:51.588
+It actually is not available. 
+We always go from here to here doing the 
+
+208
+00:16:51.588 --> 00:16:54.919
+dictionary learning. 
+Let me run a few frames. 
+
+209
+00:16:54.919 --> 00:17:00.915
+This is one frame, this is another frame. 
+Look always at the quality of the result, 
+
+210
+00:17:00.915 --> 00:17:03.210
+the reconstruction. 
+Another one. 
+
+211
+00:17:03.210 --> 00:17:07.559
+Another one. 
+So once again, we basically walk through 
+
+212
+00:17:07.559 --> 00:17:11.322
+the different frames going from this to 
+this. 
+
+213
+00:17:11.322 --> 00:17:17.344
+And you can always look at the 
+reconstruction is very, very close to the 
+
+214
+00:17:17.344 --> 00:17:22.530
+original that is not available to us. 
+Just one more frame here. 
+
+215
+00:17:22.530 --> 00:17:32.340
+Now, I want to do an, yet another frame. 
+I want to finish with demosaicing. 
+
+216
+00:17:32.340 --> 00:17:37.420
+This would be the last example. 
+It's kind of a particular case of image 
+
+217
+00:17:37.420 --> 00:17:42.430
+inpainting as we have seen before. 
+Let me explain what's the problem here. 
+
+218
+00:17:42.430 --> 00:17:47.290
+Most digital cameras do not collect full 
+red, green, and blue. 
+
+219
+00:17:47.290 --> 00:17:52.637
+They basically do a trick which is, one 
+pixel, they collect ren, red. 
+
+220
+00:17:52.637 --> 00:17:57.984
+The next, they collect green, the next, 
+red, the next green, and so on. 
+
+221
+00:17:57.984 --> 00:18:03.899
+For the next role, they collect green, 
+blue, green, blue, green, blue, and then 
+
+222
+00:18:03.899 --> 00:18:08.273
+they repeat that. 
+So, at every pixel, they have only one 
+
+223
+00:18:08.273 --> 00:18:11.230
+color. 
+Red, or green, 
+
+224
+00:18:11.230 --> 00:18:14.772
+or blue. 
+And what you have to do is you have to 
+
+225
+00:18:14.772 --> 00:18:18.464
+interpret. 
+In order to show me the image, you have 
+
+226
+00:18:18.464 --> 00:18:22.157
+to, at every pixel, create a red degree 
+and a blue. 
+
+227
+00:18:22.157 --> 00:18:27.056
+This is kind of an interpretation or an 
+inpainting of the colors. 
+
+228
+00:18:27.056 --> 00:18:32.633
+But, we can treat this as nothing esle 
+than inpainting of the colors where 
+
+229
+00:18:32.633 --> 00:18:38.367
+basically we have just, instead of 
+dropping the entire pixel, we drop two of 
+
+230
+00:18:38.367 --> 00:18:43.118
+the colors of the pixel per pixel. 
+Sometimes we draw up the red and the 
+
+231
+00:18:43.118 --> 00:18:45.902
+green. 
+Sometimes we draw up the green and the 
+
+232
+00:18:45.902 --> 00:18:48.501
+blue. 
+Sometimes we draw up the red and the 
+
+233
+00:18:48.501 --> 00:18:51.409
+blue. 
+So imagine that you have a queue which is 
+
+234
+00:18:51.409 --> 00:18:55.988
+n by n by three with sometimes is, you 
+have it available and sometimes you 
+
+235
+00:18:55.988 --> 00:18:59.448
+don't. 
+Now, we have seen that sparse modeling is 
+
+236
+00:18:59.448 --> 00:19:03.818
+extremely successfully even when the 
+entire pixel is gone. 
+
+237
+00:19:03.818 --> 00:19:07.208
+Even when 80% of the complete pixels are 
+gone. 
+
+238
+00:19:07.208 --> 00:19:11.351
+So, let's run it on this. 
+And this is called demosaicing. 
+
+239
+00:19:11.351 --> 00:19:15.871
+It has to be done basically in all 
+consumer digital cameras. 
+
+240
+00:19:15.871 --> 00:19:21.898
+Very expensive digital cameras actually 
+collect the full red, the full green, and 
+
+241
+00:19:21.898 --> 00:19:27.473
+the full blue. But, normal consumer 
+cameras do this type of mosaic and then 
+
+242
+00:19:27.473 --> 00:19:33.190
+the production of the full color image is 
+called demosaicing. And here you see 
+
+243
+00:19:33.190 --> 00:19:39.096
+examples of color images that have been 
+reconstructed from patterns like this 
+
+244
+00:19:39.096 --> 00:19:43.743
+using sparse modeling. 
+It's a particular case of basically 
+
+245
+00:19:43.743 --> 00:19:48.619
+inpainting in the color domain. 
+It's even easier than that, because 
+
+246
+00:19:48.619 --> 00:19:54.485
+instead of dropping entire 80% of the 
+pixels, you just drop some of the colors 
+
+247
+00:19:54.485 --> 00:19:58.828
+per pixel, and the results are really, 
+really nice results. 
+
+248
+00:19:58.828 --> 00:20:04.742
+We have, basically, some zooming, and you 
+can see that the results are very, very 
+
+249
+00:20:04.742 --> 00:20:08.046
+sharp. 
+And these are really some of the best 
+
+250
+00:20:08.046 --> 00:20:13.753
+results produced with, for demosaicing. 
+They're obtained with sparse modeling 
+
+251
+00:20:13.753 --> 00:20:17.182
+techniques. 
+So, these are just some of the examples 
+
+252
+00:20:17.182 --> 00:20:21.051
+of sparse modeling. 
+Sparse modeling in image processing is 
+
+253
+00:20:21.051 --> 00:20:25.989
+being used a lot these days, also for 
+image classification and other image 
+
+254
+00:20:25.989 --> 00:20:31.060
+processing challenges I have shown you 
+for denoising, inpainting, demosaicing. 
+
+255
+00:20:31.060 --> 00:20:36.291
+And I think that this basically 
+illustrates the importance of the theory 
+
+256
+00:20:36.291 --> 00:20:39.301
+that has a lot of mathematical 
+components. 
+
+257
+00:20:39.301 --> 00:20:42.670
+And basically also very, very cool 
+applications. 
+
+258
+00:20:42.670 --> 00:20:47.686
+We have a couple of additional things to 
+learn this week about sparse modeling and 
+
+259
+00:20:47.686 --> 00:20:52.218
+also about compressed sensing, and the 
+connections between the two, and I am 
+
+260
+00:20:52.218 --> 00:20:54.455
+going to do that in the forth coming 
+videos. 
+
+261
+00:20:54.455 --> 00:20:56.933
+Thank you very much, see you later. 

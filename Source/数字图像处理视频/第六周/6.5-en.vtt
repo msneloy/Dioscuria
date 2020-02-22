@@ -1,0 +1,1580 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.114
+Hello, and welcome back. 
+We just finished learning about curve 
+
+2
+00:00:04.114 --> 00:00:07.622
+evolution. 
+There's one thing that is missing that we 
+
+3
+00:00:07.622 --> 00:00:11.332
+need to learn. 
+It's how do we implement curve evolution 
+
+4
+00:00:11.332 --> 00:00:15.177
+in the computer. 
+We saw that curve evolution is important 
+
+5
+00:00:15.177 --> 00:00:20.506
+for example, to regularize curves with 
+curvature motion, but even more important 
+
+6
+00:00:20.506 --> 00:00:24.620
+for active contours. 
+And we need to learn, how do we implement 
+
+7
+00:00:24.620 --> 00:00:29.207
+in that friendly fashion that in a 
+computer we have discrete images. 
+
+8
+00:00:29.207 --> 00:00:33.390
+So, we need to talk about the numerical 
+implementation of that. 
+
+9
+00:00:33.390 --> 00:00:39.149
+one of the areas that has had a 
+tremendous impact in image processing, in 
+
+10
+00:00:39.149 --> 00:00:44.908
+particular, when we talk about PDs in 
+image processing, is level sets methods 
+
+11
+00:00:44.908 --> 00:00:49.909
+and I want to to explain that. 
+And with that, we're going to know how we 
+
+12
+00:00:49.909 --> 00:00:54.683
+implement any type of curve or surface 
+evolution in a computer. 
+
+13
+00:00:54.683 --> 00:00:59.230
+So what is all this theory, all this 
+framework of level sets? 
+
+14
+00:00:59.230 --> 00:01:04.631
+So we have talk about curves and it's 
+going to be the same for surfaces because 
+
+15
+00:01:04.631 --> 00:01:07.886
+it's much easier to present this for 
+curves. 
+
+16
+00:01:07.886 --> 00:01:11.734
+We have talk about curves and curve 
+representations. 
+
+17
+00:01:11.734 --> 00:01:17.357
+And we see that here, we have a curve 
+that is parameterized and remember for 
+
+18
+00:01:17.357 --> 00:01:21.574
+every P, we have basically a different 
+point on the curve. 
+
+19
+00:01:21.574 --> 00:01:25.200
+Now this is not the only way to represent 
+curves. 
+
+20
+00:01:25.200 --> 00:01:31.451
+There's a very different way to represent 
+exactly the same curve that is actually 
+
+21
+00:01:31.451 --> 00:01:35.432
+even more familiar when we are talking 
+about shapes. 
+
+22
+00:01:35.432 --> 00:01:41.174
+And the basic idea is that instead of 
+parameterizing the curve, we're going to 
+
+23
+00:01:41.174 --> 00:01:47.298
+represent the curve by all the points on 
+the plane that hold a certain equation 
+
+24
+00:01:47.298 --> 00:01:50.623
+equal to zero. 
+So let's look at this figure. 
+
+25
+00:01:50.623 --> 00:02:00.125
+We're going to put a coordinate system x 
+and y and then we say every point in the 
+
+26
+00:02:00.125 --> 00:02:05.494
+curve is a point such that phi at that 
+point is equal to zero. 
+
+27
+00:02:05.494 --> 00:02:11.957
+So we have to describe this function phi. 
+And for example we can define the 
+
+28
+00:02:11.957 --> 00:02:18.421
+function to be positive inside and 
+negative outside and one example is to 
+
+29
+00:02:18.421 --> 00:02:25.276
+define this as the distance to the curve 
+for, for of course the distance to the 
+
+30
+00:02:25.276 --> 00:02:31.344
+curve at the curve itself is zero. 
+The distance to the point itself is zero. 
+
+31
+00:02:31.344 --> 00:02:36.118
+So, every point on the curve has zero 
+distance to the curve. 
+
+32
+00:02:36.118 --> 00:02:41.862
+Every point inside has a positive 
+distance, and we define every point 
+
+33
+00:02:41.862 --> 00:02:47.850
+outside to be at negative distance. 
+And that way, we define the function phi. 
+
+34
+00:02:47.850 --> 00:02:53.903
+That the zero set, that's called the zero 
+level set of that function, meaning all 
+
+35
+00:02:53.903 --> 00:02:58.973
+the points in the plain where that 
+function is zero define a curve. 
+
+36
+00:02:58.973 --> 00:03:04.951
+Let's look at a profile of this and we 
+see that here. If I have a function that 
+
+37
+00:03:04.951 --> 00:03:11.004
+is positive inside and negative outside 
+and I cross it with a line, then this is 
+
+38
+00:03:11.004 --> 00:03:14.810
+the profile. 
+We're going from negative tp positive. 
+
+39
+00:03:14.810 --> 00:03:20.157
+So this region is positive. 
+Then we go again outside, so we have 
+
+40
+00:03:20.157 --> 00:03:24.342
+negative again. 
+And we go again inside and we go again 
+
+41
+00:03:24.342 --> 00:03:28.062
+outside. 
+Now which are the points that belong to 
+
+42
+00:03:28.062 --> 00:03:31.240
+the curve. 
+This point, basically, this zero. 
+
+43
+00:03:31.240 --> 00:03:37.747
+This point and this point and this point, 
+every time the profile of five crosses 
+
+44
+00:03:37.747 --> 00:03:41.245
+the zero, that point belongs to the 
+surface. 
+
+45
+00:03:41.245 --> 00:03:47.671
+In that way we are, belongs to a curve 
+sorry or a surface if we are in higher 
+
+46
+00:03:47.671 --> 00:03:51.250
+dimensions. 
+In that case, in that form we are 
+
+47
+00:03:51.250 --> 00:03:57.513
+defining a curve on the plane by all the 
+points that hold this equal to zero. 
+
+48
+00:03:57.513 --> 00:04:03.451
+And these two are just two different 
+representations of exactly the same 
+
+49
+00:04:03.451 --> 00:04:07.393
+curve. 
+This is kind of painting inside the curve 
+
+50
+00:04:07.393 --> 00:04:13.970
+and painting outside the curve in such a 
+way that along the curve that paint is 
+
+51
+00:04:13.970 --> 00:04:15.450
+equal to zero. 
+Now. 
+
+52
+00:04:15.450 --> 00:04:19.890
+With this representation we have compute 
+tangents, normals and curvature. 
+
+53
+00:04:19.890 --> 00:04:24.640
+We need to be able to compute it with 
+this representation, otherwise, we won't 
+
+54
+00:04:24.640 --> 00:04:28.217
+be able to do curve evolution. 
+So let's see how we do that. 
+
+55
+00:04:28.217 --> 00:04:30.746
+And we're going to prove a couple of 
+things. 
+
+56
+00:04:30.746 --> 00:04:34.693
+As we have talked, this week is one of 
+the most theoretical ones. 
+
+57
+00:04:34.693 --> 00:04:37.345
+But we are doing everything 
+self-contained. 
+
+58
+00:04:37.345 --> 00:04:42.094
+So I'm explaining everything inside and I 
+think we are learning a lot of new 
+
+59
+00:04:42.094 --> 00:04:45.934
+concepts. 
+So let us show that basically if we 
+
+60
+00:04:45.934 --> 00:04:52.230
+define the curve as before at the zero 
+level set of the function fee. 
+
+61
+00:04:52.230 --> 00:04:57.473
+The normal is the gradient of phi divided 
+by the magnitude, actually, with a minus. 
+
+62
+00:04:57.473 --> 00:05:01.551
+That's a convention because I want the 
+normal to point inwards. 
+
+63
+00:05:01.551 --> 00:05:05.972
+It's just a convention. 
+And of course the tangent will be this. 
+
+64
+00:05:05.972 --> 00:05:12.378
+It's basically a perpendicular vector. 
+Let's prove that, it's not hard to prove. 
+
+65
+00:05:12.378 --> 00:05:19.367
+So remember, we have the function phi and 
+all the points that belong to the curve 
+
+66
+00:05:19.367 --> 00:05:25.600
+is where phi is equal to zero. 
+So along the curve, phi is not changing. 
+
+67
+00:05:25.600 --> 00:05:29.729
+It's always zero. 
+When I travel the curve, it's always 
+
+68
+00:05:29.729 --> 00:05:32.923
+zero. 
+Then, the derivative of the function 
+
+69
+00:05:32.923 --> 00:05:35.636
+along the curve. 
+Along the arc length. 
+
+70
+00:05:35.636 --> 00:05:39.267
+Because I'm traveling along the curve is 
+equal to zero. 
+
+71
+00:05:39.267 --> 00:05:44.086
+Let's compute that derivative. 
+So I want to take the derivative of this 
+
+72
+00:05:44.086 --> 00:05:47.368
+function. 
+Remember, the function exists all over 
+
+73
+00:05:47.368 --> 00:05:52.745
+the plane, and I'm taking the derivative 
+in the direction of the curve in the, 
+
+74
+00:05:52.745 --> 00:05:56.769
+with the arc length along the curve. 
+Now, we have it here. 
+
+75
+00:05:56.769 --> 00:06:00.013
+This is just the chain rule. 
+Basic calculus. 
+
+76
+00:06:00.013 --> 00:06:03.861
+So if I have to take the derivative 
+according to s. 
+
+77
+00:06:03.861 --> 00:06:09.520
+It's the derivative according to x, 
+x according to s, and the same for the y. 
+
+78
+00:06:09.520 --> 00:06:14.198
+So that's simple calculus. 
+Now, what I wrote here is this inner 
+
+79
+00:06:14.198 --> 00:06:17.367
+product. 
+Remember, the inner product of two 
+
+80
+00:06:17.367 --> 00:06:20.913
+vectors. 
+So I'm going to write it here in case you 
+
+81
+00:06:20.913 --> 00:06:24.718
+don't remember. 
+If I want to multiply two vectors a, b. 
+
+82
+00:06:24.718 --> 00:06:31.272
+I want to do the inner product, let's say 
+with cd is a * c + b Time d. 
+
+83
+00:06:31.272 --> 00:06:37.912
+So this is nothing else, now the inner 
+product of the gradient of phi with the 
+
+84
+00:06:37.912 --> 00:06:41.965
+time chain. 
+Remember, xs, ys is the time chain, is 
+
+85
+00:06:41.965 --> 00:06:47.311
+the unit time chain. 
+We say that a couple of years ago when we 
+
+86
+00:06:47.311 --> 00:06:51.968
+were talking about differential geometry 
+curves of the plane. 
+
+87
+00:06:51.968 --> 00:06:57.315
+And phi x, phi y is just a gradient. So, 
+this is what we have here. 
+
+88
+00:06:57.315 --> 00:07:02.984
+Now this is zero. 
+Okay, we have it here. 
+
+89
+00:07:02.984 --> 00:07:07.698
+Of course this is the zero. 
+So I'm going to go here. 
+
+90
+00:07:07.698 --> 00:07:14.398
+And, of course, I'm allowed to normalize. 
+So here I have proof that the gradient of 
+
+91
+00:07:14.398 --> 00:07:17.736
+the curve is perpendicular to the 
+tangent. 
+
+92
+00:07:17.736 --> 00:07:22.505
+Then I normalize the gradient. 
+So if I have a vector that is 
+
+93
+00:07:22.505 --> 00:07:27.752
+perpendicular to another. 
+Of course, any change in magnitude in the 
+
+94
+00:07:27.752 --> 00:07:32.839
+vector is still perpendicular. 
+In particular I want to basically 
+
+95
+00:07:32.839 --> 00:07:38.005
+normalize it to have unit norm. 
+And then I get this equal to zero. 
+
+96
+00:07:38.005 --> 00:07:43.278
+So if this is perpendicular to the 
+tangent then this is the normal. 
+
+97
+00:07:43.278 --> 00:07:46.483
+So I have a perpendicular, this is the 
+normal. 
+
+98
+00:07:46.483 --> 00:07:52.223
+And now once again, we as a convention 
+put a minus because they, we want if we 
+
+99
+00:07:52.223 --> 00:07:58.112
+have positive and negative we want the 
+gradient to point, to point basically we 
+
+100
+00:07:58.112 --> 00:08:03.107
+want the normal to point inwards. 
+Once again, it's just a convention. 
+
+101
+00:08:03.107 --> 00:08:06.760
+So a very simple proof that basically 
+shows that. 
+
+102
+00:08:06.760 --> 00:08:11.640
+This is the definition of a normal so 
+having phi, I can complete the normal 
+
+103
+00:08:11.640 --> 00:08:16.456
+with absolutely no problem and of course 
+I can complete the tangent just a 
+
+104
+00:08:16.456 --> 00:08:21.118
+perpendicular vector to it. 
+And we have the first, actually we have 
+
+105
+00:08:21.118 --> 00:08:23.446
+two. 
+The normal and the tangent. 
+
+106
+00:08:23.446 --> 00:08:29.079
+Now let us compute the curvature. 
+And again a very simple computation as we 
+
+107
+00:08:29.079 --> 00:08:32.909
+have here. 
+Just maybe two more steps and we get the 
+
+108
+00:08:32.909 --> 00:08:37.409
+curvature. 
+So what we want to show is that the 
+
+109
+00:08:37.409 --> 00:08:45.568
+curvature, I only have phi, remember the 
+curvature is the second derivative 
+
+110
+00:08:45.568 --> 00:08:49.648
+according to s. 
+So the curvature was cssKN. 
+
+111
+00:08:49.648 --> 00:08:51.624
+equal kN. 
+That's a curvature. 
+
+112
+00:08:51.624 --> 00:08:54.773
+This is, I want to compute. 
+I don't have c. 
+
+113
+00:08:54.773 --> 00:08:59.780
+I have phi. 
+I have c, the curve, the final implicitly 
+
+114
+00:08:59.780 --> 00:09:05.595
+by phi as its zero level set. 
+And I want to prove that it's this 
+
+115
+00:09:05.595 --> 00:09:09.390
+formula. 
+In case you don't remember what div is, 
+
+116
+00:09:09.390 --> 00:09:16.669
+div is a divergence. 
+And the divergence of a vector alpha beta 
+
+117
+00:09:16.669 --> 00:09:22.891
+is basically alpha x + beta y. 
+So it's a scalar. 
+
+118
+00:09:22.891 --> 00:09:29.315
+The first term of the vector, you take 
+the derivative according to the first 
+
+119
+00:09:29.315 --> 00:09:33.372
+coordinate X. 
+The second, according to the second 
+
+120
+00:09:33.372 --> 00:09:34.724
+coordinate, 
+okay? 
+
+121
+00:09:34.724 --> 00:09:41.148
+Let us prove this formula right now. 
+So now, we are basically, are still going 
+
+122
+00:09:41.148 --> 00:09:46.219
+along the zero level set so we still have 
+this relationship. 
+
+123
+00:09:46.219 --> 00:09:51.122
+And let us exploit it now. 
+We are going to compute the second 
+
+124
+00:09:51.122 --> 00:09:55.648
+derivative of phi along the curve with 
+arc length. 
+
+125
+00:09:55.648 --> 00:10:01.251
+We just compute the first one in the 
+previous slide when we're computing the 
+
+126
+00:10:01.251 --> 00:10:04.016
+normal. 
+Now I want to compute the second 
+
+127
+00:10:04.016 --> 00:10:07.508
+derivative. 
+So I have the first derivative and I want 
+
+128
+00:10:07.508 --> 00:10:12.456
+to take one more derivative. 
+Now, once again, this was nothing else 
+
+129
+00:10:12.456 --> 00:10:18.350
+than the gradient in our product with T 
+as we saw the previous one and I have to 
+
+130
+00:10:18.350 --> 00:10:23.724
+take a derivative. 
+Remember derivative of a final product is 
+
+131
+00:10:23.724 --> 00:10:31.467
+the derivative of the first times the 
+second plus the first times derivative of 
+
+132
+00:10:31.467 --> 00:10:36.500
+the second. 
+Now what's the derivative of the tangent? 
+
+133
+00:10:36.500 --> 00:10:40.811
+Second derivative is curvature in a 
+normal direction. 
+
+134
+00:10:40.811 --> 00:10:44.553
+So here it is. 
+Curvature in a normal direction. 
+
+135
+00:10:44.553 --> 00:10:51.104
+So once again, derivative of the first 
+one times inner product with the tangent 
+
+136
+00:10:51.104 --> 00:10:57.459
+and then the first one, inner product 
+with the derivative of the second one, 
+
+137
+00:10:57.459 --> 00:11:01.780
+which is T. 
+But we know that the derivative of T is 
+
+138
+00:11:01.780 --> 00:11:08.135
+kN and this basically is equal to zero. 
+So what we have, so this is equal to 
+
+139
+00:11:08.135 --> 00:11:16.060
+zero, so what we have is that this turn 
+is equal to minus distant and basically I 
+
+140
+00:11:16.060 --> 00:11:22.880
+wrote that here so this turn I can take 
+the curvature outside, 
+
+141
+00:11:22.880 --> 00:11:24.688
+okay? 
+That's not a problem. 
+
+142
+00:11:24.688 --> 00:11:28.096
+It's a scalar. 
+I can take it outside of the inner 
+
+143
+00:11:28.096 --> 00:11:30.670
+product. 
+That's the first thing we do. 
+
+144
+00:11:30.670 --> 00:11:35.523
+Oh, I apologize, there is here a typo, 
+this should be a phi. 
+
+145
+00:11:35.523 --> 00:11:40.973
+Basically a kind of a capital phi, but, I 
+apologize for that typo. 
+
+146
+00:11:40.973 --> 00:11:45.997
+We are going to continue. 
+It's just that very easy to see that 
+
+147
+00:11:45.997 --> 00:11:52.469
+going from here I just made a typo. 
+And we basically have the curvature goes 
+
+148
+00:11:52.469 --> 00:11:56.642
+outside, that's here, then we have this, 
+again here. 
+
+149
+00:11:56.642 --> 00:12:02.773
+And the normal we just saw in the 
+previous slide, is gradient divided by 
+
+150
+00:12:02.773 --> 00:12:05.815
+gradient. 
+So we have curvature here. 
+
+151
+00:12:05.815 --> 00:12:12.728
+Now this product is the gradient square 
+because I'm multiplying this by itself. 
+
+152
+00:12:12.728 --> 00:12:19.817
+So it's the gradient square divided by 
+the gradient that cancel each other and I 
+
+153
+00:12:19.817 --> 00:12:23.160
+get only one gradient. 
+So this turn. 
+
+154
+00:12:23.160 --> 00:12:27.387
+Is here, okay? 
+This term I'm not going to write it down 
+
+155
+00:12:27.387 --> 00:12:33.650
+but by now you're an expert because we're 
+just doing derivatives and chain rule. 
+
+156
+00:12:33.650 --> 00:12:39.835
+If you want to take the derivative of the 
+gradient according to S, remember you 
+
+157
+00:12:39.835 --> 00:12:46.176
+have to take the derivative according to 
+X and then XS plus derivative according 
+
+158
+00:12:46.176 --> 00:12:49.621
+to y, ys. 
+So you do chain rule again and then 
+
+159
+00:12:49.621 --> 00:12:54.734
+you're going to get this expression. 
+This expression is basically this 
+
+160
+00:12:54.734 --> 00:12:58.175
+derivative. 
+And then the tangent once again we have 
+
+161
+00:12:58.175 --> 00:13:03.738
+from the previous one. 
+Now we got this equality here if you now 
+
+162
+00:13:03.738 --> 00:13:11.200
+open this with this definition your going 
+to see that is identical to here. 
+
+163
+00:13:11.200 --> 00:13:16.122
+Times this. 
+And then we got basically the formula for 
+
+164
+00:13:16.122 --> 00:13:21.880
+the curvature of a curve that is 
+represented in implicit form. 
+
+165
+00:13:21.880 --> 00:13:26.660
+Now pay attention this is extremely 
+important this is going to be very 
+
+166
+00:13:26.660 --> 00:13:30.902
+important next when I explain the forming 
+curves in level sets. 
+
+167
+00:13:30.902 --> 00:13:34.405
+I don't need to have the curve I don't 
+know c. 
+
+168
+00:13:34.405 --> 00:13:40.095
+C, it's an implicit fashion define. 
+All I need to know is phi and I take 
+
+169
+00:13:40.095 --> 00:13:44.077
+regular derivatives in each direction, in 
+the Y direction. 
+
+170
+00:13:44.077 --> 00:13:48.548
+We know how to do that. 
+So this is the x direction, this is the y 
+
+171
+00:13:48.548 --> 00:13:51.972
+direction. 
+We know, we just take derivatives as we 
+
+172
+00:13:51.972 --> 00:13:54.906
+have been seeing many times in this 
+class. 
+
+173
+00:13:54.906 --> 00:14:00.355
+This pixel minus this pixel or this pixel 
+minus this pixel when we are taking 
+
+174
+00:14:00.355 --> 00:14:05.176
+derivatives in the Y direction. 
+And we do that a number of times, just 
+
+175
+00:14:05.176 --> 00:14:08.530
+following this formula and we get the 
+curvature. 
+
+176
+00:14:08.530 --> 00:14:13.913
+or we got the normal, or we got the 
+tension, so it's much simpler, I don't 
+
+177
+00:14:13.913 --> 00:14:17.359
+have to go and take derivatives along the 
+curve. 
+
+178
+00:14:17.359 --> 00:14:21.379
+I take derivatives in the grid, basically 
+in the image. 
+
+179
+00:14:21.379 --> 00:14:26.261
+Really, really much simpler. 
+So now we know the curvature, we know the 
+
+180
+00:14:26.261 --> 00:14:29.132
+normals. 
+Do we know how to deform curves? 
+
+181
+00:14:29.132 --> 00:14:34.192
+Let's see about that. 
+So the next step is to learn how to 
+
+182
+00:14:34.192 --> 00:14:40.507
+deform a curve. 
+How to deform phi in such a way that the 
+
+183
+00:14:40.507 --> 00:14:44.849
+boundary, basically, is deforming as I 
+wanted. 
+
+184
+00:14:44.849 --> 00:14:51.560
+So, we have a function that is 
+representing a curve in implicit form. 
+
+185
+00:14:51.560 --> 00:14:55.365
+Okay? 
+We know that the curve that is defined in 
+
+186
+00:14:55.365 --> 00:15:00.142
+this way, it's moving with this velocity. 
+And we ask ourself, 
+
+187
+00:15:00.142 --> 00:15:07.833
+how do I have to change phi for the level 
+set of phi to move according to this 
+
+188
+00:15:07.833 --> 00:15:11.638
+velocity? 
+And it turns out that it is this form. 
+
+189
+00:15:11.638 --> 00:15:16.334
+And I'm going to prove to you here in 
+just a couple of lines. 
+
+190
+00:15:16.334 --> 00:15:21.840
+But before we do that, please pay 
+attention to what's happening here. 
+
+191
+00:15:21.840 --> 00:15:25.692
+The phi is once again, it lives on the 
+image. 
+
+192
+00:15:25.692 --> 00:15:30.285
+It lives on the grid. 
+Every time I'm talking about derivatives, 
+
+193
+00:15:30.285 --> 00:15:33.397
+I'm talking about derivatives on the 
+grid. 
+
+194
+00:15:33.397 --> 00:15:39.175
+So the pixels are moving up or down. 
+There's no derivatives on the curve which 
+
+195
+00:15:39.175 --> 00:15:43.472
+are very difficult to implement. 
+This is like when, we know. 
+
+196
+00:15:43.472 --> 00:15:48.732
+We have seen how to compute a gradient. 
+You know, again this minus this. 
+
+197
+00:15:48.732 --> 00:15:53.696
+We have seen those things. 
+So implementing this is much easier than 
+
+198
+00:15:53.696 --> 00:15:58.010
+implementing this. 
+Let us prove this formula. 
+
+199
+00:15:58.010 --> 00:16:03.489
+So, the basic idea is once again very, 
+very simple. 
+
+200
+00:16:03.489 --> 00:16:09.303
+I'm going to take the derivative of phi 
+according to T, 
+
+201
+00:16:09.303 --> 00:16:11.901
+okay? 
+And this is where I'm going, 
+
+202
+00:16:11.901 --> 00:16:16.277
+I'm going to take the derivative 
+according to T of this side, and the 
+
+203
+00:16:16.277 --> 00:16:20.322
+derivative according to T of this side. 
+Now this side is zero. 
+
+204
+00:16:20.322 --> 00:16:23.969
+It's a constant. 
+So the derivative of this side is also 
+
+205
+00:16:23.969 --> 00:16:25.030
+zero. 
+Here it is. 
+
+206
+00:16:25.030 --> 00:16:30.789
+The derivative here, I wrote it here. 
+And now once again chain rule, and this 
+
+207
+00:16:30.789 --> 00:16:35.012
+is what we have. 
+The derivative of this function of x, y, 
+
+208
+00:16:35.012 --> 00:16:38.468
+t according to t is what I have written 
+here. 
+
+209
+00:16:38.468 --> 00:16:44.764
+So I take the derivatives according to x, 
+than xt plus the derivative according to 
+
+210
+00:16:44.764 --> 00:16:49.832
+y, yt plus derivative according to t. 
+These are partial derivatives. 
+
+211
+00:16:49.832 --> 00:16:52.290
+So this is what I have. 
+Okay, now. 
+
+212
+00:16:52.290 --> 00:16:58.466
+This I moved to the other side because I 
+have a zero here and I get minus the 
+
+213
+00:16:58.466 --> 00:17:02.346
+derivative according to t equal to the 
+right hand. 
+
+214
+00:17:02.346 --> 00:17:07.568
+So this part is equal to minus this. 
+This we have seen before, 
+
+215
+00:17:07.568 --> 00:17:11.291
+okay? 
+It's an inner product as we have seen 
+
+216
+00:17:11.291 --> 00:17:15.620
+already at least two times in the 
+previous slides. 
+
+217
+00:17:15.620 --> 00:17:21.767
+So it's the gradient of phi because of 
+this part and this part. 
+
+218
+00:17:21.767 --> 00:17:26.270
+And this xt yt is ct is basically my 
+curve deforming. 
+
+219
+00:17:26.270 --> 00:17:30.623
+So we are here now. 
+We have one more step. 
+
+220
+00:17:30.623 --> 00:17:34.870
+City, I know what it is. 
+VN so I write VN. 
+
+221
+00:17:34.870 --> 00:17:39.967
+It's the motion of my curve exactly what 
+I want. 
+
+222
+00:17:39.967 --> 00:17:47.400
+So, once again the V can come out because 
+it is scalar and I have this. 
+
+223
+00:17:47.400 --> 00:17:52.691
+Now, remember, I want to write everything 
+as a function of phi. 
+
+224
+00:17:52.691 --> 00:17:55.472
+That's the important part, 
+okay? 
+
+225
+00:17:55.472 --> 00:18:01.212
+So, we just saw that the normal is minus 
+the gradient normalized, 
+
+226
+00:18:01.212 --> 00:18:01.930
+okay? 
+So, 
+
+227
+00:18:01.930 --> 00:18:08.407
+here we basically applied that. 
+We replaced minus the normal by the 
+
+228
+00:18:08.407 --> 00:18:11.720
+gradient of phi, normalized, 
+okay? 
+
+229
+00:18:11.720 --> 00:18:19.946
+And this as before is gradient times 
+gradient, that's gradient squared, divide 
+
+230
+00:18:19.946 --> 00:18:27.532
+one gradient, we get one gradient. 
+So this is gradient, this stays, and we 
+
+231
+00:18:27.532 --> 00:18:32.020
+got this and because there's a minus 
+here. 
+
+232
+00:18:32.020 --> 00:18:38.068
+It counts as with the minus here and then 
+we have that this is equal to this, which 
+
+233
+00:18:38.068 --> 00:18:40.400
+is what we wanted to prove. 
+Okay? 
+
+234
+00:18:40.400 --> 00:18:46.011
+So once again, you can look at this, if 
+you want to just you can pause the video 
+
+235
+00:18:46.011 --> 00:18:50.747
+now and look at the proof. 
+There is nothing here but applying the 
+
+236
+00:18:50.747 --> 00:18:55.047
+chain rule, and then writing everything 
+as a function of phi. 
+
+237
+00:18:55.047 --> 00:19:00.148
+That's the important part. 
+we get that when we want to move a curve 
+
+238
+00:19:00.148 --> 00:19:05.940
+according to V in the normal direction. 
+That's obtained by moving feet up and 
+
+239
+00:19:05.940 --> 00:19:09.978
+down, whatever this formula tells us and 
+then we cut. 
+
+240
+00:19:09.978 --> 00:19:15.569
+So you want to go for t equal five, do 
+this for t equal five, find the zero 
+
+241
+00:19:15.569 --> 00:19:18.830
+level set and you got the curve 
+evolution. 
+
+242
+00:19:18.830 --> 00:19:24.809
+So everything now is in implicit form. 
+We have functions defined on the plane 
+
+243
+00:19:24.809 --> 00:19:30.555
+and by moving those functions, we are 
+moving the zero level set and we are 
+
+244
+00:19:30.555 --> 00:19:35.680
+getting curve evolution, for example, 
+we're getting active contours. 
+
+245
+00:19:35.680 --> 00:19:41.321
+Why is this so important? 
+Let me just illustrate a couple of ideas 
+
+246
+00:19:41.321 --> 00:19:46.517
+which I think will help us to illustrate 
+how important this is. 
+
+247
+00:19:46.517 --> 00:19:52.621
+So remember, that sometimes when we 
+deform a curve, the topology can change. 
+
+248
+00:19:52.621 --> 00:19:59.137
+I'm going to ask you, which was the curve 
+motion that produces changes in topology, 
+
+249
+00:19:59.137 --> 00:20:05.406
+that might produce changes in topology? 
+Is it the curvature motion, is it the 
+
+250
+00:20:05.406 --> 00:20:08.787
+fine motion, or is it the constant 
+motion? 
+
+251
+00:20:08.787 --> 00:20:14.002
+We know that and we know that is the 
+normal motion the normal motion can 
+
+252
+00:20:14.002 --> 00:20:17.593
+change topology. 
+Now when the topology of a curve is 
+
+253
+00:20:17.593 --> 00:20:22.978
+changing if you discrotise the curve its 
+very difficult to understand at this 
+
+254
+00:20:22.978 --> 00:20:28.433
+point that was neighbor of this point 
+that was neighbor of this point actually 
+
+255
+00:20:28.433 --> 00:20:32.266
+ended up here. 
+And this one ended up there and now there 
+
+256
+00:20:32.266 --> 00:20:36.567
+not neighbors anymore. 
+They were neighbors once step before, but 
+
+257
+00:20:36.567 --> 00:20:40.048
+because of topological changes they're 
+not anymore. 
+
+258
+00:20:40.048 --> 00:20:44.690
+And numerical analysis is very 
+complicated, when those things happen, 
+
+259
+00:20:44.690 --> 00:20:49.810
+when neighvor things, neighboring things 
+just stop being neighboring things. 
+
+260
+00:20:49.810 --> 00:20:54.383
+It's very, very complicated. 
+Now when we are in this phi function, so 
+
+261
+00:20:54.383 --> 00:20:59.640
+imagine that this gray is the phi, and 
+basically the two planes, the two green. 
+
+262
+00:20:59.640 --> 00:21:05.822
+Light green and dark green are just a 
+different times you are cutting this feed 
+
+263
+00:21:05.822 --> 00:21:09.687
+function. 
+The feed function is moving according to 
+
+264
+00:21:09.687 --> 00:21:13.783
+v gradient v. 
+And all that I have to do is cut and be 
+
+265
+00:21:13.783 --> 00:21:17.106
+surprised if there is a topological 
+change. 
+
+266
+00:21:17.106 --> 00:21:20.430
+I do not have to worry about 
+connectivites. 
+
+267
+00:21:20.430 --> 00:21:26.160
+No worry at all, because I'm working on a 
+grade, as I'm going to show here. 
+
+268
+00:21:26.160 --> 00:21:31.155
+So I don't have to work with particles 
+and discretizer curve. 
+
+269
+00:21:31.155 --> 00:21:38.277
+And remember who is neighboring with whom 
+and how the neighbor, the neighborhood is 
+
+270
+00:21:38.277 --> 00:21:41.880
+changing when there are topological 
+changes. 
+
+271
+00:21:41.880 --> 00:21:48.297
+I don't have to do that. 
+I'm basically working with phi defined on 
+
+272
+00:21:48.297 --> 00:21:53.067
+a grid, as we have it here. 
+This is just another profile. 
+
+273
+00:21:53.067 --> 00:21:56.970
+And phi is changing. 
+Phi t is V. 
+
+274
+00:21:56.970 --> 00:22:03.169
+gradient, 
+gradient phi and that's it. 
+
+275
+00:22:03.169 --> 00:22:07.550
+So we discretize that the same way that 
+we discretized before. 
+
+276
+00:22:07.550 --> 00:22:11.789
+It goes up, it goes down. 
+An example you say, I want to know the 
+
+277
+00:22:11.789 --> 00:22:15.817
+state of the curve evolution right now. 
+You just slice it. 
+
+278
+00:22:15.817 --> 00:22:20.834
+You look at every place where the current 
+phi is equal to zero. 
+
+279
+00:22:20.834 --> 00:22:24.650
+You look at every coordinate or every 
+coordinate here. 
+
+280
+00:22:24.650 --> 00:22:29.051
+If there is topological change or not you 
+have to be aware of that. 
+
+281
+00:22:29.051 --> 00:22:34.438
+And that's the beauty of this and that is 
+how the active counters that we talk at 
+
+282
+00:22:34.438 --> 00:22:39.102
+the end of the previous video is 
+implemented with this where V is that 
+
+283
+00:22:39.102 --> 00:22:44.728
+velocity of active counters so V can be 
+in a simplified fashion G curvature. 
+
+284
+00:22:44.728 --> 00:22:51.226
+Where G was this inverse gradient of the 
+image or some function that makes it 
+
+285
+00:22:51.226 --> 00:22:55.307
+stop. 
+So you want to implement active counters. 
+
+286
+00:22:55.307 --> 00:23:06.838
+All you have to do is phi t equal G 
+curvature times the absolute value of the 
+
+287
+00:23:06.838 --> 00:23:10.264
+gradient. 
+And we know that the curvature, previous 
+
+288
+00:23:10.264 --> 00:23:13.551
+slide, we can also compute as a function 
+of phi. 
+
+289
+00:23:13.551 --> 00:23:18.866
+So everything is a function of this 
+surface that is defined on the grid and 
+
+290
+00:23:18.866 --> 00:23:23.831
+that's the beauty of the level states. It 
+simplifies the whole numerics. 
+
+291
+00:23:23.831 --> 00:23:28.446
+And with it we can implement the 
+curvature motion, constant motion, 
+
+292
+00:23:28.446 --> 00:23:32.572
+constant motion is absolutely trivial. 
+Let me write it here. 
+
+293
+00:23:32.572 --> 00:23:38.764
+Phi t equal gradient phi. 
+So the gradient you might discretize the 
+
+294
+00:23:38.764 --> 00:23:44.113
+same way that we talked before. 
+The pixel on the right minus the pixel on 
+
+295
+00:23:44.113 --> 00:23:47.850
+the center. 
+The pixel on the top minus the pixel on 
+
+296
+00:23:47.850 --> 00:23:52.100
+the center. 
+phi t, you discretize like phi of t + 1 - 
+
+297
+00:23:52.100 --> 00:23:55.158
+phi of t. 
+Any type of time discretization. 
+
+298
+00:23:55.158 --> 00:24:00.928
+We're not discussing a lot of numeric 
+analysis like just relatively standard 
+
+299
+00:24:00.928 --> 00:24:04.451
+numeric analysis that you can use to 
+implement. 
+
+300
+00:24:04.451 --> 00:24:10.446
+Smart numeric analysis but relatively 
+standard instead of having to discretize 
+
+301
+00:24:10.446 --> 00:24:14.066
+a curve. 
+Very, very simple equations for as 
+
+302
+00:24:14.066 --> 00:24:18.895
+complicated as we want curve evolutions, 
+curve motions. 
+
+303
+00:24:18.895 --> 00:24:23.834
+And I prove this only for curves. 
+Happens the same four surfaces and 
+
+304
+00:24:23.834 --> 00:24:27.074
+actually, the formula is exactly the same 
+formula. 
+
+305
+00:24:27.074 --> 00:24:32.430
+But phi is not function in higher 
+dimensions so exactly the same formula. 
+
+306
+00:24:32.430 --> 00:24:35.604
+So, now you have the tools to do active 
+contours. 
+
+307
+00:24:35.604 --> 00:24:40.762
+And we are going to actually see more of 
+active contours later this week in some 
+
+308
+00:24:40.762 --> 00:24:44.928
+of the future videos. 
+But you know curve evolution and you know 
+
+309
+00:24:44.928 --> 00:24:47.639
+how to implement curve evolution, as 
+well. 
+
+310
+00:24:47.639 --> 00:24:53.142
+as I said we are learning a lot of new 
+material and as I say, you can go back 
+
+311
+00:24:53.142 --> 00:24:57.704
+and recheck this video. 
+The proofs are really, really two line 
+
+312
+00:24:57.704 --> 00:25:03.250
+proofs with basic calculus and algebra 
+from very, very relatively simple 
+
+313
+00:25:03.250 --> 00:25:08.405
+calculus and algebra but you don't have 
+to be aware of it. I just explain it to 
+
+314
+00:25:08.405 --> 00:25:11.863
+you during this video and during the 
+previous videos. 
+
+315
+00:25:11.863 --> 00:25:16.235
+So we keep advancing and I'm going to see 
+you again in the next video. 
+
+316
+00:25:16.235 --> 00:25:17.540
+Thank you very much. 

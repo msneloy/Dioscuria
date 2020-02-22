@@ -1,0 +1,300 @@
+We can now describe the main step that 
+introduces error, meaning quantization. And it's also the step that I figured out 
+was to compress a lot. Without quantization, we won't be able to 
+compress too much. We will be able to compress, but not as 
+much as we see in our digital comments. So basically, we have the forward 
+transform, which we have seen. We have these, we have seen earlier, 
+but now we're going to describe the quantization. 
+So let's talk about it. And we have actually already seen 
+quantization when we started talking, the very early weeks of this class, but let's 
+just describe it in detail in the context of JPEG compression. 
+So, remember, we started from an eight by eight image, and we have that on 
+transform. And what I'm going to represent here are 
+the transform coefficients. So just, in the previous video, we saw 
+that we actually have the transform coefficients. 
+And we get them as a double sum, with sum over the X, with sum over the Y, with sum 
+over coordinates of the image. And we're basically summing the image. 
+This is the image, and we have, basically, 
+the cosine basis. So that's how we got to these 
+coefficients that we represent here. We start from an eight by eight, and we 
+get eight by eight coefficients. So we have kind of an image in a 
+different domain, in the cosine domain. So what we have here are different things 
+that we could do to those coefficients. Now we are working with coefficients. 
+So for example, we could say that we are only going to take coefficients and we'll 
+ignore all these other coefficients. We could, that would be very, very 
+simple, sway go to the upper left corner and only use those coefficients, ignore 
+everybody else. And I'm going to write in a second what 
+that means. We could also do these, which says, 
+somehow, I'm going to say which coefficients to take. 
+Those that are shaded, or says 1 are going to be coefficients I'm going to 
+send. Those that say 0 or unshaded coefficients, 
+I'm not going to send or store. Now we can do something else and we can 
+say you know what, I don't want to, include or discard 
+coefficients. I want you to take this coefficient up 
+here and represent it with eight bits. So I'm going to let you to do 
+quantization to 256 levels. On the other hand, this coefficient that 
+shows up here, so that would be the coefficient 07, T-07. 
+I want you to use only one bit. So you're going to only be able to 
+represent two different levels for that coefficient. 
+And we are going to talk about this in a second. 
+Now, what happens when we do quantization? 
+Remember that F is going to be then reconstructed, as we saw in the previous, 
+video, as the sum of T. The transform coefficients. 
+And we can put R because you remember that the forward and inverse were 
+basically the same. So this is how we're going to reconstruct 
+our image. Now if we quantize T we're not going to 
+reconstruct F because we're going to have an approximation of T. 
+And then we're going to reconstruct an approximation of F. 
+And remember what's happening is this. Our F is a linear combination of the 
+coefficients, either the original coefficients, or the 
+quantized coefficients, a linear combination multiplying the bases. 
+And these are the bases. So here I'm just drawing them in a four 
+by four, but we know that we are talking eight by eight. 
+So this top coefficient basically says how much of this basis we are going to be 
+using. And you can say, you know what? 
+Maybe our visual perception is such that if instead of what I wanted to use, which 
+is 7.7 times these bases. Maybe if I do 7.5 it's not such a big 
+deal, and my visual system won't perceive the difference. 
+So that's idea of quantization, to basically round or say, if I put slightly 
+a different number of this component, whatever component TUV represents, it 
+might not be such a big deal in the reconstruction. 
+And we're going to see that. Now, remember why are we doing 
+quantization? We are doing quantization because we are 
+going to do Huffman coding after that. And remember, in Huffman coding, we want 
+a non-uniform distribution. We want some coefficients to appear a 
+lot, so we're going to give a short code, 
+and some coefficients to appear not much, so we can give them a long code. 
+for example, if we quantize a load, we might find out that 7, 8, 9, 10 all 
+become 0. And then we're going to be able to 
+basically compress a lot and we're going to see a bit more examples of that 
+in the next transparencies. Now, this is the basic idea. 
+As I say, we are going to quantize, we are going to change the coefficients that 
+hopefully we are not going to notice that. 
+Now there is something I want to call your attention, 
+something which is very smartly done in JPEG. 
+If we just do quantization, we still have to send an eight by eight matrix of 
+quantized, transformed values, means I have to send 64 numbers. 
+Now I started, let's say, from an image that has eight bits per pixel, 256 gray 
+levels. Then I need to send each one of these, 
+even if I'm going to use only one bit, as it says here. 
+So I started from eight bits, and I can use one, 
+then I can only compress eight to one. I have to basically send you that value. 
+JPEG say something very smart. As we're going to see in a second, the 
+top region is going to use as its representation here, more bits. 
+The quantization is going to be more fine. 
+In the lower corner here, JPEG is going to say, you know what? 
+I'm going to do very, very drastic quantizations. 
+So drastic, that a lot of the TUV, the coefficients would become 0. 
+So JPEG is not going to encode, is not going to store this, then this, then 
+this, to UV. It's going to actually go in a zigzag 
+fashion. It's going to say, okay first, I'm 
+going to just do a convention. The first coefficient you see is this, 
+which is T00. The second coefficient you see is this 
+one, which is T01. The third coefficient you see is this 
+one, which is T10, okay? So you're going to be, basically be 
+encoding the quantized 0, 0. Then you're going to be encoding the 
+quantized 0, 1. Then you're going to be encoding the 
+quantized 1, 0. 
+And then you keep going in this zigzag fashion. 
+Now, why is that important? As I say, a lot of these are going to 
+become 0. Their value is going to be 0, after we do 
+a very strong quantization there. So when JPEG arrives to a certain 
+coefficient, and sees that everybody else that comes after becomes 0, it just puts 
+one signal that says end. And if the nth is here, meaning everybody 
+here is 0, then I save a lot of bits. It's still sending one bit for each, 
+let's say, to say, 0, 0, 0, we're basically saying one end, and that means, 
+to the end of my block, to the end of my eight by eight transform coefficients, 
+everybody became 0. And that's a very smart thing, and that's 
+what allow us to go beyond eight to one and to very, very high compression 
+ratios. And the more you're quantizing this 
+region, the earlier this end symbol will appear. 
+So that's the basic idea of quantization, but let's just see how we do it. 
+So, a very simple form of quantization is what we have here, and that's called 
+uniform quantization, and this is basically what jpeg is doing. 
+And, it's saying, okay you take your coefficients. 
+I want to do uniform quantization in the sense that, let's just pick for example, 
+this interval. It's in, everything that falls in here. 
+Every coefficient that has values between this point and this point I'm going to 
+represent with this. So that's basically very important. 
+So now I'm going to help halfman coding. No matter what you are, you're going to 
+be represented by one number. So I'm basically going to increase the 
+probability of that number appear. Instead of having a lot of numbers appear 
+very few times, I have one number appears a lot of times. 
+And that's very important as we know, for halfman coding, or for any coder that 
+will show up at the last stage of compression. 
+Now everything, for example, in this interval from here to here would be 
+represented by this value. And the way JPEG does that, and many 
+other coders, it's saying, okay, I'm going to give you numbers that you're 
+going to scale by that number. Okay? 
+And then just so, basically, it says that the T00. 
+The T00 is going to be divided by 16. We saw that early on in one of the first 
+videos. This is going to be rounded, 
+and then it's going to be multiplied by 16 again, 
+and that basically became my new T00. Very simple operation, but very 
+efficient. Maybe not ideal, maybe not the best I 
+could do. But JPEG is motivated as not only by 
+doing good quality but also by simplicity. 
+And we have seen what this makes proficiencts do. 
+So as we see here, if T00 basically, every number. 
+Between zero. And. 
+Fifteen will become zero with this operation. 
+If I have seven divided by sixteen, it's a number that when I round down, it 
+becomes zero and multiply by sixteen and it becomes zero, stays zero. 
+So, basically every number here. Became zero. 
+Every number then. Building sixteen. 
+And 31. Became one. 
+So I'm basically quantizing. And I'm helping Huffman to basically have 
+less numbers to send, and also more concentration. 
+And the more we scale by. So for example, if we scale by 100, it 
+means every number between 0 and 99 will become zero. 
+So my quantization decision is much more broad. 
+So not as fine, but hopefully, if I do it correct, I won't notice too much. 
+So that's a basic idea of JPEG quantization. 
+So, it's going to give and I'm going to show, that, basic, the default table in 
+jpeg in a second, is going to do this. And remember what I said in the previous 
+slide because you're going to, quantize, a lot, the high ones. 
+A lot of these, are going to become 0, and then this, end of block signal is 
+going to be very powerful to compress, a lot of symbols, with a, a lot of 
+coefficients, a lot of TUV. A lot of a, a, transform coefficients 
+with just one symbol. Extremely powerful. 
+So let's just give an example. This is done actually with a previous 
+matrix, and the basic idea, and this is how JPEG 
+basically operates. It's going to do the following. 
+It's going to take this matrix, and I'm going to show the matrix for JPEG in a 
+second, as I say. And say okay. 
+Let's just do it. Let's just divide by 16, 11, 12, 12, and 
+so on, ot I can tell you to divide by twice this 
+matrix. So by 32, 22, 24, 24, and so on. So, let's see the affects of that. 
+So here we basically progressively are dividing by the same matrix, but scale up 
+and we see how the quality degrades. Of course we're not going to want to do 
+this. What probably happened here is that we 
+end up multiplying by 32 times Z so we end up basically destroying most of the 
+coefficients. But if we basically don't multiply by too 
+much that matrix so we can scale down, divide by 16, divide by 11. 
+Multiply around, multiply back and get very, very decent quality images. 
+The more we divide, the more we compress. So if we, as we saw in the previous 
+slide, if we're going to divide by two we're only rounding basically. 
+If we're going to divide by 100 we're basically making these blocks of numbers 
+become all equal or if we want to see this in the graph, the larger this is. 
+The more we are quantizing. And this is as promised the default table 
+that I think it's going to use or one of the possibilities for the default table. 
+And the reason why I'm showing it to you is because once again I want to see you I 
+want to show you how increase. They're decreased by and there have been 
+a lot of studies on this but still the condensation is uniform. 
+And once again you can basically do multiplications of that matrix. 
+So this is what you're going to get with one scale of that matrix, and then if you 
+scale it more you're going to get, and I hope you can see the quality, and this is 
+the error, just in case, it's hard for you to see 
+from the image. But, lets just concentrate on certain 
+regions. We see here, it looks very nice. 
+So probably, we haven't scaled the quantization matrix too much. 
+Here, we're actually scale it too much, and it doesn't look very good. 
+Look at this zoom-in region. It really doesn't look very good. 
+Also here, if you zoom in, you can see some problems with the image, but not at 
+this scale. So, basically, what we have is a 
+quantization matrix that says every one of the transformed coefficients, 
+TUV. What do we want to do? 
+Do we want to divide it and round and divide it by five? 
+Or divide it by 100? And the larger the number we divide by, 
+the more error we are producing. But of course the more compression. 
+we are doing. So it's interesting. 
+In some of the software packages that you have out there, 
+when you are saving an image, it asks you for the quality that you want to save 
+your JPEG image with. And what it's asking you is basically how 
+much to multiply this quantization matrix. 
+So the quantization matrix is basically, in that package, is a fixed matrix. 
+So how are you going to basically compress more or less? 
+By scaling up or down that quantization matrix. 
+So when it says you want high quality, it's not, not going to scale by a lot. 
+When it says you want high compression or lower quality, it's going to scale it by 
+a lot. And that's how JPEG works. 
+With a very simple, basically uniform quantization that is 
+done just by scaling and multiplying back. 
+Of course, the multiplication is done at the decoder. 
+So every number between 0 and 100, if you scale down 100, between 0 and 99, sorry. 
+If you scale by 100 it's going to be coded at the zero and then the decoder is 
+going to multiply by 100 to get the number back. 
+So that's what JPEG does for quantization and that's where you get the compression. 
+Now, I want to mention that. There are techniques and there are 
+theories to try to basically adapt the quantization to the signal type. 
+So, jpeg does a uniform quantization because it's very simple. 
+You, we don't have to do a uniform quantization. 
+We can have intervals as shown here, that have basically different width. 
+So some regions will be basically, scale more than other regions. 
+That doesn't happen in JPEG. it's uniform. 
+No matter what value is TUV. You always divide, for a given 
+coefficient position, you always divide by exactly the same number. 
+Now here, depending on what's your input, the value your going to be divided by. 
+And that's very important that JPEG decided not to do that. 
+Once again in part because of simplicity, but I want to include this chapter in 
+quantization by explaining to you that you could actually to do better if you 
+were willing to spend a bit more complexity in your algorithm. 
+And basically there is very nice theory on how to do better and that's called the 
+Max-Lloyd Optimal Quantizer. And the basic idea is relatively simple, 
+although computations are not always straightforward. 
+And what they have shown is basically remember, if you want to measure the 
+error as the square difference between a given pixel and it's representation, 
+and we talk about the square. So that's a way you decide. 
+You say, I want to do the best possible quantizer considering this error. 
+And considering that I have certain allocations of bits. Of course, 
+if you say, I don't care how many bits are used, then don't quantize at all. 
+That would be basically 0 error. But if you come and tell me, I can only 
+use, basically. 256 levels. 
+So I can only use eight bits. So I can only have 256 of these 
+intervals, because I need to represent each interval 
+by one of my strings of bits. And so you predefine the number of levels 
+that you are willing to use, the number of intervals, 
+and you predefine this as your error. So you can show that basically what we 
+have to do, and this is very intuitive. You say, okay, 
+what's the error I am making in every interval? 
+So you are going in every one of these intervals, so I am going to do s sub I 
+minus one over s sub i. That's my integration, and you can show 
+that if this is the error that you care about, 
+then here you have to put s minus, basically it's only S, because I'm going 
+to do an integral, minus T sub I. So that's the error. 
+You get S, you represent it with T. So that's your error. 
+But you have to also multiply it by the probability. 
+Of that value appearing. If it never appears in your input data, 
+then you don't care about it, because you are never going to make an error, and 
+then you integrate over S. So, that's one equation looks how the 
+unknowns which is the borders of our interval that we are trying to find 
+appear here. In the integral part and the 
+representative appears here, at, so this is only one equation, but we can get a 
+second equation, you can actually show that the S I. 
+Are they average? Of the TI. 
+And the TI+1. And that comes, because you are trying to 
+compute the mean square error. And that leads to average. 
+And then from these you're going to get a second equation. 
+So you get basically two equations for every one of these concatenated 
+intervals, and you have to solve them. And that's not always easy. 
+And closed solutions do not exceeds for most of the probability distributions. 
+But they do exist if we assume that the probability distribution is uniform. 
+And that's what basically JPEG is using. It's saying,"Okay, okay, the product 
+distribution is uniform so I'm just going to just do the rounding," as I explained 
+before. But there is good theory represented here 
+basically in this equations that if you knew... 
+The probability distribution, you can actually do better than just uniform 
+quantization. But once again, jpeg decided to do 
+uniform quantization. And that's both for simplicity and also 
+what's called universality. I don't need to know the probability 
+distribution. I'm going to make jpeg work. 
+Very good for basically almost any image. Maybe I could have done it better for 
+some distributions, but I'm going to just make it basically work for any 
+distribution. And I should say to you, that you can 
+modify JPEG, and that it's still part of the standard into this your own 
+quantisation tables. Which might follow a distribution that 
+you know. So if you are compressing a very 
+particular class of images, you can basically tune your JPEG to do that. 
+So with this basically, we have concluded. 
+The basic underlying concepts of Jpeg. We start from a transform, which is DCT. 
+We quantize uniform quantization with Huffman coding. 
+Very, very simple. And you're going to have, as one of your 
+optional programming exercise, to actually build JPEG. 
+It's not going to take you long. If you use, for example, a software lilke 
+MATLAB, you're going to do a DCT, which is a very 
+simple command. You're going to do a quantization. 
+Remember, it's nothing other than divide, round, and, if you're already playing the 
+decoder, multiply back, by the same number. 
+And then you can do a Huffman coding. But, even without the Huffman coding, you 
+will be able to see, when you divide by larger numbers, you basically get more 
+compression, but, less quality. Thank you.

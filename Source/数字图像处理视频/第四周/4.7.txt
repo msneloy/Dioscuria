@@ -1,0 +1,152 @@
+Hello, and welcome back. 
+We're going to be talking now about Wiener Filter. 
+So we have to remember our basic degradation model that we see here. 
+We have again, a filter basically blurring motion blur the focus as we have 
+thought. And we have the noise and we discuss a 
+lot about noise. And then we observe this and we want to 
+reconstruct an image from our observation. 
+And we're going to design a filter here called Wiener Flitering. 
+That basically is going to help us to get a very, very good restoration under 
+certain conditions. The basic idea of Wiener Filtering is 
+that we want to minimize the mean square root between the reconstruction and the 
+original signal. So I'm going to write the mean square 
+over. It's basically the expectation of the 
+square of the error between the original signal and the reconstructed signal. 
+And we have talk a lot about this type of error in the past. 
+We have to square it and here it is so it's the expectation of the square of the 
+error. Now you may wonder but I don't know the 
+original sigma. That's the whole point of doing 
+restoration it's just getting back to something which is like the original 
+signal without knowing it. But we have an expectation here. 
+So don't need to know the original signal. 
+We just need to know some statistical characterization of the original signal. 
+Now it's not hard to show that the filter to put here that will minimize this. 
+We'll get the following form so basically the Fourier. 
+Transform of the reconstruction of the reconstructed signal will be, and I am 
+going to write it down and explain what I am writing. 
+It's the conjugate of the filter, a complex conjugate of the Fourier 
+transform of the filter that we have estimated as we have described in the 
+previous videos, divided by basically the magnitude of this filter that we have 
+estimated. So this is the degradation filter, plus 
+the power spectrum, and don't worry, if you don't know exactly what that means or 
+if you forgot I'm going to remind you in a second. The power spectrum of the 
+noise, divided by the power spectrum, of the signal, and all these multiplying our 
+observation. So, this is the Wiener Filter. 
+It's a filter that is multiplying our observation to obtain the reconstruction 
+and of course, we have to invert this, the inverse Fourier to get the basic, the 
+estimation. So once again, what is this doing? 
+This is minimizing the mean square error. I have to explain to you or remind you, 
+what are these concepts? But before that, 
+if you want to know how do I get from wanting to minimize the mean square error 
+to this expression is actually not hard. You can find a folderization for example 
+in this Wikipedia page. It's truly not hard. 
+You just write almost they say you write the definition of the mean square error, 
+the expectation, and we know that we need to take derivatives when we are trying to 
+minimize the function. I knew very fast I'm going to go to this. 
+So let's just explain again this expression. 
+Here is once again the complex conjugate of your Fourier response of the 
+degradation filter. Here is basically the magnitude square nothing has than that 
+and here as I said this is the power spectrum so, of the noise and the power 
+spectrum of your original signal or the signal class. 
+The power spectrum is basically the magnitude of the fourier transform, of 
+the correlation function. So you have F. 
+F has a correlation function. You take the Fourier transform of that. 
+And you compute the magnitude of that, and that's the power spectrum of the 
+signal, and the same for the noise. You take the noise, you compute a 
+correlation of the noise, you take the fully transformed. 
+You compute the magnitude, that's the power spectrum so you don't need to know 
+the function, you need to know the noise, the exact function or the exact noise. 
+You need to know some statistical characterization of that. 
+So this is the ideal Wiener Filter and of course you need to know this in order to 
+be able to actually implement it. So most of the time there's a very simple 
+trick that is done instead of estimating this. This is basically replaced and I'm 
+just going to use a different color. This, 
+all this expression, which is difficult to estimate unless you know a lot of 
+statistical characterizations of your signal. 
+This is basically replaced by a constant. Pretty surprising, isn't it? 
+A very complicated thing is replaced by a constant. 
+So, I don't use this anymore, I basically go and replace this by a constant. 
+And then, all I have to estimate is one number. 
+Assuming of course that I have already estimated the, degradation. 
+The basic, the operation that produced a degradation like a Gaussian or like, the 
+filter that produces motion blur. So very simple operation. 
+A very simple filter, with only one unknown, that can be estimated in a 
+number of ways. But we are not going to discuss that, 
+now. It's basically similar to the way of that 
+we needed to estimate the variance of the Gaussian or how much motion blur there is 
+in an image. It looks very similar, to the basic to 
+the inverse filter. Remember in the inverse filter, all that 
+we need is we actually took the degraded image, meaning the observation and we 
+divided by basically the Fourier transform of H, 
+basically this H that we see here. And here is slightly different, 
+similar but different. And that slight difference is critical as 
+we're going to see in the next examples. So let's just look at these images. 
+We have seen this image before. This is the original image, and this is 
+basically the result of turbulence on that image. 
+And as we know and we discussed before, this model basically with a Gaussian 
+filter. This is the result of inverse filtering, 
+so we basically take the gaussian filter, we take the fourier transform and we 
+divide this image, basically it's fourier transform, we divide it by the fourier 
+transform of the Gaussian and then we reconstruct. So this is nothing else 
+done, taking this image, taking its Fourier and dividing it, but 
+by the Fourier Transform of a Gaussian. And then inverting the Fourier of the 
+result. And is, I would say, quite a bad result 
+and we know why. We're dividing, although the Gaussian 
+memory goes to zero, it gets very small values. 
+And that basically is enhancing a lot, and is making our reconstruction very, 
+very nonstable. On the other hand, this is the result of 
+the Wiener filtering. I think its outstanding result so its 
+basically what we just saw in the previous slide we basically the filter is 
+to have been one over the Gaussian as here, the filter basically is the 
+conjugate over H^2 plus the constant. That's the filter that we apply to this 
+image. We don't apply 1 over the Gaussian, or 1 
+/ H. We apply this filter and we get that 
+significantly better result. And the result here is illustrated with 
+basically almost trial and error. We basically try the best possible K 
+knowing the original, it's just for better logical reasons basically to show 
+you how great we can get the result with Wiener filtering if we estimate this 
+constant. So to show you that this is not, just not 
+all one example that it can degrade, let's just show a second example of an 
+image that we have seen before. Here we have an image. 
+It's based in the book, it's the cover of the book that we have been using but just 
+in black and white. It has motion. 
+We have seen that already, so it has motion blur. 
+And then we add to it noise. And then we apply, 
+we know exactly a motion blur so we computed exactly the filter and we apply 
+inverse filter and this is what we get. So once again going from here to here is 
+the result of taking this image and filtering with an inverse filter, 1 / H. 
+And I'm not including the problems that might happen because I need to estimate 
+age, I'm actually putting the exact age that I used to create this image and the 
+result is close to a disaster basically for the same reasons. 
+As we saw in the previous example. This is the result of Wiener filtering, 
+okay? Once again, 
+this is what we are applying here and again we use the best constant that we 
+could use against for Pedagogic reasons to just rate the power of the inner 
+filtering. Now, 
+you probably see here the blur and you might see also the noise. 
+Here we actually take one order of magnitude less noise. 
+Same blur same motion blur and again we apply the inverse filter and we apply the 
+Weiner. And again this is really, really bad. 
+Basically what we are recovering here is the motion. 
+We are not able to recover anything else but Weiner filtering is doing outstanding 
+job. If we reduce the noise even further, 
+actually five orders of magnitude. I don't think you can see any noise. 
+If you compare this to this, basically there is, the noise is so small, that 
+basically the dominant degradation here is the motion blur. 
+This is the inverse filter. Now, it's much better, but it's still not 
+great. Again, this is nothing else than an 
+inverse filter. but applied, to the, to the blur and 
+noisy image. And this is the result of Wiener filter. 
+So this column is always inverse. This column is always Wiener filtering. 
+And just different levels of noise here. I think we've got the perfect result. 
+Why it's perfect because as I say in this exampl, in this kind of artificial 
+Pedagogic example we didn't have to estimate H, we know exactly H and also we 
+estimated the best possible K. But this illustrates how this filter is 
+extremely powerful once we estimate the degradation filter or the motion blur in 
+this case, and the constant. And still, filter inverse filter. 
+Sorry, here even if we know exactly H, it just 
+doesn't do a good job. So I hope I convinced you that Wiener 
+filtering is a very simple operation, and it can be extremely, extremely powerful. 
+So by this we conclude Wiener filtering and in the next video we are going to 
+just basically conclude the unit on restoration. 
+Thank you very much.

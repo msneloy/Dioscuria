@@ -1,0 +1,1050 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.957
+We're going to use a very simple diagram 
+to demonstrate and to present the model. 
+
+2
+00:00:07.957 --> 00:00:15.424
+Again we are on the search for a model 
+for a signal X that has N dimensions. 
+
+3
+00:00:15.424 --> 00:00:20.140
+What is N? 
+For example if we consider 8x8 blocks. 
+
+4
+00:00:20.140 --> 00:00:25.166
+As in jpeg we have that N is equal to 64 
+why 64? 
+
+5
+00:00:25.166 --> 00:00:33.648
+We take an 8x8 block or image patch and 
+we take one row after another. 
+
+6
+00:00:33.648 --> 00:00:41.921
+We concatenate them and we get N = 64. 
+This is the signal we are looking to 
+
+7
+00:00:41.921 --> 00:00:43.930
+model. 
+Now. 
+
+8
+00:00:43.930 --> 00:00:49.679
+The next step and actually one of the 
+main components of Sparse Modelling is 
+
+9
+00:00:49.679 --> 00:00:54.838
+the Dictionary. 
+The Dictionary is a matrix which is N by 
+
+10
+00:00:54.838 --> 00:00:58.974
+K. 
+N is the dimension of the signal we are 
+
+11
+00:00:58.974 --> 00:01:03.800
+looking to model. 
+K is the size of the dictionary. 
+
+12
+00:01:03.800 --> 00:01:08.626
+We have K columns. 
+Every column is called an atom. 
+
+13
+00:01:08.626 --> 00:01:16.210
+It's kind of an image, kind of a patch. 
+Because every column is 64-dimensional. 
+
+14
+00:01:16.210 --> 00:01:21.090
+And we have K such columns. 
+Very often, k. 
+
+15
+00:01:21.090 --> 00:01:25.505
+Is larger than n. 
+That's not necessary, but happens very 
+
+16
+00:01:25.505 --> 00:01:28.636
+often. 
+For example, when we are going to do 
+
+17
+00:01:28.636 --> 00:01:32.409
+image renouncing as we are using as an 
+example. 
+
+18
+00:01:32.409 --> 00:01:38.110
+If case larger than n, then we say that 
+the dictionary is over complete. 
+
+19
+00:01:38.110 --> 00:01:43.019
+Now, if K is equal to N, then the 
+dictionary's complete. 
+
+20
+00:01:43.019 --> 00:01:49.839
+For example, Fourier or discrete cosine 
+transform are complete dictionaries. 
+
+21
+00:01:49.839 --> 00:01:55.567
+If K is less than N, we say that a 
+dictionary is under-complete. 
+
+22
+00:01:55.567 --> 00:02:01.750
+Now we have the dictionary. 
+The second element of sparse modeling is. 
+
+23
+00:02:01.750 --> 00:02:07.896
+This vector alpha. 
+And what we have is a vector, alpha, that 
+
+24
+00:02:07.896 --> 00:02:13.962
+has to have dimensions, K, and we 
+multiply the matrix, D, the dictionary, 
+
+25
+00:02:13.962 --> 00:02:20.380
+by the vector, alpha, and we produce the 
+signal that we're trying to model. 
+
+26
+00:02:20.380 --> 00:02:27.896
+What's particular of this vector alpha, 
+is the number of non zero entries of the 
+
+27
+00:02:27.896 --> 00:02:33.158
+vector is very small. 
+We represent those by this red dot. 
+
+28
+00:02:33.158 --> 00:02:39.923
+We have, at most, L non zero entries. 
+And when we multiply this matrix, the 
+
+29
+00:02:39.923 --> 00:02:45.561
+Dictionary D by alpha. 
+What we are doing is having a linear 
+
+30
+00:02:45.561 --> 00:02:50.933
+combination of the atoms. 
+Corresponding to the non-zero entries. 
+
+31
+00:02:50.933 --> 00:02:54.355
+So, we are combining, this is the second 
+one. 
+
+32
+00:02:54.355 --> 00:03:00.482
+It means it's picking the second atom. 
+This is picking its corresponding atom. 
+
+33
+00:03:00.482 --> 00:03:03.904
+And this is picking its corresponding 
+atom. 
+
+34
+00:03:03.904 --> 00:03:09.713
+And we basically have a linear 
+combination according to the coefficients 
+
+35
+00:03:09.713 --> 00:03:14.806
+here of those L atoms. 
+And because these are only a few non-zero 
+
+36
+00:03:14.806 --> 00:03:20.853
+coefficients, this vector is very sparse. 
+And from that, the concept of sparse 
+
+37
+00:03:20.853 --> 00:03:24.900
+modeling. 
+So what we have is basically. 
+
+38
+00:03:24.900 --> 00:03:30.028
+A signal. 
+Represented as a product of the 
+
+39
+00:03:30.028 --> 00:03:36.838
+dictionary, and a vector alpha. 
+With only a few non zero entries. 
+
+40
+00:03:36.838 --> 00:03:43.000
+A very sparse vector. 
+Now, this model is, first of all, very, 
+
+41
+00:03:43.000 --> 00:03:47.540
+very simple. 
+Once we have the dictionary, d. 
+
+42
+00:03:47.540 --> 00:03:52.719
+And alpha will obtain the signal just by 
+a simple product. 
+
+43
+00:03:52.719 --> 00:03:59.775
+This dictionary, we're going to discuss a 
+lot about it in this video, in the future 
+
+44
+00:03:59.775 --> 00:04:03.883
+videos. 
+But for now, it's a fixed dictionary of 
+
+45
+00:04:03.883 --> 00:04:08.884
+dimensions N by K, as we have seen in the 
+previous slide. 
+
+46
+00:04:08.884 --> 00:04:14.154
+Now, the model is extremely rich. 
+Let's just do some numbers. 
+
+47
+00:04:14.154 --> 00:04:19.870
+If we have a dictionary of size K, 
+meaning K atoms, and we pick L. 
+
+48
+00:04:19.870 --> 00:04:30.759
+We have L choose out of K possibilities. 
+So if L is three we can pick any three 
+
+49
+00:04:30.759 --> 00:04:35.024
+out of K. 
+Once we pick them, each one of those 
+
+50
+00:04:35.024 --> 00:04:40.150
+selections define a subspace, a very low 
+dimensional subspace. 
+
+51
+00:04:40.150 --> 00:04:46.787
+Once we pick, we do that selection, the 
+signal, it's just a linear combination of 
+
+52
+00:04:46.787 --> 00:04:51.240
+the corresponding atoms and that's a 
+linear subspace. 
+
+53
+00:04:51.240 --> 00:04:56.114
+But we have many of them. 
+We have L out of K, a lot of them. 
+
+54
+00:04:56.114 --> 00:05:02.499
+So the model is extremely, extremely rich 
+and, hopefully, that will help us to 
+
+55
+00:05:02.499 --> 00:05:06.188
+represent. 
+Basically any signal of interest. 
+
+56
+00:05:06.188 --> 00:05:10.160
+So, the model is simple, the model is 
+very rich. 
+
+57
+00:05:10.160 --> 00:05:14.036
+And also, the model is actually familiar 
+to us. 
+
+58
+00:05:14.036 --> 00:05:20.861
+This is not the first time that we see 
+such a model of taking basically a signal 
+
+59
+00:05:20.861 --> 00:05:26.928
+and representing it as a linear 
+combination of a dictionary with only a 
+
+60
+00:05:26.928 --> 00:05:32.573
+few atoms of that dictionary. 
+Let's think for a minute, or for a few 
+
+61
+00:05:32.573 --> 00:05:36.365
+seconds, when have we seen already this 
+model? 
+
+62
+00:05:36.365 --> 00:05:40.157
+We. 
+Remember what we have learned in the last 
+
+63
+00:05:40.157 --> 00:05:43.930
+few weeks. 
+We have seen this model. 
+
+64
+00:05:43.930 --> 00:05:50.750
+In JPEG. 
+When, or how, in JPEG D. 
+
+65
+00:05:50.750 --> 00:05:57.510
+Is basically the cosine basis. 
+In JPEG we took and eight*8 block. 
+
+66
+00:05:57.510 --> 00:06:01.170
+We did a transform into the cosine 
+domain. 
+
+67
+00:06:01.170 --> 00:06:07.009
+So d is the cosine basis. 
+And alpha is basically the coefficient of 
+
+68
+00:06:07.009 --> 00:06:11.976
+the cosine transform. 
+And we saw that, for example, when we 
+
+69
+00:06:11.976 --> 00:06:15.549
+quantize. 
+A lot of the, these great cosine 
+
+70
+00:06:15.549 --> 00:06:22.214
+transform coefficients became zero. 
+So basically alpha was 64-dimensional. 
+
+71
+00:06:22.214 --> 00:06:28.016
+But a lot of it was zero. 
+So it was a very, very sparse vector. 
+
+72
+00:06:28.016 --> 00:06:34.769
+And it achieved an extremely good 
+representation of the eight by eight 
+
+73
+00:06:34.769 --> 00:06:39.238
+patch. 
+With just a few provisions, so JPEG is a 
+
+74
+00:06:39.238 --> 00:06:46.258
+great example of the power of sparsity. 
+Let me just give you another extreme 
+
+75
+00:06:46.258 --> 00:06:51.913
+example of how we can represent signals 
+in a very sparse fashion. 
+
+76
+00:06:51.913 --> 00:06:56.523
+Consider that D includes all the signals 
+of interest. 
+
+77
+00:06:56.523 --> 00:07:03.222
+So if you're talking about images, this 
+has huge matrix, K basically goes over 
+
+78
+00:07:03.222 --> 00:07:08.795
+all the possible images. 
+If that happens, then every time you want 
+
+79
+00:07:08.795 --> 00:07:14.915
+to represent a signal x, an image. 
+You only go and pick the corresponding 
+
+80
+00:07:14.915 --> 00:07:17.890
+atom. 
+The corresponding column in d. 
+
+81
+00:07:17.890 --> 00:07:23.892
+And that means that our sparsity is one. 
+So this extreme example is only to 
+
+82
+00:07:23.892 --> 00:07:28.353
+illustrate that we can do sparse 
+representations of signals. 
+
+83
+00:07:28.353 --> 00:07:33.855
+Of course, it's not very practical; 
+because imagine that you cannot put all 
+
+84
+00:07:33.855 --> 00:07:37.424
+the patches or all the images in one 
+dictionary. 
+
+85
+00:07:37.424 --> 00:07:40.919
+That would be huge, and it won't be very 
+useful. 
+
+86
+00:07:40.919 --> 00:07:46.941
+The JPEG is, as we say, probably the most 
+successful image processing algorithm, 
+
+87
+00:07:46.941 --> 00:07:52.415
+and it's based on Sparse Representations. 
+So, that's what we want. 
+
+88
+00:07:52.415 --> 00:07:57.120
+We want to Sparse Representation of 
+sigmas. 
+
+89
+00:07:57.120 --> 00:08:04.505
+And the basic idea once again is that the 
+signal is a linear combination of a few 
+
+90
+00:08:04.505 --> 00:08:10.719
+atoms because alpha is sparse. 
+How do we measure Sparsity, is the next 
+
+91
+00:08:10.719 --> 00:08:14.892
+question? 
+The way we are going to measure Sparsity 
+
+92
+00:08:14.892 --> 00:08:18.861
+is with. 
+This, which is called the LP norm for a 
+
+93
+00:08:18.861 --> 00:08:22.874
+given P. 
+Remember, alpha is nothing else than a K 
+
+94
+00:08:22.874 --> 00:08:30.232
+dimensional vector. And what we are doing 
+here with this formula is that we take 
+
+95
+00:08:30.232 --> 00:08:36.587
+every entry of alpha, and we take the 
+absolute value, and we elevate to the P 
+
+96
+00:08:36.587 --> 00:08:42.106
+power, and we add all of them. 
+And that's the LP norm of the vector. 
+
+97
+00:08:42.106 --> 00:08:46.500
+Let's illustrate this for different 
+values of P. 
+
+98
+00:08:46.500 --> 00:08:55.140
+If p is equal to two, we don't really get 
+what we want, because what we want is to 
+
+99
+00:08:55.140 --> 00:08:58.970
+penalize. 
+With an equal amount, every time one of 
+
+100
+00:08:58.970 --> 00:09:04.122
+the entries of alpha is non-zero. 
+And when it's zero, don't penalize at 
+
+101
+00:09:04.122 --> 00:09:05.593
+all. 
+So, that happens. 
+
+102
+00:09:05.593 --> 00:09:09.788
+Zero, no penalization. 
+But then the penalization increases 
+
+103
+00:09:09.788 --> 00:09:13.910
+quadratically with actually demanding to 
+lose the entry. 
+
+104
+00:09:13.910 --> 00:09:18.105
+We don't want that. 
+We want kind of an equal penalization. 
+
+105
+00:09:18.105 --> 00:09:21.270
+As long as it's non-zero, it gets 
+penalized. 
+
+106
+00:09:21.270 --> 00:09:27.969
+What happen when P is equal to one. 
+At least the penalization now is 
+
+107
+00:09:27.969 --> 00:09:32.020
+proportional. 
+Directly proportional and linearly 
+
+108
+00:09:32.020 --> 00:09:37.877
+proportional to the magnitude of the 
+entry, is not quadratic, that's better, 
+
+109
+00:09:37.877 --> 00:09:43.493
+but doesn't look like it is good. 
+We are going to see, later on that this 
+
+110
+00:09:43.493 --> 00:09:47.914
+is actually a very good penalty function. 
+This L1. 
+
+111
+00:09:47.914 --> 00:09:53.002
+L for P = 1 It doesn't look like. 
+But we are going to see that, under 
+
+112
+00:09:53.002 --> 00:09:57.924
+certain conditions, this is exactly what 
+we are looking for. 
+
+113
+00:09:57.924 --> 00:10:03.430
+But before we get into that, let's keep 
+looking for the ideal case. 
+
+114
+00:10:03.430 --> 00:10:09.520
+If now, P becomes less than one, then we 
+start to have what we really want. 
+
+115
+00:10:09.520 --> 00:10:13.240
+A penalty of zero if the coefficient is 
+zero. 
+
+116
+00:10:13.240 --> 00:10:17.200
+And then the penalty starts to flatten 
+out, meaning. 
+
+117
+00:10:17.200 --> 00:10:21.680
+As long as the coefficient is non-zero, 
+we get the same penalty. 
+
+118
+00:10:21.680 --> 00:10:29.619
+If we further decrease p less than one, 
+I'm getting close to zero, we get exactly 
+
+119
+00:10:29.619 --> 00:10:34.142
+what we want. 
+Zero penalty and equal penalty for 
+
+120
+00:10:34.142 --> 00:10:39.867
+everybody that is non-zero. 
+So the way we are going to measure 
+
+121
+00:10:39.867 --> 00:10:44.944
+sparsity is with this function. 
+For P equal zero. 
+
+122
+00:10:44.944 --> 00:10:51.277
+And that's often written. 
+As in this fashion with a zero here, and 
+
+123
+00:10:51.277 --> 00:10:55.200
+a zero there. 
+This is what's called a L0 pseudonorm. 
+
+124
+00:10:55.200 --> 00:11:01.277
+It's not really a norm, and that's why 
+it's called the pseudonorm, although very 
+
+125
+00:11:01.277 --> 00:11:07.354
+often, it's called also the norm, with 
+the understanding that it's not exactly a 
+
+126
+00:11:07.354 --> 00:11:11.508
+norm, and this is how we are going to 
+measure sparcity. 
+
+127
+00:11:11.508 --> 00:11:17.124
+We are going to count the number of 
+non-zero elements in the vector alpha. 
+
+128
+00:11:17.124 --> 00:11:20.740
+[SOUND] So this is what we basically have 
+here. 
+
+129
+00:11:20.740 --> 00:11:27.373
+Signal represented as a linear 
+combination of atoms from this, that 
+
+130
+00:11:27.373 --> 00:11:32.620
+we're not allowed to pick more than l of 
+those atoms. 
+
+131
+00:11:32.620 --> 00:11:36.390
+So back to our problem of image 
+denoising. 
+
+132
+00:11:36.390 --> 00:11:41.212
+The Maximum-A-posteriori estimation of 
+image denoising. 
+
+133
+00:11:41.212 --> 00:11:46.620
+What we have, is that we want to 
+represent our signal. 
+
+134
+00:11:46.620 --> 00:11:51.674
+Very closely, this is the measurement and 
+this is what we want to be. 
+
+135
+00:11:51.674 --> 00:11:55.964
+We want to have a close representation, 
+meaning very close. 
+
+136
+00:11:55.964 --> 00:12:02.167
+X have to be as close as possible to Y as 
+long as it belonged to the right model 
+
+137
+00:12:02.167 --> 00:12:07.682
+and then we replace X by the alpha. 
+Because we know that now we're going to 
+
+138
+00:12:07.682 --> 00:12:14.011
+be representing the signal as. 
+The dictionary multiplied by alpha that 
+
+139
+00:12:14.011 --> 00:12:21.972
+not every alpha we basically must have 
+the no more than L entries in alpha are 
+
+140
+00:12:21.972 --> 00:12:24.440
+non zero. 
+To give a. 
+
+141
+00:12:24.440 --> 00:12:29.850
+Illustrative representation, and of 
+course we get back. 
+
+142
+00:12:29.850 --> 00:12:35.537
+The signal by the alpha, where alpha is 
+the optimal. 
+
+143
+00:12:35.537 --> 00:12:43.791
+So, in a, in a very simple pictorial 
+representation, what we have is D alpha, 
+
+144
+00:12:43.791 --> 00:12:50.787
+this is D, has dimensions N by K. 
+This is alpha, that has dimensions K. 
+
+145
+00:12:50.787 --> 00:12:55.548
+We'll subtract Y. 
+That's aware approximation error. 
+
+146
+00:12:55.548 --> 00:13:03.452
+But we are not allowed to pick any alpha. 
+We're only allowed to pick alpha that has 
+
+147
+00:13:03.452 --> 00:13:10.593
+at most L non-zeros, which means that we 
+are going to be approximating Y by, at 
+
+148
+00:13:10.593 --> 00:13:14.880
+most. 
+L columns, the linear combination of at 
+
+149
+00:13:14.880 --> 00:13:20.548
+most L columns of D. 
+And from now on, the representation is 
+
+150
+00:13:20.548 --> 00:13:26.020
+given by alpha. 
+Instead of X we use alpha and we know if 
+
+151
+00:13:26.020 --> 00:13:31.590
+we want to recover the signal we 
+basically multiply by D. 
+
+152
+00:13:31.590 --> 00:13:38.430
+Now what we have obtained is a very low 
+dimensional representation of. 
+
+153
+00:13:38.430 --> 00:13:42.574
+Our signal, and a low dimensional 
+approximation of y. 
+
+154
+00:13:42.574 --> 00:13:46.798
+And the idea is that, if we reduce the 
+dimension of y. 
+
+155
+00:13:46.798 --> 00:13:50.145
+Basically, we are getting rid of the 
+noise. 
+
+156
+00:13:50.145 --> 00:13:54.290
+Because we are not allowing to use all of 
+the items. 
+
+157
+00:13:54.290 --> 00:13:59.789
+We're only allowing to use very few, 
+projecting the signal into a low 
+
+158
+00:13:59.789 --> 00:14:03.216
+dimension. 
+And therefore, reducing the noise. 
+
+159
+00:14:03.216 --> 00:14:07.880
+It's the same as we saw with the points. 
+We have points. 
+
+160
+00:14:07.880 --> 00:14:13.809
+On the plane. 
+That if we say that we are only allowed 
+
+161
+00:14:13.809 --> 00:14:18.310
+to represent all these points with a 
+straight line. 
+
+162
+00:14:18.310 --> 00:14:24.221
+With feet of straight line and we're 
+basically projecting the points onto the 
+
+163
+00:14:24.221 --> 00:14:29.905
+straight line and by that we are 
+denoising the points because we go into a 
+
+164
+00:14:29.905 --> 00:14:34.528
+much lower dimension. 
+In this case we just go from two to one, 
+
+165
+00:14:34.528 --> 00:14:40.591
+but that illustrates the concept that 
+we're going to a lower dimension of space 
+
+166
+00:14:40.591 --> 00:14:46.556
+and by that we get rid of the noise. 
+In order to represent the noise we will 
+
+167
+00:14:46.556 --> 00:14:53.030
+need many additional atoms and that's why 
+we are restricting alpha to be sparse. 
+
+168
+00:14:53.030 --> 00:14:54.230
+Now. 
+Are we done? 
+
+169
+00:14:54.230 --> 00:14:57.756
+We are only at the very beginning of this 
+week. 
+
+170
+00:14:57.756 --> 00:15:02.859
+So for sure we are not done. 
+Let me illustrate a few of the problems 
+
+171
+00:15:02.859 --> 00:15:06.800
+that we need to still solve. 
+Now. 
+
+172
+00:15:06.800 --> 00:15:13.707
+We were talking about this, minimize the 
+error under the constraint that you are 
+
+173
+00:15:13.707 --> 00:15:18.716
+not allowed to pick more than L non zero 
+entries in alpha. 
+
+174
+00:15:18.716 --> 00:15:24.846
+Is this the problem we need to solve? 
+Maybe we can solve it in this way. 
+
+175
+00:15:24.846 --> 00:15:31.150
+Let us constrain here the error. 
+You don't want more than the given error 
+
+176
+00:15:31.150 --> 00:15:36.590
+and find the sparse's possible vector 
+that achieves this error. 
+
+177
+00:15:36.590 --> 00:15:43.249
+Or we can actually have a combination of 
+the sparsity and error and try to 
+
+178
+00:15:43.249 --> 00:15:49.820
+optimize for alpha such that it minimizes 
+the sum of the two terms with a 
+
+179
+00:15:49.820 --> 00:15:54.703
+coefficient lambda. 
+So, we have three possibilities here. 
+
+180
+00:15:54.703 --> 00:15:59.853
+Sometimes the three are equivalent. 
+Sometimes they are not. 
+
+181
+00:15:59.853 --> 00:16:04.484
+Which one shall we be using? 
+Another problem. 
+
+182
+00:16:04.484 --> 00:16:10.182
+In this case, a theoretical problem. 
+Will we always find an alpha? 
+
+183
+00:16:10.182 --> 00:16:13.921
+So, I give you a y. 
+I give you a dictionary. 
+
+184
+00:16:13.921 --> 00:16:20.153
+Will I be able to find, for example, an 
+alpha that is sparse enough, and 
+
+185
+00:16:20.153 --> 00:16:23.981
+represents this signal up to certain 
+error. 
+
+186
+00:16:23.981 --> 00:16:28.789
+Is that possible? 
+And if I find it, will that be unique? 
+
+187
+00:16:28.789 --> 00:16:35.021
+Will there be only one alpha? 
+Will any alpha have the same support, the 
+
+188
+00:16:35.021 --> 00:16:38.719
+same non-zero entries? 
+When is that possible? 
+
+189
+00:16:38.719 --> 00:16:45.046
+And of course what about a dictionary? 
+Which dictionary should I use in order to 
+
+190
+00:16:45.046 --> 00:16:50.661
+get alpha as sparse as possible? 
+This is going to be something that we are 
+
+191
+00:16:50.661 --> 00:16:54.062
+going to discuss quite a lot during this 
+week. 
+
+192
+00:16:54.062 --> 00:17:00.389
+And these are some of the questions these 
+very nice sparse modelling and sparse 
+
+193
+00:17:00.389 --> 00:17:03.674
+representations open. 
+So what have we done? 
+
+194
+00:17:03.674 --> 00:17:09.708
+We basically started with image denoising 
+as an example and we say, we need to 
+
+195
+00:17:09.708 --> 00:17:15.819
+model the signal, we need to understand 
+what do we mean by image denoising, what 
+
+196
+00:17:15.819 --> 00:17:22.008
+type of clean signal are we looking for. 
+And that basically opened a question to 
+
+197
+00:17:22.008 --> 00:17:27.346
+say, we need to define models. 
+When we say we need to define models, we 
+
+198
+00:17:27.346 --> 00:17:31.299
+basically. 
+Describe a model, which is the sparse 
+
+199
+00:17:31.299 --> 00:17:35.251
+model. 
+The signal is a linear combination of a 
+
+200
+00:17:35.251 --> 00:17:39.290
+few elements. 
+A few atoms of a given dictionary. 
+
+201
+00:17:39.290 --> 00:17:42.534
+Once we define that, are we done? 
+Of course no. 
+
+202
+00:17:42.534 --> 00:17:48.086
+We have all these questions that we just 
+mentioned, theoretical, computational, 
+
+203
+00:17:48.086 --> 00:17:53.277
+how do I compute that alpha and, of 
+course, how do I compute a dictionary 
+
+204
+00:17:53.277 --> 00:17:58.180
+that is appropriate for the type of 
+signals that we are looking for? 
+
+205
+00:17:58.180 --> 00:18:02.895
+So these are some of the questions that 
+we are going to address during the next 
+
+206
+00:18:02.895 --> 00:18:05.529
+few videos. 
+And I'm looking forward to that. 
+
+207
+00:18:05.529 --> 00:18:08.224
+This is, as I say, a very, very exciting 
+topic. 
+
+208
+00:18:08.224 --> 00:18:11.715
+And very, very active topic in image 
+processing right now. 
+
+209
+00:18:11.715 --> 00:18:15.512
+Thank you very much. 
+Looking forward to seeing you in the next 
+
+210
+00:18:15.512 --> 00:18:15.880
+video. 

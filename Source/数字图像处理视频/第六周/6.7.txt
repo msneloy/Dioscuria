@@ -1,0 +1,131 @@
+Hello, and welcome back. 
+We are going to now give an example of Calculus of variations used in image 
+processing, and these are the techniques we just saw in the previous video. 
+Let's apply them to image processing now. And we're going to do that with one of 
+the most famous equations in image processing, in the area of partial 
+differential equations in image processing, and that's Anisotropic 
+Diffusion. What is that? 
+If you remember, when we discussed the Gaussian filtering and averaging images, 
+we talked that those are, were like diffusion of the pixel values all across 
+the image. What was happening is that we obtained 
+blurring. Because if there were edges basically, we 
+were averaging across edges. We were letting the pixels' values across 
+edges to be basically mixed up and that's when we obtained blurry. 
+And that was Isotropic Smoothing. It was just going all around. 
+It didn't matter if it had boundaries or not boundaries. 
+What Anisotropic Smoothing or Anisotropic Diffusion is trying to do is going to try 
+to average pixels value, pixel values, only on the right side of the object, 
+on the right side of the edge, on the correct object. 
+So, pixel values here are going to be averaged among themselves, to basically 
+denoise or enhance the image. Pixel values here are going to be 
+basically mixed among themselves. How do we do that? 
+We do that with equations, partial differential equations as we see 
+here. Before we look at the equations, let us look at the images, this is an 
+original image. And if we do basically, Gaussian 
+Smoothing or Averaging, we know that we are going to blur. 
+We blur across the boundaries because it's just mixing pixels from different 
+objects and that's what we see here. On the other hand, if we try not to blur, 
+try not to mix, we only mix pixels on the same side of the boundary without going 
+in this direction, then we get the much sharper. 
+We still see that we have removed noise inside the object, inside the grey matter 
+of these MRI picture of the brain, we see that this is much smoother, that we are 
+still preserving the boundaries very, very, nicely. 
+The difference between these two is here, we have what we have marked here with red 
+background, is isotropic diffusion, heat equation. 
+We actually already talked about it that we're going to to derive it in the next 
+slide using Calculus of variations. Here, we have added isotropic before we 
+take the second derivative which is a divergence. 
+I have to basically remind you that the Laplacian of the image is the divergence 
+of the gradient. And we are ready to define gradient and 
+the divergence in the previous slides. So, before we take it as here, 
+we introduce a function in between here. This is a very similar function as the 
+one that we used for active counters. It's, for example, one over the gradient, 
+we are going to see that in the next slide. 
+So, a function is going to say, wait a second. 
+Don't diffuse if there is a strong gradient. 
+Stop the diffusion. And that's why there is diffusion in 
+certain directions when there is not a strong gradient. 
+And there is no diffusion or reduced diffusion where there is a strong 
+gradient, meaning across edges. And that's where we get very sharp 
+boundaries. We preserve them while at the same time, 
+regularizing inside the objects. And that's what we want. 
+These equations are the results of Calculus of variations. 
+So, if we basically define any function of the gradient, 
+so here, this is what we saw the last time that we 
+were basically taking functions of u or derivatives of u. 
+And basically, the gradient is the derivative of the image and rho here 
+takes the role of f. So, we take any function of the magnitude 
+of the gradient. If we compute the Euler-Lagrange, this is 
+what we get. That's the Euler-Lagrange of that 
+equation if we follow exactly the formula that we show in the previous video. 
+And remember, the partial differential equation is obtained by deforming the 
+image equal to the Euler-Lagrange. And then, 
+when this doesn't change anymore, we have solved the Euler-Lagrange and we have 
+obtained may be only local, but at least we obtained that minimizer of this 
+functional. So, once again, this is just by doing the 
+Euler-Lagrange that we learned in the previous video. 
+We just pick a couple of examples of this raw function to show how nice this is. 
+For example, let us consider rho of a to be a squared. 
+So here, I am trying to minimize the magnitude of the gradient squared. 
+And then, the Euler-Lagrange, so ir rho of a is a squared, then rho 
+prime is 2a, okay? 
+So, instead of rho prime, I have to put two times whatever is inside rho, which 
+is the gradient, okay? 
+So basically, have here, and then the Euler-Lagrange that I get is, the 
+Euler-Lagrange equation is pie t, this is this, equal to divergence of rho 
+prime, basically 2a. Let me ignore the two, it's just scale. 
+So, a time, we mean, replace the gradient, 
+okay? a is taking basically the position of the 
+gradient, the absolute magnitude of the gradient, sorry. 
+And this is this part. So, this part stays and this part is rho 
+prime. Now, these two cancel and I go divergence 
+of basically the gradient and this is the Laplacian. 
+For this function, the Euler-Lagrange is basically the heat flow and that's 
+isotropic. That's basically smoothing it in an 
+isotropic fashion, okay? 
+So, that's the Euler-Lagrange of the square of the absolute value of the 
+magnitude, we get the regular heat flow, the Isotropic Diffusion, diffusion all 
+around. Let's just pick another example that is 
+really, really, really interesting. Let's just pick, for example, a function 
+that basically, rho of a = a, okay? Just itself, we could take the absolute 
+value of a but let's just leave that technicality aside for a second. 
+Then, rho prime is one, okay? 
+So, I'm basically going to try to minimize the absolute value of the 
+gradient, not the gradient square, 
+the absolute value of the gradient without putting it to the square. 
+And then, what do I get as the Euler-Lagrange equation of that? 
+So, rho prime is now a constant. So, I go, divergence of gradient 
+normalized by the gradient. So, I didn't get anymore the heat flow. 
+I got this normalization factor that is saying, wait a second, if the grand is 
+very high, you are one over the gradient so slow down and try to preserve those 
+edges. So, this is one example of an Isotropic 
+Diffusion. It's actually called the total variation. 
+Total [SOUND] variation, that's basically the name of this equation. 
+And now, I want you to think for a second, what is this? 
+We learned it a couple of videos ago. This is curvature of the level lines of 
+the image I. We actually use it as a genetic function. 
+We use it phi, in that case, or, or phi, we use this in that case. 
+Now, this is the curvature of every level line of the image. 
+So, we are basically considering the image as a surface and we are deforming 
+the image, we are doing an Isotropic Diffusion of the image in such a way that 
+basically it's moving according to the curvature of the level lines and that's 
+getting us an Isotropic Diffusion. This is an extremely interesting 
+connection. We talked about curve evolution, we 
+talked about curvature type of motions. This is a curvature type of motion. 
+That basically the image is moving based on curvature of the level lines and 
+that's, we don't really care about the level lines or we didn't derive this 
+equation from the level lines, we derived it from the Euler-Lagrange of the total 
+variation. But we connected between the both, 
+between both of them moving according to curvature type of equations and moving 
+curvature of the level lines and moving according to the Euler-Lagrange. 
+The curvature of what? The curvature of the level lines of the 
+image. A very interesting connection between 
+curve evolution, level set, and Calculus of variation, and that gives us a very, 
+very nice equation for Anisotropic Diffusion. 
+And this basically is one of the most famous examples of the use of Calculus of 
+variations in image processing. What's left in this week is to conclude 
+the week in the next video with a bit more of active contours, 
+one of the main clients of curve evolution and Calculus of variations as 
+we have discussed in the past and that's we're going to see in the next video. 
+Thank you very much. I'm looking forward to that. 
+Thank you.

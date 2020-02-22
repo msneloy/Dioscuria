@@ -1,0 +1,271 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.936
+Let us now complete the week on image and 
+video compression, by just a very brief 
+
+2
+00:00:05.936 --> 00:00:11.212
+description of run-length coding. 
+Run-length coding is very useful for, 
+
+3
+00:00:11.212 --> 00:00:14.510
+normally, when we, when I encode binary 
+images. 
+
+4
+00:00:14.510 --> 00:00:20.153
+So let's just draw a binary image. 
+And then we have a box to illustrate 
+
+5
+00:00:20.153 --> 00:00:23.525
+that. 
+Let's assume we have an object here that 
+
+6
+00:00:23.525 --> 00:00:28.801
+has a certain grade value. 
+And we only have two grade values. 
+
+7
+00:00:28.801 --> 00:00:36.020
+Let's say, 100 in the background, and. 
+200 here. 
+
+8
+00:00:36.020 --> 00:00:39.312
+Okay? 
+So we already have seen that if we do a 
+
+9
+00:00:39.312 --> 00:00:44.800
+small representation of our image we're 
+going to be able to compress a lot. 
+
+10
+00:00:44.800 --> 00:00:50.654
+As my representation means lets give to 
+half on codeine very nice distributions, 
+
+11
+00:00:50.654 --> 00:00:56.288
+very simple things and hopefully less 
+than we will get by encoding the whole 
+
+12
+00:00:56.288 --> 00:00:59.654
+thing. 
+So of course we could encode this image 
+
+13
+00:00:59.654 --> 00:01:05.435
+by saying many times one hundred for the 
+first row, same for the second row, and 
+
+14
+00:01:05.435 --> 00:01:11.100
+so on and so on. 
+And imagine that this is you know 10,000. 
+
+15
+00:01:11.100 --> 00:01:17.171
+by 10000 image. 
+So, we're going to say 10,000 times 100, 
+
+16
+00:01:17.171 --> 00:01:21.833
+and we keep going. 
+A smarter way, is basically to do the 
+
+17
+00:01:21.833 --> 00:01:25.817
+following. 
+To say okay, let's just count how many 
+
+18
+00:01:25.817 --> 00:01:32.593
+times they reach the value of 100. 
+Let's just count how many times there is 
+
+19
+00:01:32.593 --> 00:01:36.769
+the value 200. 
+And let's count then after that how many 
+
+20
+00:01:36.769 --> 00:01:42.539
+times there is again the value 100. 
+Basically this count we don't have to do 
+
+21
+00:01:42.539 --> 00:01:45.956
+if we know that there is only one 
+transition. 
+
+22
+00:01:45.956 --> 00:01:51.880
+So we count these and let's say that 
+there is basically 3,000 times. 
+
+23
+00:01:51.880 --> 00:02:00.292
+3000 times the value 100. 
+So we still have encoding 3,000 times 
+
+24
+00:02:00.292 --> 00:02:07.936
+100, we encode this value. 
+And then let's assume that there is a 
+
+25
+00:02:07.936 --> 00:02:12.530
+1,000 times. 
+Again, the value 200, so we put. 
+
+26
+00:02:12.530 --> 00:02:18.892
+3,000 then we put 1,000 and we're done, 
+if we assume that it was only one object, 
+
+27
+00:02:18.892 --> 00:02:22.073
+one transition. 
+If not, we can keep going. 
+
+28
+00:02:22.073 --> 00:02:25.890
+So, by two numbers, we have encoded the 
+whole row. 
+
+29
+00:02:25.890 --> 00:02:29.867
+And then we go to the next one, and we do 
+the same. 
+
+30
+00:02:29.867 --> 00:02:36.070
+And this is called run-length coding, 
+because it basically enclosed the run of 
+
+31
+00:02:36.070 --> 00:02:40.206
+equal numbers. 
+We actually, indirectly, have seen that 
+
+32
+00:02:40.206 --> 00:02:48.504
+in JPEG already when we were in the 
+transformed domain of JPEG and eight by 
+
+33
+00:02:48.504 --> 00:02:51.459
+eight. 
+I'm just drawing a part of this. 
+
+34
+00:02:51.459 --> 00:02:57.234
+And I say to you, I explain to you that 
+when everything becomes zero, there is a 
+
+35
+00:02:57.234 --> 00:03:02.132
+code that says, end of block. 
+That's basically encoding by basically 
+
+36
+00:03:02.132 --> 00:03:06.080
+one number, everything that is going to 
+happen, to the end. 
+
+37
+00:03:06.080 --> 00:03:11.709
+And that's a basic idea of run length 
+coding, again very useful for images, in 
+
+38
+00:03:11.709 --> 00:03:14.780
+particular for, basically, geometric 
+images, 
+
+39
+00:03:14.780 --> 00:03:20.425
+binary images, and indirectly was using 
+JPEG but is very popular here. 
+
+40
+00:03:20.425 --> 00:03:27.926
+And even if we have more than one object 
+and an area over here basically call the 
+
+41
+00:03:27.926 --> 00:03:31.549
+runs. 
+We say how many times there is 100? How 
+
+42
+00:03:31.549 --> 00:03:38.588
+many times 200? How many times again 100? 
+How many time again 200 or any other 
+
+43
+00:03:38.588 --> 00:03:42.630
+value if needed. 
+We encode the value and how many times it 
+
+44
+00:03:42.630 --> 00:03:46.114
+appears and with that we basically 
+compress a lot. 
+
+45
+00:03:46.114 --> 00:03:51.340
+This very, very simple images that 
+otherwise would take us a very, very long 
+
+46
+00:03:51.340 --> 00:03:55.891
+codes to represent. 
+And as before we could just encode these 
+
+47
+00:03:55.891 --> 00:04:01.286
+numbers, as they are, or we could flag 
+them in, into Huffman coding, and 
+
+48
+00:04:01.286 --> 00:04:06.907
+basically compress them even further. 
+With this, we basically complete the week 
+
+49
+00:04:06.907 --> 00:04:11.231
+on image and video compression. 
+And now we have images, now we can 
+
+50
+00:04:11.231 --> 00:04:15.289
+receive images from, every place. 
+We can compress, we can store. 
+
+51
+00:04:15.289 --> 00:04:18.216
+Next week we're going to start to process 
+them. 
+
+52
+00:04:18.216 --> 00:04:23.072
+And what happens when basically our 
+images are not as, they don't look as 
+
+53
+00:04:23.072 --> 00:04:27.197
+nice as I wanted them to look? 
+So that's what starts next week. 
+
+54
+00:04:27.197 --> 00:04:29.060
+See you next week. 
+Thank you. 

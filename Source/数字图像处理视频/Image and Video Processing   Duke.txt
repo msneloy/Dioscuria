@@ -1,0 +1,244 @@
+Image and Video Processing: From Mars to Hollywood with a Stop at the Hospital
+创建者 Duke University
+
+
+
+1 Introduction to image and video processing
+
+视频: 课程视频0 - Welcome and Start Here
+33 sec
+视频: 课程视频1 - What is image and video processing (part 1)
+10 min
+视频: 课程视频1 - What is image and video processing (part 2)
+10 min
+视频: 课程视频2 - Course logistics
+2 min
+视频: 课程视频3 - Images are everywhere - Duration 06:31
+6 min
+视频: 课程视频4 - Human visual system - Duration 17:10
+17 min
+视频: 课程视频5 - Image formation - Sampling & Quantization - Duration 28:17
+28 min
+视频: 课程视频6 - Simple image operations - Duration 17:05
+17 min
+测验: Quiz #1
+12 个问题
+Feb 16, 11:59 PM PST {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+
+2 Image and video compression
+
+视频: 课程视频1 - The why and how of compression - Duration 14:16
+14 min
+视频: 课程视频2 - Huffman coding - Duration 20:11 - Optional break at 06:53
+20 min
+视频: 课程视频3 - JPEG's 8x8 blocks - Duration 05:37
+5 min
+视频: 课程视频4 - The Discrete Cosine Transform (DCT) - Duration 25:32 - Optional break at 12:13
+25 min
+视频: 课程视频5 - Quantization - Duration 24:02 - Optional breaks at 08:48 and 17:18
+24 min
+视频: 课程视频6 - JPEG_LS and MPEG - Duration 19:32 - Optional break at 13:45
+19 min
+视频: 课程视频7 - Bonus: Run-length compression - Duration 04:29
+4 min
+测验: Quiz #2
+10 个问题
+Feb 23, 11:59 PM PST {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+
+3 Spatial processing
+
+视频: 课程视频1 - Introduction to image enhancement - Duration 19:11 - Optional break at 08:33
+19 min
+视频: 课程视频2 - Demo - Enhancement & Histogram modification - Duration 03:53
+3 min
+视频: 课程视频3 - Histogram equalization - Duration 19:56 - Optional breaks at 04:40 and 11:30
+19 min
+视频: 课程视频4 - Histogram matching - Duration 08:31
+8 min
+视频: 课程视频5 - Introduction to local neighborhood operations - Duration 06:46
+6 min
+视频: 课程视频6 - Mathematical properties of averaging - Duration 11:00
+11 min
+视频: 课程视频7 - Non-Local means - Duration 07:27
+7 min
+视频: 课程视频8 - IPOL Demo - Non-Local means - Duration 03:38
+3 min
+视频: 课程视频9 - Median filter - Duration 07:20
+7 min
+视频: 课程视频10 - Demo - Median filter - Duration 01:31
+1 min
+视频: 课程视频11 - Derivatives, Laplacian & Unsharp masking - Duration 14:24 - Optional breaks at 05:21 and 11:33
+14 min
+视频: 课程视频12 - Demo - Unsharp masking - Duration 03:10
+3 min
+视频: 课程视频13 - Gradients of scalar and vector images - Duration 05:57
+5 min
+视频: 课程视频14 - Concluding remarks - Duration 01:12
+1 min
+测验: Quiz #3
+10 个问题
+Mar 1, 11:59 PM PST {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+4 Image restoration
+
+视频: 课程视频1 - What is image restoration - Duration 07:49
+7 min
+视频: 课程视频2 - Noise types - Duration 12:43
+12 min
+视频: 课程视频3 - Demo - Types of noise - Duration 03:03
+3 min
+视频: 课程视频4 - Noise and histograms - Duration 04:52
+4 min
+视频: 课程视频5 - Estimating noise - Duration 10:41 - Optional break at 05:03
+10 min
+视频: 课程视频6 - Degradation Function - Duration 11:40
+11 min
+视频: 课程视频7 - Wiener filtering - Duration 12:34 - Optional break at 06:54
+12 min
+视频: 课程视频8 - Demo - Wiener and Box filters - Duration 03:19
+3 min
+视频: 课程视频9 - Concluding remarks - Duration 00:33
+33 sec
+测验: Quiz #4
+8 个问题
+Mar 9, 12:59 AM PDT {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+
+5 Segmentation
+
+视频: 课程视频1 - Introduction to Segmentation - Duration 04:17
+4 min
+视频: 课程视频2 - On Edges and Regions - Duration 05:17
+5 min
+视频: 课程视频3 - Hough Transform with Matlab Demo - Duration 20:59
+20 min
+视频: 课程视频4 - Line Segment Detector with Demo - Duration 03:20
+3 min
+视频: 课程视频5 - Otsu's Segmentation with Demo - Duration 14:25
+14 min
+视频: 课程视频6 - Congratulations - Duration 00:17
+17 sec
+视频: 课程视频7 - Interactive Image Segmentation - Duration 21:13
+21 min
+视频: 课程视频8 - Graph Cuts and Ms Office - Duration 09:34
+9 min
+视频: 课程视频9 - Mumford-Shah - Duration 05:50
+5 min
+视频: 课程视频10 - Active Contours - Introduction with ipol.im and Photoshop Demos - Duration 05:58
+5 min
+视频: 课程视频11 - Behind the Scenes of Adobe's Roto Brush - Duration 31:29 - Optional breaks at 20:30 and 27:26
+31 min
+视频: 课程视频12 - End of the Week - Duration 00:21
+21 sec
+测验: Quiz #5
+9 个问题
+Mar 16, 12:59 AM PDT {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+6 Geometric PDEs
+
+视频: 课程视频1 - Introduction to PDEs in Image and Video Processing - Duration 10:22
+10 min
+视频: 课程视频2 - Planar Differential Geometry - Duration 38:33 - Optional breaks at 12:46, 21:03, and 29:41
+38 min
+视频: 课程视频3 - Surface Differential Geometry - Duration 11:43
+11 min
+视频: 课程视频4 - Curve Evolution - Duration 31:10 - Optional breaks at 08:50, 19:25, and 24:22
+31 min
+视频: 课程视频5 - Level Sets and Curve Evolution - Duration 25:34 - Optional break at 14:30
+25 min
+视频: 课程视频6 - Calculus of Variations - Duration 14:03 - Optional break at 06:23
+14 min
+视频: 课程视频7 - Anisotropic Diffusion - Duration 11:17
+11 min
+视频: 课程视频8 - Active Contours - Duration 16:57 - Optional break at 06:23
+16 min
+视频: 课程视频9 - Bonus: Cool Contrast Enhancement via PDEs - Duration 08:32
+8 min
+练习测验: Quiz #6
+7 个问题
+阅读材料: Optional programming exercises
+10 min
+
+
+
+
+7 Image and video inpainting
+
+视频: 课程视频1 - Introduction to Image Inpainting - Duration 08:16
+8 min
+视频: 课程视频2 - Inpainting in Nature - Duration 05:01
+5 min
+视频: 课程视频3 - PDEs and Inpainting - Duration 21:59 - Optional break at 13:31
+21 min
+视频: 课程视频4 - Inpainting via Calculus of Variations - Duration 15:32 - Optional break at 10:06
+15 min
+视频: 课程视频5 - Smart Cut and Paste - Duration 07:51
+7 min
+视频: 课程视频6 - Demo - Photoshop Inpainting Healing Brush - Duration 02:31
+2 min
+视频: 课程视频7 - Video Inpainting and Conclusions - Duration 05:13
+5 min
+测验: Quiz #7
+7 个问题
+Mar 30, 12:59 AM PDT {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+
+Sparse modeling and compressed sensing
+
+视频: 课程视频1 - Introduction to Sparse Modeling - Part 1 - Duration 10:39
+10 min
+视频: 课程视频2 - Introduction to Sparse Modeling - Part 2 - Duration 18:16
+18 min
+视频: 课程视频3 - Sparse Modeling - Implementation - Duration 24:30 - Optional break at 11:58
+24 min
+视频: 课程视频4 - Dictionary Learning - Duration 17:13 - Optional break at 06:03
+17 min
+视频: 课程视频5 - Sparse Modeling Image Processing Examples - Duration 20:57 - Optional break at 09:25
+20 min
+视频: 课程视频6 - A Note on Compressed Sensing - Duration 05:10
+5 min
+视频: 课程视频7 - GMM and Structured Sparsity - Duration 15:40
+15 min
+视频: 课程视频8 - Bonus: Sparse Modeling and Classification - Activity Recognition - Duration 15:10
+15 min
+测验: Quiz #8
+9 个问题
+Apr 6, 12:59 AM PDT {dueMessage}
+阅读材料: Optional programming exercises
+10 min
+
+
+
+Medical imaging
+
+视频: 课程视频1 - Introduction to Medical Imaging - Duration 07:03
+7 min
+视频: 课程视频2 - Image Processing and HIV (Part I) - Duration 23:51 - Optional breaks at 12:37 and 18:39
+23 min
+视频: 课程视频2 - Image Processing and HIV (Part II) - Duration 16:30
+16 min
+视频: 课程视频3 - Brain Imaging, Diffusion Imaging, Deep Brain Stimulation - Duration 26:28
+26 min
+视频: 课程视频4 - Thanks!
+40 sec
+

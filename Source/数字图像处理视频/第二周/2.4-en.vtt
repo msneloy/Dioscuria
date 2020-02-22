@@ -1,0 +1,1421 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.521
+Now that we have, the n x n blocks for 
+each one of the plains, the YCbC, we are 
+
+2
+00:00:06.521 --> 00:00:13.125
+ready to go into the forward transform. 
+So the first thing we need to understand 
+
+3
+00:00:13.125 --> 00:00:17.580
+is why are we going to do a forward 
+transform. 
+
+4
+00:00:17.580 --> 00:00:24.441
+Let us explain first of all how do we 
+measure the error that we create in 
+
+5
+00:00:24.441 --> 00:00:31.024
+images when we're doing compression if 
+we're doing a lossy compression. 
+
+6
+00:00:31.024 --> 00:00:37.700
+And the basic idea is that error is 
+measure with what's called the mean 
+
+7
+00:00:37.700 --> 00:00:46.848
+squared error, MSE, or mean square error. 
+And it's computed as following. 
+
+8
+00:00:46.848 --> 00:00:49.186
+The mean squared error. 
+Okay. 
+
+9
+00:00:49.186 --> 00:01:00.465
+MSE = 1 / the number of pixels. 
+That just a normalization. 
+
+10
+00:01:00.465 --> 00:01:10.026
+We sum overall the pixels and what we do 
+is we basic compute the square of the 
+
+11
+00:01:10.026 --> 00:01:13.622
+error. 
+We have, we're going to have the 
+
+12
+00:01:13.622 --> 00:01:19.788
+reconstructed image, 
+let's call it f, reconstruct it minus the 
+
+13
+00:01:19.788 --> 00:01:24.178
+original image squared. 
+We go over every single pixel. 
+
+14
+00:01:24.178 --> 00:01:29.027
+So we're going to do f. 
+So let's say the, the original f was 100 
+
+15
+00:01:29.027 --> 00:01:35.186
+and we reconstructed 98, so we have the 
+difference is 2 we square it, it's 4. 
+
+16
+00:01:35.186 --> 00:01:40.959
+And we do that for every single pixel. 
+We sum that, we normalize that by the 
+
+17
+00:01:40.959 --> 00:01:46.600
+number of pixels, and most of the time, 
+because we have square here, 
+
+18
+00:01:46.600 --> 00:01:52.172
+we take a square root there. 
+So it's called a root mean square error. 
+
+19
+00:01:52.172 --> 00:01:57.745
+That's how we measure the error. 
+Now, why are we going to do a transform? 
+
+20
+00:01:57.745 --> 00:02:02.990
+Let's imagine that we take, 
+remember, we are talking n x n blocks 
+
+21
+00:02:02.990 --> 00:02:06.596
+now. 
+In general, we're talking 8 x 8, 
+
+22
+00:02:06.596 --> 00:02:10.693
+but we're talking n x n. 
+So we have n x n pieces, 
+
+23
+00:02:10.693 --> 00:02:15.774
+because we're working on each one of the 
+blocks independently. 
+
+24
+00:02:15.774 --> 00:02:19.543
+Imagine that, 
+although, these are n x n, 64 pixels, I 
+
+25
+00:02:19.543 --> 00:02:23.954
+want to transmit only one. 
+I'm going to just give you the option to 
+
+26
+00:02:23.954 --> 00:02:28.578
+transmit only one of them. 
+So, if we take just a regular image, and 
+
+27
+00:02:28.578 --> 00:02:32.775
+we transmit only one, we are going to get 
+a tremendous error. 
+
+28
+00:02:32.775 --> 00:02:39.204
+But, we might be able to do a transform 
+into a different 8 x 8, the transform has 
+
+29
+00:02:39.204 --> 00:02:42.494
+to be reversable, 
+I should be able to go back. 
+
+30
+00:02:42.494 --> 00:02:47.757
+And we do this transform, we have a new 8 
+x 8, and maybe in that transform domain, 
+
+31
+00:02:48.927 --> 00:02:53.386
+we can take only the first one and still 
+do a reasonable job. 
+
+32
+00:02:53.386 --> 00:02:58.868
+It turns out that there is a transform 
+that allow us to do that and that's 
+
+33
+00:02:58.868 --> 00:03:10.022
+called the Karhunen-Loeve transform. 
+[SOUND] That transformer has something 
+
+34
+00:03:10.022 --> 00:03:13.982
+very particular. 
+You go into that transform domain, I'm 
+
+35
+00:03:13.982 --> 00:03:18.348
+going to write down in a second what do I 
+mean by a transform? 
+
+36
+00:03:18.348 --> 00:03:22.788
+But think is nothing else than a 
+multiplication by a matrix, 
+
+37
+00:03:22.788 --> 00:03:26.562
+nothing else than that. 
+So I have my 8 x 8. 
+
+38
+00:03:26.562 --> 00:03:31.742
+I do something. 
+I go into a new 8 x 8 block or 8 x 8 
+
+39
+00:03:31.742 --> 00:03:34.258
+image. 
+And then, if what I did is a 
+
+40
+00:03:34.258 --> 00:03:39.512
+Karhunen-Loeve transform, that's also 
+sometimes written as KLT, Karhunen-Loeve 
+
+41
+00:03:39.512 --> 00:03:41.880
+transform. 
+If I'm in that domain, 
+
+42
+00:03:41.880 --> 00:03:47.485
+if I take the first of those, just the 
+first out of the 64 and I compute the 
+
+43
+00:03:47.485 --> 00:03:52.943
+mean square error, remember, I basically 
+did a reconstruction with only one. 
+
+44
+00:03:52.943 --> 00:03:56.483
+So I take my image, I do a Karhunen-Loeve 
+transform. 
+
+45
+00:03:56.483 --> 00:04:02.384
+I remove 63 of the coefficients. I come 
+back and I compute the mean square error. 
+
+46
+00:04:02.384 --> 00:04:08.505
+I got the smallest possible mean square 
+error I could have gotten with only one 
+
+47
+00:04:08.505 --> 00:04:12.120
+basically coefficient, just transmitting 
+only one. 
+
+48
+00:04:12.120 --> 00:04:15.924
+If I want three, I can do actually 
+exactly the same. 
+
+49
+00:04:15.924 --> 00:04:21.403
+ANd the interesting part with the 
+Karhunen-Loeve transform is not only that 
+
+50
+00:04:21.403 --> 00:04:26.653
+with one I did the best error, but 
+actually that one is the first one. 
+
+51
+00:04:26.653 --> 00:04:32.436
+So you go, you have 64, you're gong to a 
+new 64. You pick the first one, that's 
+
+52
+00:04:32.436 --> 00:04:37.458
+the best you can do if you're only 
+allowed to use one coefficient. 
+
+53
+00:04:37.458 --> 00:04:41.720
+If you're allowed to, to use three, you 
+pick the first three. 
+
+54
+00:04:41.720 --> 00:04:46.630
+So it's a great transform, but it has 
+only one major problem. 
+
+55
+00:04:46.630 --> 00:04:50.209
+The problem of this transform is that 
+it's image dependent. 
+
+56
+00:04:50.209 --> 00:04:54.032
+I don't know how to do it. 
+So I told you, it's going to be a matrix 
+
+57
+00:04:54.032 --> 00:04:57.430
+multiplication, 
+but I don't know the coefficients of the 
+
+58
+00:04:57.430 --> 00:05:02.101
+matrix until I don't see the image. 
+You give me the image or you give me some 
+
+59
+00:05:02.101 --> 00:05:05.924
+information about the image, 
+then I will be able to compute the 
+
+60
+00:05:05.924 --> 00:05:09.443
+coefficients of that matrix. 
+And that's not very practical, 
+
+61
+00:05:09.443 --> 00:05:12.719
+it's very slow, 
+and also, I cannot do things on the fly 
+
+62
+00:05:12.719 --> 00:05:16.382
+as things come. 
+So to replace that we count what's called 
+
+63
+00:05:16.382 --> 00:05:20.773
+a discrete cosine transform, which is 
+what is actually used in JPEG. 
+
+64
+00:05:20.773 --> 00:05:26.147
+So let's just right down the equations 
+for the discrete cosine transform and we 
+
+65
+00:05:26.147 --> 00:05:29.948
+are going to understand a bit more of 
+what a transform is. 
+
+66
+00:05:29.948 --> 00:05:34.798
+But let's keep in our minds that what we 
+actually want is a Karhunen-Loeve 
+
+67
+00:05:34.798 --> 00:05:39.517
+transform. What the Karhunen-Loeve is 
+doing is decorrealating the image, it's 
+
+68
+00:05:39.517 --> 00:05:42.860
+putting a lot of information the first 
+coefficient, 
+
+69
+00:05:42.860 --> 00:05:47.953
+and a bit more of information in the 
+second, which is independent of the first 
+
+70
+00:05:47.953 --> 00:05:52.916
+and so on in such a way, that if we want 
+to compute the means squared error, we 
+
+71
+00:05:52.916 --> 00:05:56.442
+are optimal. 
+But we're going to be suboptimal with the 
+
+72
+00:05:56.442 --> 00:06:01.013
+discrete cosine transform, but it's going 
+to have a fixed matrix, fixed 
+
+73
+00:06:01.013 --> 00:06:05.975
+coefficient, so it's universal, we're 
+going to be able to use for every image 
+
+74
+00:06:05.975 --> 00:06:10.671
+without having to recompute it. 
+So what is a transform? 
+
+75
+00:06:10.671 --> 00:06:17.296
+The idea is very simple. 
+We have an image and we can call this 
+
+76
+00:06:17.296 --> 00:06:21.891
+image, let's say f(x, y) and this is a 
+transform. 
+
+77
+00:06:21.891 --> 00:06:26.700
+We're going to go into a new domain T(u, 
+v). 
+
+78
+00:06:26.700 --> 00:06:30.252
+Okay? 
+And those of you that are familiar with 
+
+79
+00:06:30.252 --> 00:06:36.489
+Fourier, Fourier is one of the transform. 
+So we're going to sum overall the pixels 
+
+80
+00:06:36.489 --> 00:06:39.805
+in our image. 
+Remember, we basically have n. 
+
+81
+00:06:39.805 --> 00:06:48.392
+So we are going to go from 0 to n - 1. 
+We're going to go from 0 to n - 1 and 
+
+82
+00:06:48.392 --> 00:07:01.773
+we're going to take our image f and 
+multiply by transform coefficient. 
+
+83
+00:07:01.773 --> 00:07:08.889
+This is what will become, I have to give 
+you the formulas for what are these 
+
+84
+00:07:08.889 --> 00:07:13.163
+numbers for DCT, for the discrete cosine 
+transform. 
+
+85
+00:07:13.163 --> 00:07:18.060
+This will be completely image dependent 
+for the Karhunen-Loeve. 
+
+86
+00:07:18.060 --> 00:07:24.022
+We not only depend on the positions we 
+are, it will actually depend on the 
+
+87
+00:07:24.022 --> 00:07:28.712
+actual gray values on the actual 
+statistics of your image. 
+
+88
+00:07:28.712 --> 00:07:34.038
+So this is a transforms. 
+I sum over x and y, which means that x 
+
+89
+00:07:34.038 --> 00:07:38.092
+and y will, let's say, 
+disappear after my summation and I get a 
+
+90
+00:07:38.092 --> 00:07:45.578
+new image, which is again 8 x 8 or n x n. 
+So this is n x n and it just in a 
+
+91
+00:07:45.578 --> 00:07:49.919
+transform domain and you can write this 
+in matrix notation. 
+
+92
+00:07:49.919 --> 00:07:54.971
+Now, of course, a transform is only 
+useful if you actually can invert it. 
+
+93
+00:07:54.971 --> 00:07:58.386
+It won't be very nice that you give me an 
+image. 
+
+94
+00:07:58.386 --> 00:08:03.794
+I go into a transform domain that then 
+visually I don't understand what's going 
+
+95
+00:08:03.794 --> 00:08:07.281
+on there. 
+So, there's also an inverse formula so I 
+
+96
+00:08:07.281 --> 00:08:14.706
+can get back f(x, y), 
+it will be the sum from u = zero to n - 
+
+97
+00:08:14.706 --> 00:08:22.978
+1, the sum, 
+from v = 0 to n - 1 of now my transform 
+
+98
+00:08:22.978 --> 00:08:26.000
+coefficients, 
+T(u, 
+
+99
+00:08:26.000 --> 00:08:34.450
+v). And then the inverse of the 
+transform, which we are going to write 
+
+100
+00:08:34.450 --> 00:08:40.630
+sometimes is equal to r sometimes is not, 
+(x, y, u, v). 
+
+101
+00:08:40.630 --> 00:08:47.627
+So, I take an image, I do this operation, 
+I get a new image in a transform domain, 
+
+102
+00:08:47.627 --> 00:08:51.790
+and then I go and invert it. 
+That's a transform. 
+
+103
+00:08:51.790 --> 00:08:57.541
+So, to specify the transform, I basically 
+have to tell you, what are these guys? 
+
+104
+00:08:57.541 --> 00:09:02.172
+What's r and what's s? 
+And once again, it's not hard to see and 
+
+105
+00:09:02.172 --> 00:09:07.700
+you can just do this as an optional 
+homework to write these in the matrix 
+
+106
+00:09:07.700 --> 00:09:13.212
+notation. It's not, not hard at all. 
+So, I need to specify these two guys, 
+
+107
+00:09:13.212 --> 00:09:19.433
+these two functions, r and s, which as I 
+say ideally to minimize the mean square 
+
+108
+00:09:19.433 --> 00:09:26.285
+to be optimal, we would like it to be 
+Karhunen-Loeve transform but we can't, so 
+
+109
+00:09:26.285 --> 00:09:30.380
+we are going to use the DCT, which I'm 
+going to write next. 
+
+110
+00:09:30.380 --> 00:09:40.140
+So what's the DCT? 
+In the DCT, r(x, y, u, v) is actually 
+
+111
+00:09:40.140 --> 00:09:50.060
+equal to s(x, y, u, v). 
+And this is actually equal to some 
+
+112
+00:09:50.060 --> 00:10:02.681
+normalization coefficient alpha (u) alpha 
+(v) this v and this v are the same. 
+
+113
+00:10:02.681 --> 00:10:07.640
+I, I apologize there for just writing two 
+different vs. 
+
+114
+00:10:08.940 --> 00:10:15.500
+Cosine of the following, 
+[(2x + 1) u pi / 2 * n], this is the 
+
+115
+00:10:15.500 --> 00:10:37.443
+size. 
+Times cosine, exactly the same, but for 
+
+116
+00:10:37.443 --> 00:10:40.355
+the other coordinate. 2y, [(2y + 1) v pi 
+/ 2n]. 
+
+117
+00:10:45.940 --> 00:10:51.198
+That's a general formulation. 
+And I have to basically write for you 
+
+118
+00:10:51.198 --> 00:10:56.770
+what's this, it's just a normalization. 
+It's very common in this type of 
+
+119
+00:10:56.770 --> 00:11:08.040
+transforms, that the square root of 1 / n 
+for u = 0 and the square root of 2 / n 
+
+120
+00:11:08.040 --> 00:11:11.104
+for u, 
+different than 0. 
+
+121
+00:11:11.104 --> 00:11:16.344
+So here it is. 
+I just gave you the formulas for DCT or 
+
+122
+00:11:16.344 --> 00:11:21.659
+the discrete cosine transform. 
+Those that are familiar with Fourier, 
+
+123
+00:11:21.659 --> 00:11:27.134
+this is basically the, the, basically 
+the, the real part of a Fourier 
+
+124
+00:11:27.134 --> 00:11:30.070
+transform. 
+It's, it's almost that part. 
+
+125
+00:11:30.070 --> 00:11:35.382
+So, once again, the forward transform and 
+the backwards transform are exactly the 
+
+126
+00:11:35.382 --> 00:11:36.975
+same formulas. 
+Very nice, 
+
+127
+00:11:36.975 --> 00:11:42.221
+because you need to build one piece of 
+software or one piece of hardware to do 
+
+128
+00:11:42.221 --> 00:11:47.002
+both the forward and the backward and 
+then it's just a cosine transform. 
+
+129
+00:11:47.002 --> 00:11:49.923
+Okay? 
+So it's the cosine here and the cosine 
+
+130
+00:11:49.923 --> 00:11:53.310
+here and these are just normalization 
+coefficients. 
+
+131
+00:11:53.310 --> 00:11:58.570
+This is the discrete cosine transform. 
+Okay? Let's just see it. 
+
+132
+00:11:58.570 --> 00:12:02.555
+What, I want to see, I want to show you 
+these functions. 
+
+133
+00:12:02.555 --> 00:12:08.613
+These are the matrices that will multiply 
+your image as we have seen in the 
+
+134
+00:12:08.613 --> 00:12:12.200
+previous slide, in order to get the 
+transform. 
+
+135
+00:12:13.260 --> 00:12:21.546
+So here, you see actually, in this case 
+just to make our illustration easy, we 
+
+136
+00:12:21.546 --> 00:12:26.720
+use n = 4. 
+So, these are, each one of the bases, 
+
+137
+00:12:26.720 --> 00:12:34.120
+if I go back to the formulas and 
+basically, I put u 0, = 0, I get a cosine 
+
+138
+00:12:34.120 --> 00:12:41.046
+which is a function of only x and y. 
+The formulas were functions of u, v, x 
+
+139
+00:12:41.046 --> 00:12:43.703
+and y, 
+but now I fix u and v, 
+
+140
+00:12:43.703 --> 00:12:48.636
+I make both of them 0, I get a formula of 
+x and y. 
+
+141
+00:12:48.636 --> 00:12:53.950
+I get actually a 4 x 4 image which would 
+be this. 
+
+142
+00:12:53.950 --> 00:12:59.440
+If I basically fix v = 1 and u = 0, I get 
+this and so on. 
+
+143
+00:12:59.440 --> 00:13:06.791
+So basically this r and s are nothing 
+else than what's called basis functions. 
+
+144
+00:13:06.791 --> 00:13:14.235
+And what we're trying to do is we're 
+trying to decompose our small n x n image 
+
+145
+00:13:14.235 --> 00:13:19.074
+into the linear combination of this basis 
+functions. 
+
+146
+00:13:19.074 --> 00:13:27.932
+So if your image is flat, it's going to 
+have your T(u, v) is going to only be 
+
+147
+00:13:27.932 --> 00:13:34.373
+known 0 for this. 
+If your image has a lot of variations, 
+
+148
+00:13:34.373 --> 00:13:42.760
+you're going to have coefficients also 
+for T(3, 3). So each one of the T(u, V) 
+
+149
+00:13:42.760 --> 00:13:50.540
+tells you how much of this type of 
+component you have. 
+
+150
+00:13:50.540 --> 00:13:53.960
+Okay? 
+So basically you have represented your n 
+
+151
+00:13:53.960 --> 00:13:58.780
+x n image into a linear combination of 
+this type of images. 
+
+152
+00:13:58.780 --> 00:14:02.900
+The important part is that these images 
+are constant. 
+
+153
+00:14:02.900 --> 00:14:09.041
+Again, in the Karhunen-Loeve, they won't 
+be, and that's very difficult to have a 
+
+154
+00:14:09.041 --> 00:14:14.638
+very efficient how our implementation to 
+be able to do that in real time. 
+
+155
+00:14:14.638 --> 00:14:19.225
+Here, this basis is fixed. 
+You give me an image, I'm going to 
+
+156
+00:14:19.225 --> 00:14:23.190
+represent it as a linear combination of 
+this basis. 
+
+157
+00:14:23.190 --> 00:14:31.321
+And T(u, v) tells me how much of each one 
+of these I have in my image, in my 
+
+158
+00:14:31.321 --> 00:14:34.550
+timing, n x n image. 
+So, that's a transform. 
+
+159
+00:14:34.550 --> 00:14:40.469
+Basically, nothing else than going into 
+coefficient that tell us how much that 
+
+160
+00:14:40.469 --> 00:14:45.542
+each one of these components. 
+So I decompose my image into these 
+
+161
+00:14:45.542 --> 00:14:49.385
+components which are kind of frequency 
+components. 
+
+162
+00:14:49.385 --> 00:14:55.535
+You see that there is more variation as I 
+increase v and as I increase u in the 
+
+163
+00:14:55.535 --> 00:15:01.129
+vertical or horizontal direction. 
+There's one thing I haven't told you. 
+
+164
+00:15:01.129 --> 00:15:06.781
+I say, okay, I cant do Karhunen-Loeve 
+transform, I cannot compute bases for a 
+
+165
+00:15:06.781 --> 00:15:11.139
+Karhunen-Loeve because its too expensive, 
+then I go and do a discrete cosine 
+
+166
+00:15:11.139 --> 00:15:14.544
+transform. 
+Why a discrete cosine transform? Why not 
+
+167
+00:15:14.544 --> 00:15:19.447
+a Fourier transform or any other 
+transform? How the mark transform? There 
+
+168
+00:15:19.447 --> 00:15:24.145
+are many transforms out there. 
+So there is a couple of reasons why we 
+
+169
+00:15:24.145 --> 00:15:27.816
+use the DCT. 
+One of them is that, although I want to 
+
+170
+00:15:27.816 --> 00:15:31.286
+do a Karhunen-Loeve transform, I need to 
+do a DCT. 
+
+171
+00:15:31.286 --> 00:15:36.793
+It turns out that the DCT is for 
+particular cases, actually exactly equal 
+
+172
+00:15:36.793 --> 00:15:41.696
+to the Karhunen-Loeve transform. 
+Those particular cases are when the 
+
+173
+00:15:41.696 --> 00:15:47.202
+images what's called Markovian. 
+So a pixel depends basically on the pixel 
+
+174
+00:15:47.202 --> 00:15:52.860
+next to it in a very particular form, 
+and again, the pixel next to the pixel 
+
+175
+00:15:52.860 --> 00:15:56.405
+next to it. 
+So those are images that are called 
+
+176
+00:15:56.405 --> 00:16:04.616
+Markovian. 
+So if you assume something about your 
+
+177
+00:16:04.616 --> 00:16:10.482
+image, you can show that the 
+Karhunen-Loeve transform ends up being 
+
+178
+00:16:10.482 --> 00:16:14.747
+the DCT. 
+So it, at the end, it is a constant basis 
+
+179
+00:16:14.747 --> 00:16:19.990
+like we see here. 
+That's one reason and to basically decide 
+
+180
+00:16:19.990 --> 00:16:24.878
+to use the DCT. 
+The other reason that we use the DCT is 
+
+181
+00:16:24.878 --> 00:16:32.340
+because of the following. 
+Remember that I'm working from the whole 
+
+182
+00:16:32.340 --> 00:16:40.004
+image and basically having n x n blocks. 
+Okay? 
+
+183
+00:16:40.004 --> 00:16:45.780
+Someone may wonder why not to use for 
+example Fourier transform? 
+
+184
+00:16:45.780 --> 00:16:52.931
+If we go back into the theory of Fourier 
+transform, when you do a discrete Fourier 
+
+185
+00:16:52.931 --> 00:16:58.512
+transform, you're making an underlying 
+assumption of periodicity. 
+
+186
+00:16:58.512 --> 00:17:05.489
+So you are basically assuming that your 
+image repeats itself as we can see here. 
+
+187
+00:17:05.489 --> 00:17:09.326
+So this comes back here and this comes 
+back here. 
+
+188
+00:17:09.326 --> 00:17:14.340
+Okay? So there is a repetition of your 
+image. 
+
+189
+00:17:14.340 --> 00:17:19.605
+That's the underlying mathematical 
+assumption to be able to formally do a 
+
+190
+00:17:19.605 --> 00:17:25.653
+Fourier transform of this 8 x 8 block. 
+And here, I'm drawing just one line of 
+
+191
+00:17:25.653 --> 00:17:32.127
+the 8 x 8 block, but the same assumption 
+basically goes in the other direction and 
+
+192
+00:17:32.127 --> 00:17:38.206
+then in the two-dimensional. 
+Now this this basically means that when 
+
+193
+00:17:38.206 --> 00:17:44.557
+your block ends, you're expecting the 
+pixel in the next block to basically be 
+
+194
+00:17:44.557 --> 00:17:50.738
+identical to the pixel that it was here. 
+Okay? So you expect this block to 
+
+195
+00:17:50.738 --> 00:17:56.834
+basically repeats here and repeats here. 
+That's your underlying assumption. 
+
+196
+00:17:56.834 --> 00:18:03.645
+It's not very probable that the pixel 
+that was here is the same pixel value 
+
+197
+00:18:03.645 --> 00:18:08.790
+that was here, not even close in an 8 x 8 
+block maybe. 
+
+198
+00:18:08.790 --> 00:18:15.508
+On the other hand, DCT assumes a 
+different type of periodicity. 
+
+199
+00:18:15.508 --> 00:18:21.327
+Basically DCT assumes that at the 
+boundary, you have mirror symmetry. 
+
+200
+00:18:21.327 --> 00:18:24.769
+So basically, your image basically 
+repeats, 
+
+201
+00:18:24.769 --> 00:18:29.523
+but it kind of false. 
+So, the assumption says, okay, I'm 
+
+202
+00:18:29.523 --> 00:18:35.670
+assuming that the pixel here is similar 
+to the pixel here right next to it. 
+
+203
+00:18:35.670 --> 00:18:41.516
+Note that the pixel is identical to the 
+one that comes 8 pixels later, but just 
+
+204
+00:18:41.516 --> 00:18:47.070
+the pixel right next to it and that's a 
+much more reasonable assumption. 
+
+205
+00:18:47.070 --> 00:18:51.614
+So, those are two of the main reasons why 
+we use a DCT. 
+
+206
+00:18:51.614 --> 00:18:56.807
+One is because for certain types of 
+images the DCT is the Karhunen-Loeve. 
+
+207
+00:18:56.807 --> 00:19:03.218
+The other is because the periodicity, the 
+type of the periodicity assumption is 
+
+208
+00:19:03.218 --> 00:19:10.360
+much more applicable to images where we 
+started by this n x n or 8 x 8 blocks. 
+
+209
+00:19:10.360 --> 00:19:14.488
+So now, we have the DCT. 
+We started with an image. 
+
+210
+00:19:14.488 --> 00:19:19.355
+We divided n x n blocks. 
+We do a transform into a discrete cosine 
+
+211
+00:19:19.355 --> 00:19:25.840
+transform, where every coefficient tells 
+us how much of this basis are we using. 
+
+212
+00:19:25.840 --> 00:19:30.221
+I keep talking about 8 x 8. 
+How we came to 8 x 8? Actually there was 
+
+213
+00:19:30.221 --> 00:19:36.501
+a lot of studies before jpeg was defined 
+to get 8 x 8, 
+
+214
+00:19:36.501 --> 00:19:40.760
+but let me just illustrate what happens 
+here. 
+
+215
+00:19:40.760 --> 00:19:44.651
+This is an image that basically, we took 
+the whole image. 
+
+216
+00:19:44.651 --> 00:19:49.306
+In this case, we don't divide. 
+This is already a block of that image, 
+
+217
+00:19:49.306 --> 00:19:54.828
+Lina, that we talked before. 
+We did a discrete cosine transform of 
+
+218
+00:19:54.828 --> 00:19:59.904
+this entire block and we took 25% of the 
+coefficient. 
+
+219
+00:19:59.904 --> 00:20:06.685
+So we took basically only 1/4 of the 
+coefficients, and we made everybody else 
+
+220
+00:20:06.685 --> 00:20:11.340
+0, and then we did the inverse, 
+and that's the result that we got. 
+
+221
+00:20:11.340 --> 00:20:16.397
+We have introduced error and remember, 
+basically, the DCT is, what it's going to 
+
+222
+00:20:16.397 --> 00:20:21.321
+try to do is going to try to bring us 
+into a domain that introduce in error, 
+
+223
+00:20:21.321 --> 00:20:25.979
+basically killing some of the 
+coefficients making them 0 or making 
+
+224
+00:20:25.979 --> 00:20:31.103
+errors on them, won't be as noticeable. 
+But in this case, we did it very simple. 
+
+225
+00:20:31.103 --> 00:20:36.293
+We just took 25% of the DCT coefficients. 
+Which ones is going very clear soon? 
+
+226
+00:20:36.293 --> 00:20:41.810
+But just imagine that we took the, the 
+1/4 of the basically largest 
+
+227
+00:20:41.810 --> 00:20:46.259
+coefficients. 
+Now, first we did it for the whole image. 
+
+228
+00:20:46.259 --> 00:20:53.847
+Here, we actually took only 2 x 2 blocks. 
+So we went here and we divided in 2 x 2 
+
+229
+00:20:53.847 --> 00:20:58.796
+blocks and we need a DCT of every 2 x 2 
+and we took 25%.. 
+
+230
+00:20:58.796 --> 00:21:02.425
+So be is, basically ended with only one 
+and we came back. 
+
+231
+00:21:02.425 --> 00:21:06.880
+And you see this very, very annoying 
+blocking artifact. 
+
+232
+00:21:06.880 --> 00:21:13.266
+Then we did the same for 4 x 4 and we do 
+the same for 8 x 8, 
+
+233
+00:21:13.266 --> 00:21:17.780
+And we see that basically its gets better 
+and better. 
+
+234
+00:21:17.780 --> 00:21:21.030
+So, you might wonder, okay, 
+2 x 2 is too little, 
+
+235
+00:21:21.030 --> 00:21:26.425
+but why to stop at 8 x 8? 
+Why not to go to 16 x 16 and 32 x 32? 
+
+236
+00:21:26.425 --> 00:21:31.170
+And, and you know, why not to just do the 
+DCT for the entire image? 
+
+237
+00:21:31.170 --> 00:21:34.030
+There's a couple of reasons for that. 
+One is computational, 
+
+238
+00:21:34.030 --> 00:21:41.504
+the, basically it's cheaper to do 
+multiple small DCTs than one large DCT. 
+
+239
+00:21:41.504 --> 00:21:50.315
+So if you have a, let's say a 16 x 16 
+image, I'd rather do four 8 x 8 DCTs than 
+
+240
+00:21:50.315 --> 00:21:56.070
+doing just one 16 x 16 DCT. 
+That's one of the reasons. 
+
+241
+00:21:56.070 --> 00:22:00.836
+Another reason is this magic 
+approximation of DCT to the 
+
+242
+00:22:00.836 --> 00:22:04.882
+Karhunen-Loeve. 
+I say that happens under certain 
+
+243
+00:22:04.882 --> 00:22:07.850
+conditions, 
+a Markovian condition. 
+
+244
+00:22:07.850 --> 00:22:12.411
+If you're in a small region at 8 x 8 
+block, 
+
+245
+00:22:12.411 --> 00:22:17.408
+that condition, that Markovian condition 
+will probably apply. 
+
+246
+00:22:17.408 --> 00:22:23.224
+But if you are on a very large image, 
+the whole image won't have a Markovian 
+
+247
+00:22:23.224 --> 00:22:26.799
+condition. 
+So basically, in small regions you expect 
+
+248
+00:22:26.799 --> 00:22:32.246
+that assumption to hold, but it doesn't 
+hold in large regions and it's not hard 
+
+249
+00:22:32.246 --> 00:22:35.759
+to see that. 
+If you're just, let's say, looking at me 
+
+250
+00:22:35.759 --> 00:22:41.200
+right now, you see that there's a lot of 
+correlation here,, more or less the same 
+
+251
+00:22:41.200 --> 00:22:44.920
+gray values. 
+But if you actually start moving away and 
+
+252
+00:22:44.920 --> 00:22:50.430
+you say, is there a correlation between 
+the pixel value here and the pixel value 
+
+253
+00:22:50.430 --> 00:22:54.838
+here that they are very far away? There's 
+actually no correlation. 
+
+254
+00:22:54.838 --> 00:23:00.150
+I can actually change my shirt and 
+without prior information. So there is no 
+
+255
+00:23:00.150 --> 00:23:05.584
+correlation when you get far way in your 
+image, pictures that are far away, 
+
+256
+00:23:05.584 --> 00:23:11.313
+basically they start being decorrelated. 
+So you need to get to a compromise. On 
+
+257
+00:23:11.313 --> 00:23:16.748
+one side you want very small blocks 
+because you want to be computation very 
+
+258
+00:23:16.748 --> 00:23:21.082
+efficient. 
+on, on the other hand basically you don't 
+
+259
+00:23:21.082 --> 00:23:26.129
+want too small blocks, because you get 
+into, into this problem of not having 
+
+260
+00:23:26.129 --> 00:23:31.549
+enough information in the block, enough 
+correlation to be able to decorrelate 
+
+261
+00:23:31.549 --> 00:23:35.528
+with the transform. 
+And if you get to two large blocks, you 
+
+262
+00:23:35.528 --> 00:23:41.085
+start paying computations, and you start 
+paying that you violated the assumptions 
+
+263
+00:23:41.085 --> 00:23:46.162
+for which the DCT is good. 
+So 8 x 8 is a good that I say was, was, 
+
+264
+00:23:46.162 --> 00:23:51.787
+was significantly studied and it got into 
+a very, very good compromised and that's 
+
+265
+00:23:51.787 --> 00:23:57.671
+why it used today for JPEG. 
+So, to conclude this part of the DCT, I 
+
+266
+00:23:57.671 --> 00:24:03.660
+just want to show you once again this 
+image, Lina. And these are just two 
+
+267
+00:24:03.660 --> 00:24:08.623
+different cases, but don't worry about 
+that for the moment. 
+
+268
+00:24:08.623 --> 00:24:15.725
+Here, basically we took 8 x 8 plots, we 
+did a DCT, and we kept 12.5% of their 
+
+269
+00:24:15.725 --> 00:24:21.216
+coefficients, and then we came back. 
+Not really quantization, which is going 
+
+270
+00:24:21.216 --> 00:24:25.300
+to be our next step, just a DCT and the 
+inverse DCT. 
+
+271
+00:24:25.300 --> 00:24:31.654
+And it looks pretty good than is, it just 
+when we just look for the first time at 
+
+272
+00:24:31.654 --> 00:24:37.176
+the image, we actually have achieved 
+compression, because we only kept 12.5% 
+
+273
+00:24:37.176 --> 00:24:43.303
+of the pixels and we got an image which 
+looks almost identical to the original 
+
+274
+00:24:43.303 --> 00:24:47.312
+one and that's because we did that in the 
+DCT domain. 
+
+275
+00:24:47.312 --> 00:24:53.146
+If we were to actually flow basically a 
+lot of pixels here and keep only 12.5%,. 
+
+276
+00:24:53.146 --> 00:24:57.085
+we will not be able to get this quality 
+of the image. 
+
+277
+00:24:57.085 --> 00:25:01.991
+This is just the error between the 
+original and the reconstructed. 
+
+278
+00:25:01.991 --> 00:25:05.187
+And as you see, it's relatively small 
+error. 
+
+279
+00:25:05.187 --> 00:25:10.687
+So this is pretty good compression by 
+nothing else than doing a DCT, 
+
+280
+00:25:10.687 --> 00:25:14.850
+basically removing a lot of coefficients 
+and coming back. 
+
+281
+00:25:14.850 --> 00:25:18.788
+So now, we have the front end and we have 
+the back end. 
+
+282
+00:25:18.788 --> 00:25:24.477
+What's missing is the middle. 
+I'm in the DCT domain, can I achieve even 
+
+283
+00:25:24.477 --> 00:25:28.708
+more compression by doing quantization in 
+a smart fashion? 
+
+284
+00:25:28.708 --> 00:25:32.720
+And that's going to be the subject of our 
+next video clip. 

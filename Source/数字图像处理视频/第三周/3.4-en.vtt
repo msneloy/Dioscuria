@@ -1,0 +1,556 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.521
+Let us now present a very simple 
+extension of histogram equalization which 
+
+2
+00:00:04.521 --> 00:00:08.540
+is called histogram matching. 
+So let us illustrate the problem. 
+
+3
+00:00:08.540 --> 00:00:13.341
+We saw before, histogram equalization 
+where we take any histogram, any pixel 
+
+4
+00:00:13.341 --> 00:00:17.503
+distribution, and we match it to 
+something which is as uniform as 
+
+5
+00:00:17.503 --> 00:00:20.384
+possible. 
+But imagine that we have this pixel 
+
+6
+00:00:20.384 --> 00:00:25.442
+distribution, which is the one we have 
+seen before, and somebody comes and tells 
+
+7
+00:00:25.442 --> 00:00:29.155
+us, this is your target. 
+I don't want to do an equalization. 
+
+8
+00:00:29.155 --> 00:00:34.021
+I want you to finish with a histogram 
+which is as close as possible to this 
+
+9
+00:00:34.021 --> 00:00:36.645
+one. 
+So the idea is as before, we're going to 
+
+10
+00:00:36.645 --> 00:00:39.270
+have to find a map, which is written 
+here. 
+
+11
+00:00:39.270 --> 00:00:42.280
+This is the map that we have been doing 
+before. 
+
+12
+00:00:42.280 --> 00:00:47.432
+A map such that from here from this 
+distribution we can go to as close as 
+
+13
+00:00:47.432 --> 00:00:52.304
+possible to this one in this craze, 
+being the way that I'm going to describe 
+
+14
+00:00:52.304 --> 00:00:55.187
+in a second. 
+What we are going to obtain is this, 
+
+15
+00:00:55.187 --> 00:00:58.774
+which is very similar, 
+not exactly, but very, very similar. 
+
+16
+00:00:58.774 --> 00:01:03.579
+We already saw in the previous video that 
+we cannot always get exactly the 
+
+17
+00:01:03.579 --> 00:01:07.166
+specified histogram. 
+In the previous video, was equalized. 
+
+18
+00:01:07.166 --> 00:01:11.074
+But we can get very close to it. 
+And this is what we see here. 
+
+19
+00:01:11.074 --> 00:01:14.790
+So how do we do that? 
+You already have all the tools to do 
+
+20
+00:01:14.790 --> 00:01:16.840
+that. 
+Let me illustrate how. 
+
+21
+00:01:16.840 --> 00:01:21.991
+We start from the distribution of the 
+current image. 
+
+22
+00:01:21.991 --> 00:01:28.530
+Whatever that distribution is, it's the 
+image that is given to you. 
+
+23
+00:01:28.530 --> 00:01:33.582
+You know how to map that to a uniform 
+distribution. 
+
+24
+00:01:33.582 --> 00:01:38.840
+Okay? Now, you are giving a desire 
+distribution. 
+
+25
+00:01:38.840 --> 00:01:44.569
+You know how to map this desired 
+distribution, the target distribution 
+
+26
+00:01:44.569 --> 00:01:50.135
+also to a uniform distribution. 
+Therefore, if you know how to go from 
+
+27
+00:01:50.135 --> 00:01:56.110
+here to here and from here to here, 
+if you invert this, you know how to go 
+
+28
+00:01:56.110 --> 00:02:01.251
+all the path that is the desired path. 
+So, you're going to map a pixel value 
+
+29
+00:02:01.251 --> 00:02:05.158
+from here to here, 
+then you're going to ask, okay, where is 
+
+30
+00:02:05.158 --> 00:02:10.573
+this pixel coming from, this pixel value 
+coming from when I want to go here, and 
+
+31
+00:02:10.573 --> 00:02:14.689
+you just invert that. 
+So, you basically have one map and our 
+
+32
+00:02:14.689 --> 00:02:20.803
+map and you just invert the second map. 
+So let's say that pixel value a, a pixel 
+
+33
+00:02:20.803 --> 00:02:27.132
+with a gray value seven goes to ten here. 
+Then you ask, okay, who, from here. 
+
+34
+00:02:27.132 --> 00:02:32.752
+What peaks a value, one to ten, and 
+somebody, you know, this map tells you 
+
+35
+00:02:32.752 --> 00:02:36.392
+fifteen. 
+So you end up going from seven to ten, 
+
+36
+00:02:36.392 --> 00:02:41.446
+and inverse of ten is fifteen, so you 
+went from seven to fifteen. 
+
+37
+00:02:41.446 --> 00:02:45.710
+And that's how you basically get a 
+histogram matching. 
+
+38
+00:02:45.710 --> 00:02:50.942
+Just by doing the histogram 
+equalizations, now you know how to match 
+
+39
+00:02:50.942 --> 00:02:55.948
+any two desired distributions. 
+There's one caveat, as we saw in the 
+
+40
+00:02:55.948 --> 00:03:00.195
+previous video, the, the maps don't have 
+to be one to one. 
+
+41
+00:03:00.195 --> 00:03:06.262
+So, maybe there is more than one pixel 
+value here that ends up at the same pixel 
+
+42
+00:03:06.262 --> 00:03:10.130
+value there. 
+So, when you go from seven, let's say to 
+
+43
+00:03:10.130 --> 00:03:15.880
+ten, maybe there is fifteen, from here 
+goes to ten. 
+
+44
+00:03:15.880 --> 00:03:20.600
+And maybe also twenty goes to ten. 
+So. 
+
+45
+00:03:20.600 --> 00:03:24.821
+Am I going to map seven to fifteen or I'm 
+going to map seven to twenty? 
+
+46
+00:03:24.821 --> 00:03:29.821
+You're going to have to make a decision. 
+The most common decision is to pick the 
+
+47
+00:03:29.821 --> 00:03:35.017
+one that is closest to the original, so 
+you do the less deformation of the pixel 
+
+48
+00:03:35.017 --> 00:03:38.978
+values of the image. 
+But you can make other decisions, as long 
+
+49
+00:03:38.978 --> 00:03:44.174
+as those decisions are consistent and as 
+long as those decisions guarantee that 
+
+50
+00:03:44.174 --> 00:03:49.369
+you end up with an increase in function. 
+Remember that we don't want to flip pixel 
+
+51
+00:03:49.369 --> 00:03:52.097
+values. 
+So once again, you do two histogram 
+
+52
+00:03:52.097 --> 00:03:57.554
+equalizations, you invert one of them. 
+And then you basically obtain histogram 
+
+53
+00:03:57.554 --> 00:04:00.840
+matching. 
+So let's see how that works. 
+
+54
+00:04:00.840 --> 00:04:04.905
+This is a particular example. 
+We have a very dark image here. 
+
+55
+00:04:04.905 --> 00:04:09.039
+And we see that, in the histogram mostly 
+dark values are used. 
+
+56
+00:04:09.039 --> 00:04:14.190
+So it's hard for us to see what's going 
+on here, because it's very, very dark. 
+
+57
+00:04:14.190 --> 00:04:19.029
+If we do histogram equalization, we get a 
+too bright image as we see here. 
+
+58
+00:04:19.029 --> 00:04:24.067
+This is actually the mapping, the T R 
+mapping that we always are looking for. 
+
+59
+00:04:24.067 --> 00:04:26.652
+And this is going to be the new 
+histogram. 
+
+60
+00:04:26.652 --> 00:04:31.889
+And we see both from the histogram and 
+from the actual image that it's way too 
+
+61
+00:04:31.889 --> 00:04:34.872
+bright. 
+So we haven't achieved what we really 
+
+62
+00:04:34.872 --> 00:04:39.578
+wanted which is a nicer looking image 
+that we can actually observe the 
+
+63
+00:04:39.578 --> 00:04:44.369
+different regions of that image. 
+If you still have that, we do histogram 
+
+64
+00:04:44.369 --> 00:04:49.846
+matching so if somebody comes and tells 
+us I know that this is the distribution 
+
+65
+00:04:49.846 --> 00:04:55.253
+that is going to be great for my image. 
+Then what we do is again, we go form the 
+
+66
+00:04:55.253 --> 00:05:02.132
+original distribution to equalization. 
+We go from, this distribution, the new 
+
+67
+00:05:02.132 --> 00:05:08.490
+distribution here, we go to equalization, 
+which is, going to be this map. 
+
+68
+00:05:08.490 --> 00:05:12.160
+We invert that map, which is going to be 
+this. 
+
+69
+00:05:12.160 --> 00:05:18.410
+And then we go in two steps from the 
+original histogram to the equalized one. 
+
+70
+00:05:18.410 --> 00:05:23.563
+From the equalized one through the 
+inverse map to the new pixel value. 
+
+71
+00:05:23.563 --> 00:05:29.305
+And we get this distribution, which gives 
+us this image, which looks much nicer 
+
+72
+00:05:29.305 --> 00:05:33.870
+than this one and also help us to look at 
+some of its details. 
+
+73
+00:05:33.870 --> 00:05:39.554
+So we basically got histogram matching by 
+doing twice histogram equalization. 
+
+74
+00:05:39.554 --> 00:05:42.802
+Once direct and the other which is 
+inverted. 
+
+75
+00:05:42.802 --> 00:05:48.856
+And again, if we have ambiguities we just 
+make a decision by using for example, the 
+
+76
+00:05:48.856 --> 00:05:53.950
+pixel value closest to the one that we 
+started in the original image. 
+
+77
+00:05:53.950 --> 00:05:58.298
+So you got two for the price of one. 
+If you know how to do histogram 
+
+78
+00:05:58.298 --> 00:06:01.880
+equalization, you know how to do 
+histogram matching. 
+
+79
+00:06:01.880 --> 00:06:06.909
+Of course, there is a big art, in 
+designing your target histogram and 
+
+80
+00:06:06.909 --> 00:06:12.226
+that's very application dependent. 
+Let's just mention one last thing about 
+
+81
+00:06:12.226 --> 00:06:15.100
+histogram equalization or histogram 
+matching. 
+
+82
+00:06:15.100 --> 00:06:20.238
+So far, we considered the whole image, 
+and we say, let's just look at the whole 
+
+83
+00:06:20.238 --> 00:06:25.509
+image, let's look at the distribution, 
+and let's match those pixel distributions 
+
+84
+00:06:25.509 --> 00:06:30.381
+to a new distribution, either an 
+equalization or a specified distribution. 
+
+85
+00:06:30.381 --> 00:06:35.519
+You can do the same operations locally. 
+So for example, if we take this, and we 
+
+86
+00:06:35.519 --> 00:06:39.790
+do histogram, global histogram 
+equalization, we're going to get this. 
+
+87
+00:06:39.790 --> 00:06:44.024
+Sometimes it looks a bit better, but 
+there is a compromise. 
+
+88
+00:06:44.024 --> 00:06:49.207
+I only have 256 pixel values to 
+distribute for my whole image. 
+
+89
+00:06:49.207 --> 00:06:55.121
+So, I may not be able to do a very strong 
+contrast at the same time here and here. 
+
+90
+00:06:55.121 --> 00:06:59.940
+So, the way to solve this is to basically 
+consider regions and say, 
+
+91
+00:06:59.940 --> 00:07:04.792
+let just do histogram equalization for 
+example of this region and let's do 
+
+92
+00:07:04.792 --> 00:07:09.952
+histogram equalization of this region. 
+They can actually be overlapping and we 
+
+93
+00:07:09.952 --> 00:07:12.850
+are going to treat each region 
+independently. 
+
+94
+00:07:12.850 --> 00:07:18.003
+And maybe by doing that, I can basically 
+improve the contrast in every region in 
+
+95
+00:07:18.003 --> 00:07:22.383
+the image, when there is a large 
+variability, like in this particular 
+
+96
+00:07:22.383 --> 00:07:25.474
+image. 
+This is the result of that and I want you 
+
+97
+00:07:25.474 --> 00:07:28.180
+for example to concentrate on this 
+region. 
+
+98
+00:07:28.180 --> 00:07:32.870
+How it's very hard to see the details 
+here. 
+
+99
+00:07:32.870 --> 00:07:38.100
+They don't look much better here, but 
+they do look much better here. 
+
+100
+00:07:38.100 --> 00:07:42.400
+Now, in this region, 
+there's not a lot of details. 
+
+101
+00:07:42.400 --> 00:07:47.900
+The global did manage to do a good job 
+but not in this region. 
+
+102
+00:07:47.900 --> 00:07:52.414
+Global histogram equalization or global 
+histogram matching is a compromise 
+
+103
+00:07:52.414 --> 00:07:55.292
+between everything that we see in the 
+image. 
+
+104
+00:07:55.292 --> 00:08:00.002
+We can try to overcome, at least 
+partially, that compromise by doing this 
+
+105
+00:08:00.002 --> 00:08:03.666
+local operation. 
+And now we see that you can get details 
+
+106
+00:08:03.666 --> 00:08:08.180
+here, we can also get details here. 
+So, in the different regions of the 
+
+107
+00:08:08.180 --> 00:08:13.283
+image, they have very different pixel 
+values and we can still do a basically a 
+
+108
+00:08:13.283 --> 00:08:18.190
+histogram stretching and get much better 
+contrast in the different regions. 
+
+109
+00:08:18.190 --> 00:08:24.184
+By this, we basically conclude our unit, 
+our portion on histogram equalization and 
+
+110
+00:08:24.184 --> 00:08:28.551
+histogram matching, 
+a very simple operation, and very useful. 
+
+111
+00:08:28.551 --> 00:08:31.216
+See you in the next video. 
+Thank you. 

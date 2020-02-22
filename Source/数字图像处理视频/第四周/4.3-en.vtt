@@ -1,0 +1,221 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.483
+Hello, and welcome back. 
+We are going to benefit once again from 
+
+2
+00:00:03.483 --> 00:00:07.851
+MATLAB to learn a few of the examples of 
+different types of noise that we have 
+
+3
+00:00:07.851 --> 00:00:11.941
+learned in the previous video. 
+Let us, first of all, as we already know 
+
+4
+00:00:11.941 --> 00:00:16.367
+how to do that, load an image. 
+This is one other image that comes with a 
+
+5
+00:00:16.367 --> 00:00:19.734
+MATLAB packet. 
+This in particular is a color image RGB. 
+
+6
+00:00:19.734 --> 00:00:23.662
+So we are going to first transform it 
+into a black and white image. 
+
+7
+00:00:23.662 --> 00:00:28.462
+We're basically only going to be paying 
+attention to the luminance component of 
+
+8
+00:00:28.462 --> 00:00:31.517
+the image. 
+That's this operation that we see here. 
+
+9
+00:00:31.517 --> 00:00:35.258
+Then we're going to add Gaussian noise, 
+that's what we see here. 
+
+10
+00:00:35.258 --> 00:00:39.809
+So Gaussian means we are going to add 
+Gaussian noise to this image and that 
+
+11
+00:00:39.809 --> 00:00:42.740
+Gaussian noise is going to have a 
+variance of 2. 
+
+12
+00:00:42.740 --> 00:00:46.385
+Then we're going to add salt and pepper 
+noise with 2%,. 
+
+13
+00:00:46.385 --> 00:00:51.852
+meaning 2% of the pixels in the image I 
+are going to be changed to either black 
+
+14
+00:00:51.852 --> 00:00:56.198
+or white, according to the definition of, 
+of salt and pepper noise. 
+
+15
+00:00:56.198 --> 00:01:00.895
+And then we are actually going to add 20% 
+of salt and pepper noise. 
+
+16
+00:01:00.895 --> 00:01:04.820
+So that's this image. 
+Now, what we are going to do, is we are 
+
+17
+00:01:04.820 --> 00:01:09.377
+going to load all the images, 
+the original color image, the black and 
+
+18
+00:01:09.377 --> 00:01:14.201
+white version of that image, 
+the Gaussian noise, the 2% salt and 
+
+19
+00:01:14.201 --> 00:01:18.175
+pepper noise, and the 20% salt and pepper 
+noise. 
+
+20
+00:01:18.175 --> 00:01:23.118
+So let's just see what happens. 
+Once again, we are basically loading all 
+
+21
+00:01:23.118 --> 00:01:26.624
+the images. 
+Now, I'm going to move them so we can 
+
+22
+00:01:26.624 --> 00:01:30.406
+look at them better, 
+but I think you managed to see some of 
+
+23
+00:01:30.406 --> 00:01:33.816
+that already. 
+So there's a lot of images here. 
+
+24
+00:01:33.816 --> 00:01:39.792
+And, let's see first the original image. 
+This is the RGB, the color of image that 
+
+25
+00:01:39.792 --> 00:01:44.116
+we loaded first. 
+I'm going to remove that so we don't have 
+
+26
+00:01:44.116 --> 00:01:48.520
+so many images on the screen. 
+Here is the original image. 
+
+27
+00:01:48.520 --> 00:01:51.724
+Here is the result of finding the 
+Gaussian noise. 
+
+28
+00:01:51.724 --> 00:01:56.760
+The first observation you can see is 
+basically there is noise all around the 
+
+29
+00:01:56.760 --> 00:01:58.853
+image. 
+So, this is Gaussian noise. 
+
+30
+00:01:58.853 --> 00:02:03.170
+Every pixel has some noise according to 
+the Gaussian distribution. 
+
+31
+00:02:03.170 --> 00:02:07.836
+Contrary to that, we see here that 2% 
+salt and pepper noise. 
+
+32
+00:02:07.836 --> 00:02:13.126
+Some of the pixels of the image have been 
+affected, only 2% of them. 
+
+33
+00:02:13.126 --> 00:02:19.115
+Now, once they are affected, they become 
+either completely white or completely 
+
+34
+00:02:19.115 --> 00:02:21.760
+black as we see that here. 
+Finally, 
+
+35
+00:02:21.760 --> 00:02:25.728
+we see what happens when we have 20% of 
+noise. 
+
+36
+00:02:25.728 --> 00:02:31.580
+So you see a lot of pixels that basically 
+became either black or white. 
+
+37
+00:02:31.580 --> 00:02:36.302
+Once again, compared to only 2%, and 
+compared to the Gaussian noise, that is 
+
+38
+00:02:36.302 --> 00:02:40.772
+affecting all the pixels. And finally, 
+then just look again at this nice 
+
+39
+00:02:40.772 --> 00:02:44.109
+original image. 
+So these are different types of noise, 
+
+40
+00:02:44.109 --> 00:02:49.020
+Gaussian noise and salt and pepper noise, 
+and basically different densities of 
+
+41
+00:02:49.020 --> 00:02:53.239
+noise for salt and pepper. 
+We could also have played with different 
+
+42
+00:02:53.239 --> 00:02:57.772
+variances for the Gaussian noise, but I 
+think that this is sufficient to 
+
+43
+00:02:57.772 --> 00:03:00.731
+illustrate the concept of these types of 
+noise. 
+
+44
+00:03:00.731 --> 00:03:03.880
+Thank you very much and see you in the 
+next video. 

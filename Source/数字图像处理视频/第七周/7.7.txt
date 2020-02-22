@@ -1,0 +1,63 @@
+Hello and welcome back. 
+Let us now talk about Video Inpainting. You basically already have all the tools 
+to do Video Inpainting. Remember, and I'm showing these in very 
+slow motion, a video is a sequence of frames, a sequence of images. 
+So, we can basically use the tools that we developed for Image Inpainting now in 
+Video Inpainting. How? 
+For example, we can take, in the Cut and Paste, instead of two-dimensional patches 
+x, y, we can consider three-dimensional patches x, y, t and look at them in the 
+video. In the whole video, that would be very 
+expensive but we can look at them in segments of the video. 
+We can also run the partial differential equations or the variational formulations 
+considering, for example, three-dimensional gradients. 
+When we talk about curvature, we can consider the videos as surfaces and talk 
+about surface curvatures like Mean curvature or Gaussian curvature. 
+So basically, the same type of concepts, Laplacian, we can take derivatives in the 
+x, y, and t directions. Some type of concepts, we can expand to 
+do Video Inpainting. And that's how today, Video Inpainting is 
+done in the literature extending those concepts that we saw for images. 
+Now, Video Inpainting has a bit of different characteristics. 
+For example, here, let me just show you with the 
+arrows. There are some objects that are static in 
+the video so they will never appear in any of the frames. 
+And there are some objects that move in the video so it's slightly different if 
+we want to remove static objects than if we want to remove moving objects. 
+For example, if we want to remove a moving object, all what we have to do is 
+wait until it's gone in one of the future frames and copy from those frames into 
+the current frame. So, I want to remove this now. 
+Look at my pointer, now it's gone. So, I basically can copy those pixels, 
+those pixels from future frames into the current frame. Because the object is 
+moving, the current background appears in some of the previous or some of the 
+future frames. When the object is fixed, it's slightly 
+different. The background is never revealed but this 
+Cut and Paste or partial differential equations or variation of formulations 
+will work there. So, you could if you want make a 
+distinction between these two and differently inpaint each region or you 
+could just let those techniques that we described for images work with all the 
+objects. Here, we see an example of this video 
+inpainted with those combination of Cut and Paste propagation of information as 
+we have seen, we basically have removed a number of objects, we have removed 
+basically this, this, and this. We have removed both static and dynamic objects 
+with those techniques without making any explicit distinction between them. 
+Here is another example. what we want to remove now, as you see, 
+is this object. Remember, for inpainting you get the 
+video, as we got the image, you have to get the 
+mask, a video with the mask. Now, of course, doing that by hand for 
+video is much more time-consuming than doing it by hand for still images. 
+But we have to mix to do segmentation in video as we have seen, for example, the 
+Roto Brush in Adobe's After Effects. And here is the, the result of basically 
+removing this person or this mask. And you see the video looks completely 
+natural. We, it's very hard to realize for us that 
+this is not the original video but it actually is not and it's actually 
+inpainted with this dynamic object. And now here, we have a second example. 
+This is an example that we have already seen in the past and once again, we are 
+basically removing one object and making you believe that it was the original 
+video. This basically concludes our presentation 
+of Image and Video Inpainting. We have seen very, very good techniques 
+for doing this and as we talked in the past, this is used a lot, for example, 
+in the movie industry. But its also used a lot to improve our 
+own pictures, our own images, and remove objects that we don't like on those 
+images. I hope you had fun, this is really a fun 
+topic. You can make a lot of nice stuff with 
+Image and Video Inpainting. Thank you very much and I am going to see 
+you again next week. Thank you.

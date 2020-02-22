@@ -1,0 +1,490 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.627
+Coming back to local filters, there's 
+another extremely important and extremely 
+
+2
+00:00:04.627 --> 00:00:07.966
+appropriate local filter which is called 
+a median filter, 
+
+3
+00:00:07.966 --> 00:00:12.126
+which we are going to describe next. 
+And it's a great filter because it 
+
+4
+00:00:12.126 --> 00:00:15.699
+doesn't really blur edges. 
+And although it's a very classical 
+
+5
+00:00:15.699 --> 00:00:18.980
+filter, it's still very useful today. 
+So, let's observe it. 
+
+6
+00:00:18.980 --> 00:00:23.237
+Before we actually describe it, let's see 
+what happens with a real image. 
+
+7
+00:00:23.237 --> 00:00:27.790
+We have here an image, that has been 
+contaminated with what's called salt and 
+
+8
+00:00:27.790 --> 00:00:30.392
+pepper noise. 
+Next week, we're actually going to 
+
+9
+00:00:30.392 --> 00:00:35.300
+describe different models of noise a bit 
+better, but salt and pepper, it's just 
+
+10
+00:00:35.300 --> 00:00:39.676
+noise that basically is very strong 
+noise, individually added at different 
+
+11
+00:00:39.676 --> 00:00:41.041
+pixels. 
+We see it here. 
+
+12
+00:00:41.041 --> 00:00:43.767
+This is the result of the local mean 
+filter. 
+
+13
+00:00:43.767 --> 00:00:47.698
+What we have seen in the previous videos, 
+just local averaging, 
+
+14
+00:00:47.698 --> 00:00:52.771
+in this case, a three by three. 
+You might be able to observe there is 
+
+15
+00:00:52.771 --> 00:00:57.020
+some reduction of noise but not really 
+too much reduction of noise. 
+
+16
+00:00:57.020 --> 00:01:02.677
+Here, on the other hand, is the result of 
+a three by three median filter and we see 
+
+17
+00:01:02.677 --> 00:01:05.230
+a great result. 
+We don't see blurring. 
+
+18
+00:01:05.230 --> 00:01:09.036
+we actually see that a lot of the noise 
+has been reduced. 
+
+19
+00:01:09.036 --> 00:01:13.911
+We could reduce much more noise with a 
+local mean filter, a local average. 
+
+20
+00:01:13.911 --> 00:01:18.519
+If we go beyond three by three, we might 
+go five by five, nine by nine. 
+
+21
+00:01:18.519 --> 00:01:24.129
+Remember, by averaging we are reducing 
+the noise by square of the number of 
+
+22
+00:01:24.129 --> 00:01:28.269
+pixels that we are averaging as we saw in 
+the previous videos. 
+
+23
+00:01:28.269 --> 00:01:33.411
+But if we enlarge the neighborhood, we 
+also saw that we are going to start to 
+
+24
+00:01:33.411 --> 00:01:36.350
+blur a lot of the details. 
+On the other hand, 
+
+25
+00:01:36.350 --> 00:01:42.956
+keeping a three by three neighborhood 
+would still get extremely good denoising 
+
+26
+00:01:42.956 --> 00:01:47.168
+with the median filter. 
+So, what's the median filter? 
+
+27
+00:01:47.168 --> 00:01:50.862
+Very simple. 
+What we do, is we actually take, let's 
+
+28
+00:01:50.862 --> 00:01:54.880
+say, if we are working in a three by 
+three neighborhood, 
+
+29
+00:01:54.880 --> 00:02:01.027
+we basically order the pixels so we 
+basically order them from the smallest to 
+
+30
+00:02:01.027 --> 00:02:04.652
+the largest and we pick the one in the 
+middle, 
+
+31
+00:02:04.652 --> 00:02:08.041
+okay? 
+So, we start putting all the pixels in 
+
+32
+00:02:08.041 --> 00:02:14.189
+order, we pick the one in the middle. 
+This is an operation we actually learn in 
+
+33
+00:02:14.189 --> 00:02:18.603
+elementary school. 
+And it's an extremely powerful, replace 
+
+34
+00:02:18.603 --> 00:02:24.580
+it by the one in the middle. 
+So, for example, if you have pixels which 
+
+35
+00:02:24.580 --> 00:02:29.380
+look like this and one of the pixels is 
+very noisy, 
+
+36
+00:02:29.380 --> 00:02:34.856
+when you order them, 
+this one is going to be replaced by one 
+
+37
+00:02:34.856 --> 00:02:40.182
+of these values that are all equal so 
+it's going to be replaced, it's going to 
+
+38
+00:02:40.182 --> 00:02:41.127
+go down, 
+okay? 
+
+39
+00:02:41.127 --> 00:02:45.118
+So, the noise is clean. 
+Completely clean, without blurring as we 
+
+40
+00:02:45.118 --> 00:02:48.652
+have seen for Gaussian filtering or for 
+mean filtering. 
+
+41
+00:02:48.652 --> 00:02:53.167
+It's a very, very simple filter. 
+You order, and you pick the one in the 
+
+42
+00:02:53.167 --> 00:02:55.916
+middle. 
+You order from the smallest to the 
+
+43
+00:02:55.916 --> 00:02:58.730
+largest, and you pick the one in the 
+middle. 
+
+44
+00:02:58.730 --> 00:03:02.917
+And then, you move to the next window. 
+So, you basically take a three by three 
+
+45
+00:03:02.917 --> 00:03:06.885
+window, then you move to the next window, 
+the next window, the next window. 
+
+46
+00:03:06.885 --> 00:03:10.136
+And you get this extremely simple filter, 
+the median filter. 
+
+47
+00:03:10.136 --> 00:03:14.434
+Before I show you additional examples of 
+the median filter in real time, we're 
+
+48
+00:03:14.434 --> 00:03:18.566
+going to actual run MatLab to do that. 
+Let me just give you one interesting 
+
+49
+00:03:18.566 --> 00:03:25.110
+property of the median filter. 
+We saw in a couple of views ago that the 
+
+50
+00:03:25.110 --> 00:03:33.651
+average filter is reducing this, a minus 
+ai squared. We say the average is the 
+
+51
+00:03:33.651 --> 00:03:41.291
+value of a that reduces, that minimizes 
+this and I'm summing over all the pixels. 
+
+52
+00:03:41.291 --> 00:03:48.741
+So, I'm going to ask you a question, can 
+we represent the median filtering in a 
+
+53
+00:03:48.741 --> 00:03:52.752
+form like this? 
+A different function maybe. 
+
+54
+00:03:52.752 --> 00:03:58.233
+Some of certain function of a minus ai, 
+can we do that? 
+
+55
+00:03:58.233 --> 00:04:06.920
+Just think for a while, and tell me yes 
+or no, if you know the answer of that. 
+
+56
+00:04:06.920 --> 00:04:12.328
+So, what's the answer to this question? 
+Very interesting. 
+
+57
+00:04:12.328 --> 00:04:20.775
+This is the mean. 
+The value of a that minimizes the square 
+
+58
+00:04:20.775 --> 00:04:25.145
+error is the mean. 
+What's the median? 
+
+59
+00:04:25.145 --> 00:04:33.080
+The median is the value that minimizes 
+the absolute. 
+
+60
+00:04:33.080 --> 00:04:37.376
+There's no square here. 
+It's just the absolute difference. 
+
+61
+00:04:37.376 --> 00:04:42.652
+It's extremely interesting that by 
+replacing this square by basically 
+
+62
+00:04:42.652 --> 00:04:46.120
+nothing, just absolute value, we get the 
+median. 
+
+63
+00:04:46.120 --> 00:04:50.901
+Once again, you can prove this. 
+It's a bit more of a difficult proof, 
+
+64
+00:04:50.901 --> 00:04:56.324
+because when we discuss how to prove 
+this, we say, just take derivatives, make 
+
+65
+00:04:56.324 --> 00:05:01.748
+the derivative equal to zero, and you're 
+going to find that a is the average of 
+
+66
+00:05:01.748 --> 00:05:04.887
+all the ai's. 
+Here, you're not allowed to take 
+
+67
+00:05:04.887 --> 00:05:10.757
+derivative, because at zero, the absolute 
+value cannot have a, doesn't have a 
+
+68
+00:05:10.757 --> 00:05:14.141
+derivative. 
+So, the proof is a bit more delicate. 
+
+69
+00:05:14.141 --> 00:05:17.885
+But I'm sure that you can do it as a 
+bonus exercise. 
+
+70
+00:05:17.885 --> 00:05:23.428
+Don't worry too much about that for now. 
+You can believe me, that if you don't 
+
+71
+00:05:23.428 --> 00:05:28.828
+want to do the proof by yourself, 
+that the result of minimizing this is the 
+
+72
+00:05:28.828 --> 00:05:32.356
+median filter. 
+An extremely interesting operation. 
+
+73
+00:05:32.356 --> 00:05:36.820
+For those that are familiar with the area 
+of robot statistics, 
+
+74
+00:05:36.820 --> 00:05:43.150
+this is a square error, which is not very 
+robust, and that's why it's blurring. 
+
+75
+00:05:43.150 --> 00:05:48.678
+This is a much more robust error. 
+And that's why it's able to completely 
+
+76
+00:05:48.678 --> 00:05:54.514
+eliminate noise, like salt and pepper 
+noise, without blurring the rest of the 
+
+77
+00:05:54.514 --> 00:05:58.046
+image. 
+The last interesting property I want to 
+
+78
+00:05:58.046 --> 00:06:03.651
+mention about the median is in the 
+average, the result doesn't have to be 
+
+79
+00:06:03.651 --> 00:06:08.027
+one of the pixels. 
+So, for example, if you're averaging one 
+
+80
+00:06:08.027 --> 00:06:11.560
+and two, you get 1.5. 
+It's not one, it's not two, 
+
+81
+00:06:11.560 --> 00:06:14.825
+okay? 
+When you're averaging, let's say, a three 
+
+82
+00:06:14.825 --> 00:06:17.946
+by, 
+when you're completing the average of a 
+
+83
+00:06:17.946 --> 00:06:23.606
+three by three and you're replacing the 
+middle pixel by the average, you might be 
+
+84
+00:06:23.606 --> 00:06:27.380
+replacing the pixel by a value that 
+doesn't show up, 
+
+85
+00:06:27.380 --> 00:06:32.542
+not in the three by three window, 
+maybe not even in the whole image. 
+
+86
+00:06:32.542 --> 00:06:36.625
+Once again, the average between, of one 
+and two is 1.5, 
+
+87
+00:06:36.625 --> 00:06:40.229
+a new value. 
+On the other hand, when you're doing the 
+
+88
+00:06:40.229 --> 00:06:45.653
+median filtering, you're always replacing 
+by one of the values that already exist 
+
+89
+00:06:45.653 --> 00:06:49.873
+in the three by three window. 
+So, you're not producing new pixel 
+
+90
+00:06:49.873 --> 00:06:53.088
+values. 
+And that's part of what's happening here. 
+
+91
+00:06:53.088 --> 00:06:56.370
+And that's a very interesting property by 
+itself. 
+
+92
+00:06:56.370 --> 00:06:59.249
+There is no novelty. 
+There is no new values. 
+
+93
+00:06:59.249 --> 00:07:04.540
+Only those that are already familiar in 
+the neighborhood of the pixel that you 
+
+94
+00:07:04.540 --> 00:07:07.452
+are replacing the pixel with the median. 
+Now, 
+
+95
+00:07:07.452 --> 00:07:11.815
+now, that we know about the median, now 
+that we know some of the interesting 
+
+96
+00:07:11.815 --> 00:07:15.596
+properties of the median, 
+let's just see a few additional examples 
+
+97
+00:07:15.596 --> 00:07:19.594
+of the median filter in action. 
+Let's see that in the next video. 
+
+98
+00:07:19.594 --> 00:07:20.260
+Thank you. 

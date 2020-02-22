@@ -1,0 +1,681 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.615
+Let's see if we can use the histograms 
+then, to basically, estimate a noise. 
+
+2
+00:00:04.615 --> 00:00:07.610
+We need to estimate both the shape of the 
+noise, 
+
+3
+00:00:07.610 --> 00:00:12.537
+basically the function of the noise. 
+Its Gaussian is uniform, its salt and 
+
+4
+00:00:12.537 --> 00:00:15.282
+pepper. 
+And once we estimate that, we need to 
+
+5
+00:00:15.282 --> 00:00:19.983
+estimate actually the parameters of that. 
+So, we're going to use the same image 
+
+6
+00:00:19.983 --> 00:00:23.010
+that we have seen before. 
+This very simple image. 
+
+7
+00:00:23.010 --> 00:00:28.484
+And let's assume for a moment that you 
+manage to go into a region that has only, 
+
+8
+00:00:28.484 --> 00:00:31.974
+in the original image, only one type of 
+pixel value. 
+
+9
+00:00:31.974 --> 00:00:36.421
+So, one gray value for all the pixels 
+there in the original image. 
+
+10
+00:00:36.421 --> 00:00:41.457
+And we see that illustrated here. 
+If we manage to do that, then we go and 
+
+11
+00:00:41.457 --> 00:00:45.801
+plot the histogram. 
+The distribution of pixel values for that 
+
+12
+00:00:45.801 --> 00:00:48.436
+region. 
+For example, this would be the 
+
+13
+00:00:48.436 --> 00:00:53.564
+distribution of the pixel values. 
+Now, when we see these, basically we can 
+
+14
+00:00:53.564 --> 00:00:56.768
+immediately guess what kind of noise is 
+here. 
+
+15
+00:00:56.768 --> 00:01:02.394
+So, I'm going to ask you, what type of 
+noise was added to this region that would 
+
+16
+00:01:02.394 --> 00:01:08.284
+give us this histogram check?" It's very 
+easy to see that basically, this is a 
+
+17
+00:01:08.284 --> 00:01:10.660
+Gaussian noise. 
+We are now experts. 
+
+18
+00:01:10.660 --> 00:01:14.713
+So, the moment we see the, this, we 
+immediately recognize it. 
+
+19
+00:01:14.713 --> 00:01:20.164
+Now, that we know that it's Gaussian, 
+basically we need to estimate the average 
+
+20
+00:01:20.164 --> 00:01:25.824
+and the variance and that's very easily 
+done by just computing it from the pixel 
+
+21
+00:01:25.824 --> 00:01:29.038
+values. 
+Maybe it was really noise, as here, that 
+
+22
+00:01:29.038 --> 00:01:32.602
+was added. 
+If that's the case, we once again use the 
+
+23
+00:01:32.602 --> 00:01:38.471
+histogram distribution to basically 
+decide and compute the average and the 
+
+24
+00:01:38.471 --> 00:01:42.568
+variance. 
+And with that, we can try to invert it as 
+
+25
+00:01:42.568 --> 00:01:49.056
+we're going to discuss in a few minutes. 
+Here, again, we're complete experts now 
+
+26
+00:01:49.056 --> 00:01:52.811
+in noise. 
+So, it's very clear that was basically 
+
+27
+00:01:52.811 --> 00:01:57.977
+uniform noise added to that region. 
+And once again, we can variously 
+
+28
+00:01:57.977 --> 00:02:03.506
+estimate, basically, the region of the 
+noise, where the uniform noise was added. 
+
+29
+00:02:03.506 --> 00:02:09.250
+And what's actually the value that was 
+added or the probability of those values. 
+
+30
+00:02:09.250 --> 00:02:13.929
+Now, what happens if we don't know it, 
+know, don't know the type of noise? 
+
+31
+00:02:13.929 --> 00:02:17.225
+Then, it's very easy. 
+Let's assume that this is the 
+
+32
+00:02:17.225 --> 00:02:20.520
+distribution that we observe. 
+So, we can go and try. 
+
+33
+00:02:20.520 --> 00:02:25.464
+We try Gaussian and we fit the best 
+possible Gaussian to this distribution. 
+
+34
+00:02:25.464 --> 00:02:28.562
+We tried [UNKNOWN] we try gamma, we try 
+uniform. 
+
+35
+00:02:28.562 --> 00:02:33.439
+We, we basically go and fit using 
+standard tools for function fitting. 
+
+36
+00:02:33.439 --> 00:02:37.328
+We basically fit the best of each one of 
+the distributions. 
+
+37
+00:02:37.328 --> 00:02:42.140
+And the one that produces the smallest 
+error, that's the one that we pick. 
+
+38
+00:02:42.140 --> 00:02:47.024
+Maybe that was in the original 
+distribution of the noise but hopefully, 
+
+39
+00:02:47.024 --> 00:02:50.465
+that's a good enough approximation for 
+that noise. 
+
+40
+00:02:50.465 --> 00:02:57.080
+So, this is the way that we can estimate 
+noise if we find a region that has 
+
+41
+00:02:57.080 --> 00:03:02.694
+basically uniform original pixel values. 
+If not, we're going to have to work a bit 
+
+42
+00:03:02.694 --> 00:03:05.434
+more. 
+So, first of all, people try to do that 
+
+43
+00:03:05.434 --> 00:03:09.767
+with relatively small regions. 
+If you have a small region, you have a 
+
+44
+00:03:09.767 --> 00:03:13.335
+larger probability that you are picking 
+uniform regions. 
+
+45
+00:03:13.335 --> 00:03:17.923
+The problem with small regions is you 
+don't have enough pixel values to 
+
+46
+00:03:17.923 --> 00:03:22.320
+estimate your averages and your standard 
+deviations or your balances. 
+
+47
+00:03:22.320 --> 00:03:27.353
+For example if I pick a region with only 
+one pixel, I won't be able to estimate 
+
+48
+00:03:27.353 --> 00:03:30.540
+any statistics on the noise from from 
+that pixel. 
+
+49
+00:03:30.540 --> 00:03:36.606
+If you pick too large of a region, you 
+have the risk that you're basically 
+
+50
+00:03:36.606 --> 00:03:42.110
+getting into very distinct pixel values 
+in the original image, two or more. 
+
+51
+00:03:42.110 --> 00:03:45.654
+And then, what will happen here? 
+We already know. 
+
+52
+00:03:45.654 --> 00:03:50.028
+We actually are going to have histograms 
+that look like this. 
+
+53
+00:03:50.028 --> 00:03:54.250
+Basically, have two peaks. 
+If that happens, then there are 
+
+54
+00:03:54.250 --> 00:04:00.132
+techniques to try to detect that there is 
+more than one peak in the histogram. 
+
+55
+00:04:00.132 --> 00:04:06.240
+And if that happens, basically either you 
+make the region smaller, or you separate 
+
+56
+00:04:06.240 --> 00:04:10.829
+the histogram, and then you do an 
+estimate for each one of the regions 
+
+57
+00:04:10.829 --> 00:04:14.021
+independently. 
+The other thing to be very careful is 
+
+58
+00:04:14.021 --> 00:04:19.209
+that you might need to do this type of 
+estimates in every region in the image. 
+
+59
+00:04:19.209 --> 00:04:24.397
+Because nothing guarantees unless you 
+know that in advance the noise is the 
+
+60
+00:04:24.397 --> 00:04:29.519
+uniform noise, is the same all around. 
+If it's the same all around, then you can 
+
+61
+00:04:29.519 --> 00:04:33.860
+just go and pick a number of regions in 
+the image, 
+
+62
+00:04:33.860 --> 00:04:37.927
+do your estimates for example, average 
+all the estimates. 
+
+63
+00:04:37.927 --> 00:04:43.374
+So, you compute the mean and standard 
+deviation of variants for each one of the 
+
+64
+00:04:43.374 --> 00:04:46.545
+regions. 
+And then you say, hey, my noise is this 
+
+65
+00:04:46.545 --> 00:04:49.923
+distribution. 
+But I'm going to average all the means 
+
+66
+00:04:49.923 --> 00:04:53.646
+that I computed, 
+I'm going to average all the variances I 
+
+67
+00:04:53.646 --> 00:04:56.473
+computed, 
+and that's going to be my estimate. 
+
+68
+00:04:56.473 --> 00:05:01.299
+So, these are the standard ways of 
+computing the noise from your image. 
+
+69
+00:05:01.299 --> 00:05:06.333
+Now, why is this very useful? 
+As we say in the very beginning, our 
+
+70
+00:05:06.333 --> 00:05:10.558
+model here, 
+and I'm going to remove for a second the 
+
+71
+00:05:10.558 --> 00:05:16.420
+deterioration part of the image. 
+I'm going to assume there is just noise. 
+
+72
+00:05:16.420 --> 00:05:26.010
+We say f of x,y is basically my original 
+image and the noise was added. 
+
+73
+00:05:26.010 --> 00:05:32.457
+Now, once I estimate the parameters of my 
+noise and the type of my noise with 
+
+74
+00:05:32.457 --> 00:05:38.035
+experience, for example, I know what 
+kinds of filters work well for different 
+
+75
+00:05:38.035 --> 00:05:41.779
+types of noise. 
+For example, for Gaussian filtering, we 
+
+76
+00:05:41.779 --> 00:05:47.578
+already saw the average filter, basically 
+the mean filter and also the non-local 
+
+77
+00:05:47.578 --> 00:05:50.808
+means. 
+That if we manage to cut your regions, 
+
+78
+00:05:50.808 --> 00:05:56.240
+that if there uniform or similar across 
+the image, then averaging is great. 
+
+79
+00:05:56.240 --> 00:06:01.305
+If I have a pixel distribution, let's 
+say, around zero, averaging would 
+
+80
+00:06:01.305 --> 00:06:04.787
+basically almost get rid of, of that 
+noise. 
+
+81
+00:06:04.787 --> 00:06:09.606
+The same for uniform noise. 
+So, depending on the noise type, we 
+
+82
+00:06:09.606 --> 00:06:14.002
+basically can use different filters. 
+Salt and pepper noise. 
+
+83
+00:06:14.002 --> 00:06:18.095
+Medium filter is a great filter for salt 
+and pepper noise. 
+
+84
+00:06:18.095 --> 00:06:21.624
+We know that salt and pepper are kind of 
+isolated. 
+
+85
+00:06:21.624 --> 00:06:25.011
+We actually saw an example in the 
+previous week. 
+
+86
+00:06:25.011 --> 00:06:30.163
+They are isolated points and, basically, 
+when we compute the medium, we just 
+
+87
+00:06:30.163 --> 00:06:35.879
+basically eliminate those isolated points 
+and end up replacing them by the pixel 
+
+88
+00:06:35.879 --> 00:06:40.580
+values around them. 
+So, knowing the type of noise help us to 
+
+89
+00:06:40.580 --> 00:06:47.300
+basically design and decide which type of 
+filters, which types of operations, are 
+
+90
+00:06:47.300 --> 00:06:53.600
+we going to do to be able to recover the 
+original image from the basically 
+
+91
+00:06:53.600 --> 00:06:59.095
+decorated from the noisy image. 
+We're going to see in a few weeks, when 
+
+92
+00:06:59.095 --> 00:07:04.824
+we go to more advanced techniques, that 
+also knowing the type of noise can 
+
+93
+00:07:04.824 --> 00:07:10.242
+basically enter the design of the 
+algorithm in a completely different 
+
+94
+00:07:10.242 --> 00:07:14.035
+fashion. 
+For example, if we are going to basically 
+
+95
+00:07:14.035 --> 00:07:17.518
+know that we are dealing with Gaussian 
+noise, 
+
+96
+00:07:17.518 --> 00:07:20.770
+remember, we're tying to get an estimate, 
+F, 
+
+97
+00:07:20.770 --> 00:07:26.682
+that is very similar, or as similar as 
+possible to the original one. 
+
+98
+00:07:26.682 --> 00:07:34.020
+If we know that the noise is Gaussian, 
+we're also going to basically constrain 
+
+99
+00:07:34.020 --> 00:07:37.613
+the, this is g, 
+I apologize for that, 
+
+100
+00:07:37.613 --> 00:07:42.500
+this is g. 
+So, for a Gaussian noise, 
+
+101
+00:07:43.560 --> 00:07:49.876
+the error between these two has to behave 
+as Gaussian noise, 
+
+102
+00:07:49.876 --> 00:07:53.981
+okay? 
+So, this is my estimate, my denoise 
+
+103
+00:07:53.981 --> 00:07:59.140
+image. 
+This is my noisy image, what I observe, 
+
+104
+00:07:59.140 --> 00:08:02.996
+this should be as close as possible to 
+the original image. 
+
+105
+00:08:02.996 --> 00:08:06.635
+Let's assume it's identical to the 
+original image. 
+
+106
+00:08:06.635 --> 00:08:12.020
+Then, the difference between these two 
+should have a Gaussian distribution. 
+
+107
+00:08:12.020 --> 00:08:18.575
+So, I expect my noise to have a Gaussian 
+distribution, and we are going to see 
+
+108
+00:08:18.575 --> 00:08:25.130
+that we can impose that by basically 
+imposing some properties on the mean 
+
+109
+00:08:25.130 --> 00:08:31.331
+square error, basically the error 
+squared, or the difference between my 
+
+110
+00:08:31.331 --> 00:08:37.658
+observe and my estimated image. 
+Now, if my, basically, noise was 
+
+111
+00:08:37.658 --> 00:08:42.655
+estimated to be uniform, 
+then I'm going to have to impose here a 
+
+112
+00:08:42.655 --> 00:08:47.069
+different error. 
+For example, we are going to see that if 
+
+113
+00:08:47.069 --> 00:08:50.401
+the nose, the noise, sorry, is 
+exponential, 
+
+114
+00:08:50.401 --> 00:08:56.814
+what we are going to try to do is my 
+estimate minus my observation, but 
+
+115
+00:08:56.814 --> 00:09:01.705
+without this square. 
+That's why we're going to try to measure 
+
+116
+00:09:01.705 --> 00:09:08.486
+and make sure that that basically behaves 
+in the way I expect from an exponential 
+
+117
+00:09:08.486 --> 00:09:12.290
+noise. 
+So, once again, the key concept is if you 
+
+118
+00:09:12.290 --> 00:09:19.741
+know denoise, then you know that your 
+estimate minus your observation has to 
+
+119
+00:09:19.741 --> 00:09:23.340
+behave like that noise. 
+So, if I, 
+
+120
+00:09:23.340 --> 00:09:28.690
+no, my noise is uniform and I compute my 
+estimate and my estimate. 
+
+121
+00:09:28.690 --> 00:09:33.564
+minus the observation gives me a Gaussian 
+distribution, 
+
+122
+00:09:33.564 --> 00:09:37.129
+I say, okay, I made two possibile 
+mistakes here, 
+
+123
+00:09:37.129 --> 00:09:42.629
+Either I estimated wrong my noise or I 
+basically did the wrong denoising because 
+
+124
+00:09:42.629 --> 00:09:46.364
+I didn't get back what I assume was the 
+type of noise. 
+
+125
+00:09:46.364 --> 00:09:51.389
+And this is how you basically you put 
+back your noise estimates into your 
+
+126
+00:09:51.389 --> 00:09:56.753
+design of image restoration techniques. 
+Once again, something that we didn't see 
+
+127
+00:09:56.753 --> 00:10:01.383
+in image enhancement but we actually can 
+see an image restoration. 
+
+128
+00:10:01.383 --> 00:10:07.649
+We push it back to design off the filter 
+or to basically select parameters of the 
+
+129
+00:10:07.649 --> 00:10:10.710
+filter. 
+Of course, if I have more noise, more 
+
+130
+00:10:10.710 --> 00:10:16.050
+salt and pepper noise, I might need to 
+decide on the size of my medium filter 
+
+131
+00:10:16.050 --> 00:10:20.037
+window in a different fashion than if I 
+have less noise. 
+
+132
+00:10:20.037 --> 00:10:25.020
+So, this is how you basically, once 
+again, put, put back that information 
+
+133
+00:10:25.020 --> 00:10:28.755
+into the design. 
+We have talked a lot about this, but 
+
+134
+00:10:28.755 --> 00:10:32.724
+remember, the original model have here 
+the h function, 
+
+135
+00:10:32.724 --> 00:10:37.533
+the degradation function. 
+So, let's just spend, in the next video, 
+
+136
+00:10:37.533 --> 00:10:40.740
+sometime discussing it. 
+Thank you very much. 

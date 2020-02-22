@@ -1,0 +1,133 @@
+Hello and welcome back. 
+We're starting a new week in the area of image and video processing. 
+The topic of this week is Sparse Modeling. 
+This is one of the most active areas in image processing currently. 
+And is very important for us to describe this area. 
+We're going to be using some basic tools of linear algebra. 
+So there's going to be a bit of math, but not as much as we had for example during 
+the week on PDE's, and variational calculus and differential geometry. 
+And as before, everything is going to be self-contained and I'm going to walk you 
+through. So it's going to be very, very simple, 
+and you're going to be able to catch. Everything that you need to know. 
+The fundamentals in Sparse Modeling to understand, as I say, one of the most 
+active current areas in the area of image and video processing. 
+Before I proceed, I should mention that I'm going to be using slides that I have 
+adapted with permission from Professor Ilad. 
+I want to let you know also that if you want to learn more about this topic, his 
+book is an excellent source for that. Of course, you don't need the book. 
+Everything is going to be set, contained. You don't need to buy the book to enjoy 
+what we're going to be learning during this week but if you want to pursue 
+further this area, it's a good recommended source of material and 
+there's also some other presentations on the web. 
+And also in the class web page. In this class web page, we have listed a 
+couple of places where you can get free software to play with this area. 
+So, let's proceed to percent. What is Sparse Modeling? 
+And we are going to use as example image denoising. 
+Sparse Modeling is used for many, many other areas in image processing, but 
+image denoising is a good example to introduce the basic concept. 
+So as we have seen before, the basic idea is that we're going to have a noise 
+image. Which we assume again just because we 
+want a very simple presentation of the topic that we are having additive noise 
+added to this image. So, its the image plus noise and we 
+want to use Sparse Modeling to remove the noise. 
+Or from a noisy image we want to do something to remove the noise. 
+Now this can be formulated in the following form, which is type of a 
+variational formulation that we have discussed before. 
+But now we are in the discreet domain, so it's kind of a bit simpler. 
+We have a couple of components. Why is our image the noisy image that's 
+all we have. We measure a noisy image. 
+And we want to recover a clean image. That's X. 
+Now, the first thing is, we don't want the recover image to be too far away from 
+the noise image. And that's the penalization that we have 
+here. Is that means square error, between the 
+image that we observe and the image that we recover. 
+We have seen the means square error. For those that want understandably more, 
+what we're assuming here is additive. Gaussian noise. 
+And basically we are minimizing and this is the variance of the noise, basically. 
+Now if we only had this term which fits the measurements, then what's the 
+solution to this problem? What's the image that minimizes this 
+problem? Its nothing than the noisy image itself. 
+So, we haven't done much. And that's when we add another term that 
+has multiple names depending on the discipline. 
+It's a prior. It's also called a regularization term 
+that basically says, yes, I know what image, I know I want an image that is 
+close to y, but I want that image to have certain properties. 
+Let me say this straight one example. Let's assume that this is your data. 
+I'm going to just mark a few points. This is your data, this is Y. 
+If I tell you nothing else, but find X that is close to Y, you're going to stay 
+with that. But if I tell you. 
+That through this function, if I tell you that the solution is a straight line, I 
+force you to make a straight line. Then, you're going to find a solution 
+which is something like that. Not the original points but something 
+like that. So I gave you prior information. 
+I gave you a constrain that says, find something that is close but is also a 
+straight line and then you got that solution. 
+So the basic idea is that we have two terms. 
+One that relates dissolution to the measurements. 
+And one that basically gives you a prior, a regularization at condition. 
+So it's kind of we're projecting the observation, Y, into this prior. 
+Now, this is what's called a Bayesian point of view, following Thomas Bayes, 
+and the basic idea is that we're computing what's called the 
+Maximum-A-posteriori or the map. We're basically going to compute. 
+The X that maximizes something, or minimizes this function. 
+Depending if we take the function as itself, we call it a minimizer. 
+If we look at the probabilistic framework that this, basically an exponentiation, 
+so we take this to the exponent and this, also kind of, to the exponent, that would 
+be a maximization. But don't worry. 
+We do max or we do min, depending on the sign and depending. 
+We can always do. Minus and then we get a maximization, so 
+that's why it's called the Maximum-A-posteriori. 
+We could give to everything that we are going to be presenting next, a 
+probabilistic framework, a probabilistic interpretation and then make this even 
+more clear. But the basic idea is that we have a 
+prior, and in base language this is called a likelihood. 
+The prior and the likelihood and both can have a probabilistic interpretation. 
+Now, Once again, this models the noise, In this case, additive Gaussian. 
+This models the signal. And a lot of image and in general signal 
+processing has dedicated a lot of effort into designing what is the best prior? 
+What is the best space to define images? To define different types of signals. 
+And there has been a lot of work in the literature of image processing in that. 
+So. I'm going to just describe a few. 
+People say, a good prior is, give me an image that doesn't have too much energy. 
+So this is this example. There is always a parameter here that can 
+scale it up and down. There were other priors that say: give me 
+an image that is smooth. For example, we have seen when we talk 
+about in painting, that one way to make sure of smoothness is roughness. 
+Instead of having low energy, you say, it has to be very smooth. 
+Which means that, when I compute the roughness, the energy has to be low. 
+Another prior is to say, that's correct but we have edges. 
+So I don't want my edges to be smooth. I want very sharp edges. 
+And then we do an adaptation that says not every place it has to be smooth. 
+We allow certain jumps. Another example, is to basically take 
+functions, not just the quadratic function, but more sophisticated 
+functions of smoothness and that's related to the topic of robust 
+statistics. Just another example, we can talk about 
+total variation, we have seen that when we need initial tropic diffusion. 
+This was one of the examples of initial tropic diffusion that we took basically 
+the integral over the gradient, not gradient square, but the gradient and we 
+got initial tropic diffusion. We can also do wavelengths, and we 
+haven't discussed in this class about wavelengths, but you probably have heard 
+about wavelengths. It's a very important topic in image 
+processing. Of course, in nine weeks, we cannot 
+discuss everything, so we have not discussed about. 
+Wavelets in particular. But people have used that. 
+And you can think about basically multiplying the matrix, multiplying the 
+image by a matrix, and then doing some penalty on that product. 
+For example, the L1, as we have here, the absolute value. 
+What we're going to be discussing during this week is this particular prior that 
+we have here. And I am going to explain it more in the 
+next few slides and we're even going to learn more in the next videos. 
+But this it the prior that we're going to be talking about. 
+And basically, it's written here. But again, I'm going to explain it next. 
+This has been basically the evolution and. 
+Basically, is kind of historical evolution, they'll know exactly about 
+different types of priors. That people have used, that people have 
+proposed. Each one has it's advantages and 
+disadvantages. We are going to discuss this one. 
+Now there's much more sophisticted priors that people have proposed in the 
+literature. Some of those are very good but are 
+computationally extremely expensive and extremely difficult. 
+One of the features of many of these priors and as we're going to see also of 
+this one its computations are visible. We can do them. 
+We can understand the prior and we can do the computations. 
+So let us explain what is this. Prior of Sparse Modeling.

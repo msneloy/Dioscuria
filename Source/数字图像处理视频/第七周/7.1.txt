@@ -1,0 +1,107 @@
+Hello, and welcome back. 
+This week we are going to be talking about image and video inpainting. 
+In contrast with the topics that we described last week, where we performed a 
+description of fundamental tools to solve a number of problems, like an isotropic 
+diffusion, active contours, and even image inpainting. This week is about a 
+particular problem. It's not about tools for multiple 
+problems, it's about solving one particular problem 
+in image and video processing. Of course, some of the tools that we are 
+going to be using for this might be used for other techniques, 
+and we often learn from the solutions of a problem towards another problem. 
+But it's a very important difference between providing for the mental tools 
+for solving multiple problems, and solving one particular problem. 
+So what is image and video inpainting? And let's start with image inpainting. 
+Image inpainting is basically the art of changing an image in a non-detectable 
+form. So here we see a painting that has a lot 
+of degradation, and here is the restoration of that painting. 
+This was of course done by professionals manually. 
+It's a painting, it's not a picture, was not done in the computer, although the 
+computer can help as well, as we're going to see it later on. 
+When you go and see this picture in the museum, 
+you'll believe it's the original picture. Some experts actually might be able to 
+notice the difference, and be able to see the regions that were actually inpainted 
+or filled in with information from different regions. 
+But the basic idea is that in inpainting, we show you an image or a video, and we 
+make you believe that's the original one. In this case, it's to solve degradations. 
+Inpainting, it's sometimes also called fill in, 
+because we're filling in the regions of problems, 
+the regions of deterioration with informations from this surrounding. 
+And we are going to see that, sometimes, with fill in with information from the 
+near areas sometimes with information from far away areas from the whole image. 
+There's even techniques that do image in painting using database of images where 
+you look for similar things. So, this is one example of what image in 
+painting needs to be done. Remember, it's modifying an image in a 
+non-detectable form. And when we say non-detectable, we say at 
+least by the non-experts. Here is another example. A lot has been 
+done to this image, basically to transform it into this one. 
+Of course it has been inpainted, you see these regions have been filled in. 
+But also there were color corrections and other things, but this illustrates yet 
+another example of image inpainting. Look at all these regions that have 
+missing information and that were basically restored, inpainted, filled in 
+with nice information that looks like natural in the surrounding region of the 
+image. Of course, it's natural to extend these 
+to regular photography, in particular when we were talking about pictures, and 
+not digital pictures, but analog pictures, and here we see examples. 
+Some of examples like here have a few additional restoration techniques, but we 
+see these. For example, the picture was turned into 
+two pieces, then was put together and to repair that, you basically see that it 
+was inpainted. A region of missing information or 
+undesirable information was filled in with other types of information. 
+We see here the same. There is a scratch. 
+Now the scratch is gone. And here there is a similar example like 
+this. Basically, the picture was folded, and 
+when you unfold it, you see this kind of scratch in the middle and then here its 
+gone. So, these are all examples of image 
+impending to restore basically the image to a much nicer looking image. 
+Of course, this is an example that we saw in the first week, where image inpainting 
+is done with a completely different target. 
+In this case, and this illustrates the idea of modifying an image in an 
+undetectable form. In this case, we see nothing, nothing 
+wrong with this image, that we know, if you remember from the first week of 
+class, that basically this was the original image. 
+So what was inpainted now is the object that the user wants to remove from the 
+image. So basically, this region becomes the 
+region of missing information that we are going to inpaint in, 
+and we need to recover the water, and we need to recover the column. 
+So we need to recover texture, we need to recover structure, 
+straight lines and water that is basically non-straight lines. 
+So very different types of informations need to be filled in, inpainted, in order 
+to solve this problem of removing objects. 
+And we discuss in the first week, this is used all the times in the movie industry, 
+I show you a few examples of objects that need to be removed in the movie industry. 
+Here is yet another example from this era, where basically we see here, a 
+picture of Lenin, and a picture, and next to him there is Trotsky. 
+And here, basically, Trotsky has been removed from the picture. 
+So once again an object has been removed from the picture. 
+And, yeah, you can have multiple examples of these. For example in this website, or 
+the website that was linked in the previous slide. 
+So again inpainting in order to remove objects that from the image or from the 
+video. I want to explain something that 
+inpainting, in its basic form, cannot do. I don't want to, you have the wrong 
+understanding that inpainting is an extremely smart technique that can fill 
+in with whatever you want. So let me use this example to illustrate 
+that. Here, this person was removed, 
+and then it was inpainted. So when you look at this image, it holds 
+everything that inpainting is about, modifying the image in an undetectable 
+form. But look what happened here. 
+When the person was removed, two chairs were brought in. 
+This is done by an expert. It's not done by the computer. 
+There's no way for the computer to understand that what you want here are 
+chairs. Maybe in a very, very advanced technique, 
+when you basically provide a lot of side information, 
+you could, in the computer, with programs like Photoshop, 
+cut chairs from here and put them here. And this is the kind of stuff that was 
+done here. So it's a cut and paste, 
+and we are going to see how to do that. But basically, inpainting, does not have 
+that high level knowledge of what needs to be there. 
+The computer and the user can interact to basically bring that into the scene, as 
+we're going to see later on. But if you don't interact, 
+if you just say, do something with this region, 
+the computer does not know what is that you want, 
+why is that you want chairs there, and not, for example, green, 
+not, for example, some of the background. But with interaction with the user, we 
+might be able to do this, kind of a cut and paste. 
+So, this is about image inpainting. In the next video, I'm going to show you 
+that we are actually familiar, in nature, with image and video inpainting, and 
+that's actually very interesting. See you in the next video. 
+Thank you very much.

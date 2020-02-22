@@ -1,0 +1,841 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.716
+Hello and welcome back. 
+One of the fun things of this week is 
+
+2
+00:00:04.716 --> 00:00:07.790
+that we are learning a lot of background 
+material. 
+
+3
+00:00:07.790 --> 00:00:12.190
+While the background material is 
+important for image processing, it's 
+
+4
+00:00:12.190 --> 00:00:16.910
+important for many other disciplines. 
+For example, in the previous video we 
+
+5
+00:00:16.910 --> 00:00:20.673
+learned about level sets. 
+Level sets are important in image 
+
+6
+00:00:20.673 --> 00:00:25.775
+processing to the curve evolution like 
+active contours as we have seen numerous 
+
+7
+00:00:25.775 --> 00:00:29.156
+examples last week. 
+We saw a few this week and we are going 
+
+8
+00:00:29.156 --> 00:00:32.090
+to see more even in the next coming 
+videos. 
+
+9
+00:00:32.090 --> 00:00:37.161
+Another topic that is very important in 
+mathematics and is also important in 
+
+10
+00:00:37.161 --> 00:00:40.257
+image processing is the calculus of 
+variations. 
+
+11
+00:00:40.257 --> 00:00:44.604
+And that's what we're going to be talking 
+right now in this video. 
+
+12
+00:00:44.604 --> 00:00:49.346
+And then in the next video we're going to 
+see an example of that for image 
+
+13
+00:00:49.346 --> 00:00:54.120
+denoiseing and image enhancement. 
+So what is calculus of variations? 
+
+14
+00:00:54.120 --> 00:01:00.234
+The idea is very simple, because it's an 
+extension of finding extrema of 
+
+15
+00:01:00.234 --> 00:01:03.801
+functions. 
+But now we are going to be finding 
+
+16
+00:01:03.801 --> 00:01:08.047
+extrema of functionals. 
+And what do I mean by that? 
+
+17
+00:01:08.047 --> 00:01:11.790
+We're going to have images like you. 
+And. 
+
+18
+00:01:11.790 --> 00:01:15.750
+It's derivatives. 
+So this is going to be an image for us. 
+
+19
+00:01:15.750 --> 00:01:20.346
+And we're going to be looking at 
+minimizing a function of the image. 
+
+20
+00:01:20.346 --> 00:01:25.791
+Might be the image is square, might be 
+the gradient of the image, might be the 
+
+21
+00:01:25.791 --> 00:01:29.751
+Laplacian of the image. 
+So we're going to be trying to find 
+
+22
+00:01:29.751 --> 00:01:35.338
+what's the image that minimizes that 
+function in the same way that we tried to 
+
+23
+00:01:35.338 --> 00:01:39.157
+find, what's the point that minimizes a 
+given function. 
+
+24
+00:01:39.157 --> 00:01:44.460
+For example, if I draw this function then 
+you say oh, this is the point that 
+
+25
+00:01:44.460 --> 00:01:48.018
+minimizes it. 
+But here, U is by itself what we are 
+
+26
+00:01:48.018 --> 00:01:51.755
+looking for. 
+So we are not looking for a coordinate, 
+
+27
+00:01:51.755 --> 00:01:55.419
+we are looking for a function that 
+minimizes this. 
+
+28
+00:01:55.419 --> 00:02:00.548
+This is going to be very clear even in 
+the next slide with an example. 
+
+29
+00:02:00.548 --> 00:02:05.458
+And we are going to make all the 
+connection of the minimization of 
+
+30
+00:02:05.458 --> 00:02:08.829
+function X with the minimization of 
+functions. 
+
+31
+00:02:08.829 --> 00:02:14.764
+Now, we're going to discuss in a couple 
+of minutes that a condition for U to be a 
+
+32
+00:02:14.764 --> 00:02:19.373
+minimizer of this is to hold. 
+This equation which is called the 
+
+33
+00:02:19.373 --> 00:02:25.071
+Euler-Lagrange equation and this is the 
+type of partial differential equation 
+
+34
+00:02:25.071 --> 00:02:28.650
+that we are going to be solving in image 
+processing. 
+
+35
+00:02:28.650 --> 00:02:34.348
+Let me illustrate a bit more about this 
+and then how we came to this equation 
+
+36
+00:02:34.348 --> 00:02:40.045
+which is completely parallel to the 
+minimization of regular functions that we 
+
+37
+00:02:40.045 --> 00:02:43.259
+are away from regular standards in 
+calculus. 
+
+38
+00:02:43.259 --> 00:02:48.300
+So let's just illustrate, first of all, 
+what do I mean by a functional. 
+
+39
+00:02:48.300 --> 00:02:54.729
+Let's assume that I'm giving two points. 
+And I am asking you what's the curve 
+
+40
+00:02:54.729 --> 00:02:59.086
+connecting these two points that has the 
+minimum length. 
+
+41
+00:02:59.086 --> 00:03:05.000
+So I am asking you for the function of 
+that curve, the minimizer is going to be 
+
+42
+00:03:05.000 --> 00:03:07.880
+a function, not a point. 
+The length of. 
+
+43
+00:03:07.880 --> 00:03:13.002
+Any curve, absolutely. 
+Any curve connecting these two points is 
+
+44
+00:03:13.002 --> 00:03:18.042
+basically written here. 
+The curve is parameterized as X Ux, we 
+
+45
+00:03:18.042 --> 00:03:23.991
+know about that, that's the particular 
+case of that parameterization for 
+
+46
+00:03:23.991 --> 00:03:29.493
+basically any curve that goes. 
+And connect those points. 
+
+47
+00:03:29.493 --> 00:03:34.370
+the length is. 
+As we know, the derivative of the first 
+
+48
+00:03:34.370 --> 00:03:39.940
+coordinate squared so that's one squared 
+derivative of the second coordinate 
+
+49
+00:03:39.940 --> 00:03:42.978
+squared. 
+So it's this function that we are going 
+
+50
+00:03:42.978 --> 00:03:47.245
+to try to optimize. 
+We already know what a function that 
+
+51
+00:03:47.245 --> 00:03:51.657
+minimizes the length between two points. 
+It's a straight line. 
+
+52
+00:03:51.657 --> 00:03:56.575
+But let's see how we get that. 
+You see calculus offers variations, so 
+
+53
+00:03:56.575 --> 00:04:00.120
+I'm trying to find U connecting these two 
+points. 
+
+54
+00:04:00.120 --> 00:04:07.419
+This is the condition for a function to 
+be a minimizer of this function. 
+
+55
+00:04:07.419 --> 00:04:12.590
+So it's that integral over a function of 
+functions. 
+
+56
+00:04:12.590 --> 00:04:19.390
+We haven't arrived at it yet, but we're 
+going to discuss it in a few slides that 
+
+57
+00:04:19.390 --> 00:04:24.235
+this is what happened. 
+So F is square root of one plus UX 
+
+58
+00:04:24.235 --> 00:04:28.825
+squared. 
+So if you just do the numbers and takes, 
+
+59
+00:04:28.825 --> 00:04:35.370
+you take this and do the derivative 
+according to U minus the derivative that 
+
+60
+00:04:35.370 --> 00:04:43.367
+is written here, you get this expression. 
+So this expression is nothing else than 
+
+61
+00:04:43.367 --> 00:04:51.040
+applying this to f as written here. 
+Now this equal to zero is a condition for 
+
+62
+00:04:51.040 --> 00:04:57.905
+the particular U we are looking for to 
+solve the problem that we are searching 
+
+63
+00:04:57.905 --> 00:05:03.815
+for, meaning the minimizer of the length 
+connecting these two points. 
+
+64
+00:05:03.815 --> 00:05:09.030
+Now we have this equals zero, the 
+denominator doesn't matter. 
+
+65
+00:05:09.030 --> 00:05:15.317
+In when we have eight over B equal zero 
+when its to be equal zero is U, so U 
+
+66
+00:05:15.317 --> 00:05:22.100
+double derivative equal zero, that means 
+that the first derivative is constant and 
+
+67
+00:05:22.100 --> 00:05:27.230
+then is that the function is 8X plus B 
+that's a straight line. 
+
+68
+00:05:27.230 --> 00:05:32.004
+And A and B are found by what's called 
+the boundary conditions. 
+
+69
+00:05:32.004 --> 00:05:35.566
+We know that it has to go through these 
+points. 
+
+70
+00:05:35.566 --> 00:05:41.628
+So if I replace here X by a zero, I have 
+to get this point and if I replace by X 
+
+71
+00:05:41.628 --> 00:05:46.100
+one, I have to get this point and in that 
+way, I get A and B. 
+
+72
+00:05:46.100 --> 00:05:52.880
+So we see that for length, the function 
+that basically solves the Euler-Lagrange, 
+
+73
+00:05:52.880 --> 00:05:57.287
+and that's a necessary condition, is a 
+straight line. 
+
+74
+00:05:57.287 --> 00:06:03.050
+So basically, if we take this curve here, 
+it will have certain length. 
+
+75
+00:06:03.050 --> 00:06:09.345
+But actually, the one that minimizes is 
+not this because this is not a straight 
+
+76
+00:06:09.345 --> 00:06:12.533
+line. 
+The one that minimizes is this one. 
+
+77
+00:06:12.533 --> 00:06:18.750
+So, a function to be a minimizer has to 
+haul the Euler-Larange equation. 
+
+78
+00:06:18.750 --> 00:06:23.270
+Why is that important, and how do we get 
+to the Euler-Lagrange equation? 
+
+79
+00:06:23.270 --> 00:06:30.065
+Let us go for a second back to regular 
+functions, and how we find the minima of 
+
+80
+00:06:30.065 --> 00:06:34.509
+a regular function. 
+So you might not remember exactly how we 
+
+81
+00:06:34.509 --> 00:06:37.797
+do that. 
+But you do remember the result, which is 
+
+82
+00:06:37.797 --> 00:06:41.703
+going to explain next. 
+The basic idea is, you have a function. 
+
+83
+00:06:41.703 --> 00:06:45.060
+And you have the function around a 
+certain point. 
+
+84
+00:06:45.060 --> 00:06:48.417
+And you do a small perturbation of that 
+function. 
+
+85
+00:06:48.417 --> 00:06:52.460
+And you take the derivative according to 
+that perturbation. 
+
+86
+00:06:52.460 --> 00:06:57.872
+And the condition for a point to be a 
+maximum or a minimum is that when you do 
+
+87
+00:06:57.872 --> 00:07:01.230
+any perturbation, the derivative is equal 
+to zero. 
+
+88
+00:07:01.230 --> 00:07:07.440
+If you compute the derivative according 
+to the permutation, you get this, and 
+
+89
+00:07:07.440 --> 00:07:12.687
+this has to hold for every n. 
+So the derivative of the function for 
+
+90
+00:07:12.687 --> 00:07:18.365
+every end has to be equal zero which 
+means that this has to be zero, and we 
+
+91
+00:07:18.365 --> 00:07:22.227
+know that. 
+We know that the condition of a point to 
+
+92
+00:07:22.227 --> 00:07:28.057
+be an extreme of a function is that it's 
+derivative have to be equal to zero. 
+
+93
+00:07:28.057 --> 00:07:32.675
+Now why is that so important? 
+We know that but why is that so 
+
+94
+00:07:32.675 --> 00:07:35.704
+important? 
+Because then I can write this 
+
+95
+00:07:35.704 --> 00:07:40.216
+differential equation. 
+Xt so I can make X change in the 
+
+96
+00:07:40.216 --> 00:07:47.115
+direction of minus the derivative and 
+that basically says that you start from a 
+
+97
+00:07:47.115 --> 00:07:53.929
+point and your next point, because X is 
+changing in time, it just, you move a bit 
+
+98
+00:07:53.929 --> 00:07:58.327
+in the direction of the derivative of the 
+function. 
+
+99
+00:07:58.327 --> 00:08:04.700
+Remember, derivative is tangent so you 
+move a bit to the next spot. 
+
+100
+00:08:04.700 --> 00:08:09.283
+This is how you move. 
+Your next point is this point minus a 
+
+101
+00:08:09.283 --> 00:08:12.780
+tiny step in the direction of the 
+derivative. 
+
+102
+00:08:12.780 --> 00:08:18.840
+That's what this equation is telling us. 
+Because if we were to discretize this 
+
+103
+00:08:18.840 --> 00:08:23.560
+equation, we get that, that. 
+X. 
+
+104
+00:08:25.540 --> 00:08:35.606
+We just saw the result there. 
+We had the X at T plus Delta T minus X at 
+
+105
+00:08:35.606 --> 00:08:39.630
+T. 
+Divided by delta T, that's a [INAUDIBLE] 
+
+106
+00:08:39.630 --> 00:08:45.900
+equation of this. 
+This expression is equal to minus fx and 
+
+107
+00:08:45.900 --> 00:08:54.224
+that's what we have here so we go slowly. 
+In the direction of the derivative of X 
+
+108
+00:08:54.224 --> 00:08:59.054
+until we get to this point. 
+Let's just see that again. 
+
+109
+00:08:59.054 --> 00:09:05.523
+We go one step and then we will go 
+another step and another step until 
+
+110
+00:09:05.523 --> 00:09:12.084
+basically we get to the steady state. 
+In the steady state, we have the XT 
+
+111
+00:09:12.084 --> 00:09:16.093
+equals zero. 
+Nothing is changing anymore and, 
+
+112
+00:09:16.093 --> 00:09:20.528
+therefore, this. 
+Is = to zero, which is our condition. 
+
+113
+00:09:20.528 --> 00:09:27.016
+So once again, we know that the condition 
+for a point to be a minimal of a 
+
+114
+00:09:27.016 --> 00:09:31.312
+function. 
+Is it has to be the derivative = to zero. 
+
+115
+00:09:31.312 --> 00:09:36.310
+So we take a point. 
+I'm going to just show that to you again 
+
+116
+00:09:36.310 --> 00:09:41.849
+We take a point and we move it in the 
+direction of the derivative and then 
+
+117
+00:09:41.849 --> 00:09:47.758
+slowly we are moving it in the direction 
+of the derivative and we are moving it 
+
+118
+00:09:47.758 --> 00:09:52.560
+again until it doesn't move anymore. 
+When it doesn't move anymore. 
+
+119
+00:09:52.560 --> 00:09:58.534
+This is equal to zero, which is the 
+condition for it to be a minimum. 
+
+120
+00:09:58.534 --> 00:10:03.366
+So we arrive to a point that is in this 
+case a minimum. 
+
+121
+00:10:03.366 --> 00:10:08.550
+So this concept extends to functionals, 
+in the same fashion. 
+
+122
+00:10:08.550 --> 00:10:14.427
+Very simple again. 
+We start from a functional, and then 
+
+123
+00:10:14.427 --> 00:10:19.930
+we're going to ask u to be in extrema, so 
+we do a perturbation. 
+
+124
+00:10:19.930 --> 00:10:27.155
+So, u is here, the yellow curve. 
+It's basically our original function now. 
+
+125
+00:10:27.155 --> 00:10:31.390
+We do a perturbation. 
+Now, the perturbation, now, is another 
+
+126
+00:10:31.390 --> 00:10:34.956
+function. 
+Because we're not talking about points. 
+
+127
+00:10:34.956 --> 00:10:39.785
+We're talking about entire functions. 
+So this is the perturbation. 
+
+128
+00:10:39.785 --> 00:10:44.540
+And then u tilda is the sum of my 
+function and the perturbation. 
+
+129
+00:10:44.540 --> 00:10:50.630
+And what I want is when I replace U by U 
+tilde, I replace it by the perturbation 
+
+130
+00:10:50.630 --> 00:10:56.341
+and I take the derivative, according to 
+the perturbation, has to be equal to 
+
+131
+00:10:56.341 --> 00:11:02.203
+zero, the same way than when I did the 
+point perturbation for functions, I got 
+
+132
+00:11:02.203 --> 00:11:05.553
+zero. 
+If I do a function perturbation here, I 
+
+133
+00:11:05.553 --> 00:11:09.588
+have to get zero. 
+From this, after a few lines of just 
+
+134
+00:11:09.588 --> 00:11:13.700
+taking derivatives, we get the 
+Euler-Lagrange equation. 
+
+135
+00:11:13.700 --> 00:11:19.270
+So that's how we get basically the 
+Euler-Lagrange equation. 
+
+136
+00:11:19.270 --> 00:11:24.650
+Doing the derivative according to the 
+[INAUDIBLE] that we are using. 
+
+137
+00:11:24.650 --> 00:11:30.427
+Once you have basically the 
+Euler-Lagrange equation, you can do the 
+
+138
+00:11:30.427 --> 00:11:35.456
+same that we did for functions. 
+You can move your function in the 
+
+139
+00:11:35.456 --> 00:11:39.852
+direction of the Euler-Lagrange equation 
+until steady state, 
+
+140
+00:11:39.852 --> 00:11:45.613
+when you get to state, you have solved 
+your Euler-Lagrange equation. 
+
+141
+00:11:45.613 --> 00:11:49.706
+So let's just illustrate that here. 
+Look what happened. 
+
+142
+00:11:49.706 --> 00:11:53.420
+I want to put that, basically. 
+I want to do that again, 
+
+143
+00:11:53.420 --> 00:11:57.233
+okay? 
+So you're going to basically move until 
+
+144
+00:11:57.233 --> 00:12:03.040
+you get to the steady state. 
+When you get to steady state, basically 
+
+145
+00:12:03.040 --> 00:12:07.200
+we've got zero. 
+So let us recap what we just saw. 
+
+146
+00:12:07.200 --> 00:12:13.784
+In regular calculus, we basically are 
+moving a point, not a curve, removing a 
+
+147
+00:12:13.784 --> 00:12:20.104
+point in the direction of minus the 
+derivative and basically we get, the 
+
+148
+00:12:20.104 --> 00:12:25.371
+solution which is the minima. 
+In the case of the calculus of 
+
+149
+00:12:25.371 --> 00:12:32.306
+variations, we move, we move the function 
+in the direction of the Euler-Lagrange 
+
+150
+00:12:32.306 --> 00:12:36.871
+basically again the derivative for the 
+perturbation. 
+
+151
+00:12:36.871 --> 00:12:40.623
+We do that all the way to stay state, 
+okay? 
+
+152
+00:12:40.623 --> 00:12:47.201
+And just do that again. 
+We do it all the way to steady state and 
+
+153
+00:12:47.201 --> 00:12:52.062
+at the point of steady state basically 
+this became zero. 
+
+154
+00:12:52.062 --> 00:12:57.937
+And we have solved the Euler-Lagrange 
+which is the condition, basically, for 
+
+155
+00:12:57.937 --> 00:13:01.747
+getting an extreme amount in this case a 
+minima. 
+
+156
+00:13:01.747 --> 00:13:05.161
+We can change the signs and get the 
+maxima. 
+
+157
+00:13:05.161 --> 00:13:10.480
+So we are going to see, in the next 
+video, how we can take you to be an 
+
+158
+00:13:10.480 --> 00:13:14.132
+image. 
+We'll do some interesting function of F. 
+
+159
+00:13:14.132 --> 00:13:19.532
+And get, for example. 
+Blurring the image or get image noisy. 
+
+160
+00:13:19.532 --> 00:13:26.290
+So once again, our unknown is the image 
+that basically optimizes this function. 
+
+161
+00:13:26.290 --> 00:13:31.622
+And we get the complete analogy between 
+regular calculus and calculus of 
+
+162
+00:13:31.622 --> 00:13:37.540
+variations and as I say for [INAUDIBLE] 
+and even more for calculus of variations, 
+
+163
+00:13:37.540 --> 00:13:41.631
+these type of techniques go way beyond 
+image processing. 
+
+164
+00:13:41.631 --> 00:13:46.306
+What image processing did, and in 
+particular the area of partial 
+
+165
+00:13:46.306 --> 00:13:51.347
+differential equations, is to borrow 
+these techniques from continuous 
+
+166
+00:13:51.347 --> 00:13:55.836
+mathematics into this area. 
+Once again, I'm going to show you in the 
+
+167
+00:13:55.836 --> 00:14:00.681
+next video an example of a function that 
+is very useful for image processing. 
+
+168
+00:14:00.681 --> 00:14:03.702
+I see you in the next video. 
+Thank you very much. 

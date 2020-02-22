@@ -1,0 +1,1300 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.390
+Hello and welcome back, I want to talk 
+now about a half transform. 
+
+2
+00:00:05.390 --> 00:00:10.901
+The half transform is a really nice 
+technique to detect objects, to segment 
+
+3
+00:00:10.901 --> 00:00:14.061
+out objects, for which you know their 
+shape. 
+
+4
+00:00:14.061 --> 00:00:19.720
+Maybe a straight line, maybe a circle, as 
+we have seen in the previous example. 
+
+5
+00:00:19.720 --> 00:00:23.997
+For example we want to detect the ball. 
+We know it's circular. 
+
+6
+00:00:23.997 --> 00:00:29.803
+So can we include that information in our 
+detection, in our segmentation technique, 
+
+7
+00:00:29.803 --> 00:00:35.184
+to detect that it's actually circular? 
+Can we use the information that we're 
+
+8
+00:00:35.184 --> 00:00:39.999
+expecting here as a straight line, and 
+basically get a straight line. 
+
+9
+00:00:39.999 --> 00:00:45.592
+So the half transform allows to do that, 
+and in a very simple and really, really 
+
+10
+00:00:45.592 --> 00:00:48.000
+nice fashion. 
+Let's illustrate that. 
+
+11
+00:00:48.000 --> 00:00:53.139
+The basic idea is quite simple, and we're 
+going to start with ideas on how to 
+
+12
+00:00:53.139 --> 00:00:57.277
+detect straight lines, and then we're 
+going to move to circles. 
+
+13
+00:00:57.277 --> 00:01:02.150
+But starting with straight lines makes it 
+much, much easier to understand. 
+
+14
+00:01:02.150 --> 00:01:08.063
+In school I mean, probably in elementary 
+or middle school you have learned how to 
+
+15
+00:01:08.063 --> 00:01:11.348
+represent a straight line that is on a 
+plane. 
+
+16
+00:01:11.348 --> 00:01:16.604
+And I'm going to write down the equations 
+and explain them to you again. 
+
+17
+00:01:16.604 --> 00:01:20.692
+So here we have the plane. 
+This is a image plane, the x y. 
+
+18
+00:01:20.692 --> 00:01:26.167
+This is the image plane and we have 
+points on a straight line on the plane. 
+
+19
+00:01:26.167 --> 00:01:30.620
+For example this straight line might be 
+this one or this one. 
+
+20
+00:01:30.620 --> 00:01:36.234
+Now a straight line on a plane is 
+represented, can be written down in the 
+
+21
+00:01:36.234 --> 00:01:40.233
+following form. 
+We have rho, and I'm going to explain 
+
+22
+00:01:40.233 --> 00:01:51.060
+each one of these symbols in a second, is 
+X cosine theta plus Y sine theta. 
+
+23
+00:01:51.060 --> 00:01:56.501
+So rho is the distance from the 
+coordinate system's center to the 
+
+24
+00:01:56.501 --> 00:02:01.201
+straight line, and this should be 
+perpendicular, of course. 
+
+25
+00:02:01.201 --> 00:02:05.736
+It's a distance. 
+Might be a bit tilted in the video, but 
+
+26
+00:02:05.736 --> 00:02:09.199
+it should be, basically, a 90 degrees 
+angle. 
+
+27
+00:02:09.199 --> 00:02:15.631
+So rho is the distance to the straight 
+line, and theta is this angle here that 
+
+28
+00:02:15.631 --> 00:02:21.980
+basically is the angle with one of the 
+axes. Let's pick this one in this case 
+
+29
+00:02:21.980 --> 00:02:28.358
+with the line connecting test center with 
+the straight line that we are 
+
+30
+00:02:28.358 --> 00:02:32.965
+considering. 
+So basically, every point that is on the 
+
+31
+00:02:32.965 --> 00:02:38.191
+line holds this equation. 
+Every single point, this one and this one 
+
+32
+00:02:38.191 --> 00:02:42.011
+and every point in the line will hold 
+this equation. 
+
+33
+00:02:42.011 --> 00:02:45.684
+Using that, here is the idea of the half 
+transform. 
+
+34
+00:02:45.684 --> 00:02:50.679
+We take a point on the image and that 
+comes from the edge detection. 
+
+35
+00:02:50.679 --> 00:02:56.262
+So basically every point that the edge 
+detector said, there is an edge going 
+
+36
+00:02:56.262 --> 00:02:59.518
+through. 
+For every point, we basically have an 
+
+37
+00:02:59.518 --> 00:03:02.547
+infinite number of lines going through 
+it. 
+
+38
+00:03:02.547 --> 00:03:07.234
+This is one of them, with a particular 
+rho and a particular theta. 
+
+39
+00:03:07.234 --> 00:03:12.882
+Now, let's draw a different one. 
+This line has its own rho and its own 
+
+40
+00:03:12.882 --> 00:03:16.654
+theta. 
+This will be rho, this will be theta. 
+
+41
+00:03:16.654 --> 00:03:23.300
+We can go and draw a different line, all 
+the lines going through the point. 
+
+42
+00:03:23.300 --> 00:03:28.688
+See, here is another one. 
+It has its own rho, here, and its own 
+
+43
+00:03:28.688 --> 00:03:32.729
+theta. 
+And we can keep doing that, we can pick 
+
+44
+00:03:32.729 --> 00:03:37.130
+yet another one. 
+For example, let us pick this one. 
+
+45
+00:03:37.130 --> 00:03:42.671
+And, he had rope. 
+And it has theta. 
+
+46
+00:03:42.671 --> 00:03:47.901
+So, every point has an infinite number of 
+lines. 
+
+47
+00:03:47.901 --> 00:03:56.470
+And basically, every point will go and 
+say, any of those lines is okay with me. 
+
+48
+00:03:56.470 --> 00:04:01.710
+The point will go and vote for. 
+Ro. 
+
+49
+00:04:01.710 --> 00:04:07.133
+And theta for a series of them. 
+It should be voting for an infinite 
+
+50
+00:04:07.133 --> 00:04:11.880
+number but we're going to discrotize 
+we're going to do this on the computer so 
+
+51
+00:04:11.880 --> 00:04:14.764
+we won't be able to vote for an infinite 
+number. 
+
+52
+00:04:14.764 --> 00:04:18.070
+We're going to vote for discreet space of 
+row and feta. 
+
+53
+00:04:18.070 --> 00:04:23.839
+Now that's only one point and basically 
+every possible line that goes through 
+
+54
+00:04:23.839 --> 00:04:26.354
+that point will get one vote. 
+Okay. 
+
+55
+00:04:26.354 --> 00:04:32.271
+Now what happens with this other point? 
+This other point has it's own lines that 
+
+56
+00:04:32.271 --> 00:04:36.191
+go through it. 
+So it's going to go and vote for it's own 
+
+57
+00:04:36.191 --> 00:04:39.002
+lines. 
+It's going to vote for this one of 
+
+58
+00:04:39.002 --> 00:04:43.066
+course. 
+But it's also going to vote, for example, 
+
+59
+00:04:43.066 --> 00:04:47.027
+for this one. 
+That has its own rho and its own theta. 
+
+60
+00:04:47.027 --> 00:04:52.968
+And it's going to vote, and I don't want 
+to draw too many, because it will make 
+
+61
+00:04:52.968 --> 00:04:57.920
+the picture very unclear. 
+But it's going to vote for another line 
+
+62
+00:04:57.920 --> 00:05:03.861
+here and another line here and so on. 
+So it's basically going to vote also for 
+
+63
+00:05:03.861 --> 00:05:08.873
+a series of rho and theta. 
+And all the votes will get one vote. 
+
+64
+00:05:08.873 --> 00:05:13.032
+But look what happened. 
+This line is common to both of them. 
+
+65
+00:05:13.032 --> 00:05:18.503
+And we know that in Euclidean space 
+through two points, there is a single 
+
+66
+00:05:18.503 --> 00:05:20.765
+line. 
+So there is only one line. 
+
+67
+00:05:20.765 --> 00:05:25.070
+The one that we are looking for, that's 
+going to get two votes. 
+
+68
+00:05:25.070 --> 00:05:30.524
+Basically, and that will help us to 
+understand what's the row and the theta 
+
+69
+00:05:30.524 --> 00:05:34.014
+for this line. 
+But of course not only two vaults, 
+
+70
+00:05:34.014 --> 00:05:39.323
+because there's going to be another point 
+here, that's also going to vote for a 
+
+71
+00:05:39.323 --> 00:05:43.323
+series of rho and theta, but is going to 
+vote for this one. 
+
+72
+00:05:43.323 --> 00:05:49.213
+So this one is now getting three votes, 
+one for each point that the edge detector 
+
+73
+00:05:49.213 --> 00:05:51.325
+found, 
+that is on that line. 
+
+74
+00:05:51.325 --> 00:05:57.307
+now of course the edge detector might 
+find points that are outside of that 
+
+75
+00:05:57.307 --> 00:06:03.561
+line, and those will also make their own 
+votes, but hopefully the only line that 
+
+76
+00:06:03.561 --> 00:06:07.290
+gets a large number of votes is the line 
+of interest. 
+
+77
+00:06:07.290 --> 00:06:12.354
+So that's the basic idea of the Hough 
+transform, and we're going to provide 
+
+78
+00:06:12.354 --> 00:06:18.193
+more details in a second but every point 
+that the edge detector find votes for the 
+
+79
+00:06:18.193 --> 00:06:23.258
+possibilities, in this case, lines. 
+If we have multiple points on the same 
+
+80
+00:06:23.258 --> 00:06:26.212
+line, then we're going to have multiple 
+votes. 
+
+81
+00:06:26.212 --> 00:06:31.481
+So how do we do that in reality. 
+So, in reality, we are going to go from 
+
+82
+00:06:31.481 --> 00:06:37.582
+the XY coordinate system, which means the 
+image coordinate system, to a new 
+
+83
+00:06:37.582 --> 00:06:41.540
+coordinate system, which is theta and 
+rho. 
+
+84
+00:06:41.540 --> 00:06:47.040
+That coordinate the system, the same way 
+that our image is discretized, 
+
+85
+00:06:47.040 --> 00:06:52.213
+is going to be discretized. 
+So theta can be anything around the 
+
+86
+00:06:52.213 --> 00:06:58.701
+circle, and we basically discrotize as 
+fine as we want or as fine as our memory 
+
+87
+00:06:58.701 --> 00:07:05.025
+or our, our computational time allow us. 
+Let's say we can discretize every one 
+
+88
+00:07:05.025 --> 00:07:08.529
+degree. 
+We do the same for rho, we discrotize it. 
+
+89
+00:07:08.529 --> 00:07:13.654
+We know that row can not go further than 
+the size of the image, so we know it's 
+
+90
+00:07:13.654 --> 00:07:16.950
+bounded, and then we basically discretize 
+it. 
+
+91
+00:07:16.950 --> 00:07:22.661
+And then what we're going to do, let me 
+write the equation again, with half the 
+
+92
+00:07:22.661 --> 00:07:29.985
+equation, rho x, 
+cosine theta plus y sine theta. 
+
+93
+00:07:29.985 --> 00:07:32.619
+So what we are going to do is the 
+following. 
+
+94
+00:07:32.619 --> 00:07:35.794
+We go through every point, let's say this 
+one. 
+
+95
+00:07:35.794 --> 00:07:40.560
+So every point gives us x, y, the 
+coordinates of that point. 
+
+96
+00:07:40.560 --> 00:07:44.990
+Then we run through theta, 
+and we say, let's say, one degree. 
+
+97
+00:07:44.990 --> 00:07:50.398
+So we have the coordinate x and y. 
+We put cosine of one, sine of one. 
+
+98
+00:07:50.398 --> 00:07:54.272
+That gives us a rho. 
+We go and vote for that one. 
+
+99
+00:07:54.272 --> 00:07:59.680
+We, let's say, add one vote. 
+This is sometimes called the accumulator. 
+
+100
+00:07:59.680 --> 00:08:04.098
+And then we go ascertain, theta now equal 
+two. 
+
+101
+00:08:04.098 --> 00:08:06.946
+We have x, y. 
+We define theta 2. 
+
+102
+00:08:06.946 --> 00:08:12.444
+We have cosine of two plus sine of two. 
+We get a new rho. 
+
+103
+00:08:12.444 --> 00:08:19.514
+We go and vote for that one as well. 
+And we keep voting for every single 
+
+104
+00:08:19.514 --> 00:08:24.031
+point. 
+Now it's not very hard to see that once 
+
+105
+00:08:24.031 --> 00:08:30.904
+you fix x and y, if you vary theta as 
+here, or as here, rho changes in a 
+
+106
+00:08:30.904 --> 00:08:35.912
+sinusoidal fashion. 
+So, that's very easy and it counts on the 
+
+107
+00:08:35.912 --> 00:08:40.511
+cosine and sine. 
+So your votes will look like a sinusoidal 
+
+108
+00:08:40.511 --> 00:08:46.030
+function for every single point. 
+Remember now when I go to a second point, 
+
+109
+00:08:46.030 --> 00:08:50.399
+I will got, I will get more votes, a 
+different sinusoidal. 
+
+110
+00:08:50.399 --> 00:08:56.607
+So I will get different votes, and there 
+will be a place, the place for responding 
+
+111
+00:08:56.607 --> 00:09:01.130
+to this straight line, that is starting 
+to accumulate votes. 
+
+112
+00:09:01.130 --> 00:09:04.759
+Everything, 
+for every point, we are going to have 
+
+113
+00:09:04.759 --> 00:09:08.686
+that sinusoidal. 
+We vote basically, on that sinusoidal, 
+
+114
+00:09:08.686 --> 00:09:13.651
+and we start to accumulate. 
+And now, the next step is to go into the 
+
+115
+00:09:13.651 --> 00:09:19.061
+accumulator, and find the maxima. 
+It may be multiple, if there are multiple 
+
+116
+00:09:19.061 --> 00:09:22.395
+straight lines, 
+but we go and find, and say, oh, 
+
+117
+00:09:22.395 --> 00:09:25.211
+this is the rho and theta that many 
+points like, 
+
+118
+00:09:25.211 --> 00:09:30.546
+and that's how we detect these lines. 
+So, let me just run you through the 
+
+119
+00:09:30.546 --> 00:09:34.548
+pipeline again. 
+You start from the image, and you do an 
+
+120
+00:09:34.548 --> 00:09:36.565
+edge detection. 
+Every point. 
+
+121
+00:09:36.565 --> 00:09:40.035
+Some of them in the lines that you care 
+about. 
+
+122
+00:09:40.035 --> 00:09:44.410
+Some of them outside. 
+Every point defines an equation like 
+
+123
+00:09:44.410 --> 00:09:47.050
+this. 
+Every point gives you the x, y 
+
+124
+00:09:47.050 --> 00:09:51.047
+coordinates. 
+So you go into the accumulator space, and 
+
+125
+00:09:51.047 --> 00:09:56.681
+you vote sinusoidal votes. 
+Or you just run through the thetas in the 
+
+126
+00:09:56.681 --> 00:10:02.451
+discretized space and you vote for every 
+rho that you get from this equation. 
+
+127
+00:10:02.451 --> 00:10:08.221
+Every point a vote, then you finish, you 
+basically say, lets go and look which 
+
+128
+00:10:08.221 --> 00:10:13.991
+areas, which basically entries in my 
+accumulator have enough bolts that means 
+
+129
+00:10:13.991 --> 00:10:17.663
+that there is a straight line going 
+through them. 
+
+130
+00:10:17.663 --> 00:10:23.882
+Now this concept of voting goes very far, 
+and you can actually do many, many things 
+
+131
+00:10:23.882 --> 00:10:29.760
+beyond detecting straight lines. 
+Let us show one example. 
+
+132
+00:10:31.340 --> 00:10:38.086
+The basic, so here, we have four, five 
+points, and then they accumulators so its 
+
+133
+00:10:38.086 --> 00:10:43.340
+just going and you will see there is a 
+straight line so there will be three 
+
+134
+00:10:43.340 --> 00:10:48.595
+votes for that, and there is another 
+straight line that will should be three 
+
+135
+00:10:48.595 --> 00:10:51.551
+votes. 
+Two votes, two votes, and so on. 
+
+136
+00:10:51.551 --> 00:10:57.736
+For this very, very particular example, I 
+just want to use it to show how we 
+
+137
+00:10:57.736 --> 00:11:02.820
+basically get this sinusoidal type of 
+votes for every point. 
+
+138
+00:11:02.820 --> 00:11:09.090
+Now, let's see that on a real image. 
+So what we see here is an aerial image 
+
+139
+00:11:09.090 --> 00:11:12.649
+here. 
+we clearly see that there is some 
+
+140
+00:11:12.649 --> 00:11:16.661
+straight lines. 
+This is the result of edge detection. 
+
+141
+00:11:16.661 --> 00:11:19.698
+In particular, it's a canny edge 
+detector. 
+
+142
+00:11:19.698 --> 00:11:24.514
+Now, it's a bit confusing. 
+From it, we want to get the parametrized 
+
+143
+00:11:24.514 --> 00:11:28.589
+straight line. 
+We want to go the rho, we want to get the 
+
+144
+00:11:28.589 --> 00:11:33.118
+rho and theta for this one. 
+This is the picture of this accumulator 
+
+145
+00:11:33.118 --> 00:11:37.733
+that went through all these points. 
+Now, you don't need to use all of them. 
+
+146
+00:11:37.733 --> 00:11:42.474
+You can just sample some of them. 
+There's plenty of points on this straight 
+
+147
+00:11:42.474 --> 00:11:46.835
+line so you will get very high 
+accumulator just by using a subset of 
+
+148
+00:11:46.835 --> 00:11:49.048
+them. 
+But, this is the result of the 
+
+149
+00:11:49.048 --> 00:11:52.461
+accumulator. 
+And then you go here and you look for the 
+
+150
+00:11:52.461 --> 00:11:56.158
+maximum values. 
+And from then you get the rho and the 
+
+151
+00:11:56.158 --> 00:11:59.558
+theta that correspond to those maximum 
+values. 
+
+152
+00:11:59.558 --> 00:12:04.310
+Remember this is your theta, 
+rho accumulator. 
+
+153
+00:12:04.310 --> 00:12:09.804
+So wherever is the maximum, it gives you 
+a value for theta and a value for rho, 
+
+154
+00:12:09.804 --> 00:12:15.679
+and those corresponds to what we see 
+here, and then you can put it back on the 
+
+155
+00:12:15.679 --> 00:12:21.249
+picture and say, this is my most 
+basically extreme line, my most prominent 
+
+156
+00:12:21.249 --> 00:12:24.149
+line. 
+Then there might be other maximal. 
+
+157
+00:12:24.149 --> 00:12:30.024
+There would certainly be for this line, 
+and this line, and this, and you can go 
+
+158
+00:12:30.024 --> 00:12:34.450
+and pick all of them. 
+In this case, we are only marking the 
+
+159
+00:12:34.450 --> 00:12:38.982
+most prominent one, a very simple and 
+extremely powerful technique. 
+
+160
+00:12:38.982 --> 00:12:44.099
+I want to show you also how we do this 
+for circuits but before that I want to 
+
+161
+00:12:44.099 --> 00:12:46.920
+run this example in mat lab. 
+Let's see that. 
+
+162
+00:12:46.920 --> 00:12:50.266
+We're now as we said inside the mat lab 
+environment. 
+
+163
+00:12:50.266 --> 00:12:55.350
+And let's see the type of operations that 
+we are going to do to illustrate the 
+
+164
+00:12:55.350 --> 00:13:00.498
+Hough transform to the text trade lines. 
+So there is a bunch of commands here but 
+
+165
+00:13:00.498 --> 00:13:05.325
+I'm going to describe them to you. 
+Most of them are just to make nice plot. 
+
+166
+00:13:05.325 --> 00:13:10.022
+I'm going to describe to you those that 
+are important, to understand what 
+
+167
+00:13:10.022 --> 00:13:12.790
+basically the Hough transform is doing 
+here. 
+
+168
+00:13:12.790 --> 00:13:17.354
+So first, as we have seen many times in 
+the past, we read the image. 
+
+169
+00:13:17.354 --> 00:13:21.711
+This is the first operation. 
+Then we're going to rotate that image. 
+
+170
+00:13:21.711 --> 00:13:26.829
+This is just for the fun of it. 
+I don't want you to believe that we can 
+
+171
+00:13:26.829 --> 00:13:31.947
+only detect horizontal or vertical lines, 
+so we're going to rotate that image. 
+
+172
+00:13:31.947 --> 00:13:35.820
+Here, we do edges. 
+Remember, the first thing we need to do 
+
+173
+00:13:35.820 --> 00:13:40.800
+is detect the edges in the image. 
+That's the input to the Hough transform. 
+
+174
+00:13:40.800 --> 00:13:44.950
+And then here it is the Hough transform 
+in MATLAB. 
+
+175
+00:13:44.950 --> 00:13:50.710
+That would basically create this 
+accumulator in the theta rho space. 
+
+176
+00:13:50.710 --> 00:13:55.211
+And these are a bunch of operations, just 
+to illustrate, to visualize. 
+
+177
+00:13:55.211 --> 00:14:00.111
+We're going to run it in a second, I'm 
+just describing the operations for now. 
+
+178
+00:14:00.111 --> 00:14:02.891
+Then, the next, we need to detect the 
+peaks. 
+
+179
+00:14:02.891 --> 00:14:06.069
+We need to detect the maximal in the 
+accumulator. 
+
+180
+00:14:06.069 --> 00:14:09.380
+And that's this operation, and we're 
+going to plot it. 
+
+181
+00:14:09.380 --> 00:14:14.720
+Now we have the maximal, which means that 
+we have the rho, and the theta and, we 
+
+182
+00:14:14.720 --> 00:14:19.020
+need to detect the lines. 
+We actually need to draw those lines. 
+
+183
+00:14:19.020 --> 00:14:24.429
+And that's what this operation does, is 
+basically finds the lines and then the 
+
+184
+00:14:24.429 --> 00:14:29.561
+rest is going to draw them, and actually 
+it's going to draw them as segments and, 
+
+185
+00:14:29.561 --> 00:14:33.445
+with the images, I'm going to illustrate 
+you how we do that. 
+
+186
+00:14:33.445 --> 00:14:39.140
+So let's just run all these operations. 
+and then just see the results. 
+
+187
+00:14:39.140 --> 00:14:46.299
+So, here are the two images. 
+As you see it's pretty fast, and we see 
+
+188
+00:14:46.299 --> 00:14:52.250
+the original image. 
+This is the accumulator, and here, the 
+
+189
+00:14:52.250 --> 00:14:58.615
+squares, the wide squares are basically 
+the peaks the, basically, the most 
+
+190
+00:14:58.615 --> 00:15:05.334
+important maximal in the accumulator. 
+And those are these green lines that we 
+
+191
+00:15:05.334 --> 00:15:09.072
+see here. 
+Once again in the accumulator, we have 
+
+192
+00:15:09.072 --> 00:15:13.445
+rho and theta. 
+Once we have that we can go back into the 
+
+193
+00:15:13.445 --> 00:15:18.852
+image plain and draw the lines. 
+Now you may wonder, but wait a second, 
+
+194
+00:15:18.852 --> 00:15:24.489
+rho and theta would give us straight 
+lines, but all across the image how do we 
+
+195
+00:15:24.489 --> 00:15:27.700
+get to segments if we need to get to 
+segments. 
+
+196
+00:15:27.700 --> 00:15:31.874
+And the basic idea is that there are many 
+ways of doing that. 
+
+197
+00:15:31.874 --> 00:15:37.486
+But one way of doing that is you go and 
+put the line back in the image as we have 
+
+198
+00:15:37.486 --> 00:15:40.635
+here. 
+And then you can go around that line and 
+
+199
+00:15:40.635 --> 00:15:46.110
+see if there actual points in the image 
+which were detected by the age detector 
+
+200
+00:15:46.110 --> 00:15:50.558
+that voted for that line. 
+And you basically can get what actually 
+
+201
+00:15:50.558 --> 00:15:54.460
+was the real segment and not the whole 
+line in the image. 
+
+202
+00:15:54.460 --> 00:16:00.024
+That's just one way of doing that. 
+And as we see here, we got this straight 
+
+203
+00:16:00.024 --> 00:16:03.408
+lines. 
+Very fast, and very simple operation to 
+
+204
+00:16:03.408 --> 00:16:06.116
+get straight lines. 
+There are others. 
+
+205
+00:16:06.116 --> 00:16:11.831
+Just, their votes are weaker, and we need 
+to decide to put a threshold in the 
+
+206
+00:16:11.831 --> 00:16:15.470
+cumulator. 
+We might put a threshold that says don't 
+
+207
+00:16:15.470 --> 00:16:20.278
+give me any line that has less than 
+certain amount of votes, 
+
+208
+00:16:20.278 --> 00:16:26.529
+or we can say give me the ten top lines, 
+give me the, the, the five top lines or 
+
+209
+00:16:26.529 --> 00:16:32.940
+anything that is application dependent. 
+So with this image and with this example 
+
+210
+00:16:32.940 --> 00:16:37.507
+we see the whole pipeline. 
+From the image, detect the edges, create 
+
+211
+00:16:37.507 --> 00:16:40.392
+the accumulator, 
+find the maximal, 
+
+212
+00:16:40.392 --> 00:16:44.720
+draw up those lines back to the image. 
+And if you need, 
+
+213
+00:16:44.720 --> 00:16:50.057
+basically find the segments by looking in 
+the image, where do you have actual 
+
+214
+00:16:50.057 --> 00:16:53.939
+points that voted for that, if you need 
+just the segment. 
+
+215
+00:16:53.939 --> 00:16:59.720
+So now we're going to go back and I'm 
+going to describe what we do for circles. 
+
+216
+00:16:59.720 --> 00:17:06.883
+What about circles then? 
+So here we have an image of circles and 
+
+217
+00:17:06.883 --> 00:17:15.542
+we are going to know if we can basically 
+find the circle using the half transform. 
+
+218
+00:17:15.542 --> 00:17:22.828
+The idea is exactly the same. 
+Now a circle can be written down in the 
+
+219
+00:17:22.828 --> 00:17:28.108
+following form. 
+X minus X zero, that's a X coordinate of 
+
+220
+00:17:28.108 --> 00:17:34.548
+the circle. 
+Square plus Y minus Y zero squared equal 
+
+221
+00:17:34.548 --> 00:17:44.976
+to the radius squared so, every point in 
+the circle holds this equation where the 
+
+222
+00:17:44.976 --> 00:17:49.881
+center of the circle. 
+Is given by this and this. 
+
+223
+00:17:49.881 --> 00:17:55.047
+These are the coordinates of the center, 
+what we need to find. 
+
+224
+00:17:55.047 --> 00:17:59.620
+And the radius of the center, which is 
+also an unknown. 
+
+225
+00:17:59.620 --> 00:18:04.262
+It's given here. 
+If you don't remember this formula, just 
+
+226
+00:18:04.262 --> 00:18:10.147
+pick any of the elementary geometry 
+books, or just believe me that this 
+
+227
+00:18:10.147 --> 00:18:14.706
+formula is the right formula for a circle 
+on the plane. 
+
+228
+00:18:14.706 --> 00:18:21.503
+Now in the same way that we need rho and 
+theta for straight lines, we need to find 
+
+229
+00:18:21.503 --> 00:18:25.980
+the center and the radius for a circle. 
+So we need one. 
+
+230
+00:18:25.980 --> 00:18:30.918
+To three parameters. 
+So now accumu, our accumulator won't be 
+
+231
+00:18:30.918 --> 00:18:35.270
+on the plane. 
+It will be a 3-dimensional accumulator, 
+
+232
+00:18:35.270 --> 00:18:41.130
+but we're going to do exactly the same. 
+We're going to have an edge detector. 
+
+233
+00:18:41.130 --> 00:18:46.540
+Every point is not a vote for a circus 
+every point is going to give us. 
+
+234
+00:18:46.540 --> 00:18:50.713
+Its coordinates. 
+And then we are going to run through the 
+
+235
+00:18:50.713 --> 00:18:56.663
+accumulator on the X coordinate of the 
+center, the Y coordinate of the center, 
+
+236
+00:18:56.663 --> 00:19:00.682
+and get the radius. 
+So we are going to run through that, 
+
+237
+00:19:00.682 --> 00:19:05.662
+through the Xs, run through the Ys. 
+And then, get the radius. 
+
+238
+00:19:05.662 --> 00:19:11.937
+We accumulate, we pick the maximum one, 
+and we basically are done. 
+
+239
+00:19:11.937 --> 00:19:17.490
+We got our center and radius. 
+So, let us see this straight one example. 
+
+240
+00:19:17.490 --> 00:19:22.324
+Here we have the edges and I want to 
+repeat that once again. 
+
+241
+00:19:22.324 --> 00:19:27.482
+Every point here will vote for multiple 
+centers, multiple radius. 
+
+242
+00:19:27.482 --> 00:19:32.800
+We can of course limit the centers, 
+because we know the dimensions. 
+
+243
+00:19:32.800 --> 00:19:38.763
+We can also limit the votes for the 
+radius, because we also know how large 
+
+244
+00:19:38.763 --> 00:19:43.760
+the objects can be in the image. 
+We are going to vote for that. 
+
+245
+00:19:43.760 --> 00:19:49.018
+There are going to be multiple votes for 
+the real circles in the images and then 
+
+246
+00:19:49.018 --> 00:19:51.810
+we basically detect them and here they 
+are. 
+
+247
+00:19:51.810 --> 00:19:57.615
+We basically went through that 
+cummulator, and find the top votes. 
+
+248
+00:19:57.615 --> 00:20:02.901
+And we get out results. 
+Basically the Hough transform can be used 
+
+249
+00:20:02.901 --> 00:20:07.945
+for any parametric curve. 
+Anything that we need to vote for some 
+
+250
+00:20:07.945 --> 00:20:13.147
+parameters of that curve. 
+As rho and theta, the centers we can find 
+
+251
+00:20:13.147 --> 00:20:18.663
+parabolas, we can find any, any curve 
+that we can write with parameters. 
+
+252
+00:20:18.663 --> 00:20:24.180
+The more parameters you have, the more 
+expensive the Hough transform is. 
+
+253
+00:20:24.180 --> 00:20:30.170
+So normally, the Hough transform is used 
+for finding straights line, circles, 
+
+254
+00:20:30.170 --> 00:20:33.807
+ellipses, 
+relatively simple objects that have a 
+
+255
+00:20:33.807 --> 00:20:39.201
+controllable number of parameters. 
+Otherwise, your accumulator space is 
+
+256
+00:20:39.201 --> 00:20:44.826
+huge, takes a lot of memory, and takes a 
+lot of computational time, both to 
+
+257
+00:20:44.826 --> 00:20:50.220
+compute it and to find the maximal. 
+But for those simple shapes, there's, 
+
+258
+00:20:50.220 --> 00:20:53.961
+one of the best techniques out there is 
+the Hough transform. 
+
+259
+00:20:53.961 --> 00:20:58.146
+So I hope you enjoy this video and I'll 
+see you in the next video. 
+
+260
+00:20:58.146 --> 00:20:59.415
+Thank you very much. 

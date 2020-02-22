@@ -1,0 +1,651 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.103
+Hello, it's great to have you back. 
+This is week 6, and the topic of this 
+
+2
+00:00:06.103 --> 00:00:10.610
+week is partial differential equations in 
+image processing. 
+
+3
+00:00:10.610 --> 00:00:15.171
+Some of you might remember, some of you 
+might know what partial differential 
+
+4
+00:00:15.171 --> 00:00:18.413
+equations are. 
+Some of you might not remember when you 
+
+5
+00:00:18.413 --> 00:00:22.134
+studied that, maybe a long time ago, 
+maybe just a few years ago. 
+
+6
+00:00:22.134 --> 00:00:26.515
+But don't worry because every other week 
+this is going to be a very self 
+
+7
+00:00:26.515 --> 00:00:29.877
+containing week. 
+Before I give you a bit more of details 
+
+8
+00:00:29.877 --> 00:00:34.798
+of what we are going to learn this week 
+let me try to explain to you what we mean 
+
+9
+00:00:34.798 --> 00:00:38.640
+by partial differential equations what is 
+kind of this new area. 
+
+10
+00:00:38.640 --> 00:00:44.670
+Relatively new area in imagine processing 
+but certainly new for us in this class. 
+
+11
+00:00:44.670 --> 00:00:50.227
+So far we have been considering images at 
+discrete objects in the computer. 
+
+12
+00:00:50.227 --> 00:00:53.340
+If we look for example at the still 
+image. 
+
+13
+00:00:53.340 --> 00:00:58.707
+We already talked it looks continuous to 
+us but actually it is a connection of 
+
+14
+00:00:58.707 --> 00:01:03.667
+pixels so its like this great two 
+dimensional array of pixels as we have 
+
+15
+00:01:03.667 --> 00:01:08.899
+represented here now they are so close to 
+each other we already talked about 
+
+16
+00:01:08.899 --> 00:01:14.334
+resolution they're so close to each other 
+that it looks like a continuous image, 
+
+17
+00:01:14.334 --> 00:01:19.362
+but actually it is a discreet object. 
+It's representing the computer as a 
+
+18
+00:01:19.362 --> 00:01:22.420
+discreet object. 
+The same happens with movies. 
+
+19
+00:01:22.420 --> 00:01:26.262
+We already know that movies are discrete 
+object. 
+
+20
+00:01:26.262 --> 00:01:32.426
+They look continuous to us, like this 
+movie that we are watching here, because 
+
+21
+00:01:32.426 --> 00:01:38.350
+the sampling in time is basically very 
+fast, and that's why our perception 
+
+22
+00:01:38.350 --> 00:01:45.401
+perceives this as a continuous object, 
+but we already know that this is a 
+
+23
+00:01:45.401 --> 00:01:50.327
+discrete object. 
+30 frames per second, 24 frames per 
+
+24
+00:01:50.327 --> 00:01:55.060
+second. 
+So images and videos are discreet both in 
+
+25
+00:01:55.060 --> 00:01:58.413
+space. 
+In time and also at the gray levels. 
+
+26
+00:01:58.413 --> 00:02:02.804
+They look continuous to us but they are 
+discreet objects. 
+
+27
+00:02:02.804 --> 00:02:08.890
+Now that leads us to what we have been 
+doing most of these five previous weeks 
+
+28
+00:02:08.890 --> 00:02:15.361
+using tools from discreet representations 
+from discreet mathematics because we have 
+
+29
+00:02:15.361 --> 00:02:21.139
+discreet objects in the computer. 
+So what's different when we start talking 
+
+30
+00:02:21.139 --> 00:02:27.276
+about partial differential equations. 
+What's different is that we're going to 
+
+31
+00:02:27.276 --> 00:02:33.199
+start considering continuous objects. 
+So what we consider discreet objects the 
+
+32
+00:02:33.199 --> 00:02:38.515
+way that videos and images are 
+represented in the computer we see for 
+
+33
+00:02:38.515 --> 00:02:42.539
+example, sums. 
+We never saw the sign of an integral we 
+
+34
+00:02:42.539 --> 00:02:47.020
+always talk about sums we talked about 
+discreet operations. 
+
+35
+00:02:47.020 --> 00:02:52.333
+Also, every time we saw kind of a 
+continuous object a derivative which is a 
+
+36
+00:02:52.333 --> 00:02:57.717
+toll from calculus is a continuous object 
+then we immediately discretize it. 
+
+37
+00:02:57.717 --> 00:03:01.330
+Remember, we talked about, for example, 
+it's derivative. 
+
+38
+00:03:01.330 --> 00:03:07.278
+Derivative indicates direction, and we 
+say, okay, let's do plus one and minus 
+
+39
+00:03:07.278 --> 00:03:11.217
+one here. 
+So immediately we redefine its discreet 
+
+40
+00:03:11.217 --> 00:03:15.316
+counterpart because we want to be in a 
+discreet wall. 
+
+41
+00:03:15.316 --> 00:03:20.411
+We want to be in a discreet space. 
+The area of partial differential 
+
+42
+00:03:20.411 --> 00:03:26.279
+equations says forget about that the area 
+of partial differential equations has a 
+
+43
+00:03:26.279 --> 00:03:31.718
+completely different approach and says 
+images are continuous objects do not 
+
+44
+00:03:31.718 --> 00:03:37.013
+treat them as discreet images anymore 
+that's just an artifact of computer 
+
+45
+00:03:37.013 --> 00:03:40.520
+representations. 
+Treat them as continuous objects. 
+
+46
+00:03:40.520 --> 00:03:46.108
+And then you basically are going to be 
+talking about image processing that's 
+
+47
+00:03:46.108 --> 00:03:51.841
+iterations of infinite decimal operators, 
+things that happen at very, very small 
+
+48
+00:03:51.841 --> 00:03:56.340
+scale we iterate them. 
+And when we are iterating them, actually, 
+
+49
+00:03:56.340 --> 00:04:01.565
+we get these partial differential 
+equations, but once again if you don't 
+
+50
+00:04:01.565 --> 00:04:07.299
+remember exactly what they are, we are 
+going to explain that in the next videos. 
+
+51
+00:04:07.299 --> 00:04:10.710
+Don't worry about that, the key concept 
+is here. 
+
+52
+00:04:10.710 --> 00:04:14.515
+Images are not discreet objects, images 
+are continuous. 
+
+53
+00:04:14.515 --> 00:04:19.236
+So go and gather up all of your 
+algorithms that are in your continuous 
+
+54
+00:04:19.236 --> 00:04:22.921
+domain. 
+Treat images as continuous objects, and 
+
+55
+00:04:22.921 --> 00:04:28.978
+then you can do partial differential 
+equations you can also differentiate 
+
+56
+00:04:28.978 --> 00:04:33.234
+geometry, tools that are from continuous 
+mathematics. 
+
+57
+00:04:33.234 --> 00:04:39.208
+All of a sudden, they are valid. 
+They're powerful for basically discreet 
+
+58
+00:04:39.208 --> 00:04:43.873
+image processing, but then you ask 
+yourself, wait a second. 
+
+59
+00:04:43.873 --> 00:04:49.930
+You gather up them, but my images are 
+still discreet objects in my computer. 
+
+60
+00:04:49.930 --> 00:04:54.067
+But here comes to the rescue, numerical 
+analysis. 
+
+61
+00:04:54.067 --> 00:05:00.877
+Numerical analysis is exactly the area 
+that says how do I implement continuous 
+
+62
+00:05:00.877 --> 00:05:05.446
+algorithms? 
+How do I implement continuous mathematics 
+
+63
+00:05:05.446 --> 00:05:11.825
+in discrete domains like a computer? 
+So you go and develop algorithms with 
+
+64
+00:05:11.825 --> 00:05:18.576
+tools of continuous mathematics and then. 
+Numerical analysis comes to the rescue 
+
+65
+00:05:18.576 --> 00:05:23.443
+once we need to implement those 
+algorithms in the computer. 
+
+66
+00:05:23.443 --> 00:05:28.804
+So it's kind of a different paradigm. 
+It's not better, its not worse. 
+
+67
+00:05:28.804 --> 00:05:35.073
+It's different than the paradigm that we 
+were used to before, when we consider 
+
+68
+00:05:35.073 --> 00:05:39.280
+images from the very beginning as 
+discreet objects. 
+
+69
+00:05:39.280 --> 00:05:40.980
+Now, 
+why? 
+
+70
+00:05:40.980 --> 00:05:45.460
+Why is this happening now? 
+What's going on? 
+
+71
+00:05:45.460 --> 00:05:51.360
+Why do we move from this, from this 
+completely discreet, that basically if we 
+
+72
+00:05:51.360 --> 00:05:57.572
+look historically, has mostly dominated 
+image and video processing for years and 
+
+73
+00:05:57.572 --> 00:06:03.687
+years, until basically about ten years 
+ago, and of course there are a number of 
+
+74
+00:06:03.687 --> 00:06:10.277
+reasons why these continuous tools appear 
+in image processing one is computers we 
+
+75
+00:06:10.277 --> 00:06:16.465
+can more powerful and then numerical 
+algorithms to implement this continuous 
+
+76
+00:06:16.465 --> 00:06:22.893
+math that were impossible to have in a 
+computer we can actually do able in even 
+
+77
+00:06:22.893 --> 00:06:26.510
+small and personal computers of course 
+every. 
+
+78
+00:06:26.510 --> 00:06:32.112
+New tools can because some people moved 
+into the area and we should never forget 
+
+79
+00:06:32.112 --> 00:06:37.023
+about the influence of people. 
+So a lot of people in the last ten years 
+
+80
+00:06:37.023 --> 00:06:42.487
+or so that were interested in continuous 
+mathematics also became interested in 
+
+81
+00:06:42.487 --> 00:06:47.537
+image processing and they brought their 
+tools, their expertise into image 
+
+82
+00:06:47.537 --> 00:06:50.995
+processing. 
+Now we're going to see, as I said we're 
+
+83
+00:06:50.995 --> 00:06:55.353
+going to see examples. 
+I am going to provide you the background 
+
+84
+00:06:55.353 --> 00:06:57.331
+but. 
+What is it bringing to us? 
+
+85
+00:06:57.331 --> 00:07:01.390
+It's going to bring a number of things. 
+It brings new concepts. 
+
+86
+00:07:01.390 --> 00:07:06.259
+It brings accuracy. 
+This is a very important thing, because 
+
+87
+00:07:06.259 --> 00:07:11.282
+we are in continuous domain, 
+and then we implement by numerical, 
+
+88
+00:07:11.282 --> 00:07:14.565
+algorithms. 
+The accuracy will depend on the 
+
+89
+00:07:14.565 --> 00:07:18.382
+implementation, not on the design of the 
+algorithm. 
+
+90
+00:07:18.382 --> 00:07:22.811
+The algorithm is designed in the 
+continuous domain, so there is no 
+
+91
+00:07:22.811 --> 00:07:27.392
+intrinsic accuracy. 
+Depending how much I'm willing to invest, 
+
+92
+00:07:27.392 --> 00:07:33.194
+computation and resources for example, in 
+the implementation that will determine 
+
+93
+00:07:33.194 --> 00:07:38.768
+the actual accuracy of the algorithm. 
+It's not intrinsic to the algorithm. 
+
+94
+00:07:38.768 --> 00:07:44.117
+When I define a derivative at plus minus, 
+plus one minus one, 
+
+95
+00:07:44.117 --> 00:07:47.938
+I'm done. 
+I have defined the accuracy of my 
+
+96
+00:07:47.938 --> 00:07:52.203
+algorithm. 
+Now if I define the continuum and, and 
+
+97
+00:07:52.203 --> 00:07:56.112
+then say do the derivative the best you 
+can, 
+
+98
+00:07:56.112 --> 00:08:01.000
+I leave the door open to very high 
+accuracy techniques. 
+
+99
+00:08:01.000 --> 00:08:06.427
+Another thing that was broad, that we are 
+not going to discuss a lot in this class, 
+
+100
+00:08:06.427 --> 00:08:10.067
+and certainly not in this week, is very 
+formal analysis. 
+
+101
+00:08:10.067 --> 00:08:14.832
+A lot of the techniques that came from 
+the area of partial differential 
+
+102
+00:08:14.832 --> 00:08:18.538
+equations to image processing have very 
+formal analysis. 
+
+103
+00:08:18.538 --> 00:08:23.767
+You can prove theorems, you can prove 
+that what your doing is right even before 
+
+104
+00:08:23.767 --> 00:08:26.497
+your going and implementing the 
+algorithm. 
+
+105
+00:08:26.497 --> 00:08:31.064
+So it's one of the most mathematical 
+areas in image and video processing. 
+
+106
+00:08:31.064 --> 00:08:35.890
+I'm not saying its the only one, but it's 
+one of the most mathematical areas. 
+
+107
+00:08:35.890 --> 00:08:40.753
+And the consequences of this is that 
+partial differential equation tools 
+
+108
+00:08:40.753 --> 00:08:43.684
+brought a lot of state of the al-, 
+algorithms. 
+
+109
+00:08:43.684 --> 00:08:48.947
+But I think one of the most important 
+things, and I want to leave you before we 
+
+110
+00:08:48.947 --> 00:08:54.734
+go into details with this take home 
+message, is that there are new tools and 
+
+111
+00:08:54.734 --> 00:09:00.085
+new books in the bookshelf. 
+So when you bring a new theory into an 
+
+112
+00:09:00.085 --> 00:09:03.572
+area, 
+you say, okay all these new frameworks 
+
+113
+00:09:03.572 --> 00:09:07.910
+are now allowed. 
+And it always good to have more tools to 
+
+114
+00:09:07.910 --> 00:09:13.250
+solve real problems, as we are going to 
+see this week and a bit next week. 
+
+115
+00:09:13.250 --> 00:09:17.634
+So, what we're going to do this week is 
+I'm going to give you the tools to 
+
+116
+00:09:17.634 --> 00:09:22.548
+understand the underlying and the 
+simplest possible tools to understand the 
+
+117
+00:09:22.548 --> 00:09:26.364
+area of partial differential equations in 
+image processing. 
+
+118
+00:09:26.364 --> 00:09:31.150
+We're going to filter in examples that is 
+going to show you to understand. 
+
+119
+00:09:31.150 --> 00:09:35.738
+Remember, last week we discussed active 
+counters, that's one example of the use 
+
+120
+00:09:35.738 --> 00:09:40.268
+of partial differential equations in 
+image processing as we are going to see 
+
+121
+00:09:40.268 --> 00:09:44.857
+very soon in one of the future videos. 
+And we are also going to talk next week 
+
+122
+00:09:44.857 --> 00:09:49.328
+about imaging painting and some of the 
+algorithms we are going to subscribe 
+
+123
+00:09:49.328 --> 00:09:52.270
+there are based on partial differential 
+equations. 
+
+124
+00:09:52.270 --> 00:09:56.440
+As I said, is one of the most 
+mathematical areas that we're going to 
+
+125
+00:09:56.440 --> 00:10:00.916
+discuss during these nine weeks of 
+classes in image and video processing. 
+
+126
+00:10:00.916 --> 00:10:05.454
+But there's nothing to worry, because I'm 
+going to introduce you to the basic 
+
+127
+00:10:05.454 --> 00:10:10.129
+concepts and the basic tools that you 
+need to understand the fundamental 
+
+128
+00:10:10.129 --> 00:10:15.216
+concepts behind this area of partial 
+differential equations in image 
+
+129
+00:10:15.216 --> 00:10:18.387
+processing. 
+And we're going to start learning about 
+
+130
+00:10:18.387 --> 00:10:22.000
+those concepts right in the next video. 
+Thank you. 

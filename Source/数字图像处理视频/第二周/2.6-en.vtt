@@ -1,0 +1,1255 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.729
+While JPEG is the most important image 
+compression algorithm, and as we 
+
+2
+00:00:04.729 --> 00:00:09.526
+discussed before, probably the most 
+important image processing algorithm 
+
+3
+00:00:09.526 --> 00:00:14.656
+overall, there are other techniques for 
+image and video compression which are 
+
+4
+00:00:14.656 --> 00:00:17.853
+very important. 
+And I want to describe the basic 
+
+5
+00:00:17.853 --> 00:00:20.718
+underlying, the concepts behind two of 
+them. 
+
+6
+00:00:20.718 --> 00:00:25.914
+One is JPEG-LS, and the other is MPEG. 
+JPEG-LS basically permits us to compress 
+
+7
+00:00:25.914 --> 00:00:31.470
+lossless, basically without any loss of 
+information, preserving exactly the pixel 
+
+8
+00:00:31.470 --> 00:00:36.901
+value at every single pixel in the image. 
+An MPEG is the one that we use to 
+
+9
+00:00:36.901 --> 00:00:40.869
+compress video, 
+and you probably have MPEG in your mobile 
+
+10
+00:00:40.869 --> 00:00:44.768
+phones as well, 
+and you have seen videos on the internet 
+
+11
+00:00:44.768 --> 00:00:49.712
+that are compressed with MPEG. 
+So let's describe the underlying concept 
+
+12
+00:00:49.712 --> 00:00:54.746
+between these two very important image 
+and video compressing, image and video 
+
+13
+00:00:54.746 --> 00:00:59.286
+procession techniques as what? 
+And we're going to start with JPEG-LS 
+
+14
+00:00:59.286 --> 00:01:03.080
+concepts, basically. 
+And the idea behind that is what's called 
+
+15
+00:01:03.080 --> 00:01:09.495
+predictive lossless compression. 
+So for comparison, I left here the basic 
+
+16
+00:01:09.495 --> 00:01:14.580
+diagram that we have seen so many times 
+already for JPEG-LS, 
+
+17
+00:01:14.580 --> 00:01:18.486
+while this is the basic diagram for 
+predictive coding. 
+
+18
+00:01:18.486 --> 00:01:22.908
+And the basic idea of predictive coding 
+is very, very simple. 
+
+19
+00:01:22.908 --> 00:01:28.730
+It's even simpler than the idea of JPEG. 
+And let's just illustrate that with an 
+
+20
+00:01:28.730 --> 00:01:33.103
+example. 
+We're just draw a small portion of an 
+
+21
+00:01:33.103 --> 00:01:35.618
+image. 
+And, in predictive coding, the first 
+
+22
+00:01:35.618 --> 00:01:37.983
+thing that we have to define, is an 
+order. 
+
+23
+00:01:37.983 --> 00:01:40.752
+We're going to compress one pixel after 
+another. 
+
+24
+00:01:40.752 --> 00:01:45.135
+And, let's say that we define what's 
+called, a roster order, that we basically 
+
+25
+00:01:45.135 --> 00:01:50.000
+go from left to right, and we'll encode 
+the first row, then we code, the second 
+
+26
+00:01:50.000 --> 00:01:54.025
+row, and we keep going. 
+So let's say that we have encoded 
+
+27
+00:01:54.025 --> 00:01:57.474
+everything and now we need to encode this 
+pixel. 
+
+28
+00:01:57.474 --> 00:02:03.008
+The idea of predictive coding is to 
+guess, to predict the value of this pixel 
+
+29
+00:02:03.008 --> 00:02:07.607
+based only on the past. 
+We cannot predict it based on the future 
+
+30
+00:02:07.607 --> 00:02:10.770
+because the decoder doesn't know the 
+future. 
+
+31
+00:02:10.770 --> 00:02:15.350
+That the caller has only received all 
+this pictures. 
+
+32
+00:02:15.350 --> 00:02:19.880
+So we could, for example say, okay, I'm 
+going to guess, I'm going to predict that 
+
+33
+00:02:19.880 --> 00:02:24.410
+the value of this pixel is identical to 
+the value of the previous pixel. 
+
+34
+00:02:24.410 --> 00:02:29.832
+And then what we do is, after we do the 
+prediction, we basically compute the 
+
+35
+00:02:29.832 --> 00:02:33.374
+error, between my prediction and the 
+actual value. 
+
+36
+00:02:33.374 --> 00:02:38.580
+And what we encode, let's say with 
+Huffman coding here, is the error. 
+
+37
+00:02:38.580 --> 00:02:43.522
+And the decoder basically is going to 
+emulate what the encoder is doing. 
+
+38
+00:02:43.522 --> 00:02:48.250
+It's basically going to say, okay, I'm 
+going to do the same prediction. 
+
+39
+00:02:48.250 --> 00:02:51.638
+That you did. 
+I know the past, exactly as you know it, 
+
+40
+00:02:51.638 --> 00:02:56.720
+and I'm going to predict that this pixel, 
+with this value, so the color and the 
+
+41
+00:02:56.720 --> 00:03:00.564
+color talk with each other. 
+They are using exactly the same 
+
+42
+00:03:00.564 --> 00:03:04.473
+prediction strategy. 
+So, I predicted this one, and you gave me 
+
+43
+00:03:04.473 --> 00:03:07.535
+the error. 
+I basically add to my prediction the 
+
+44
+00:03:07.535 --> 00:03:12.226
+error, and I have this pixel value. 
+And then I continue to the next pixel. 
+
+45
+00:03:12.226 --> 00:03:14.700
+I do exactly the same. 
+Process. 
+
+46
+00:03:14.700 --> 00:03:19.823
+And the basic idea is that if you are 
+very good at predicting this error is 
+
+47
+00:03:19.823 --> 00:03:22.789
+going to be very close to zero, all the 
+time. 
+
+48
+00:03:22.789 --> 00:03:25.757
+It's not going to have any possible 
+value. 
+
+49
+00:03:25.757 --> 00:03:31.082
+It's going to have values around zero, 
+and that's exactly if you remember what 
+
+50
+00:03:31.082 --> 00:03:36.100
+encoders like Huffman coding likes. 
+To have values that appear a lot, so we 
+
+51
+00:03:36.100 --> 00:03:41.118
+can give a very short code to them, 
+and some values, once in a while you're 
+
+52
+00:03:41.118 --> 00:03:44.102
+going to make a big mistake in your 
+prediction. 
+
+53
+00:03:44.102 --> 00:03:47.221
+Don't worry, 
+because you're going to encode error, 
+
+54
+00:03:47.221 --> 00:03:50.827
+and basically when, 
+by encoding the error, you're going to 
+
+55
+00:03:50.827 --> 00:03:54.800
+have lossless compression. 
+So once in a while you make a big 
+
+56
+00:03:54.800 --> 00:03:58.169
+mistake. 
+Then Huffman will use a larger code for 
+
+57
+00:03:58.169 --> 00:04:02.834
+that mistake, but because that happens 
+once and awhile, it won't be so 
+
+58
+00:04:02.834 --> 00:04:06.620
+problematic, and your going to be able to 
+still compress. 
+
+59
+00:04:06.620 --> 00:04:11.928
+So, a lot of the art in predictive 
+lossless compression is in designing, in 
+
+60
+00:04:11.928 --> 00:04:16.232
+designing your predictor. 
+Such that the error is as small as 
+
+61
+00:04:16.232 --> 00:04:18.886
+possible all the time. 
+Hopefully, zero. 
+
+62
+00:04:18.886 --> 00:04:22.903
+If you're great in predicting, it's 
+going to be always zero. 
+
+63
+00:04:22.903 --> 00:04:25.844
+And it's going to be able to compress a 
+lot. 
+
+64
+00:04:25.844 --> 00:04:31.080
+But at least it's going to be very, very 
+close to zero if you're doing smart 
+
+65
+00:04:31.080 --> 00:04:34.471
+predictors. 
+And then the decoder is going to just do 
+
+66
+00:04:34.471 --> 00:04:39.195
+a very, very simple decoding. 
+So know that overall this structure of a 
+
+67
+00:04:39.195 --> 00:04:44.672
+predictive lossless compression technique 
+is a bit simpler than the one of JPEG. 
+
+68
+00:04:44.672 --> 00:04:48.985
+Ofcourse it's not going to be able to 
+achieve as much compression. 
+
+69
+00:04:48.985 --> 00:04:52.409
+Base is going to be lossless which is 
+very important. 
+
+70
+00:04:52.409 --> 00:04:55.490
+So lets just illustrate a couple of 
+possible. 
+
+71
+00:04:55.490 --> 00:04:59.720
+Predictors. 
+So we have our image. 
+
+72
+00:05:00.860 --> 00:05:06.067
+An. 
+We're going to, basically, drop the 
+
+73
+00:05:06.067 --> 00:05:10.456
+liters, again, let us see that all these 
+have been encoded. 
+
+74
+00:05:10.456 --> 00:05:16.001
+And lets just consider now, that what I 
+want to do is predict, this pixel. 
+
+75
+00:05:16.001 --> 00:05:20.820
+So, one thing I can do, is predict it 
+based on the past. 
+
+76
+00:05:20.820 --> 00:05:28.635
+Just on this pixel. 
+So I can say that I predict this to be F 
+
+77
+00:05:28.635 --> 00:05:38.014
+of X minus one Y, and then, if I'm the 
+encoder, I'm going to take actual F of 
+
+78
+00:05:38.014 --> 00:05:42.964
+XY. 
+I'm going to substract, so my error at 
+
+79
+00:05:42.964 --> 00:05:51.920
+this pixel will be F. 
+Of X minus one, Y minus F. 
+
+80
+00:05:51.920 --> 00:05:56.407
+Xy. 
+And this what I'm going to basically save 
+
+81
+00:05:56.407 --> 00:06:00.552
+through half my coding. 
+And then once again the decoder is 
+
+82
+00:06:00.552 --> 00:06:05.412
+going to emulate my predictor, it's 
+going to say oh you predicted this, you 
+
+83
+00:06:05.412 --> 00:06:10.630
+gave me an error, I add the error to my 
+prediction, I get this pixel value. 
+
+84
+00:06:10.630 --> 00:06:15.561
+Very, very simple operation, in 
+particular for the decoder, it's a, it's 
+
+85
+00:06:15.561 --> 00:06:21.008
+a really, really simple operation. 
+So, one possible predictor is just to use 
+
+86
+00:06:21.008 --> 00:06:24.398
+the past. 
+Another is basically to use the two 
+
+87
+00:06:24.398 --> 00:06:28.465
+previous pixels. 
+Let's say an average of the three, two 
+
+88
+00:06:28.465 --> 00:06:32.609
+previous pixels. 
+Some other predictors, like, for example 
+
+89
+00:06:32.609 --> 00:06:36.526
+JPEG-LS, we'll actually consider a bit 
+more. 
+
+90
+00:06:36.526 --> 00:06:41.547
+We'll basically try to use, 
+be a bit smarter, and maybe use all this 
+
+91
+00:06:41.547 --> 00:06:42.742
+region. 
+Say, okay, 
+
+92
+00:06:42.742 --> 00:06:48.344
+why only to use the one on the left? 
+Maybe I can also use the one on top of 
+
+93
+00:06:48.344 --> 00:06:53.797
+you, and the one basically diagonal. 
+And, you can do normal combinations of 
+
+94
+00:06:53.797 --> 00:06:57.009
+them. 
+As I say, you could, if you were to use 
+
+95
+00:06:57.009 --> 00:07:00.221
+these two, you could basically average 
+them. 
+
+96
+00:07:00.221 --> 00:07:04.884
+You can also average these three. 
+Actually JPEG-LS does a bit more 
+
+97
+00:07:04.884 --> 00:07:09.078
+elaborated technique. 
+So JPEG-LS is the standard for lossless 
+
+98
+00:07:09.078 --> 00:07:12.997
+image compression. 
+It's actually the algorithm that is in 
+
+99
+00:07:12.997 --> 00:07:16.779
+the Mars rovers. 
+One of the algorithms that, that are in 
+
+100
+00:07:16.779 --> 00:07:21.248
+the Mars rovers for image compression is 
+JPEG-LS and it has. 
+
+101
+00:07:21.248 --> 00:07:24.893
+a bit smarter. 
+It tries to find basically where edges 
+
+102
+00:07:24.893 --> 00:07:28.605
+are in the image. 
+But it's also are very simple, remember 
+
+103
+00:07:28.605 --> 00:07:33.839
+compression has to be simple in order to 
+become a standard, so that everybody can 
+
+104
+00:07:33.839 --> 00:07:36.507
+implement them and they can run very 
+fast. 
+
+105
+00:07:36.507 --> 00:07:39.874
+And we have seen that concept appear 
+already in JPEG. 
+
+106
+00:07:39.874 --> 00:07:44.130
+It also appears in JPEG-LS, and it will 
+appear as well in MPEG. 
+
+107
+00:07:44.130 --> 00:07:49.999
+So you could use this region. 
+Basically you could use as I said the 
+
+108
+00:07:49.999 --> 00:07:53.942
+whole past. 
+You could basically say I'm going to 
+
+109
+00:07:53.942 --> 00:08:00.251
+write to use only these pixels. 
+maybe if I have encoded already, if I'm 
+
+110
+00:08:00.251 --> 00:08:07.240
+in the middle of a very large image, I 
+could basically use my whole pass, 
+
+111
+00:08:07.240 --> 00:08:11.094
+past data, 
+all the way to here. 
+
+112
+00:08:11.094 --> 00:08:16.476
+The problem is that if you do that, 
+you're going to have to remember a lot of 
+
+113
+00:08:16.476 --> 00:08:21.494
+pixels, it's going to take a lot of 
+memory, if you just used everything in 
+
+114
+00:08:21.494 --> 00:08:26.294
+the past, it's just too much. 
+So JPEG-LS has most modern predictive 
+
+115
+00:08:26.294 --> 00:08:31.384
+lossless compression techniques. 
+This is, may be the previous role, at 
+
+116
+00:08:31.384 --> 00:08:35.021
+most two roles before, but not much more 
+than that. 
+
+117
+00:08:35.021 --> 00:08:39.530
+Otherwise, SSA becomes too complex and 
+too much memory. 
+
+118
+00:08:39.530 --> 00:08:43.126
+So, that's basically the idea of 
+predictive coding. 
+
+119
+00:08:43.126 --> 00:08:47.873
+Now let's see how effective this is with 
+just a very simple image. 
+
+120
+00:08:47.873 --> 00:08:52.053
+So this is a nice image from earth, taken 
+from outer space. 
+
+121
+00:08:52.053 --> 00:08:56.600
+And this is a distribution. 
+Remember we talked about histograms. 
+
+122
+00:08:56.600 --> 00:09:00.319
+This is the distribution of pixel values. 
+Okay? 
+
+123
+00:09:00.319 --> 00:09:07.006
+So you see Huffman might like this 
+because there are some concentration of 
+
+124
+00:09:07.006 --> 00:09:13.604
+pixel values around 150, but there is 
+still a very, very wide distribution. 
+
+125
+00:09:13.604 --> 00:09:20.731
+Now if we do predictive coding with one 
+of the predictors I just mentioned. 
+
+126
+00:09:20.731 --> 00:09:27.417
+So we go roster like this and at every 
+point we basically predict the value 
+
+127
+00:09:27.417 --> 00:09:32.344
+based on some very small neighborhood 
+around that value. 
+
+128
+00:09:32.344 --> 00:09:39.203
+Then the error is distributed as here. So 
+we predict, we compute the error as I've 
+
+129
+00:09:39.203 --> 00:09:45.660
+shown in the previous slide, and we plot 
+the distribution of error, the histogram. 
+
+130
+00:09:45.660 --> 00:09:51.633
+But look how nice it is, it's a smart 
+predictor and it's a relatively nice 
+
+131
+00:09:51.633 --> 00:09:54.942
+image. 
+And then we basically get a strong 
+
+132
+00:09:54.942 --> 00:10:01.075
+concentration around zero, and you can 
+observe here a plot of the prediction 
+
+133
+00:10:01.075 --> 00:10:04.950
+error and as expected when then are big 
+changes, 
+
+134
+00:10:04.950 --> 00:10:09.961
+your prediction doesn't know that a 
+change is about to happen. So that's 
+
+135
+00:10:09.961 --> 00:10:15.180
+where you make most of the mistakes. 
+In regions that are relatively uniform, 
+
+136
+00:10:15.180 --> 00:10:20.052
+you don't make a lot of mistakes, so 
+that's why you get a lot of zeros. 
+
+137
+00:10:20.052 --> 00:10:25.620
+And okay, once in a while, there's a big 
+change you make a mistake and Huffman is 
+
+138
+00:10:25.620 --> 00:10:31.327
+going to take more bits to represent that 
+prediction error, but that happens once 
+
+139
+00:10:31.327 --> 00:10:35.336
+in a while. 
+So most of your errors of the prediction 
+
+140
+00:10:35.336 --> 00:10:39.000
+are very small, 
+and that's really, really good. 
+
+141
+00:10:39.000 --> 00:10:45.307
+So that's basically the underlying idea 
+of JPEG-LS, or any predictive lossless 
+
+142
+00:10:45.307 --> 00:10:51.361
+encoder or compression. 
+Now, you can add quantization as well. 
+
+143
+00:10:51.361 --> 00:10:58.000
+In a predictive coding, or in a 
+predictive image compression technique. 
+
+144
+00:10:58.000 --> 00:11:03.152
+So basically you quantize the error. 
+The same way that we saw how to quantize 
+
+145
+00:11:03.152 --> 00:11:06.230
+transform coefficients, you quantize the 
+error. 
+
+146
+00:11:06.230 --> 00:11:10.024
+And with that, you can achieve more 
+compression. 
+
+147
+00:11:10.024 --> 00:11:13.900
+You can actually have control on how much 
+error. 
+
+148
+00:11:13.900 --> 00:11:19.390
+So if you are allowing +-plus minus 1 
+pixel value of error, of quantization in 
+
+149
+00:11:19.390 --> 00:11:23.346
+your error, 
+then you know that your reconstructed 
+
+150
+00:11:23.346 --> 00:11:27.619
+image will differ, 
+will differ from the original image only 
+
+151
+00:11:27.619 --> 00:11:31.127
+by +-plus minus 1 grey value. 
+So you can have a lot of control. 
+
+152
+00:11:31.127 --> 00:11:34.428
+Because you're not working the transform 
+domain, 
+
+153
+00:11:34.428 --> 00:11:39.105
+you're working the image domain. 
+And that's also part of JPEG-LS, 
+
+154
+00:11:39.105 --> 00:11:42.200
+that you can add quantization to your 
+errors. 
+
+155
+00:11:42.200 --> 00:11:47.968
+basically, the decoder will receive a 
+quantized error, and will reproduce a 
+
+156
+00:11:47.968 --> 00:11:52.767
+pixel that has a small variation compared 
+to the original pixel. 
+
+157
+00:11:52.767 --> 00:11:58.840
+One very important thing to have in mind 
+is that when you introduce quantization, 
+
+158
+00:11:58.840 --> 00:12:08.564
+you have to do your prediction based on 
+the quantized error. So let's just do the 
+
+159
+00:12:08.564 --> 00:12:15.980
+same drawing that we had before. 
+If we are going to predict this pixel 
+
+160
+00:12:15.980 --> 00:12:20.030
+based on this one, 
+then remember, 
+
+161
+00:12:20.030 --> 00:12:25.854
+the decoder is going to only have the 
+quantized version of that after it has 
+
+162
+00:12:25.854 --> 00:12:31.078
+reconstructed the quantized error. 
+So at the encoder, you have to also 
+
+163
+00:12:31.078 --> 00:12:36.610
+emulate what the decoder is doing and 
+consider only the quantized version of 
+
+164
+00:12:36.610 --> 00:12:40.032
+your pixel. 
+If you were to predict based on the 
+
+165
+00:12:40.032 --> 00:12:45.565
+original version, then you're predicting 
+based on something that the decoder 
+
+166
+00:12:45.565 --> 00:12:49.059
+doesn't have. 
+And that's why it's the quantized value 
+
+167
+00:12:49.059 --> 00:12:52.990
+that enters the area of the predictor in 
+this drawing. 
+
+168
+00:12:52.990 --> 00:12:58.669
+That's just something to have in mind in 
+case you're designing basically a 
+
+169
+00:12:58.669 --> 00:13:04.221
+predictive loss, a predictive lossless 
+and lossy image compression. 
+
+170
+00:13:04.221 --> 00:13:09.974
+If you want to have quantization, 
+remember, you cannot use anything in 
+
+171
+00:13:09.974 --> 00:13:13.975
+image compression that the decoder 
+doesn't have. 
+
+172
+00:13:13.975 --> 00:13:18.928
+As an encoder, you have only, 
+you are only allowed to use things that 
+
+173
+00:13:18.928 --> 00:13:22.987
+the decoder is going to see. 
+Otherwise, this basically is not a 
+
+174
+00:13:22.987 --> 00:13:27.962
+symmetric system, and it won't work. 
+So, that's just the only thing to have in 
+
+175
+00:13:27.962 --> 00:13:30.860
+mind. 
+And as I say JPEG-LS includes a 
+
+176
+00:13:30.860 --> 00:13:34.645
+quantization. 
+So this is the basic underlying idea of 
+
+177
+00:13:34.645 --> 00:13:40.285
+lossless, 
+predictive coding, or lossy, but with 
+
+178
+00:13:40.285 --> 00:13:44.615
+control, loss. 
+Now, that's not the only way that we can 
+
+179
+00:13:44.615 --> 00:13:49.109
+do prediction. 
+And basically MPEG, which is the standard 
+
+180
+00:13:49.109 --> 00:13:53.194
+for video compression, is also based on 
+prediction. 
+
+181
+00:13:53.194 --> 00:13:59.648
+But now, I have actually multiple frames. 
+So remember in video, we have let's say 
+
+182
+00:13:59.648 --> 00:14:04.060
+30 frames a second. 
+So in order to predict, for example, 
+
+183
+00:14:04.060 --> 00:14:10.790
+this frame, 
+I can use past frames to predict it. 
+
+184
+00:14:10.790 --> 00:14:16.241
+And, the basic idea is very simple. 
+If I'm filming a scene that is completely 
+
+185
+00:14:16.241 --> 00:14:20.832
+static, then every frame will be 
+identical to the previous frame. 
+
+186
+00:14:20.832 --> 00:14:23.988
+And MPEG is trying to take advantage of 
+that. 
+
+187
+00:14:23.988 --> 00:14:28.579
+It's trying to say, okay, 
+let's just look at the region in an image 
+
+188
+00:14:28.579 --> 00:14:33.595
+and let's see if that region, 
+this basic constant, and you can do it in 
+
+189
+00:14:33.595 --> 00:14:37.461
+multiple fashions, 
+and we're not going to discuss all the 
+
+190
+00:14:37.461 --> 00:14:41.541
+details behind MPEG. 
+But for example, you can actually say 
+
+191
+00:14:41.541 --> 00:14:46.895
+okay, I'm going to see if this region 
+here; if there is a similar region around 
+
+192
+00:14:46.895 --> 00:14:51.815
+it, it doesn't have to be exactly at the 
+same place, it can be around it. 
+
+193
+00:14:51.815 --> 00:14:57.498
+It can basically look for similar regions 
+in previous frames, maybe in only in one 
+
+194
+00:14:57.498 --> 00:15:02.626
+frame, maybe only in three frames before 
+me, it's going to look for similar 
+
+195
+00:15:02.626 --> 00:15:07.477
+regions and it's going to basically also 
+try to encode only the error. 
+
+196
+00:15:07.477 --> 00:15:10.530
+So it's going to do prediction in time. 
+Okay? 
+
+197
+00:15:10.530 --> 00:15:14.952
+And it's a very, very simple idea, and 
+that works extremely well. 
+
+198
+00:15:14.952 --> 00:15:17.900
+We know that MPEG actually compresses a 
+lot, 
+
+199
+00:15:17.900 --> 00:15:23.655
+thanks to the fact that for example, this 
+is a good example. The only thing that is 
+
+200
+00:15:23.655 --> 00:15:27.866
+moving in this video is me. 
+The whole background is constant. 
+
+201
+00:15:27.866 --> 00:15:33.270
+So, if you pick blocks in the background, 
+you're going to find in previous frames 
+
+202
+00:15:33.270 --> 00:15:38.955
+basically identical blocks and then the 
+prediction error will be zero and that's 
+
+203
+00:15:38.955 --> 00:15:43.873
+great for the encoder. 
+So here is an example with basically we 
+
+204
+00:15:43.873 --> 00:15:49.980
+have the same image that we had before 
+but basically we have two frames of that 
+
+205
+00:15:49.980 --> 00:15:56.164
+image one and two and we do a very simple 
+prediction here, which basically we say, 
+
+206
+00:15:56.164 --> 00:16:00.286
+okay, the second image is identical to 
+the first image. 
+
+207
+00:16:00.286 --> 00:16:06.164
+If there is not a lot of motion, we see 
+that prediction is really, really good. 
+
+208
+00:16:06.164 --> 00:16:11.889
+Most of the time it's zero, as we have 
+seen before for the special predictor. 
+
+209
+00:16:11.889 --> 00:16:17.221
+This is a temporary predictor. 
+Once again, every pixel here is predicted 
+
+210
+00:16:17.221 --> 00:16:22.786
+as to be identical to the pixel in the 
+same position in the previous image. 
+
+211
+00:16:22.786 --> 00:16:27.015
+We can be smarter. 
+We can look for that pixel in a region 
+
+212
+00:16:27.015 --> 00:16:32.579
+around it, and then we are going to 
+encode both the value and the offset So, 
+
+213
+00:16:32.579 --> 00:16:35.770
+did I find it to the left, or did I find 
+it, 
+
+214
+00:16:35.770 --> 00:16:39.732
+eh, eh, downwards. 
+But here it was the simplest possible 
+
+215
+00:16:39.732 --> 00:16:42.741
+thing. 
+Just basically exactly in the same 
+
+216
+00:16:42.741 --> 00:16:46.263
+position. 
+And this is the difference, and this is 
+
+217
+00:16:46.263 --> 00:16:50.960
+the distribution of the error. 
+So basically, if I know this frame. 
+
+218
+00:16:50.960 --> 00:16:57.219
+I'm going to be able to reproduce this 
+frame very, very efficiently by copying 
+
+219
+00:16:57.219 --> 00:17:04.070
+the previous frame, and adding the, this 
+image, which is the error image. 
+
+220
+00:17:04.070 --> 00:17:08.101
+Copying the previous frame is free, 
+because I already have it. 
+
+221
+00:17:08.101 --> 00:17:12.200
+The decoder array has it. 
+And compressing this, because it's so 
+
+222
+00:17:12.200 --> 00:17:17.223
+concentrated in zero, it's really, really 
+very efficient with techniques with 
+
+223
+00:17:17.223 --> 00:17:20.858
+Huffman coding. 
+I add these two images, I get this one, 
+
+224
+00:17:20.858 --> 00:17:25.683
+and then I continue to the next frame. 
+And of course, if there is a lot of 
+
+225
+00:17:25.683 --> 00:17:30.575
+motion, the error image won't be as 
+simple, but hopefully it will be simple 
+
+226
+00:17:30.575 --> 00:17:34.660
+enough that Huffman can take advantages 
+of it. 
+
+227
+00:17:34.660 --> 00:17:42.830
+And this is the basic block diagram of 
+MPEG, or video compression techniques. 
+
+228
+00:17:42.830 --> 00:17:47.143
+It's very similar to what we have seen 
+for JPEG. 
+
+229
+00:17:47.143 --> 00:17:54.270
+It basically has DCT, quantization, 
+variable length coding like half man. 
+
+230
+00:17:54.270 --> 00:18:00.144
+It only has this additional component 
+here, which is basically encoding the 
+
+231
+00:18:00.144 --> 00:18:04.686
+prediction in time. 
+So it's the one that takes care of doing 
+
+232
+00:18:04.686 --> 00:18:10.873
+this motion estimation and saying, okay, 
+I want to take this block from a region 
+
+233
+00:18:10.873 --> 00:18:15.181
+in the past. 
+But the basic structure is the samic 
+
+234
+00:18:15.181 --> 00:18:19.019
+structure, 
+plus this that takes into account that 
+
+235
+00:18:19.019 --> 00:18:24.501
+I'm not compressing just one image, 
+and basically compressing multiple 
+
+236
+00:18:24.501 --> 00:18:27.619
+frames, 
+and many of them are very similar. 
+
+237
+00:18:27.619 --> 00:18:32.985
+So, once again, predictive coding. 
+Here actually is a combination between 
+
+238
+00:18:32.985 --> 00:18:36.160
+the techniques that we have seen for 
+JPEG, 
+
+239
+00:18:36.160 --> 00:18:40.619
+and the techniques that we have seen for 
+predictive coding. 
+
+240
+00:18:40.619 --> 00:18:46.690
+Both together produce MPEG. 
+With this, we basically have concluded 
+
+241
+00:18:46.690 --> 00:18:51.200
+the basic underlying concepts of image 
+and video compression. 
+
+242
+00:18:51.200 --> 00:18:56.672
+So we have discussed JPEG, we have 
+discussed JPEG-LS, and we have discussed 
+
+243
+00:18:56.672 --> 00:18:59.630
+MPEG. 
+We did transform, we did predictive 
+
+244
+00:18:59.630 --> 00:19:03.993
+coding, we did quantization, we did 
+basically Huffman coding. 
+
+245
+00:19:03.993 --> 00:19:09.983
+The whole building blocks of compression, 
+which is what we basically use daily in 
+
+246
+00:19:09.983 --> 00:19:14.690
+image and video processing. 
+In the next video, which is going to be a 
+
+247
+00:19:14.690 --> 00:19:18.457
+bonus video, if you have time, I 
+recommend you to watch it. 
+
+248
+00:19:18.457 --> 00:19:23.348
+I'm going to describe very briefly what's 
+called run length coding, just to 
+
+249
+00:19:23.348 --> 00:19:27.380
+complete the picture. 
+But, if you don't have time, you can just 
+
+250
+00:19:27.380 --> 00:19:30.818
+skip that video, and next week go into 
+the next unit. 
+
+251
+00:19:30.818 --> 00:19:32.140
+Thank you very much. 

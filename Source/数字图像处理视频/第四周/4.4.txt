@@ -1,0 +1,66 @@
+Now that we are experts on noise, let's 
+see what happens to the histogram of an image when you add noise to it. 
+For that, we are going to use a very simple example. 
+We see here an image that has only three regions and then only three values. 
+If we were to draw the histogram of this image, we will see a different heights 
+but we actually see on the three, basically, delta functions. 
+One that stands for the black region, one that stands for the gray region, and 
+one that stands for this lighter region and the height of these depends on the 
+area of each one of the regions. So, 
+when we add noise, with each one of these distribution, how is this histogram going 
+to change? It's going to change from this three 
+delta function to something. let's see what happens. 
+So, here we see three examples already. In the first example, we took the 
+original image and we added Gaussian noise. 
+This the type of the probability distribution of the noise. 
+And we actually see it reflected here. It's very clearly, they are kind of three 
+Gaussian distributions. This is going to be very important, it's 
+going to help us to estimate the noise, if we are only given the image, as we are 
+going to see in the next video. Here, we see a shape which is very 
+similar to the shape of their Rayleigh noise. 
+It's kind of tilted and then it goes down almost like a Gaussian, slightly 
+different. So clearly, the shapes here are very 
+different. For example, this is kind of symmetric. 
+This is not. Remember, these are probability 
+distributional functions for the noise so we are not expecting to see a perfect 
+function. This all in probability. 
+And here, we see the gamma noise. Once again, a shape very similar around 
+each one of the pixel values, a shape that is very similar to the 
+actual probability distribution function. So, these are the three of them. 
+They just continue seeing some additional examples. 
+I'm going to ask you now a question. Which noise do you think we added here to 
+the original image? So, this is how the, basically, the image 
+looks after we add the noise. Which one of these six do you think we 
+have added here? Please give me an answer to that. 
+I think it's not very hard to get to the answer if we just compare the shapes. 
+Once again, remember, if we only had the original image, we have kind of three 
+delta functions with different heights representing the black, the gray, and the 
+white regions. And now, we see very clearly, exponential 
+functions. So, it was these noise, 
+okay? We cannot see that from the image itself. 
+It's very hard to see. Is this Gaussian, is this exponential, is 
+this Rayleigh? You have to really be trained to observe 
+that just from the image. But it's much easier from the histogram. 
+So now, that we are really experts I'm going to ask you again, what's the noise 
+here? Please give me an answer. 
+Just think for a second, and give me an answer. 
+Once again, this was the original histogram and now, we actually see kind 
+of uniform distributions. So, we see clearly that this is the 
+noise. It's basically around the area of the 
+original histogram with the flat regions. So, this is a type of noise. 
+Now, please note that in this image, the same type of noise was added all around 
+the image. Otherwise, for example, if we add 
+Gaussian noise inside this region and uniform noise to everything else, we will 
+see actually a Gaussian here and uniform in the other two. 
+So, we will see combinations of these distributions. 
+Finally, this is the salt and pepper. Salt and pepper actually is not hard, in 
+general, to recognize from the original image. 
+We see the black dots or the white dots. But I also want to illustrate that in the 
+histogram. The histogram stays with kind of delta 
+functions but, of course, if there was no black there would be a new delta function 
+of black, or if there was black it would be a 
+larger basically a taller delta function there and the same for y. 
+So, we can see from the histograms what actually happens sometimes. 
+And therefore, we can use the histograms to estimate the type of noise and to 
+estimate the parameters of the noise as we're going to see in the next video. 
+Thank you.

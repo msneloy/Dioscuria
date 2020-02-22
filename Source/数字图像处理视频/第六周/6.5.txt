@@ -1,0 +1,316 @@
+Hello, and welcome back. 
+We just finished learning about curve evolution. 
+There's one thing that is missing that we need to learn. 
+It's how do we implement curve evolution in the computer. 
+We saw that curve evolution is important for example, to regularize curves with 
+curvature motion, but even more important for active contours. 
+And we need to learn, how do we implement in that friendly fashion that in a 
+computer we have discrete images. So, we need to talk about the numerical 
+implementation of that. one of the areas that has had a 
+tremendous impact in image processing, in particular, when we talk about PDs in 
+image processing, is level sets methods and I want to to explain that. 
+And with that, we're going to know how we implement any type of curve or surface 
+evolution in a computer. So what is all this theory, all this 
+framework of level sets? So we have talk about curves and it's 
+going to be the same for surfaces because it's much easier to present this for 
+curves. We have talk about curves and curve 
+representations. And we see that here, we have a curve 
+that is parameterized and remember for every P, we have basically a different 
+point on the curve. Now this is not the only way to represent 
+curves. There's a very different way to represent 
+exactly the same curve that is actually even more familiar when we are talking 
+about shapes. And the basic idea is that instead of 
+parameterizing the curve, we're going to represent the curve by all the points on 
+the plane that hold a certain equation equal to zero. 
+So let's look at this figure. We're going to put a coordinate system x 
+and y and then we say every point in the curve is a point such that phi at that 
+point is equal to zero. So we have to describe this function phi. 
+And for example we can define the function to be positive inside and 
+negative outside and one example is to define this as the distance to the curve 
+for, for of course the distance to the curve at the curve itself is zero. 
+The distance to the point itself is zero. So, every point on the curve has zero 
+distance to the curve. Every point inside has a positive 
+distance, and we define every point outside to be at negative distance. 
+And that way, we define the function phi. That the zero set, that's called the zero 
+level set of that function, meaning all the points in the plain where that 
+function is zero define a curve. Let's look at a profile of this and we 
+see that here. If I have a function that is positive inside and negative outside 
+and I cross it with a line, then this is the profile. 
+We're going from negative tp positive. So this region is positive. 
+Then we go again outside, so we have negative again. 
+And we go again inside and we go again outside. 
+Now which are the points that belong to the curve. 
+This point, basically, this zero. This point and this point and this point, 
+every time the profile of five crosses the zero, that point belongs to the 
+surface. In that way we are, belongs to a curve 
+sorry or a surface if we are in higher dimensions. 
+In that case, in that form we are defining a curve on the plane by all the 
+points that hold this equal to zero. And these two are just two different 
+representations of exactly the same curve. 
+This is kind of painting inside the curve and painting outside the curve in such a 
+way that along the curve that paint is equal to zero. 
+Now. With this representation we have compute 
+tangents, normals and curvature. We need to be able to compute it with 
+this representation, otherwise, we won't be able to do curve evolution. 
+So let's see how we do that. And we're going to prove a couple of 
+things. As we have talked, this week is one of 
+the most theoretical ones. But we are doing everything 
+self-contained. So I'm explaining everything inside and I 
+think we are learning a lot of new concepts. 
+So let us show that basically if we define the curve as before at the zero 
+level set of the function fee. The normal is the gradient of phi divided 
+by the magnitude, actually, with a minus. That's a convention because I want the 
+normal to point inwards. It's just a convention. 
+And of course the tangent will be this. It's basically a perpendicular vector. 
+Let's prove that, it's not hard to prove. So remember, we have the function phi and 
+all the points that belong to the curve is where phi is equal to zero. 
+So along the curve, phi is not changing. It's always zero. 
+When I travel the curve, it's always zero. 
+Then, the derivative of the function along the curve. 
+Along the arc length. Because I'm traveling along the curve is 
+equal to zero. Let's compute that derivative. 
+So I want to take the derivative of this function. 
+Remember, the function exists all over the plane, and I'm taking the derivative 
+in the direction of the curve in the, with the arc length along the curve. 
+Now, we have it here. This is just the chain rule. 
+Basic calculus. So if I have to take the derivative 
+according to s. It's the derivative according to x, 
+x according to s, and the same for the y. So that's simple calculus. 
+Now, what I wrote here is this inner product. 
+Remember, the inner product of two vectors. 
+So I'm going to write it here in case you don't remember. 
+If I want to multiply two vectors a, b. I want to do the inner product, let's say 
+with cd is a * c + b Time d. So this is nothing else, now the inner 
+product of the gradient of phi with the time chain. 
+Remember, xs, ys is the time chain, is the unit time chain. 
+We say that a couple of years ago when we were talking about differential geometry 
+curves of the plane. And phi x, phi y is just a gradient. So, 
+this is what we have here. Now this is zero. 
+Okay, we have it here. Of course this is the zero. 
+So I'm going to go here. And, of course, I'm allowed to normalize. 
+So here I have proof that the gradient of the curve is perpendicular to the 
+tangent. Then I normalize the gradient. 
+So if I have a vector that is perpendicular to another. 
+Of course, any change in magnitude in the vector is still perpendicular. 
+In particular I want to basically normalize it to have unit norm. 
+And then I get this equal to zero. So if this is perpendicular to the 
+tangent then this is the normal. So I have a perpendicular, this is the 
+normal. And now once again, we as a convention 
+put a minus because they, we want if we have positive and negative we want the 
+gradient to point, to point basically we want the normal to point inwards. 
+Once again, it's just a convention. So a very simple proof that basically 
+shows that. This is the definition of a normal so 
+having phi, I can complete the normal with absolutely no problem and of course 
+I can complete the tangent just a perpendicular vector to it. 
+And we have the first, actually we have two. 
+The normal and the tangent. Now let us compute the curvature. 
+And again a very simple computation as we have here. 
+Just maybe two more steps and we get the curvature. 
+So what we want to show is that the curvature, I only have phi, remember the 
+curvature is the second derivative according to s. 
+So the curvature was cssKN. equal kN. 
+That's a curvature. This is, I want to compute. 
+I don't have c. I have phi. 
+I have c, the curve, the final implicitly by phi as its zero level set. 
+And I want to prove that it's this formula. 
+In case you don't remember what div is, div is a divergence. 
+And the divergence of a vector alpha beta is basically alpha x + beta y. 
+So it's a scalar. The first term of the vector, you take 
+the derivative according to the first coordinate X. 
+The second, according to the second coordinate, 
+okay? Let us prove this formula right now. 
+So now, we are basically, are still going along the zero level set so we still have 
+this relationship. And let us exploit it now. 
+We are going to compute the second derivative of phi along the curve with 
+arc length. We just compute the first one in the 
+previous slide when we're computing the normal. 
+Now I want to compute the second derivative. 
+So I have the first derivative and I want to take one more derivative. 
+Now, once again, this was nothing else than the gradient in our product with T 
+as we saw the previous one and I have to take a derivative. 
+Remember derivative of a final product is the derivative of the first times the 
+second plus the first times derivative of the second. 
+Now what's the derivative of the tangent? Second derivative is curvature in a 
+normal direction. So here it is. 
+Curvature in a normal direction. So once again, derivative of the first 
+one times inner product with the tangent and then the first one, inner product 
+with the derivative of the second one, which is T. 
+But we know that the derivative of T is kN and this basically is equal to zero. 
+So what we have, so this is equal to zero, so what we have is that this turn 
+is equal to minus distant and basically I wrote that here so this turn I can take 
+the curvature outside, okay? 
+That's not a problem. It's a scalar. 
+I can take it outside of the inner product. 
+That's the first thing we do. Oh, I apologize, there is here a typo, 
+this should be a phi. Basically a kind of a capital phi, but, I 
+apologize for that typo. We are going to continue. 
+It's just that very easy to see that going from here I just made a typo. 
+And we basically have the curvature goes outside, that's here, then we have this, 
+again here. And the normal we just saw in the 
+previous slide, is gradient divided by gradient. 
+So we have curvature here. Now this product is the gradient square 
+because I'm multiplying this by itself. So it's the gradient square divided by 
+the gradient that cancel each other and I get only one gradient. 
+So this turn. Is here, okay? 
+This term I'm not going to write it down but by now you're an expert because we're 
+just doing derivatives and chain rule. If you want to take the derivative of the 
+gradient according to S, remember you have to take the derivative according to 
+X and then XS plus derivative according to y, ys. 
+So you do chain rule again and then you're going to get this expression. 
+This expression is basically this derivative. 
+And then the tangent once again we have from the previous one. 
+Now we got this equality here if you now open this with this definition your going 
+to see that is identical to here. Times this. 
+And then we got basically the formula for the curvature of a curve that is 
+represented in implicit form. Now pay attention this is extremely 
+important this is going to be very important next when I explain the forming 
+curves in level sets. I don't need to have the curve I don't 
+know c. C, it's an implicit fashion define. 
+All I need to know is phi and I take regular derivatives in each direction, in 
+the Y direction. We know how to do that. 
+So this is the x direction, this is the y direction. 
+We know, we just take derivatives as we have been seeing many times in this 
+class. This pixel minus this pixel or this pixel 
+minus this pixel when we are taking derivatives in the Y direction. 
+And we do that a number of times, just following this formula and we get the 
+curvature. or we got the normal, or we got the 
+tension, so it's much simpler, I don't have to go and take derivatives along the 
+curve. I take derivatives in the grid, basically 
+in the image. Really, really much simpler. 
+So now we know the curvature, we know the normals. 
+Do we know how to deform curves? Let's see about that. 
+So the next step is to learn how to deform a curve. 
+How to deform phi in such a way that the boundary, basically, is deforming as I 
+wanted. So, we have a function that is 
+representing a curve in implicit form. Okay? 
+We know that the curve that is defined in this way, it's moving with this velocity. 
+And we ask ourself, how do I have to change phi for the level 
+set of phi to move according to this velocity? 
+And it turns out that it is this form. And I'm going to prove to you here in 
+just a couple of lines. But before we do that, please pay 
+attention to what's happening here. The phi is once again, it lives on the 
+image. It lives on the grid. 
+Every time I'm talking about derivatives, I'm talking about derivatives on the 
+grid. So the pixels are moving up or down. 
+There's no derivatives on the curve which are very difficult to implement. 
+This is like when, we know. We have seen how to compute a gradient. 
+You know, again this minus this. We have seen those things. 
+So implementing this is much easier than implementing this. 
+Let us prove this formula. So, the basic idea is once again very, 
+very simple. I'm going to take the derivative of phi 
+according to T, okay? 
+And this is where I'm going, I'm going to take the derivative 
+according to T of this side, and the derivative according to T of this side. 
+Now this side is zero. It's a constant. 
+So the derivative of this side is also zero. 
+Here it is. The derivative here, I wrote it here. 
+And now once again chain rule, and this is what we have. 
+The derivative of this function of x, y, t according to t is what I have written 
+here. So I take the derivatives according to x, 
+than xt plus the derivative according to y, yt plus derivative according to t. 
+These are partial derivatives. So this is what I have. 
+Okay, now. This I moved to the other side because I 
+have a zero here and I get minus the derivative according to t equal to the 
+right hand. So this part is equal to minus this. 
+This we have seen before, okay? 
+It's an inner product as we have seen already at least two times in the 
+previous slides. So it's the gradient of phi because of 
+this part and this part. And this xt yt is ct is basically my 
+curve deforming. So we are here now. 
+We have one more step. City, I know what it is. 
+VN so I write VN. It's the motion of my curve exactly what 
+I want. So, once again the V can come out because 
+it is scalar and I have this. Now, remember, I want to write everything 
+as a function of phi. That's the important part, 
+okay? So, we just saw that the normal is minus 
+the gradient normalized, okay? 
+So, here we basically applied that. 
+We replaced minus the normal by the gradient of phi, normalized, 
+okay? And this as before is gradient times 
+gradient, that's gradient squared, divide one gradient, we get one gradient. 
+So this is gradient, this stays, and we got this and because there's a minus 
+here. It counts as with the minus here and then 
+we have that this is equal to this, which is what we wanted to prove. 
+Okay? So once again, you can look at this, if 
+you want to just you can pause the video now and look at the proof. 
+There is nothing here but applying the chain rule, and then writing everything 
+as a function of phi. That's the important part. 
+we get that when we want to move a curve according to V in the normal direction. 
+That's obtained by moving feet up and down, whatever this formula tells us and 
+then we cut. So you want to go for t equal five, do 
+this for t equal five, find the zero level set and you got the curve 
+evolution. So everything now is in implicit form. 
+We have functions defined on the plane and by moving those functions, we are 
+moving the zero level set and we are getting curve evolution, for example, 
+we're getting active contours. Why is this so important? 
+Let me just illustrate a couple of ideas which I think will help us to illustrate 
+how important this is. So remember, that sometimes when we 
+deform a curve, the topology can change. I'm going to ask you, which was the curve 
+motion that produces changes in topology, that might produce changes in topology? 
+Is it the curvature motion, is it the fine motion, or is it the constant 
+motion? We know that and we know that is the 
+normal motion the normal motion can change topology. 
+Now when the topology of a curve is changing if you discrotise the curve its 
+very difficult to understand at this point that was neighbor of this point 
+that was neighbor of this point actually ended up here. 
+And this one ended up there and now there not neighbors anymore. 
+They were neighbors once step before, but because of topological changes they're 
+not anymore. And numerical analysis is very 
+complicated, when those things happen, when neighvor things, neighboring things 
+just stop being neighboring things. It's very, very complicated. 
+Now when we are in this phi function, so imagine that this gray is the phi, and 
+basically the two planes, the two green. Light green and dark green are just a 
+different times you are cutting this feed function. 
+The feed function is moving according to v gradient v. 
+And all that I have to do is cut and be surprised if there is a topological 
+change. I do not have to worry about 
+connectivites. No worry at all, because I'm working on a 
+grade, as I'm going to show here. So I don't have to work with particles 
+and discretizer curve. And remember who is neighboring with whom 
+and how the neighbor, the neighborhood is changing when there are topological 
+changes. I don't have to do that. 
+I'm basically working with phi defined on a grid, as we have it here. 
+This is just another profile. And phi is changing. 
+Phi t is V. gradient, 
+gradient phi and that's it. So we discretize that the same way that 
+we discretized before. It goes up, it goes down. 
+An example you say, I want to know the state of the curve evolution right now. 
+You just slice it. You look at every place where the current 
+phi is equal to zero. You look at every coordinate or every 
+coordinate here. If there is topological change or not you 
+have to be aware of that. And that's the beauty of this and that is 
+how the active counters that we talk at the end of the previous video is 
+implemented with this where V is that velocity of active counters so V can be 
+in a simplified fashion G curvature. Where G was this inverse gradient of the 
+image or some function that makes it stop. 
+So you want to implement active counters. All you have to do is phi t equal G 
+curvature times the absolute value of the gradient. 
+And we know that the curvature, previous slide, we can also compute as a function 
+of phi. So everything is a function of this 
+surface that is defined on the grid and that's the beauty of the level states. It 
+simplifies the whole numerics. And with it we can implement the 
+curvature motion, constant motion, constant motion is absolutely trivial. 
+Let me write it here. Phi t equal gradient phi. 
+So the gradient you might discretize the same way that we talked before. 
+The pixel on the right minus the pixel on the center. 
+The pixel on the top minus the pixel on the center. 
+phi t, you discretize like phi of t + 1 - phi of t. 
+Any type of time discretization. We're not discussing a lot of numeric 
+analysis like just relatively standard numeric analysis that you can use to 
+implement. Smart numeric analysis but relatively 
+standard instead of having to discretize a curve. 
+Very, very simple equations for as complicated as we want curve evolutions, 
+curve motions. And I prove this only for curves. 
+Happens the same four surfaces and actually, the formula is exactly the same 
+formula. But phi is not function in higher 
+dimensions so exactly the same formula. So, now you have the tools to do active 
+contours. And we are going to actually see more of 
+active contours later this week in some of the future videos. 
+But you know curve evolution and you know how to implement curve evolution, as 
+well. as I said we are learning a lot of new 
+material and as I say, you can go back and recheck this video. 
+The proofs are really, really two line proofs with basic calculus and algebra 
+from very, very relatively simple calculus and algebra but you don't have 
+to be aware of it. I just explain it to you during this video and during the 
+previous videos. So we keep advancing and I'm going to see 
+you again in the next video. Thank you very much.

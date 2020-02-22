@@ -1,0 +1,1371 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.974
+Hello and welcome back. 
+Let us now describe the first image 
+
+2
+00:00:03.974 --> 00:00:07.882
+Inpainting model. 
+That's going to base, be based on partial 
+
+3
+00:00:07.882 --> 00:00:11.453
+differential equations that we learned 
+the last week. 
+
+4
+00:00:11.453 --> 00:00:16.236
+But again, this is going to be self 
+contained, we're going to understand 
+
+5
+00:00:16.236 --> 00:00:21.020
+exactly what kind of partial differential 
+equation are we going to use? 
+
+6
+00:00:21.020 --> 00:00:25.649
+When we talk about image in painting we 
+talk about the following. 
+
+7
+00:00:25.649 --> 00:00:29.940
+We have an image. 
+Here and we have a region. 
+
+8
+00:00:29.940 --> 00:00:33.989
+Where we want to change the content of 
+the image. 
+
+9
+00:00:33.989 --> 00:00:36.717
+In this case it's the cable. 
+Here. 
+
+10
+00:00:36.717 --> 00:00:41.180
+Someone's going to provide us this. 
+Image and painting. 
+
+11
+00:00:41.180 --> 00:00:46.760
+Includes the topic where we basically 
+have these two inputs into the system. 
+
+12
+00:00:46.760 --> 00:00:51.753
+We are not going to detect, this is a 
+very subjective, very often a very 
+
+13
+00:00:51.753 --> 00:00:56.159
+subjective topic about what is that we 
+want to change. 
+
+14
+00:00:56.159 --> 00:01:01.614
+Maybe somebody wants to change the shoes. 
+In this case, we want to change this. 
+
+15
+00:01:01.614 --> 00:01:05.712
+Now, how we detect these. 
+We talk a lot about segmentation. 
+
+16
+00:01:05.712 --> 00:01:10.530
+So we can segment out objects. 
+And those are the regions of missing 
+
+17
+00:01:10.530 --> 00:01:14.053
+information. 
+We are going to call them origins to be 
+
+18
+00:01:14.053 --> 00:01:17.360
+inpainted. 
+With these two images, we want to make, 
+
+19
+00:01:17.360 --> 00:01:20.452
+basically, in this case, the cable 
+disappear. 
+
+20
+00:01:20.452 --> 00:01:23.420
+We want to inpaint in. 
+These regions. 
+
+21
+00:01:23.420 --> 00:01:28.806
+And the first topic we're going to 
+discuss is how do we inpaint with rich, 
+
+22
+00:01:28.806 --> 00:01:32.397
+with information from the surrounding 
+regions. 
+
+23
+00:01:32.397 --> 00:01:36.456
+We're not going to take information from 
+very far away. 
+
+24
+00:01:36.456 --> 00:01:41.374
+We are only going to use information from 
+the surrounding regions. 
+
+25
+00:01:41.374 --> 00:01:46.213
+So we get two images. 
+The original image and an image which is 
+
+26
+00:01:46.213 --> 00:01:51.600
+a binary mask of the, representing the 
+regions that we want to in paint. 
+
+27
+00:01:51.600 --> 00:01:57.323
+When I personally started working on 
+Image Inpainting with my group, we 
+
+28
+00:01:57.323 --> 00:02:03.691
+visited a professional restaurenteur, a 
+professional curator at the Minneapolis 
+
+29
+00:02:03.691 --> 00:02:08.044
+Institute of arts. 
+And we asked this person how do you 
+
+30
+00:02:08.044 --> 00:02:13.283
+inpaint, how do you restore? 
+And its very interesting because they 
+
+31
+00:02:13.283 --> 00:02:18.926
+were doing it the way that children draw. 
+And here is the illustration. 
+
+32
+00:02:18.926 --> 00:02:23.360
+We have a region to be inpainted and we 
+have the image. 
+
+33
+00:02:23.360 --> 00:02:27.943
+So, they first continue the boundaries of 
+the regions. 
+
+34
+00:02:27.943 --> 00:02:34.170
+So, if there is a boundary here going 
+inside the region to being painted. 
+
+35
+00:02:34.170 --> 00:02:37.803
+So then they continue the boundary 
+inside. 
+
+36
+00:02:37.803 --> 00:02:44.290
+The same way that a child would basically 
+draw the outlines of the objects. 
+
+37
+00:02:44.290 --> 00:02:49.207
+Then, they complete the color. 
+So first, they continue the boundaries. 
+
+38
+00:02:49.207 --> 00:02:52.803
+Then, they propagate the colors inside 
+the region. 
+
+39
+00:02:52.803 --> 00:02:58.528
+And then, lastly, they normally add kind 
+of noise because paintings, and in this 
+
+40
+00:02:58.528 --> 00:03:04.473
+case it was a professional restorator of 
+paintings don't look flawed so you have 
+
+41
+00:03:04.473 --> 00:03:08.950
+to kind of add this granularity to make 
+it look more natural. 
+
+42
+00:03:08.950 --> 00:03:14.360
+And we are going to talk about these. 
+First we will talk about these two steps. 
+
+43
+00:03:14.360 --> 00:03:20.615
+Then we are going to discuss a bit about 
+this step which there are many techniques 
+
+44
+00:03:20.615 --> 00:03:22.414
+to do that. 
+That's what. 
+
+45
+00:03:22.414 --> 00:03:27.809
+So remember, there's kind of a 
+continuation of the geometry, basically 
+
+46
+00:03:27.809 --> 00:03:31.406
+the boundary and then filling with the 
+colors. 
+
+47
+00:03:31.406 --> 00:03:36.723
+It's like if this is water, we are 
+going to let the water flow into the 
+
+48
+00:03:36.723 --> 00:03:42.666
+region, but because we have the boundary, 
+it's going to actually, the right water 
+
+49
+00:03:42.666 --> 00:03:48.593
+is going to flow into the right regions. 
+Now, the job is to design a partial 
+
+50
+00:03:48.593 --> 00:03:52.840
+differential equation that emulates this 
+process. 
+
+51
+00:03:52.840 --> 00:03:58.301
+And here it is. 
+So we have basically the image outside 
+
+52
+00:03:58.301 --> 00:04:02.762
+and we have a region of missing 
+information inside. 
+
+53
+00:04:02.762 --> 00:04:07.572
+And we want to propagate the information 
+from outside in. 
+
+54
+00:04:07.572 --> 00:04:11.946
+The way we're going to do that is with 
+this equation. 
+
+55
+00:04:11.946 --> 00:04:18.418
+This is the first component of imaging 
+painting with partial differential 
+
+56
+00:04:18.418 --> 00:04:21.480
+equations. 
+So what's happening here? 
+
+57
+00:04:21.480 --> 00:04:25.303
+Is the information that we want to 
+propagate. 
+
+58
+00:04:25.303 --> 00:04:31.420
+I am not telling you yet what is that 
+information.So is the information. 
+
+59
+00:04:31.420 --> 00:04:37.274
+That we want to propagate. 
+And n is the direction that we're 
+
+60
+00:04:37.274 --> 00:04:43.908
+propagating that information. 
+So n is the direction that we're doing 
+
+61
+00:04:43.908 --> 00:04:48.104
+the propagation. 
+Now look what happens here. 
+
+62
+00:04:48.104 --> 00:04:52.300
+We have gradient l meaning the change of 
+L. 
+
+63
+00:04:52.300 --> 00:04:59.155
+Inner product with N = 0. 
+This is a change of A and it's projected, 
+
+64
+00:04:59.155 --> 00:05:06.667
+because of the inner product, into N, the 
+direction of propagation and we want it 
+
+65
+00:05:06.667 --> 00:05:11.362
+to be equal to zero. 
+So this is of course a vector. 
+
+66
+00:05:11.362 --> 00:05:16.340
+It's the gradient of information. 
+So we have a vector. 
+
+67
+00:05:16.340 --> 00:05:21.870
+And we want that vector to be 
+perpendicular to the direction that we 
+
+68
+00:05:21.870 --> 00:05:27.961
+are propagate, and we're have, so this is 
+going to be the gradient of L, and this 
+
+69
+00:05:27.961 --> 00:05:32.370
+is going to be the direction. 
+We want them to be basically 
+
+70
+00:05:32.370 --> 00:05:37.580
+perpendicular in the sense that we 
+want to propagate information L. 
+
+71
+00:05:37.580 --> 00:05:43.792
+In such a way that is it does not change, 
+it does not change in the direction of 
+
+72
+00:05:43.792 --> 00:05:49.150
+the propagation.That's exactly what it 
+means propagating information. 
+
+73
+00:05:49.150 --> 00:05:54.888
+I move it in the direction that is 
+constant along that direction. 
+
+74
+00:05:54.888 --> 00:05:59.303
+That's what this equation is basically 
+telling us. 
+
+75
+00:05:59.303 --> 00:06:06.013
+That L, the information is constant in 
+the direction of propagation, constant 
+
+76
+00:06:06.013 --> 00:06:11.399
+along these directions. 
+Now how do we solve this with partial 
+
+77
+00:06:11.399 --> 00:06:15.813
+differential equations? 
+Assume that the image is I. 
+
+78
+00:06:15.813 --> 00:06:21.992
+[SOUND] Now, we have this and we want to 
+deform the image, we want to change the 
+
+79
+00:06:21.992 --> 00:06:27.814
+image, this is a partial differential 
+equation, in such a way that at the end, 
+
+80
+00:06:27.814 --> 00:06:32.793
+we get this equal to zero. 
+We have seen how to do that when we're 
+
+81
+00:06:32.793 --> 00:06:38.691
+talking about Euler-Lagrange equations. 
+When we want something to be equal to 
+
+82
+00:06:38.691 --> 00:06:43.211
+zero, how do I deform the image in order 
+to accomplish that? 
+
+83
+00:06:43.211 --> 00:06:47.731
+Let's think for a second how to do that. 
+Remember last week. 
+
+84
+00:06:47.731 --> 00:06:51.700
+How do we do that? 
+Very simple. 
+
+85
+00:06:51.700 --> 00:06:58.252
+We basically do this. 
+Let me just go back one sec. 
+
+86
+00:06:58.252 --> 00:07:05.573
+We basically do this. 
+We make the image change in time 
+
+87
+00:07:05.573 --> 00:07:12.455
+according to what we want. 
+Now, when this doesn't change anymore, 
+
+88
+00:07:12.455 --> 00:07:17.129
+meaning that steady state, we get this 
+equal to zero. 
+
+89
+00:07:17.129 --> 00:07:21.893
+That's the definition of steady state: no 
+more change. 
+
+90
+00:07:21.893 --> 00:07:27.555
+Actually, the computer, when this very 
+little change, we can stop. 
+
+91
+00:07:27.555 --> 00:07:31.870
+When this is ideally zero, we got what we 
+wanted. 
+
+92
+00:07:31.870 --> 00:07:36.011
+L. 
+Constant in the direction of propagation. 
+
+93
+00:07:36.011 --> 00:07:43.549
+So, this is actually a very simple trick. 
+Every time you want to do something like 
+
+94
+00:07:43.549 --> 00:07:52.500
+A = zero, whatever is A, some information 
+of the image, you do dI dT = A. 
+
+95
+00:07:52.500 --> 00:07:59.442
+And you run that to a steady state. 
+That's basically what we did for the all 
+
+96
+00:07:59.442 --> 00:08:03.407
+day Lagrange. 
+So this is the basic equation for this 
+
+97
+00:08:03.407 --> 00:08:06.897
+type of imaging painting. 
+Now, we haven't finished. 
+
+98
+00:08:06.897 --> 00:08:12.594
+I have to tell you what's L and what's M. 
+What's the information that we want to 
+
+99
+00:08:12.594 --> 00:08:15.941
+propagate? 
+And in which direction do we want to 
+
+100
+00:08:15.941 --> 00:08:18.790
+propagate? 
+And there's a lot of art here. 
+
+101
+00:08:18.790 --> 00:08:23.205
+So I'm just giving you examples. 
+I'm teaching you the concepts. 
+
+102
+00:08:23.205 --> 00:08:27.051
+And these are examples that are already 
+very powerful. 
+
+103
+00:08:27.051 --> 00:08:35.840
+But you can come with different examples. 
+Now, let me start by the information. 
+
+104
+00:08:35.840 --> 00:08:41.557
+We want this propagation to be smooth. 
+We don't want to see a big jump inside 
+
+105
+00:08:41.557 --> 00:08:46.665
+the region that we are inpainting. 
+If we see a big jump, we're going to 
+
+106
+00:08:46.665 --> 00:08:49.638
+notice that. 
+So we want it to be smooth. 
+
+107
+00:08:49.638 --> 00:08:55.584
+So it has to be anything that represent 
+basically smoothness in the image, and 
+
+108
+00:08:55.584 --> 00:09:01.225
+one of the things that represent 
+smoothness is the Laplacian of the image, 
+
+109
+00:09:01.225 --> 00:09:05.495
+the second derivative of the image 
+represent smoothness. 
+
+110
+00:09:05.495 --> 00:09:07.921
+Now. 
+Why not the first derivative? 
+
+111
+00:09:07.921 --> 00:09:11.287
+Wait a second, and you're going to 
+understand why. 
+
+112
+00:09:11.287 --> 00:09:16.482
+Because the first derivative is also a 
+representation of this bothness. 
+
+113
+00:09:16.482 --> 00:09:19.848
+Now, in which direction are we going to 
+propagate? 
+
+114
+00:09:19.848 --> 00:09:24.823
+And now we go back to what we learned 
+from professional restorators. 
+
+115
+00:09:24.823 --> 00:09:30.005
+They say, continue edges. 
+Now, we know that if we have an edge, the 
+
+116
+00:09:30.005 --> 00:09:34.373
+gradient of the image is perpendicular to 
+the edge. 
+
+117
+00:09:34.373 --> 00:09:40.711
+We learned that, that week, last week, so 
+we are going to want to propagate along 
+
+118
+00:09:40.711 --> 00:09:47.306
+the edges, which means that we have to 
+take the perpendicular to the gradient, 
+
+119
+00:09:47.306 --> 00:09:53.129
+so n is the perpendicular to the 
+gradient, as written here, or we can 
+
+120
+00:09:53.129 --> 00:09:59.101
+write that n is basically the gradient. 
+But the perpendicular to it. 
+
+121
+00:09:59.101 --> 00:10:04.929
+So that's important thing here, that we 
+want to continue edges. 
+
+122
+00:10:04.929 --> 00:10:10.756
+And then, for that, we have to go 
+perpendicular to the gradient. 
+
+123
+00:10:10.756 --> 00:10:18.088
+And that basically also explains why we 
+cannot take the first derivative of L. 
+
+124
+00:10:18.088 --> 00:10:23.821
+Because if we were to put L. 
+Equal to the first derivative, let's say 
+
+125
+00:10:23.821 --> 00:10:27.234
+the gradient. 
+These two guys are always zero. 
+
+126
+00:10:27.234 --> 00:10:31.654
+So I'm not solving anything. 
+Because the gradient and its 
+
+127
+00:10:31.654 --> 00:10:36.850
+perpendicular are always zero. 
+And I wanted basically to go kind of. 
+
+128
+00:10:36.850 --> 00:10:40.525
+Constant in that direction. 
+This is not enough. 
+
+129
+00:10:40.525 --> 00:10:46.598
+There is also another reason why, okay 
+this is always perpendicular, it's not 
+
+130
+00:10:46.598 --> 00:10:50.194
+very good. 
+Although remember we're taking the 
+
+131
+00:10:50.194 --> 00:10:54.510
+gradient of L. 
+But the other reason is because we want. 
+
+132
+00:10:54.510 --> 00:11:00.100
+Two things to be smooth inside. 
+We want to continue the grey values 
+
+133
+00:11:00.100 --> 00:11:04.119
+inside to be smooth. 
+We also want to con, continue the 
+
+134
+00:11:04.119 --> 00:11:09.607
+boundaries to be smooth inside, so we 
+need higher order of the realities. 
+
+135
+00:11:09.607 --> 00:11:15.393
+Not only because these two guys are 
+perpendicular and then there's not enough 
+
+136
+00:11:15.393 --> 00:11:21.475
+information, even if we take the gradient 
+of L, which is what actually N pending is 
+
+137
+00:11:21.475 --> 00:11:25.109
+propagating. 
+We want to go a bit higher order so we 
+
+138
+00:11:25.109 --> 00:11:29.782
+get even more smoothness. 
+And as I said, the Laplacian is one of 
+
+139
+00:11:29.782 --> 00:11:34.010
+the simplest measures of smoothness. 
+So, we get smoothness. 
+
+140
+00:11:34.010 --> 00:11:39.540
+In the opposite direction or 
+perpendicular to the gradient or on the 
+
+141
+00:11:39.540 --> 00:11:44.670
+level line's direction. 
+And that basically gives us our equation. 
+
+142
+00:11:44.670 --> 00:11:54.850
+So, we have the change of l. 
+And this is the normal, is the 
+
+143
+00:11:54.850 --> 00:11:59.868
+perpendicular to the gradient. 
+What we're going to get at the end of 
+
+144
+00:11:59.868 --> 00:12:05.756
+this, when we get to steady state, when 
+this becomes zero we basically get that 
+
+145
+00:12:05.756 --> 00:12:09.379
+the Laplacian became constant along the 
+edges. 
+
+146
+00:12:09.379 --> 00:12:13.531
+And we have propagated the Laplacian 
+along the edges. 
+
+147
+00:12:13.531 --> 00:12:19.796
+That's what basically this basic equation 
+makes and once again you just discretize 
+
+148
+00:12:19.796 --> 00:12:24.552
+it in the computer and you run it and you 
+get Image Inpainting. 
+
+149
+00:12:24.552 --> 00:12:29.874
+You get propagation from outside in. 
+Every differential equation has to have 
+
+150
+00:12:29.874 --> 00:12:33.651
+boundary conditions. 
+So, if this is my image and this is my 
+
+151
+00:12:33.651 --> 00:12:36.712
+region to be in painting, what do I 
+assume here? 
+
+152
+00:12:36.712 --> 00:12:41.661
+And these boundary conditions for this 
+type of equations, a bit of a strange 
+
+153
+00:12:41.661 --> 00:12:46.480
+equation, it has three derivatives, two 
+because of the Laplacian, one more 
+
+154
+00:12:46.480 --> 00:12:48.630
+because of the gradient. 
+Remember. 
+
+155
+00:12:48.630 --> 00:12:52.712
+We talked about this in the past. 
+But the Laplacian is the second 
+
+156
+00:12:52.712 --> 00:12:56.311
+derivative of the image. 
+In one direction plus the second 
+
+157
+00:12:56.311 --> 00:12:59.291
+derivative of the image in the other 
+direction. 
+
+158
+00:12:59.291 --> 00:13:04.165
+And then we take the gradient of this. 
+And we get a third derivative of 
+
+159
+00:13:04.165 --> 00:13:09.993
+considering both gray values and edges in 
+the boundary and those are smoothly 
+
+160
+00:13:09.993 --> 00:13:15.597
+propagating inside thanks to have 
+basically the Laplacian here and these 
+
+161
+00:13:15.597 --> 00:13:22.247
+are as we talked the level lines of the 
+image the isopoles the regions of edges, 
+
+162
+00:13:22.247 --> 00:13:26.730
+the directions of edges. 
+These are very simple but very, very 
+
+163
+00:13:26.730 --> 00:13:30.640
+interesting equation. 
+Let us see some examples. 
+
+164
+00:13:30.640 --> 00:13:36.586
+So always when you do image processing, 
+start with very simple examples to see 
+
+165
+00:13:36.586 --> 00:13:40.475
+what's happening. 
+And here is a very simple example. 
+
+166
+00:13:40.475 --> 00:13:44.049
+White is the region. 
+Then it's to be inpainted. 
+
+167
+00:13:44.049 --> 00:13:48.937
+And you can see here that there is a very 
+smooth continuation. 
+
+168
+00:13:48.937 --> 00:13:52.170
+Really, really nice. 
+A smooth continuation. 
+
+169
+00:13:52.170 --> 00:13:57.452
+It continues the boundaries nice. 
+It, of course, continues the colors, 
+
+170
+00:13:57.452 --> 00:14:01.709
+black and grey. 
+But even more, more important, it really 
+
+171
+00:14:01.709 --> 00:14:06.439
+completes the circle. 
+It doesn't know that there is a circle 
+
+172
+00:14:06.439 --> 00:14:09.830
+there. 
+It just goes in the normal direction. 
+
+173
+00:14:09.830 --> 00:14:14.254
+Perpendicular to the normal direction in 
+the edge direction. 
+
+174
+00:14:14.254 --> 00:14:17.425
+Remember the gradient is in this 
+direction. 
+
+175
+00:14:17.425 --> 00:14:21.480
+The perpendicular to the gradient is in 
+this direction. 
+
+176
+00:14:21.480 --> 00:14:25.315
+So it's going and it's filling in. 
+Inside the region. 
+
+177
+00:14:25.315 --> 00:14:28.412
+Propagating information in that 
+direction. 
+
+178
+00:14:28.412 --> 00:14:33.352
+Really, really nice result. 
+Of course, if it works only in artificial 
+
+179
+00:14:33.352 --> 00:14:38.145
+images it's not very good. 
+Hopefully, it works on the, also on real 
+
+180
+00:14:38.145 --> 00:14:39.915
+data. 
+Here is an example. 
+
+181
+00:14:39.915 --> 00:14:42.570
+What is being impainted? 
+The letters. 
+
+182
+00:14:42.570 --> 00:14:47.903
+We wrote on top of this image. 
+This is a nice image of New Orleans. 
+
+183
+00:14:47.903 --> 00:14:53.641
+And we draw with a basic rough and tough 
+and boom, the letters are gone. 
+
+184
+00:14:53.641 --> 00:14:59.782
+So the regions to be painting are all 
+these letters and we go inside and we 
+
+185
+00:14:59.782 --> 00:15:04.792
+make the letters disappear. 
+We're propagating information from 
+
+186
+00:15:04.792 --> 00:15:08.914
+outside in. 
+So hard to see here and now you get the 
+
+187
+00:15:08.914 --> 00:15:14.813
+very nice image where we invented the 
+information that is covered by the 
+
+188
+00:15:14.813 --> 00:15:18.845
+letters. 
+Based on information that is surrounding 
+
+189
+00:15:18.845 --> 00:15:21.900
+the letters. 
+Very nice result, I think. 
+
+190
+00:15:21.900 --> 00:15:27.311
+Here is another example of basically an 
+image that has deteriorations and 
+
+191
+00:15:27.311 --> 00:15:31.114
+degradation. 
+The red are the images, the regions, that 
+
+192
+00:15:31.114 --> 00:15:35.721
+we are going to in paint. 
+Sometimes, you mark regions that are a 
+
+193
+00:15:35.721 --> 00:15:39.158
+bit larger than the actual missing 
+information. 
+
+194
+00:15:39.158 --> 00:15:40.913
+Look here. 
+Is very thing. 
+
+195
+00:15:40.913 --> 00:15:44.643
+You do it a bit larger. 
+It's like giving an impulse. 
+
+196
+00:15:44.643 --> 00:15:49.542
+So this is propagated from outside, in. 
+You start from a, be far away. 
+
+197
+00:15:49.542 --> 00:15:53.491
+It helps you have to move even more 
+smooth as we want. 
+
+198
+00:15:53.491 --> 00:15:58.204
+And here are the results. 
+And it looks pretty good, some place you 
+
+199
+00:15:58.204 --> 00:16:03.974
+might see a tiny error here because it's 
+covering a lot of the eye of this girl, 
+
+200
+00:16:03.974 --> 00:16:09.311
+so it's very difficult to invent 
+information when there is nothing in the 
+
+201
+00:16:09.311 --> 00:16:14.215
+surrounding area that hints about what 
+needs to be basically put in. 
+
+202
+00:16:14.215 --> 00:16:19.669
+But of course you get an extremely good. 
+At least initial result looks almost 
+
+203
+00:16:19.669 --> 00:16:24.878
+excellent and the a professional 
+restorator you see different programs may 
+
+204
+00:16:24.878 --> 00:16:29.740
+basically be able to go and repair only 
+that tiny region if needed to. 
+
+205
+00:16:29.740 --> 00:16:34.195
+Sometimes, there's no need for that. 
+Here is the original one. 
+
+206
+00:16:34.195 --> 00:16:38.428
+We have already seen it. 
+A person is jumping with a cable. 
+
+207
+00:16:38.428 --> 00:16:42.512
+Now the cable is gone, and now you see a 
+zooming region. 
+
+208
+00:16:42.512 --> 00:16:45.780
+Once again, look how nice the socks 
+continue. 
+
+209
+00:16:45.780 --> 00:16:52.396
+Very nice continuation of this thread H 
+because that's what we wanted, we were 
+
+210
+00:16:52.396 --> 00:16:59.013
+continuing HX that's exactly what we 
+wanted, and that's exactly what this type 
+
+211
+00:16:59.013 --> 00:17:04.292
+of algorithm does. 
+So, on our example, just a special 
+
+212
+00:17:04.292 --> 00:17:08.500
+effect, let's just look at what's 
+happening here. 
+
+213
+00:17:08.500 --> 00:17:13.830
+And basically they're all gone. 
+I'm going to just show you that again. 
+
+214
+00:17:13.830 --> 00:17:17.692
+There are people in the boat and they're 
+all gone. 
+
+215
+00:17:17.692 --> 00:17:23.254
+We're basically in-painting what's 
+basically been covered by the people 
+
+216
+00:17:23.254 --> 00:17:27.193
+sitting on the boat and basically they're 
+all gone. 
+
+217
+00:17:27.193 --> 00:17:32.292
+Again, in-painting means modifying an 
+image in a form that is then 
+
+218
+00:17:32.292 --> 00:17:36.300
+non-detectable, at least by the regular 
+consumer. 
+
+219
+00:17:36.300 --> 00:17:43.791
+Here is another example of, we have 
+scratches and now the scratches are gone 
+
+220
+00:17:43.791 --> 00:17:48.424
+basically, we basically removed those 
+scratches. 
+
+221
+00:17:48.424 --> 00:17:56.112
+We inpaint in the information from the 
+surrounding areas and again, looks very 
+
+222
+00:17:56.112 --> 00:18:00.745
+nice. 
+It looks very natural as it was before it 
+
+223
+00:18:00.745 --> 00:18:04.241
+was all scratched. 
+Now there is one example. 
+
+224
+00:18:04.241 --> 00:18:09.476
+And this is the last example I want to 
+show in this video where it's actually 
+
+225
+00:18:09.476 --> 00:18:13.746
+not very hard to detect the regions that 
+need to be inpainted. 
+
+226
+00:18:13.746 --> 00:18:19.050
+In other previous examples we, basically 
+the user, defined somehow the regions. 
+
+227
+00:18:19.050 --> 00:18:24.433
+Now, this is an example, for example, of 
+wireless transmission of images. 
+
+228
+00:18:24.433 --> 00:18:28.740
+Remember, images are transmitted, are 
+restored, using JPEG. 
+
+229
+00:18:28.740 --> 00:18:32.740
+JPEG works in blocks. 
+What happens is, if when you're 
+
+230
+00:18:32.740 --> 00:18:36.124
+transmitting an image, there's a signal 
+drop. 
+
+231
+00:18:36.124 --> 00:18:40.662
+For example, on the cell phone. 
+So half a block gets dropped. 
+
+232
+00:18:40.662 --> 00:18:45.200
+Now, signal drops are not very hard to 
+detect, and basically. 
+
+233
+00:18:45.200 --> 00:18:48.583
+You, you have no signal and you detected 
+it. 
+
+234
+00:18:48.583 --> 00:18:52.046
+Okay? 
+So when there's a drop you can say, hey, 
+
+235
+00:18:52.046 --> 00:18:56.610
+I'm basic going to recover that block by 
+mention painting. 
+
+236
+00:18:56.610 --> 00:19:02.887
+And that's what we are simulating here. 
+And this is the original and all these 
+
+237
+00:19:02.887 --> 00:19:09.219
+blocks that you see here basically are 
+dropped signals, simulation of dropped 
+
+238
+00:19:09.219 --> 00:19:13.084
+signal. 
+You see that there's no signal, you plug 
+
+239
+00:19:13.084 --> 00:19:18.182
+that into a painting and then boom, you 
+reconstruct your image. 
+
+240
+00:19:18.182 --> 00:19:22.870
+Let me show you that again, you basically 
+see signal drop. 
+
+241
+00:19:22.870 --> 00:19:27.381
+And you reconstruct. 
+So basically you may have a better 
+
+242
+00:19:27.381 --> 00:19:33.533
+cellular phone, a cellular phone that 
+detect signal drop in images and boom 
+
+243
+00:19:33.533 --> 00:19:39.849
+does imaging painting, this is still 
+JPEG, still the person that is sending it 
+
+244
+00:19:39.849 --> 00:19:44.310
+to you doesn't know. 
+That the signal might drop. 
+
+245
+00:19:44.310 --> 00:19:47.126
+At the receiver end, you see a signal 
+drop. 
+
+246
+00:19:47.126 --> 00:19:52.222
+This actually can help even compression. 
+You can drop on purpose some of the 
+
+247
+00:19:52.222 --> 00:19:57.452
+blocks, because we know how to recover 
+them with image in painting, and in that 
+
+248
+00:19:57.452 --> 00:20:00.670
+way, you basically improve the 
+compression ratio. 
+
+249
+00:20:00.670 --> 00:20:06.169
+Some blocks are very easy to recover, and 
+then you can actually not even send them 
+
+250
+00:20:06.169 --> 00:20:10.125
+or not even store them. 
+Makes the reconstruction a bit more 
+
+251
+00:20:10.125 --> 00:20:15.020
+computationally expensive, but makes the 
+compression possibly much higher. 
+
+252
+00:20:15.020 --> 00:20:17.665
+So this is the last example from this 
+video. 
+
+253
+00:20:17.665 --> 00:20:22.654
+But there is one thing I haven't told you 
+and that was on purpose just to keep you 
+
+254
+00:20:22.654 --> 00:20:25.240
+wondering a bit. 
+I gave you the equation of. 
+
+255
+00:20:25.240 --> 00:20:28.832
+Image in painting, but here we have three 
+colors. 
+
+256
+00:20:28.832 --> 00:20:34.280
+How do we do that? 
+How do we go from that equation that I 
+
+257
+00:20:34.280 --> 00:20:41.325
+gave you before to colors? 
+Remember the equation was something like 
+
+258
+00:20:41.325 --> 00:20:47.410
+IT equal gradient of ii and the I. 
+In a product. 
+
+259
+00:20:47.410 --> 00:20:54.070
+Gradient I. 
+Perpendicular, so. 
+
+260
+00:20:54.070 --> 00:20:57.736
+You can basically do this for each one of 
+the channels. 
+
+261
+00:20:57.736 --> 00:21:01.402
+Lets say in red, green, blue or in any 
+other color space. 
+
+262
+00:21:01.402 --> 00:21:05.735
+Or you can think about extending this to 
+color images, to vectors. 
+
+263
+00:21:05.735 --> 00:21:11.201
+We know the concept of gradient for color 
+vectors and we can basically define the 
+
+264
+00:21:11.201 --> 00:21:15.467
+Laplacian for color vectors as well. 
+So, both possibilities exist. 
+
+265
+00:21:15.467 --> 00:21:21.067
+You can treat every color independently 
+or you can try to use definition of 
+
+266
+00:21:21.067 --> 00:21:26.000
+vectorial fields for these, every 
+component here Laplacian and gradient in 
+
+267
+00:21:26.000 --> 00:21:30.603
+vectorial fashion. 
+All the examples I show you, every color 
+
+268
+00:21:30.603 --> 00:21:35.211
+is treated independently. 
+So, this is an example of imaging pending 
+
+269
+00:21:35.211 --> 00:21:39.704
+with partial differential equations. 
+Next video, I'm going to show you an 
+
+270
+00:21:39.704 --> 00:21:44.396
+example of energy painting with 
+variational formulations that we learned 
+
+271
+00:21:44.396 --> 00:21:47.738
+last week. 
+Very simple variation of formulation that 
+
+272
+00:21:47.738 --> 00:21:52.688
+will lead us to also a very nice energy 
+painting technique based on the same 
+
+273
+00:21:52.688 --> 00:21:57.702
+colors of propagation and boundaries. 
+I'm looking forward to seeing you in the 
+
+274
+00:21:57.702 --> 00:21:59.052
+next video. 
+Thank you. 

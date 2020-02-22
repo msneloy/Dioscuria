@@ -1,0 +1,104 @@
+Hello and welcome to Week 4 of our Image 
+and Video Processing class. For the last few weeks, we have been very 
+busy learning a lot of new concepts in image and video processing. 
+This week, the materials are going to be a bit short. 
+I think we all deserve a shorter week about after learning so much new 
+material. But also, the main reason this week is 
+going to be a bit short in material is because we're going to come back to some 
+important examples of image restoration later when we talk about more advanced 
+topics in the class of image processing. But we still need to learn the basics of 
+image restoration. And we need to understand what is image 
+restoration. So, let's just go straight into that. 
+But before that, just for a second, what background do you need for the topic 
+of this week? If you have knowledge about signal 
+processing, and Fourier analysis, there are some parts of the week that you 
+might benefit a bit more. But since it happened in the previous 
+weeks, the material is going to be very 
+self-contained so you should be able to understand the basic concepts with very 
+limited background, just some background in Linear Algebra 
+mostly. but again, Fourier analysis will be very 
+helpful if you know it. In particular, for the topic of Weiner 
+filtering that we are going to explain in, in a few hours or actually in a few 
+minutes. So, let's just explain, what is image 
+restoration? So, in image restoration in contrast with 
+image enhancement, we are going to try to restore the image. 
+We are going to have a model for the degradation and that's what we see here. 
+This is a degradation model. Basically, we start with an image. 
+The image goes through some degradation which is represented by this filter H. 
+Examples of degradation, and we're going to discuss them in detail later on are, 
+for example, blurring, defocus. When we take a picture that's 
+out of focus, that's basically a degradation. 
+Another example is what's called motion blur. 
+When we take pictures of something that goes very fast, we actually see that as 
+kind of blurry in our picture and that's basically another type of degradation. 
+After the image has gone through degradation, there is noise added to it. 
+For example, the sensors in cameras have noise, the sensors in magnetic resonance 
+have noise. So, there is noise added to it and this 
+is what we actually observe, g. Now, from g, we need to go back to f as 
+close as possible as the original f, and that's why this is called restoration. 
+We're going to try to invert this degradation and noise, in order to be 
+able to produce an image which is as close as possible as the original image. 
+So, this restored image, we want it to be as close as possible to the original 
+image. That's a goal of restoration. We didn't have that task in image 
+enhancement, we just wanted it to look better, to look sharper, to benefit, 
+let's say, our visual perception of the image. 
+The goal now is to actually restore the image. It's kind of a different goal, 
+they're related, but it's kind of a different goal, 
+okay? And some of the things that we saw the previous week are actually very 
+useful for image restoration as well, for example, non-local means. 
+You can show that under certain conditions, restores the image. 
+So, what's the model that we have here? How was g produced? 
+g, basically is a result of f going through 
+the degradation. So, we have f (x,y) convolution with H 
+(x,y). That's a degredation model and normally, it's assumed that is a linear 
+operation. So, it's a convolution. 
+And we add to it the noise. And most of the image and video 
+processing literature leads with what's called additive noise. 
+The noise is added to the image. That's not what happens in all real 
+cameras in all real acquisition devices, for example. 
+There is also multiplicative noise. Very often, were basically all these, 
+basically the degradation gets multiplied by some noise. 
+There are other types of noise that happens, but these are some, two of the 
+most common. The most common of all is additive. 
+Some literature, but much more limited, addresses multiplicative noise. 
+One of the effects of multiplicative noise is that the amount of noise depends 
+on the signal itself. So, if the pixel value is three, we're 
+multiplying three, but if the pixel value is ten, we're multiplying ten, and then 
+the amount of noise much, might be much larger. 
+And with additive noise, that doesn't happen. 
+So, it's basically kind of image-independent denoise. 
+Now, there is a way to transform multiplicative noise into additive noise 
+so we can enjoy all of the literature in additive noise and also work kind of with 
+a small trick applied also to multiplicative noise. 
+And I wonder if you know what trick can we use to do that. 
+Maybe think for a second before I give you the answer. 
+So, the question is very simple. Think for yourself if you know what to do 
+with multiplicative noise so you transform it to additive noise. 
+And let's think and I'll give you the answer very soon, 
+okay? You just spend some time thinking. 
+Maybe you go to the answer very fast. Maybe you go to the answer after a while 
+or maybe you are waiting for me to give you the answer. 
+And the idea is very simple. If you have multiplicative noise instead 
+of additive noise, let me erase here, so I have everything 
+to write down. So, if you are multiplying two numbers, a 
+times b, I can take the logarithmic of those, of the product of those two 
+numbers. And that's equal to the logarithmic of a 
+plus the log of b. So, I have trans, if b was my noise, I basically transform it 
+into additive noise. So, instead of working with the image, 
+I'm going to work with the logarithmic version of the image and I'm going to 
+work with the logarithmic component of the noise. 
+So basically, you give me the degradation g, I take the log of g, 
+and I treat everything that is now from now on as it was additive noise. 
+When I finish recovering it, I basically have to invert this operation. 
+And that's an exponential function. So, that's one of the reasons that a lot 
+of the literature has basically concentrated on additive noise because of 
+this trick. Now, this trick has its own problems in 
+particular because if you don't really remove all the noise, the exponent can 
+make it much, much larger. But it's an important trick that 
+basically makes our additive noise, restoration techniques also applicable to 
+multiplicative noise with some caveats and some limitations. 
+So, having now a concept of what is image restoration, 
+let's just talk in the next theory about noise. 
+What type of noise can we have in an image? 
+Where do they come from? So, see you in the next video to deal 
+with that topic. Thank you.

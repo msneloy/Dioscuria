@@ -1,0 +1,1726 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.109
+We're going to now talk about how an 
+image is represented in the computer, 
+
+2
+00:00:04.109 --> 00:00:06.945
+how a color image is represented in the 
+computer, 
+
+3
+00:00:06.945 --> 00:00:09.665
+and how a video is represented in the 
+computer, 
+
+4
+00:00:09.665 --> 00:00:13.717
+and the very important concepts of 
+sampling, and representation, and 
+
+5
+00:00:13.717 --> 00:00:17.046
+quantization. 
+It's always very good to have in mind the 
+
+6
+00:00:17.046 --> 00:00:19.867
+images that we normally take with our 
+cameras. 
+
+7
+00:00:19.867 --> 00:00:24.652
+But please remember, while we see here 
+and we talk a few videos ago that images 
+
+8
+00:00:24.652 --> 00:00:29.804
+that we are familiar with is just a very 
+small part of the spectrum of images that 
+
+9
+00:00:29.804 --> 00:00:34.160
+we can acquire at different wavelengths 
+and with different modalities. 
+
+10
+00:00:34.160 --> 00:00:38.314
+And the concept of something in 
+quantization are relevant for basically 
+
+11
+00:00:38.314 --> 00:00:42.989
+all of those modalities, we always going 
+to have to sample, we are always going to 
+
+12
+00:00:42.989 --> 00:00:45.874
+quantize. 
+But again, it's good to have in mind when 
+
+13
+00:00:45.874 --> 00:00:50.606
+we talk about these different ideas, how 
+they apply to the images that we are most 
+
+14
+00:00:50.606 --> 00:00:54.300
+familiar with, which are the images from 
+our own digital cameras. 
+
+15
+00:00:54.300 --> 00:01:00.231
+So, the basic idea is as follows. 
+We may say half light, basic error 
+
+16
+00:01:00.231 --> 00:01:05.248
+reflecting on the objects, 
+and the light that is reflected on the 
+
+17
+00:01:05.248 --> 00:01:10.097
+objects goes into the camera. 
+And, what we have are sensors in the 
+
+18
+00:01:10.097 --> 00:01:14.696
+camera as we can see here. 
+Remember, in our eyes, we have the retina 
+
+19
+00:01:14.696 --> 00:01:19.186
+and the retina have the cones and rods, 
+those were the sensors. 
+
+20
+00:01:19.186 --> 00:01:24.368
+In digital cameras, we have sensors, 
+exactly the same way as we have sensors 
+
+21
+00:01:24.368 --> 00:01:27.960
+in our eyes. 
+So, this is just one example of a sensor. 
+
+22
+00:01:27.960 --> 00:01:30.862
+The energy is coming in, 
+there are filters, 
+
+23
+00:01:30.862 --> 00:01:35.076
+and then basically, the energy is 
+acquired and is transmitted. 
+
+24
+00:01:35.076 --> 00:01:40.189
+So, the energy is sent and transmitted. 
+And normally, what we are going to have 
+
+25
+00:01:40.189 --> 00:01:44.814
+on a regular camera is the 
+two-dimensional array of these sensors. 
+
+26
+00:01:44.814 --> 00:01:48.340
+So, each one of these is going to be one 
+of these. 
+
+27
+00:01:48.340 --> 00:01:51.429
+Okay? 
+And normally, they are arranged in a 
+
+28
+00:01:51.429 --> 00:01:55.047
+square or rectangular fashion as we see 
+it here. 
+
+29
+00:01:55.047 --> 00:02:01.270
+So, we have actually kind of a discrete 
+number that's when we go and buy each of 
+
+30
+00:02:01.270 --> 00:02:05.774
+the cameras, 
+we hear that this is about 1,000 x 1,000. 
+
+31
+00:02:05.774 --> 00:02:10.543
+It means, we're actually going to talk a 
+bit more about that in a second. 
+
+32
+00:02:10.543 --> 00:02:14.584
+It means that we have 1,000 sensors in 
+this direction, 
+
+33
+00:02:14.584 --> 00:02:17.167
+1,000 sensors in this direction, 
+so a total of a thousand square sensors. 
+
+34
+00:02:17.167 --> 00:02:21.870
+So, once again, light is reflecting 
+objects, is projected into the camera, 
+
+35
+00:02:21.870 --> 00:02:26.816
+and is sensed by the camera, 
+but all the process has a step of 
+
+36
+00:02:26.816 --> 00:02:30.758
+discretization. 
+Some of you might be more familiar than 
+
+37
+00:02:30.758 --> 00:02:34.225
+others with this. 
+Those of you that took classes in, in 
+
+38
+00:02:34.225 --> 00:02:39.491
+digital signal processing and are aware 
+of A to D converters. This would be very 
+
+39
+00:02:39.491 --> 00:02:44.114
+simple and very familiar to you, 
+but let's just review it for those that 
+
+40
+00:02:44.114 --> 00:02:49.099
+are not so familiar with the concepts. 
+So, we see here the light represented 
+
+41
+00:02:49.099 --> 00:02:54.581
+here, is reflected from the object and it 
+goes into the sensing device. 
+
+42
+00:02:54.581 --> 00:03:00.142
+Think about your digital cameras. 
+So this is a blown-up of what we have 
+
+43
+00:03:00.142 --> 00:03:04.058
+back here. 
+It looks, the object is continuous space, 
+
+44
+00:03:04.058 --> 00:03:10.245
+everything is continuous, but we actually 
+get a discrete representation of that 
+
+45
+00:03:10.245 --> 00:03:15.413
+object and the discretization applies in 
+two different directions. 
+
+46
+00:03:15.413 --> 00:03:20.726
+One is a spatial discretization. 
+So we have a discrete number of sensors 
+
+47
+00:03:20.726 --> 00:03:25.358
+here, and basically the light. 
+One of the simplest modes is that we 
+
+48
+00:03:25.358 --> 00:03:29.849
+integrate, each one of these integrates 
+the light arriving to it, 
+
+49
+00:03:29.849 --> 00:03:35.112
+so that's a discretization in the space. 
+There's also discretization in the 
+
+50
+00:03:35.112 --> 00:03:38.270
+amplitude. 
+We're not going to be able to capture 
+
+51
+00:03:38.270 --> 00:03:43.884
+every single level of gray, every single 
+level that is reflected from the object, 
+
+52
+00:03:43.884 --> 00:03:47.112
+but we're going to have to discretize it 
+as well. 
+
+53
+00:03:47.112 --> 00:03:50.600
+So let's see. 
+Let's talk a bit more about that. 
+
+54
+00:03:50.600 --> 00:03:59.740
+This is the object as we actually see it. 
+And let, let's just look at one line. 
+
+55
+00:03:59.740 --> 00:04:04.546
+I cross this object. 
+So, we see that there it has different 
+
+56
+00:04:04.546 --> 00:04:10.429
+values, it goes from white to gray. 
+So let's just now draw the profile which 
+
+57
+00:04:10.429 --> 00:04:15.152
+is what we see here. 
+So it's very light, white, and then it 
+
+58
+00:04:15.152 --> 00:04:20.704
+becomes a bit dark, and if we see here, 
+let me just erase this so we can 
+
+59
+00:04:20.704 --> 00:04:24.164
+basically see it more clearly. 
+If we go around, 
+
+60
+00:04:24.164 --> 00:04:28.247
+I'm going to just mark it here. 
+If we're going around, we see that it's 
+
+61
+00:04:28.247 --> 00:04:32.269
+going for white then it's dark, 
+then it just becomes brighter a bit, and 
+
+62
+00:04:32.269 --> 00:04:34.828
+goes down again, 
+and then it's white again. 
+
+63
+00:04:34.828 --> 00:04:39.642
+So it has kind of these profile. 
+High is white, then it go dark, and then 
+
+64
+00:04:39.642 --> 00:04:42.932
+it goes up, down, and then it becomes 
+white again. 
+
+65
+00:04:42.932 --> 00:04:45.674
+Of course, it's not perfect. 
+It has some noise. 
+
+66
+00:04:45.674 --> 00:04:50.305
+Even when we go and buy paint and paint a 
+wall, basically, we think that it's 
+
+67
+00:04:50.305 --> 00:04:53.047
+exactly the same color. 
+But it's actually not. 
+
+68
+00:04:53.047 --> 00:04:56.460
+It has some small variations, which are 
+represented here. 
+
+69
+00:04:56.460 --> 00:04:59.855
+So again, there are two processes 
+happening here. 
+
+70
+00:04:59.855 --> 00:05:03.179
+One is sampling. 
+We are going to basically look at the 
+
+71
+00:05:03.179 --> 00:05:08.414
+values at certain discrete intervals. 
+We are not going to have the values all 
+
+72
+00:05:08.414 --> 00:05:11.172
+around. 
+We are going to have it at certain 
+
+73
+00:05:11.172 --> 00:05:12.215
+intervals. 
+Okay? 
+
+74
+00:05:12.215 --> 00:05:16.580
+That's one discretization. 
+The second discretization is, we're not 
+
+75
+00:05:16.580 --> 00:05:20.609
+going to be able to represent every 
+single possible value here. 
+
+76
+00:05:20.609 --> 00:05:24.034
+We're going to basically just represent a 
+few of them. 
+
+77
+00:05:24.034 --> 00:05:27.593
+We're going to round them. 
+So let's just give an example. 
+
+78
+00:05:27.593 --> 00:05:30.750
+A very simple illustration on how can we 
+round? 
+
+79
+00:05:30.750 --> 00:05:37.997
+Let's say that we see the value, 17.5. 
+So basically we see that this is the 
+
+80
+00:05:37.997 --> 00:05:42.230
+value that is representing a particular 
+gray value here. 
+
+81
+00:05:42.230 --> 00:05:47.520
+So how can we round this? 
+One way is just to truncate it like this. 
+
+82
+00:05:47.520 --> 00:05:53.480
+And then basically say, you know, I know 
+that what came into the sensor is 17.5, 
+
+83
+00:05:53.480 --> 00:05:57.836
+but actually I'm going to represent it by 
+17." Okay? 
+
+84
+00:05:57.836 --> 00:06:04.179
+So, there are more ways of doing this and 
+we are going to talk in more detail about 
+
+85
+00:06:04.179 --> 00:06:08.306
+quantization. 
+This is simply this conversation in this 
+
+86
+00:06:08.306 --> 00:06:12.280
+direction of the great value is called 
+quantitation. 
+
+87
+00:06:12.280 --> 00:06:18.240
+We could also consider, for example, if 
+we had 17.5 as before, we could actually 
+
+88
+00:06:18.240 --> 00:06:23.786
+divide it by 2. 
+Take this and multiply by 2. 
+
+89
+00:06:23.786 --> 00:06:29.435
+So basically we divided by 2, then we 
+round, and then we multiply by 2. 
+
+90
+00:06:29.435 --> 00:06:35.243
+And I'm just going to ask you, as a very 
+simple exercise, what's this value? 
+
+91
+00:06:35.243 --> 00:06:40.300
+And what will happen if you're still 
+dividing by 2, 
+
+92
+00:06:40.300 --> 00:06:49.860
+we basically for example, divide by 4. 
+Round down, and then multiply by 4. 
+
+93
+00:06:49.860 --> 00:06:55.362
+And I'm going to have you think about 
+this, as a simple aromatic operation, 
+
+94
+00:06:55.362 --> 00:07:01.252
+we're going to discuss a lot about this 
+particular operation in the chapter on 
+
+95
+00:07:01.252 --> 00:07:04.771
+quantization. 
+But to recap, we have two ways of 
+
+96
+00:07:04.771 --> 00:07:08.500
+sampling. 
+One is the, two ways to get ways of 
+
+97
+00:07:08.500 --> 00:07:12.381
+discretization. 
+One is sampling in the spatial domain, 
+
+98
+00:07:12.381 --> 00:07:16.186
+and the other is quanitization in the 
+gray values. 
+
+99
+00:07:16.186 --> 00:07:22.472
+So, the basic idea is that while we have 
+started from a continuous object that 
+
+100
+00:07:22.472 --> 00:07:27.243
+basically lives in the whole space and 
+has multiple gray values, 
+
+101
+00:07:27.243 --> 00:07:33.133
+we end up with a discrete object that has 
+discrete, discretization both in the 
+
+102
+00:07:33.133 --> 00:07:36.338
+spatial domain and also in the gray 
+values. 
+
+103
+00:07:36.338 --> 00:07:42.228
+The whole idea of good digital cameras is 
+to have a dense enough sampling here, 
+
+104
+00:07:42.228 --> 00:07:47.074
+and very, very fine level of 
+quantization, so we don't notice that 
+
+105
+00:07:47.074 --> 00:07:51.248
+everything is discrete. 
+But it's actually, it is discrete. 
+
+106
+00:07:51.248 --> 00:07:57.500
+So we have pixel values, 
+each one of these is called a pixel. 
+
+107
+00:07:58.680 --> 00:08:06.660
+This comes from picture, 
+element, 
+
+108
+00:08:07.720 --> 00:08:15.703
+and is denote as pixel. 
+And actually I'm going to just, if you 
+
+109
+00:08:15.703 --> 00:08:19.196
+want to Google or you want to search on 
+the web a bit, 
+
+110
+00:08:19.196 --> 00:08:23.853
+I'm going to just, you might find it 
+entertaining to find out who basically 
+
+111
+00:08:23.853 --> 00:08:26.634
+was the first person to use the term 
+pixel. 
+
+112
+00:08:26.634 --> 00:08:31.679
+It's actually a very famous statistician 
+and you can have fun looking for that on 
+
+113
+00:08:31.679 --> 00:08:38.092
+the internet or discuss about that on in 
+the blogs when you find out about that. 
+
+114
+00:08:38.092 --> 00:08:44.623
+So, everyone of these is discrete, 
+both in space and is discrete also in its 
+
+115
+00:08:44.623 --> 00:08:48.193
+grey values. 
+And that's how we get pixels. 
+
+116
+00:08:48.193 --> 00:08:56.283
+And once again, the more we have of this 
+and the more we have of the levels, the 
+
+117
+00:08:56.283 --> 00:09:03.165
+better the image it is. 
+So, regular images will be, for example, 
+
+118
+00:09:03.165 --> 00:09:10.274
+256 x 256 spatial domain. 
+That will means that it will have 256 
+
+119
+00:09:10.274 --> 00:09:16.480
+square pixels and maybe it's represented 
+by 8 bits. 
+
+120
+00:09:17.660 --> 00:09:24.093
+So every pixel, is represented by 8 bits, 
+which means that it can have, it's can 
+
+121
+00:09:24.093 --> 00:09:29.913
+represent 256 different gray values and 
+we are going to see how important this 
+
+122
+00:09:29.913 --> 00:09:33.206
+is. 
+Both the spatial discretization and the 
+
+123
+00:09:33.206 --> 00:09:37.188
+quantization of gray values are extremely 
+important. 
+
+124
+00:09:37.188 --> 00:09:45.520
+We can have better images, 
+for, let me just go back. 
+
+125
+00:09:45.520 --> 00:09:51.750
+We're going to have, for example, we 
+might have an image that has, instead of 
+
+126
+00:09:51.750 --> 00:10:00.810
+256 x 256, it might have 512 x 512 and 
+still 256 letters. 
+
+127
+00:10:00.810 --> 00:10:06.147
+So it's going to take more memory to save 
+that image, but it's going to have a 
+
+128
+00:10:06.147 --> 00:10:09.452
+better quality. 
+And once again, when you're buying 
+
+129
+00:10:09.452 --> 00:10:13.516
+digital cameras, they normally tell you a 
+lot about this number, 
+
+130
+00:10:13.516 --> 00:10:17.644
+how many pixels it has, 
+and that tells you how fine the sampling 
+
+131
+00:10:17.644 --> 00:10:19.385
+is. 
+We want a lot of pixels, 
+
+132
+00:10:19.385 --> 00:10:24.351
+so they are so close to each other, that 
+we, that we can actually believe that 
+
+133
+00:10:24.351 --> 00:10:28.866
+it's a continuous domain and the same at 
+the level of the grey values. 
+
+134
+00:10:28.866 --> 00:10:33.768
+So, once again, one, each one of these is 
+a pixel and it's represented by gray 
+
+135
+00:10:33.768 --> 00:10:36.975
+values. 
+Now this is a black and white image. 
+
+136
+00:10:36.975 --> 00:10:40.648
+We actually, in our cameras, we have 
+color images. 
+
+137
+00:10:40.648 --> 00:10:44.781
+Color images are represented by three of 
+these images. 
+
+138
+00:10:44.781 --> 00:10:48.600
+One for red, 
+one for green, 
+
+139
+00:10:49.820 --> 00:10:55.224
+and one for blue. 
+So basically the cameras acquire, I'm 
+
+140
+00:10:55.224 --> 00:11:00.492
+going to explain a bit more about that in 
+a second, acquire three images. 
+
+141
+00:11:00.492 --> 00:11:05.607
+One represents the blue colors, how much 
+blue there is in the scene, 
+
+142
+00:11:05.607 --> 00:11:10.494
+the other represents the green, 
+and the other represents the red. 
+
+143
+00:11:10.494 --> 00:11:13.930
+And this is called red, 
+green, and blue, 
+
+144
+00:11:13.930 --> 00:11:18.410
+so you often going to hear images which 
+are R, G, and B. 
+
+145
+00:11:18.410 --> 00:11:25.691
+I should make one comment about this. 
+Most low-end to mid-end consumer cameras, 
+
+146
+00:11:25.691 --> 00:11:33.252
+they actually don't really capture full 
+two-dimensional rays for each one of the 
+
+147
+00:11:33.252 --> 00:11:38.941
+colors. 
+So we would like to have each one red, 
+
+148
+00:11:38.941 --> 00:11:46.840
+green and blue. 
+So that's what we would like to have red, 
+
+149
+00:11:46.840 --> 00:11:48.893
+green, 
+and blue. 
+
+150
+00:11:48.893 --> 00:11:55.130
+That would be the ideal scenario and the 
+more expensive cameras actually do that, 
+
+151
+00:11:55.130 --> 00:12:01.291
+basically they capture three full images. 
+Most consumer cameras, if you buy a 
+
+152
+00:12:01.291 --> 00:12:07.067
+low-end digital camera, actually does 
+something slightly different, something 
+
+153
+00:12:07.067 --> 00:12:11.995
+that is called mosaic. 
+And the basic idea is that it capture the 
+
+154
+00:12:11.995 --> 00:12:18.002
+pixels with interleaving in the colors, 
+will capture out a red, a green, a red, a 
+
+155
+00:12:18.002 --> 00:12:24.760
+green, and so on. And here, it will 
+capture a red here, a blue, 
+
+156
+00:12:24.760 --> 00:12:27.800
+blue, 
+red, and so on. 
+
+157
+00:12:27.800 --> 00:12:32.579
+So the next one will be red, green, red, 
+green. 
+
+158
+00:12:32.579 --> 00:12:39.760
+The next one will be blue, red, blue, 
+red. 
+
+159
+00:12:39.760 --> 00:12:45.863
+So actually, it's not having the triple 
+the amount of pixels, is actually having 
+
+160
+00:12:45.863 --> 00:12:48.743
+one pixel red, one green, one red, one 
+green. 
+
+161
+00:12:48.743 --> 00:12:53.543
+From this, we are going to have to 
+interpolate and that we're going to learn 
+
+162
+00:12:53.543 --> 00:12:58.588
+how to do those things in the 3rd and 4th 
+week weeks in this class. 
+
+163
+00:12:58.588 --> 00:13:03.410
+We're going to have to go, because to 
+represent a full color image at every 
+
+164
+00:13:03.410 --> 00:13:06.689
+pixel, we're going to have to go red, 
+green and blue. 
+
+165
+00:13:06.689 --> 00:13:11.575
+So, we do have the red, we're going have 
+to create, somehow the green and blue, 
+
+166
+00:13:11.575 --> 00:13:14.404
+and that's down from the neighboring 
+pixels. 
+
+167
+00:13:14.404 --> 00:13:19.226
+Here, we have the green, we are going to 
+have to create the red and the blue. 
+
+168
+00:13:19.226 --> 00:13:24.434
+So, we are going to have to complete the 
+three channels to be able to see a color 
+
+169
+00:13:24.434 --> 00:13:27.247
+image. 
+When you buy a digital cameras, they 
+
+170
+00:13:27.247 --> 00:13:32.944
+actually normally tell you the size on 
+this which is the size after it have done 
+
+171
+00:13:32.944 --> 00:13:38.063
+that population, although, they as they 
+as they say the regular consumer images 
+
+172
+00:13:38.063 --> 00:13:42.001
+capture this. 
+So they actually capture 1/3 of the data 
+
+173
+00:13:42.001 --> 00:13:45.020
+that they tell you that they're giving to 
+you, 
+
+174
+00:13:45.020 --> 00:13:49.351
+that the data they tell you they're 
+giving to you has been interpolated from 
+
+175
+00:13:49.351 --> 00:13:52.895
+what has been captured. 
+So we have discrete images. 
+
+176
+00:13:52.895 --> 00:13:57.949
+We have a red, green, and blue channels. 
+We're going to think about them as red, 
+
+177
+00:13:57.949 --> 00:14:03.715
+green, and blue so we already went from 
+this representation to the interpolated, 
+
+178
+00:14:03.715 --> 00:14:09.252
+by the way this is called mosaic. 
+So that's how color images are created. 
+
+179
+00:14:09.252 --> 00:14:13.789
+Now, how are videos? 
+So this is how you have a color in your, 
+
+180
+00:14:13.789 --> 00:14:18.865
+an image in your computer. 
+You have three channels, three arrays of 
+
+181
+00:14:18.865 --> 00:14:24.324
+two dimensional discrete values, one for 
+red, one for green, one for blue. 
+
+182
+00:14:24.324 --> 00:14:28.785
+So what happened with videos? 
+Videos basically repeat this. 
+
+183
+00:14:28.785 --> 00:14:31.680
+So one image has, red, 
+green, and blue. 
+
+184
+00:14:31.680 --> 00:14:36.120
+And what happen in video, you have 
+multiple of these. 
+
+185
+00:14:36.120 --> 00:14:42.524
+For example, for one second of video, in, 
+in some of the formats you're going to 
+
+186
+00:14:42.524 --> 00:14:47.988
+have 30 of these. 
+So you're going to have 30 x RGB and each 
+
+187
+00:14:47.988 --> 00:14:53.196
+one of these, remember, is one of these 
+two-dimension structures. 
+
+188
+00:14:53.196 --> 00:14:59.770
+So basically, if you are having, if you 
+want to have one second of video in your 
+
+189
+00:14:59.770 --> 00:15:09.580
+computer, you'll have 30 * 3 images. 
+30 images in 1 second and 3 because you 
+
+190
+00:15:09.580 --> 00:15:16.133
+have three colors. 
+So in 1 second, you're going to have 90 
+
+191
+00:15:16.133 --> 00:15:22.021
+images of this type to represent 1 second 
+of video. 
+
+192
+00:15:22.021 --> 00:15:31.129
+And, of course, 90 images, so let's say 
+90 images at the resolution of 512 x 512, 
+
+193
+00:15:31.129 --> 00:15:39.366
+each an 8 bits each. 
+So this is what you need to represent at 
+
+194
+00:15:39.366 --> 00:15:43.193
+relatively very low resolution. 
+This is not very high resolution, this is 
+
+195
+00:15:43.193 --> 00:15:48.536
+pretty standard, but basically this is 
+what your going to need to represent 1 
+
+196
+00:15:48.536 --> 00:15:54.240
+second of a video in your computer. 
+By the way, it's just saying that it's 3 
+
+197
+00:15:54.240 --> 00:15:58.356
+* 8 bits, three times because we have 
+[INAUDIBLE] bits. 
+
+198
+00:15:58.356 --> 00:16:02.471
+Sometimes people will say that our 
+resolution is 24 bits, 
+
+199
+00:16:02.471 --> 00:16:06.010
+so we use 24 bits to represent basically 
+a pixel. 
+
+200
+00:16:06.010 --> 00:16:08.057
+Okay? 
+So this is how you have. 
+
+201
+00:16:08.057 --> 00:16:13.634
+If you go now to a computer that knows 
+how to deal a program that knows how to 
+
+202
+00:16:13.634 --> 00:16:19.211
+deal with images you're going to see 
+basically two-dimensional discrete arrays 
+
+203
+00:16:19.211 --> 00:16:22.882
+as many as seconds or frames you have in 
+your image. 
+
+204
+00:16:22.882 --> 00:16:28.388
+It's one of these 30, it's called a 
+frame, and you have 30 of this in a 
+
+205
+00:16:28.388 --> 00:16:32.906
+second or 30 images. 
+When we talk about still images, with we 
+
+206
+00:16:32.906 --> 00:16:38.483
+talk normally about images, when we talk 
+about videos, each one of these we call 
+
+207
+00:16:38.483 --> 00:16:41.391
+it a frame. 
+So this is how your images are 
+
+208
+00:16:41.391 --> 00:16:44.761
+represented. 
+Let's just look a bit more about how 
+
+209
+00:16:44.761 --> 00:16:49.575
+important and what are the effects of 
+your resolution in space, on your 
+
+210
+00:16:49.575 --> 00:16:53.770
+resolution in gray values. 
+Meaning, how many pixels you're going to 
+
+211
+00:16:53.770 --> 00:16:58.820
+have and what are the gray values that 
+you're going to use for them. 
+
+212
+00:16:58.820 --> 00:17:03.065
+So, this is again the same type of 
+representation. 
+
+213
+00:17:03.065 --> 00:17:09.649
+This is how 1 color of 1 image, or 1 
+color of 1 frame is represented. 
+
+214
+00:17:09.649 --> 00:17:14.154
+If you have the letter D, then these 
+pixels are 0. 
+
+215
+00:17:14.154 --> 00:17:25.111
+When we have 8 bits, 
+normally 0 is black and 1 or 256, 255, 
+
+216
+00:17:25.111 --> 00:17:32.275
+actually is white. 
+So if you are going with 8 bits, you can 
+
+217
+00:17:32.275 --> 00:17:35.985
+go from 0 to 255. 
+0 is black, 255 is white. 
+
+218
+00:17:35.985 --> 00:17:42.851
+Sometimes at 255 is called 1 if you want 
+to talk about the interval between 0 and 
+
+219
+00:17:42.851 --> 00:17:45.140
+1. 
+So, although, you see this, 
+
+220
+00:17:45.140 --> 00:17:51.441
+actually the computer is represented by a 
+bunch of 0 for the black region. 
+
+221
+00:17:51.441 --> 00:17:56.773
+Then, let' say that this region is in the 
+middle of the gray value, 
+
+222
+00:17:56.773 --> 00:18:01.136
+it would be an equivalent of a 128 value 
+or a 0.5 value. 
+
+223
+00:18:01.136 --> 00:18:06.177
+So we see here 0.5 and then 1 for 
+basically the white. 
+
+224
+00:18:06.177 --> 00:18:14.567
+So this is your discrete representation 
+of this image in the computer. 
+
+225
+00:18:14.567 --> 00:18:18.752
+Okay? 
+At every pixel, you have a discrete 
+
+226
+00:18:18.752 --> 00:18:25.282
+value. 
+Now, sometimes, one of the things that 
+
+227
+00:18:25.282 --> 00:18:31.559
+happen is because you have only 256 
+different levels that you can use. 
+
+228
+00:18:31.559 --> 00:18:37.248
+Sometimes your image is too bright and 
+you might not be able to represent the 
+
+229
+00:18:37.248 --> 00:18:42.645
+small variations in brightness, there. 
+Remember, the human visual system can 
+
+230
+00:18:42.645 --> 00:18:47.896
+basically adapt to multiple level, 
+multiple levels of brightness, but not 
+
+231
+00:18:47.896 --> 00:18:51.616
+all of them at the same time. 
+The same for an image. 
+
+232
+00:18:51.616 --> 00:18:54.679
+We can capture many, many levels, maybe 
+256, 
+
+233
+00:18:54.679 --> 00:19:00.367
+but if we have to deal with a very dark 
+region and a very light region at the 
+
+234
+00:19:00.367 --> 00:19:05.228
+same time, we are in trouble. 
+And sometimes, the very small variations 
+
+235
+00:19:05.228 --> 00:19:09.885
+in this light region, we're not going to 
+be able to capture and that's called 
+
+236
+00:19:09.885 --> 00:19:13.088
+saturation. 
+So, it's going to look all white because 
+
+237
+00:19:13.088 --> 00:19:16.289
+it all got to the 255, 
+maybe it was above 255. 
+
+238
+00:19:16.289 --> 00:19:20.556
+We want it to be above 50, 
+255 because it was very bright. 
+
+239
+00:19:20.556 --> 00:19:24.965
+So that happens very often, 
+we take images and sometimes we see 
+
+240
+00:19:24.965 --> 00:19:30.441
+what's called specularities or, or very 
+strong reflections and it looks white, 
+
+241
+00:19:30.441 --> 00:19:35.348
+it looks very, very light and that's 
+because the image, the sensor has 
+
+242
+00:19:35.348 --> 00:19:38.711
+saturated. 
+So, this explains, now you know why, why 
+
+243
+00:19:38.711 --> 00:19:42.689
+that is happening. 
+You have a discrete amount of levels, a 
+
+244
+00:19:42.689 --> 00:19:46.179
+discrete amount of values to represent 
+your image, 
+
+245
+00:19:46.179 --> 00:19:51.762
+and this went above and beyond what you 
+can represent with that discrete amount 
+
+246
+00:19:51.762 --> 00:19:56.295
+of values. 
+So again, two discretizations, one in 
+
+247
+00:19:56.295 --> 00:20:00.985
+space and one in gray values. 
+And look what happened, what's the 
+
+248
+00:20:00.985 --> 00:20:04.485
+effect? 
+And you know that, because if you have a 
+
+249
+00:20:04.485 --> 00:20:10.293
+digital camera or if you see images on 
+the, on the web, on the Internet, you see 
+
+250
+00:20:10.293 --> 00:20:16.300
+images have different resolution. 
+So if you were to use a lot of pixels, 
+
+251
+00:20:16.300 --> 00:20:20.871
+you might see this. 
+So this means that you have something 
+
+252
+00:20:20.871 --> 00:20:26.316
+which is very, very fine, 
+a lot of pixels and that looks really 
+
+253
+00:20:26.316 --> 00:20:29.991
+nice. 
+On the other hand, if you have something 
+
+254
+00:20:29.991 --> 00:20:36.605
+which is much more coarse, less dense, so 
+you have less pixels, you're going to see 
+
+255
+00:20:36.605 --> 00:20:41.424
+something like this. 
+And it's very clear to see, for example, 
+
+256
+00:20:41.424 --> 00:20:47.303
+how you know, this line is very nicely 
+represented here is not so nicely 
+
+257
+00:20:47.303 --> 00:20:51.550
+represented here. 
+You can see very easily this small 
+
+258
+00:20:51.550 --> 00:20:57.642
+numbers here, not so easy here. 
+You look at these numbers here, they're 
+
+259
+00:20:57.642 --> 00:21:02.244
+not so clear here. 
+So here we only have changed the spatial 
+
+260
+00:21:02.244 --> 00:21:06.144
+resolution. 
+We have not changed the number of gray 
+
+261
+00:21:06.144 --> 00:21:08.874
+values. 
+Still, let's say we have 256. 
+
+262
+00:21:08.874 --> 00:21:15.271
+So each one of these is represented with 
+256 and each one of these is represented 
+
+263
+00:21:15.271 --> 00:21:21.355
+of 256, but we are not able, basically, 
+to represent so fine detail with this as 
+
+264
+00:21:21.355 --> 00:21:25.801
+we are with this. 
+And you can think about, once again, if I 
+
+265
+00:21:25.801 --> 00:21:30.675
+want to draw a profile. 
+If you want to represent, something that 
+
+266
+00:21:30.675 --> 00:21:38.100
+has, this profile of great value and you 
+actually want to discretize that. 
+
+267
+00:21:44.180 --> 00:21:49.674
+If you do it very coarse, you're not 
+going to be able to detect that there is 
+
+268
+00:21:49.674 --> 00:21:55.461
+a smooth variation in the gray values. 
+But if on the other hand you are able to 
+
+269
+00:21:55.461 --> 00:22:00.991
+put many more layers, 
+you're going to be able to capture its 
+
+270
+00:22:00.991 --> 00:22:08.391
+value at many, many points, instead of 
+just at a few, 
+
+271
+00:22:08.391 --> 00:22:17.853
+let me just use a different color, 
+just as a few values if you do a coarse 
+
+272
+00:22:17.853 --> 00:22:23.411
+discretization. 
+And that's why this image doesn't look as 
+
+273
+00:22:23.411 --> 00:22:30.500
+nice as this one, because this capture 
+what was going on at a very coarse levels 
+
+274
+00:22:30.500 --> 00:22:34.503
+in the discretization, 
+in the space discretization. 
+
+275
+00:22:34.503 --> 00:22:40.676
+Now, similar things happen if you 
+basically do a very coarse discretization 
+
+276
+00:22:40.676 --> 00:22:43.930
+of the gray values. 
+So let's just start, 
+
+277
+00:22:43.930 --> 00:22:48.773
+and once again, we are not changing the 
+number of pixels. 
+
+278
+00:22:48.773 --> 00:22:55.951
+All these four images and the four images 
+that are going to come next have exactly 
+
+279
+00:22:55.951 --> 00:23:01.226
+the same number of pixels. 
+Okay? So actually, it's written here, 
+
+280
+00:23:01.226 --> 00:23:05.551
+it has 452, 
+I'm going to just make it larger, times 
+
+281
+00:23:05.551 --> 00:23:07.194
+374, 
+all the images. 
+
+282
+00:23:07.194 --> 00:23:12.470
+But, the first image is displayed with 8 
+bits, meaning 256 values. 
+
+283
+00:23:12.470 --> 00:23:18.741
+So I'm going to just write it, maybe I'm 
+just going to say it here. 
+
+284
+00:23:18.741 --> 00:23:25.962
+The first is 256 and we actually see it 
+very, very smooth and very, very nice. 
+
+285
+00:23:25.962 --> 00:23:34.514
+Here, we only use 7 bits or 128 values. 
+So basically, the value 0 and 1 become 0, 
+
+286
+00:23:34.514 --> 00:23:38.888
+2 and 3 become 2, 
+4 and 5 become 4. 
+
+287
+00:23:38.888 --> 00:23:42.270
+Okay? 
+The easiest way to do that is you take 
+
+288
+00:23:42.270 --> 00:23:47.900
+every value here, let's say a value, 
+you divide by 2. 
+
+289
+00:23:49.580 --> 00:23:56.760
+You take basically the closest integer 
+from below and you multiply it again by 
+
+290
+00:23:56.760 --> 00:23:57.577
+2. 
+Okay? 
+
+291
+00:23:57.577 --> 00:24:03.940
+So for example, if the value of this 
+image was 8, you divide by 2, 
+
+292
+00:24:05.220 --> 00:24:09.141
+you take, divide by 2, basic, divide. 
+Sorry. 
+
+293
+00:24:09.141 --> 00:24:11.568
+Divide by 2, 
+that's 4. 
+
+294
+00:24:11.568 --> 00:24:13.902
+Okay? 
+You multiply by 2, 
+
+295
+00:24:13.902 --> 00:24:18.850
+you got 8 again. 
+No problem with that pixel value. 
+
+296
+00:24:18.850 --> 00:24:20.811
+Okay? 
+But what happen, 
+
+297
+00:24:20.811 --> 00:24:25.759
+let's just do that here, 
+what happen if you have 9? 
+
+298
+00:24:25.759 --> 00:24:30.446
+You divide by 2, 
+that's 4 and 1/2. 
+
+299
+00:24:30.446 --> 00:24:33.978
+I have to take the closest integer from 
+below, 
+
+300
+00:24:33.978 --> 00:24:38.891
+that's 4, 
+I multiplied by 2 and this became 8. 
+
+301
+00:24:38.891 --> 00:24:46.082
+So a 9 was transformed into an 8 and 
+that's basically reduces the range and 
+
+302
+00:24:46.082 --> 00:24:52.100
+reduces the quality of the image. 
+This becomes even worse if we go into 
+
+303
+00:24:52.100 --> 00:24:57.070
+this region where we are actually only 
+using 64 different values. 
+
+304
+00:24:57.070 --> 00:25:02.269
+So, that's equivalent basically to 
+dividing by 4 then truncating and 
+
+305
+00:25:02.269 --> 00:25:06.780
+multiplying by 4. 
+And that means that you're going to start 
+
+306
+00:25:06.780 --> 00:25:13.433
+talking about basically, if you have only 
+64, every 4 values are represented with 1 
+
+307
+00:25:13.433 --> 00:25:17.179
+number. 
+So 0, 1, 2, 3, they all become 0. 
+
+308
+00:25:17.179 --> 00:25:24.033
+4, 5, 6, 7, they all become 4, and so on. 
+And then, you can keep going and this is 
+
+309
+00:25:24.033 --> 00:25:28.302
+only represented with 32. 
+So I hope that you're starting to see 
+
+310
+00:25:28.302 --> 00:25:33.317
+that the quality is deteriorating. 
+In particular, if you look at lines here, 
+
+311
+00:25:33.317 --> 00:25:36.435
+you start to see what's called false 
+contours. 
+
+312
+00:25:36.435 --> 00:25:39.688
+You see these lines that they're not 
+clear here. 
+
+313
+00:25:39.688 --> 00:25:45.348
+There is a smooth transition here, but 
+here you see these false contours and 
+
+314
+00:25:45.348 --> 00:25:50.436
+that's created because of these jumps 
+that I mentioned to you. 
+
+315
+00:25:50.436 --> 00:25:54.540
+So if you were going basically 1, 2, 3, 
+4, 
+
+316
+00:25:54.540 --> 00:26:00.819
+it's actually, you are going to, when you 
+taking very, very few gray values, you're 
+
+317
+00:26:00.819 --> 00:26:06.265
+going to go 0, 0, 0, 0, 4. 
+You're going to jump into that value and 
+
+318
+00:26:06.265 --> 00:26:11.939
+that's because you are basically have 
+much less resources to represent the 
+
+319
+00:26:11.939 --> 00:26:16.781
+different gray values. 
+It's just going into an even more extreme 
+
+320
+00:26:16.781 --> 00:26:22.379
+case and we keep going down. 
+Here, basically we used only 16 and now I 
+
+321
+00:26:22.379 --> 00:26:28.070
+think that you're going to be able to see 
+the false countours very clearly. 
+
+322
+00:26:28.070 --> 00:26:34.154
+Here, we go basically only to 8 values. 
+There's only 8 numbers to represent 
+
+323
+00:26:34.154 --> 00:26:37.493
+everything that is happening in this 
+picture. 
+
+324
+00:26:37.493 --> 00:26:41.426
+Okay? And that's basically a very strong 
+quantization. 
+
+325
+00:26:41.426 --> 00:26:46.250
+Here, there is basically only 4 and here 
+is basically only 2. 
+
+326
+00:26:46.250 --> 00:26:53.792
+In this very extreme case, everything 
+that was below 128 became 0, 
+
+327
+00:26:53.792 --> 00:26:58.785
+became black. 
+Everything that was above 128 became 255, 
+
+328
+00:26:58.785 --> 00:27:04.310
+white and then you see a very, very poor 
+quality data. 
+
+329
+00:27:04.310 --> 00:27:07.739
+Okay? 
+So that's how the spatial quantization 
+
+330
+00:27:07.739 --> 00:27:13.508
+and the gray value, spatial sampling, 
+sorry, and the gray value quantization 
+
+331
+00:27:13.508 --> 00:27:17.483
+effect you. 
+The more you have of samples, the better 
+
+332
+00:27:17.483 --> 00:27:23.485
+quality it is, the more you have the 
+possibility of represent many, many, many 
+
+333
+00:27:23.485 --> 00:27:27.539
+small variations. 
+In gray values, the better it is, of 
+
+334
+00:27:27.539 --> 00:27:33.385
+course, the more memory it takes into 
+your computer and that's going to be the 
+
+335
+00:27:33.385 --> 00:27:38.577
+subject of our compression unit. 
+So now we know how images are represented 
+
+336
+00:27:38.577 --> 00:27:41.852
+in the computer. 
+They represent these two-dimensional 
+
+337
+00:27:41.852 --> 00:27:44.743
+arrays. 
+Great level images are represented by 
+
+338
+00:27:44.743 --> 00:27:47.793
+one. 
+Color images are represented by three, 
+
+339
+00:27:47.793 --> 00:27:52.057
+red, green and blue. 
+Videos are represented by multiples of 
+
+340
+00:27:52.057 --> 00:27:54.042
+them, 
+let's say 30 a second, 
+
+341
+00:27:54.042 --> 00:27:58.967
+sometimes it's only 24 depending on the 
+standard that, that we have, 
+
+342
+00:27:58.967 --> 00:28:04.848
+but there are multiple of those images 
+and as we say, we call them frames and we 
+
+343
+00:28:04.848 --> 00:28:10.068
+know that everything is discrete. 
+So we have something and quantization. 
+
+344
+00:28:10.068 --> 00:28:15.508
+An image in a computer is nothing else 
+now that the two-dimensional array of 
+
+345
+00:28:15.508 --> 00:28:17.420
+discrete values. 
+Thank you. 

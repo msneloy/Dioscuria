@@ -1,0 +1,35 @@
+Hello and Welcome back. 
+I am going to show you now an example of imaging painting inside Adobe Photoshop. 
+Adobe has implemented a number of types of image in painting algorithms. 
+Some are based on partial differential equations of the type that we showed in 
+the previous videos. Actually, they used a higher order 
+partial differential equation as we have seen in one of the videos in this class. 
+And also, they have implemented this smart cut and paste type of techniques 
+that we show in the previous video. So let's see an example. 
+In particular, we are using the tool that is called the Healing Brush, 
+and it has a number of options, as I just described. 
+Some based on partial differential equation, some based on cut and paste. 
+And what we see here is one of the images they show in the previous video, 
+this was the image to be in painted, we want to remove this object. 
+This is the result that they show in the previous video. 
+It was not obtained with Photoshop. It was obtained with similar techniques 
+of smart cut and paste and variation and formulations. 
+So, lets see how we can apply the Healing Brush. 
+Now, in real time in the demo, to obtain similar results of removing this. 
+So, the basic idea, I hope you can see the circle there. 
+Let me just put it in a nice background, so you can see it. 
+And the basic idea, is you kind of start painting what you want to be removed. 
+I'm going to release now, and in thinking, and it's gone. 
+It's basically gone, and it's kind of the background starts to appear. We'll just 
+do a bit more. I paint around, I brush, 
+and is working, and is disappearing, and is starting to look like this. 
+Again, remember this was not the original. 
+This was [INAUDIBLE] by the techniques we describe and now is happening in real 
+time. Let me just do one more. 
+And you see, it's starting to disappear. And it's very nicely [INAUDIBLE] filled 
+in. And we can keep going until we make 
+everything that we don't want, every object that we don't want, 
+we make it disappear by basically blending information from the background 
+inside it. So, this is a nice demo of something that 
+is available with Photoshop. Thank you very much. 
+I see you in the next video.

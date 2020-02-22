@@ -1,0 +1,266 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.578
+We are now inside a MATLAB environment. 
+And we are going to be using MATLAB to 
+
+2
+00:00:04.578 --> 00:00:09.096
+illustrate some of these picture 
+modification, algorithm we just described 
+
+3
+00:00:09.096 --> 00:00:12.698
+and also some those are we are going to 
+see in the next video. 
+
+4
+00:00:12.698 --> 00:00:15.751
+MATLAB is a great software to do image 
+processing. 
+
+5
+00:00:15.751 --> 00:00:20.513
+Of course, you don't need to have MATLAB 
+to understand what I'm, going to show you 
+
+6
+00:00:20.513 --> 00:00:23.932
+next or you don't need to know how to 
+program in MATLAB. 
+
+7
+00:00:23.932 --> 00:00:28.511
+It's very intuitive and it's going to be 
+very simple for us to understand the 
+
+8
+00:00:28.511 --> 00:00:33.045
+commands that I'm going to do. 
+The first command, is basically reading 
+
+9
+00:00:33.045 --> 00:00:36.670
+an image. 
+As we see here, we are reading the image. 
+
+10
+00:00:36.670 --> 00:00:41.431
+The next command is going to have a 
+number of steps, which I'm going to show 
+
+11
+00:00:41.431 --> 00:00:44.438
+you next. 
+I'm going to first, create a figure and 
+
+12
+00:00:44.438 --> 00:00:48.698
+show the image in that figure. 
+Then I create a second figure, and I'm 
+
+13
+00:00:48.698 --> 00:00:51.580
+going to show you the histogram of that 
+image. 
+
+14
+00:00:51.580 --> 00:00:56.990
+And I'm going to keep creating figures to 
+illustrate the other operations, I want 
+
+15
+00:00:56.990 --> 00:01:00.530
+to show you. 
+One of them is going to be the inversion 
+
+16
+00:01:00.530 --> 00:01:02.333
+of that image, 
+255 minus I. 
+
+17
+00:01:02.333 --> 00:01:07.209
+And the last thing I want to show you is 
+the histogram of that image. 
+
+18
+00:01:07.209 --> 00:01:12.152
+You can start thinking, how the histogram 
+of the inversion compares to the 
+
+19
+00:01:12.152 --> 00:01:15.291
+histogram of the original image. 
+Let's see that., 
+
+20
+00:01:15.291 --> 00:01:20.434
+let's just show all those figures, one 
+after the other, I'm going to move them, 
+
+21
+00:01:20.434 --> 00:01:24.910
+so it makes it easier for us to observe 
+those images, those figures. 
+
+22
+00:01:24.910 --> 00:01:28.594
+And I'm going to tell you what each one 
+of them is. 
+
+23
+00:01:28.594 --> 00:01:32.640
+So here is the original image. 
+And this is its histogram. 
+
+24
+00:01:32.640 --> 00:01:38.130
+And we see the image is pretty dark, so 
+we see a large concentration of dark 
+
+25
+00:01:38.130 --> 00:01:41.164
+values. 
+Here is the inversion of the image. 
+
+26
+00:01:41.164 --> 00:01:44.487
+We basically have flip all of image 
+values. 
+
+27
+00:01:44.487 --> 00:01:49.906
+And look what happened to the histogram. 
+The histogram also has flip. 
+
+28
+00:01:49.906 --> 00:01:54.218
+Basically, what was here, 
+it moved to here as we have expected 
+
+29
+00:01:54.218 --> 00:01:59.723
+because we are just flipping the pixels 
+we are not making any other change but 
+
+30
+00:01:59.723 --> 00:02:04.252
+flipping the pixel values. 
+So it's a very simple operation and we 
+
+31
+00:02:04.252 --> 00:02:09.626
+see what's happening to the histogram. 
+Let's now see another operation that we 
+
+32
+00:02:09.626 --> 00:02:12.947
+are going to describe in detail in the 
+next video. 
+
+33
+00:02:12.947 --> 00:02:16.800
+And it's going to be an what's called 
+histogram equalization. 
+
+34
+00:02:16.800 --> 00:02:21.848
+I'm going to look for the command to do 
+the histogram equalization and to show 
+
+35
+00:02:21.848 --> 00:02:24.305
+that to you. 
+And that's going to be here. 
+
+36
+00:02:24.305 --> 00:02:28.822
+Once again, I'm going to show you the 
+image and its histogram as before. 
+
+37
+00:02:28.822 --> 00:02:33.671
+Now I'm going to show you the equalized 
+image and I'm going to illustrate what 
+
+38
+00:02:33.671 --> 00:02:37.988
+that means and also the histogram. 
+So again we're going to have four 
+
+39
+00:02:37.988 --> 00:02:41.451
+figures. 
+And, I think that you are starting to 
+
+40
+00:02:41.451 --> 00:02:46.601
+guess what's happening here. 
+As before, we have the original image, 
+
+41
+00:02:46.601 --> 00:02:51.830
+it's historgram We see the histogram very 
+concentrated on the left. 
+
+42
+00:02:51.830 --> 00:02:56.627
+Here we have the result what's called 
+histogram equalization. 
+
+43
+00:02:56.627 --> 00:03:02.527
+What we are trying to do here is to make 
+this histogram looks more uniform. 
+
+44
+00:03:02.527 --> 00:03:08.268
+Look at here, how instead of being 
+concentrated in the low values, showing 
+
+45
+00:03:08.268 --> 00:03:13.932
+that this is a very dark image. 
+We spread the pixel's values so there is 
+
+46
+00:03:13.932 --> 00:03:18.966
+better exploitation of all the gamut of 
+values from zero to 256. 
+
+47
+00:03:18.966 --> 00:03:24.000
+Instead of here that there was almost no 
+pixels with this value. 
+
+48
+00:03:24.000 --> 00:03:29.900
+That is to come equalization help us to 
+see details that we couldn't see before 
+
+49
+00:03:29.900 --> 00:03:35.131
+like this region of the tire. 
+So it's a very powerful operation to be 
+
+50
+00:03:35.131 --> 00:03:41.158
+able to basically see details in the 
+image that because of the bad use of the 
+
+51
+00:03:41.158 --> 00:03:44.791
+spectrum of grey values we couldn't see 
+before. 
+
+52
+00:03:44.791 --> 00:03:50.046
+What we're going to see next is how we 
+actually mathematically do this 
+
+53
+00:03:50.046 --> 00:03:53.060
+operation. 
+So, see you in the next video. 

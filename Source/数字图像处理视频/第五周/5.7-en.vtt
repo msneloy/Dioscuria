@@ -1,0 +1,1336 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.865
+Hello and welcome back. 
+One of the reasons that image and video 
+
+2
+00:00:03.865 --> 00:00:08.958
+segmentation is studied so much in image 
+processing is because of its relevance to 
+
+3
+00:00:08.958 --> 00:00:13.559
+multiple applications from the movie 
+industry to medical imaging as we are 
+
+4
+00:00:13.559 --> 00:00:16.075
+going to see in the last week of this 
+class. 
+
+5
+00:00:16.075 --> 00:00:20.799
+The other reason there are so many 
+studies in this area is because image and 
+
+6
+00:00:20.799 --> 00:00:24.420
+video processing is intrinsically a very 
+difficult problem. 
+
+7
+00:00:24.420 --> 00:00:29.685
+And, what we are going to do in this 
+video lecture, is basically introduce the 
+
+8
+00:00:29.685 --> 00:00:32.674
+concept of interactive image 
+segmentation. 
+
+9
+00:00:32.674 --> 00:00:37.157
+We are going to let the user help us to 
+do the image segmentation. 
+
+10
+00:00:37.157 --> 00:00:42.850
+So that's basically the topic of, of this 
+lecture, interactive image segmentation. 
+
+11
+00:00:42.850 --> 00:00:47.980
+Let me show you a couple of examples. 
+Extreme examples of the difficulty of 
+
+12
+00:00:47.980 --> 00:00:51.451
+image segmentation. 
+This is a really nice image. 
+
+13
+00:00:51.451 --> 00:00:56.259
+If you haven't seen it before, it looks 
+nothing strange to you. 
+
+14
+00:00:56.259 --> 00:00:59.516
+It's just basically a drawing of a 
+forest. 
+
+15
+00:00:59.516 --> 00:01:05.410
+Now if you look very carefully, and I 
+invite you to do that, you start seeing 
+
+16
+00:01:05.410 --> 00:01:09.055
+faces in this image, faces that are 
+camouflaged. 
+
+17
+00:01:09.055 --> 00:01:14.484
+For example, we see a face here. 
+I hope you can see it - their eyes, nose 
+
+18
+00:01:14.484 --> 00:01:19.032
+and mouth. 
+Here, is in our face, here, once the 
+
+19
+00:01:19.032 --> 00:01:26.020
+eyes, the nose, and the mouth. 
+There is outer phase camouflage here. 
+
+20
+00:01:26.020 --> 00:01:31.437
+Eyes, nose, mouth. 
+There's a profile face here, the eyes, 
+
+21
+00:01:31.437 --> 00:01:35.686
+the nose and the mouth. 
+There is actually a lot of images. 
+
+22
+00:01:35.686 --> 00:01:41.500
+If you stare at this image for some time, 
+you're going to start discover more and 
+
+23
+00:01:41.500 --> 00:01:47.388
+more faces that pop-out from this image. 
+Now this is a really challenging image 
+
+24
+00:01:47.388 --> 00:01:50.817
+segmentation problem to segment out the 
+faces. 
+
+25
+00:01:50.817 --> 00:01:56.109
+It becomes easier if I tell the 
+algorithm, more or less the location of 
+
+26
+00:01:56.109 --> 00:02:01.624
+those faces so then the algorithm might 
+be able to find the eyes in those 
+
+27
+00:02:01.624 --> 00:02:04.270
+locations. 
+Let's see yet another example. 
+
+28
+00:02:04.270 --> 00:02:09.212
+You're welcome to pause the video and 
+observe at this image for longer if you 
+
+29
+00:02:09.212 --> 00:02:14.080
+wish to discover more and more faces. 
+Let's look at the next example. 
+
+30
+00:02:14.080 --> 00:02:19.220
+Another very interesting drawing. 
+We see a tree. 
+
+31
+00:02:19.220 --> 00:02:22.320
+Here, with the houses in the back, we see 
+a lady. 
+
+32
+00:02:22.320 --> 00:02:27.533
+Now if you stare at this image, and in 
+particular if you take a bit of distance 
+
+33
+00:02:27.533 --> 00:02:31.227
+from the screen. 
+And sometimes if you kind of close your 
+
+34
+00:02:31.227 --> 00:02:36.960
+eyes to blur a bit the image you might 
+actually find that there is a face here. 
+
+35
+00:02:36.960 --> 00:02:43.275
+The lady becomes the nose. 
+Here, part of the buildings basically 
+
+36
+00:02:43.275 --> 00:02:47.417
+become the eyes. 
+So once again, how can we tell the image 
+
+37
+00:02:47.417 --> 00:02:51.541
+segmentation algorithm to segment this 
+very, very difficult image? 
+
+38
+00:02:51.541 --> 00:02:56.045
+In particular, how can we tell the 
+algorithm if we're interested in the 
+
+39
+00:02:56.045 --> 00:03:00.930
+tree, are we interested in the face, are 
+we interested in the nose or the lady? 
+
+40
+00:03:00.930 --> 00:03:03.277
+What is foreground? 
+What's background? 
+
+41
+00:03:03.277 --> 00:03:07.972
+To illustrate what's foreground and 
+what's background, that is a very, very 
+
+42
+00:03:07.972 --> 00:03:11.207
+difficult problem, let's just see this 
+famous image. 
+
+43
+00:03:11.207 --> 00:03:15.341
+We actually see here. 
+Two profiles, one, two. 
+
+44
+00:03:15.341 --> 00:03:23.170
+I hope you can also see if you look at 
+the wide region, we see actually a glass. 
+
+45
+00:03:23.170 --> 00:03:29.018
+So what is for as forgram, the profile, 
+or the class, it's very hard for the, 
+
+46
+00:03:29.018 --> 00:03:35.182
+algorithm in the computer to understand, 
+what is that we're interesting, what's 
+
+47
+00:03:35.182 --> 00:03:40.714
+interesting in the image for us. 
+So one way of, doing that is, let's the 
+
+48
+00:03:40.714 --> 00:03:43.499
+user. 
+Tell us what's foreground, what's 
+
+49
+00:03:43.499 --> 00:03:47.120
+background. 
+Let us use the user, basically, which is 
+
+50
+00:03:47.120 --> 00:03:53.059
+the real client of this and the one that 
+it is interested in the segmentation, let 
+
+51
+00:03:53.059 --> 00:03:57.694
+us use the user to give us a bit of 
+information about the image. 
+
+52
+00:03:57.694 --> 00:04:01.641
+And the way to do that. 
+That we're going to explore is basically 
+
+53
+00:04:01.641 --> 00:04:04.986
+we're going to ask the user. 
+To mark very simple scribbles. 
+
+54
+00:04:04.986 --> 00:04:07.428
+The user is going to come and just 
+scribble. 
+
+55
+00:04:07.428 --> 00:04:12.013
+Here's a story line, but just can be any 
+mark in the image, as we're going to see 
+
+56
+00:04:12.013 --> 00:04:15.110
+later, and say, you know, I want to call 
+this background. 
+
+57
+00:04:15.110 --> 00:04:18.614
+Another student said, I want to call this 
+foregram. 
+
+58
+00:04:18.614 --> 00:04:22.526
+Now go and segment it. 
+So that's all what we are going to ask 
+
+59
+00:04:22.526 --> 00:04:25.780
+from the user at this stage. 
+We might ask more, later on. 
+
+60
+00:04:25.780 --> 00:04:31.109
+Once of course, we segment it out we can 
+do different things, like putting new 
+
+61
+00:04:31.109 --> 00:04:35.319
+images in the background. 
+But it's very important that we are 
+
+62
+00:04:35.319 --> 00:04:39.866
+going to get help from the user. 
+We shouldn't be asking a lot of help. 
+
+63
+00:04:39.866 --> 00:04:45.307
+We shouldn't be asking the user to go 
+around and basically completely mark the 
+
+64
+00:04:45.307 --> 00:04:49.303
+boundary of the object. 
+Then there's not much left for the 
+
+65
+00:04:49.303 --> 00:04:54.676
+computer to do and that's very tedious, 
+which is still done sometimes, but it's 
+
+66
+00:04:54.676 --> 00:04:59.635
+very tedious work for the user. 
+We want very little interaction that can 
+
+67
+00:04:59.635 --> 00:05:02.686
+help us a lot. 
+How can we exploit these scribbles? 
+
+68
+00:05:02.686 --> 00:05:06.322
+So I'm going to illustrate that. 
+I'm going to tell you a particular 
+
+69
+00:05:06.322 --> 00:05:10.315
+pipeline to exploit these. 
+But the underlying ideas are very common 
+
+70
+00:05:10.315 --> 00:05:14.845
+in multiple, multiple techniques for 
+image segmentation that you can find in 
+
+71
+00:05:14.845 --> 00:05:20.185
+the literature. 
+So the user has given us hints of what's 
+
+72
+00:05:20.185 --> 00:05:24.820
+foreground, that we see here. 
+And what's background? 
+
+73
+00:05:24.820 --> 00:05:29.903
+We can basically go and look at all the 
+pixels that the user has marked as 
+
+74
+00:05:29.903 --> 00:05:32.411
+foreground. 
+We can draw the histogram. 
+
+75
+00:05:32.411 --> 00:05:35.460
+We can draw the distribution of those 
+pixels. 
+
+76
+00:05:35.460 --> 00:05:40.272
+We can do basically the same for the 
+background, so we end up with that: 
+
+77
+00:05:40.272 --> 00:05:45.219
+Distribution of foreground, we end up 
+with the distribution of background. 
+
+78
+00:05:45.219 --> 00:05:50.099
+Very often the background has much more 
+variability than the foreground. 
+
+79
+00:05:50.099 --> 00:05:54.731
+Now, if you now give me a pixel. 
+I can, compute what's a probability of 
+
+80
+00:05:54.731 --> 00:05:58.795
+being in the foreground. 
+What's a probability of being in the 
+
+81
+00:05:58.795 --> 00:06:01.193
+background. 
+From these, distributions. 
+
+82
+00:06:01.193 --> 00:06:04.990
+That the user mark. 
+Once again, all what I'm using are the 
+
+83
+00:06:04.990 --> 00:06:07.655
+pixels that the user marked as 
+foreground. 
+
+84
+00:06:07.655 --> 00:06:10.720
+And the pixels that a user marked as 
+background. 
+
+85
+00:06:10.720 --> 00:06:16.880
+We can actually normalize this. 
+So here, we use C to stand for the vector 
+
+86
+00:06:16.880 --> 00:06:20.593
+in color space. 
+It can be RGB, red, green, blue. 
+
+87
+00:06:20.593 --> 00:06:24.476
+It can be other color space. 
+It doesn't matter. 
+
+88
+00:06:24.476 --> 00:06:31.143
+It's whatever are the colors, just under 
+the scribbles that the user has marked. 
+
+89
+00:06:31.143 --> 00:06:37.179
+And again, we have these distributions. 
+And we can predict the probability of a 
+
+90
+00:06:37.179 --> 00:06:42.555
+pixel being foreground or background, 
+which is just the probability of being 
+
+91
+00:06:42.555 --> 00:06:46.870
+foreground and we normalize by both 
+foreground or background. 
+
+92
+00:06:46.870 --> 00:06:52.076
+So, for example, a pixel that was marked 
+by the user as being foreground. 
+
+93
+00:06:52.076 --> 00:06:56.109
+It would have a very high probability, 
+that pixel value. 
+
+94
+00:06:56.109 --> 00:07:00.728
+basically, once again, this is just a 
+particular illustration. 
+
+95
+00:07:00.728 --> 00:07:06.081
+The basic idea is that we use the 
+distribution of the foreground and the 
+
+96
+00:07:06.081 --> 00:07:09.894
+distribution of the background to tell 
+the computer. 
+
+97
+00:07:09.894 --> 00:07:15.393
+You know, pixels that are similar to the 
+colors that the user has marked as 
+
+98
+00:07:15.393 --> 00:07:19.060
+foreground, 
+you should try to call them foreground. 
+
+99
+00:07:19.060 --> 00:07:24.181
+Pixels that are similar to the color of 
+what the user has marked as background, 
+
+100
+00:07:24.181 --> 00:07:29.934
+you should try to call them background. 
+So, now we have kind of an idea of what 
+
+101
+00:07:29.934 --> 00:07:33.489
+to call foreground, what to call 
+background. 
+
+102
+00:07:33.489 --> 00:07:36.529
+And. 
+If we just take, basically, this formula 
+
+103
+00:07:36.529 --> 00:07:39.238
+and we draw that. 
+We are going to get this. 
+
+104
+00:07:39.238 --> 00:07:42.642
+Which is already a very interesting 
+segmentation. 
+
+105
+00:07:42.642 --> 00:07:46.532
+Just by looking this exercise and looking 
+at this image. 
+
+106
+00:07:46.532 --> 00:07:49.450
+We can almost find the object of 
+interest. 
+
+107
+00:07:49.450 --> 00:07:54.660
+Basically, what the user told us is the 
+object of interest, which is the cat. 
+
+108
+00:07:54.660 --> 00:07:57.620
+Now there's something interesting to 
+observe here. 
+
+109
+00:07:57.620 --> 00:08:03.847
+So, the higher the value here, the more 
+probability of being foreground, based on 
+
+110
+00:08:03.847 --> 00:08:08.734
+what the user told us. 
+So why do you think that these eyes are 
+
+111
+00:08:08.734 --> 00:08:14.961
+basically very dark, meaning have very 
+high probability of being background and 
+
+112
+00:08:14.961 --> 00:08:21.425
+very low probability of being foreground, 
+and that's because they're very dark, and 
+
+113
+00:08:21.425 --> 00:08:27.888
+look, also here we have very dark pixels, 
+so if we just look at the pixels that the 
+
+114
+00:08:27.888 --> 00:08:32.094
+user has marked. 
+That's not enough information for us. 
+
+115
+00:08:32.094 --> 00:08:38.541
+Because they might be inside the object 
+of interest some pixels that look as the 
+
+116
+00:08:38.541 --> 00:08:41.646
+background. 
+So we need to do a bit more. 
+
+117
+00:08:41.646 --> 00:08:45.400
+What can we do? 
+Let us see that next. 
+
+118
+00:08:45.400 --> 00:08:50.420
+What we're going to do, is we're going to 
+basically try to find. 
+
+119
+00:08:50.420 --> 00:08:56.132
+All the pixels in the image compare them 
+with the probability of being foreground 
+
+120
+00:08:56.132 --> 00:09:01.565
+and the probability of being background. 
+And then we are going to make a decision. 
+
+121
+00:09:01.565 --> 00:09:06.860
+How we're going to do that comparison? 
+Using something which is called geodesic. 
+
+122
+00:09:06.860 --> 00:09:10.564
+Distance. 
+And this is something that you basically 
+
+123
+00:09:10.564 --> 00:09:14.492
+do every day. 
+When you go to work, when you go in your 
+
+124
+00:09:14.492 --> 00:09:19.678
+house from your room to the kitchen, 
+you're basically traveling a path. 
+
+125
+00:09:19.678 --> 00:09:24.939
+And you're going to try to travel, all 
+the time, the path of minimal effort. 
+
+126
+00:09:24.939 --> 00:09:30.497
+So if you want to go from your room to 
+the kitchen, and you don't want to, you 
+
+127
+00:09:30.497 --> 00:09:35.610
+want to get there as fast as possible, 
+you're going the shortest path. 
+
+128
+00:09:35.610 --> 00:09:39.392
+Now sometimes does that path has an 
+obstacle. 
+
+129
+00:09:39.392 --> 00:09:43.848
+So for example a wall. 
+You cannot go through the wall. 
+
+130
+00:09:43.848 --> 00:09:49.732
+You have to go around the wall. 
+So if you draw a map of your office or 
+
+131
+00:09:49.732 --> 00:09:54.611
+house, there are certain. 
+Regions that are very easy to go through. 
+
+132
+00:09:54.611 --> 00:09:58.170
+Certain regions that are much harder to 
+go through. 
+
+133
+00:09:58.170 --> 00:10:03.753
+So when you want to go from one point to 
+another you might not be able to go in a 
+
+134
+00:10:03.753 --> 00:10:07.381
+straight line. 
+For example if there is a wall, you're 
+
+135
+00:10:07.381 --> 00:10:12.755
+going to have to basically go around it. 
+And the basic idea is that every region 
+
+136
+00:10:12.755 --> 00:10:17.486
+in the path has a weight. 
+And that weight, we're going to call it 
+
+137
+00:10:17.486 --> 00:10:20.273
+W. 
+What we're going to do is, we're going to 
+
+138
+00:10:20.273 --> 00:10:25.090
+go to every pixel in the image and we're 
+going to compute the minimal path. 
+
+139
+00:10:25.090 --> 00:10:31.030
+To let foregram prevail, the minimal 
+path, to the background screening. 
+
+140
+00:10:31.030 --> 00:10:36.754
+Once we have that, we're going to decide 
+if its foreground or background according 
+
+141
+00:10:36.754 --> 00:10:41.414
+to which path is shorter. 
+So I have to tell you, what are we 
+
+142
+00:10:41.414 --> 00:10:45.772
+going to use as w. 
+Before that, let me just make a remark, 
+
+143
+00:10:45.772 --> 00:10:50.380
+that this can be computer very fast, 
+actually, linear time. 
+
+144
+00:10:50.380 --> 00:10:56.130
+Visiting every pixel of the image only 
+once you can compute that. 
+
+145
+00:10:56.130 --> 00:10:57.420
+Distance. 
+The path. 
+
+146
+00:10:57.420 --> 00:11:01.939
+Basically, this formula to the foreground 
+and to the background. 
+
+147
+00:11:01.939 --> 00:11:04.951
+So this is not very difficult 
+computation. 
+
+148
+00:11:04.951 --> 00:11:10.761
+This is based on extensions of techniques 
+that are called Dios Track techniques. 
+
+149
+00:11:10.761 --> 00:11:14.920
+And they are very standard techniques in 
+graph a, a theory. 
+
+150
+00:11:14.920 --> 00:11:20.658
+And we're going to discuss them a bit 
+more next week when we talk about partial 
+
+151
+00:11:20.658 --> 00:11:24.890
+differential equations. 
+For now, all that I want you to know. 
+
+152
+00:11:24.890 --> 00:11:31.002
+Is that this computation, of what's a 
+minimal effort, from traveling from, a 
+
+153
+00:11:31.002 --> 00:11:37.940
+pixel, to any one of the scribbles with a 
+weight that I'm going to define in a 
+
+154
+00:11:37.940 --> 00:11:41.492
+second. 
+That minimal effort can be computed 
+
+155
+00:11:41.492 --> 00:11:46.778
+extremely, extremely fast, mmk, basically 
+can be done in real time. 
+
+156
+00:11:46.778 --> 00:11:50.217
+So what's W? 
+Which is computed thanks to the 
+
+157
+00:11:50.217 --> 00:11:55.571
+scribbles, the distribution of colors, so 
+that's what we're going to use. 
+
+158
+00:11:55.571 --> 00:12:00.820
+We're basically going to use. 
+That probability that we just computed. 
+
+159
+00:12:00.820 --> 00:12:04.718
+And what we are going to think is the 
+following. 
+
+160
+00:12:04.718 --> 00:12:11.389
+If, from the pixel I'm seeking, going to 
+the scribble, the probability of being 
+
+161
+00:12:11.389 --> 00:12:18.060
+foreground doesn't change too much. 
+That means that I'm probably a foreground 
+
+162
+00:12:18.060 --> 00:12:22.173
+pixel. 
+If I can keep going for myself to the 
+
+163
+00:12:22.173 --> 00:12:27.770
+foreground scribble and the probability 
+of foreground doesn't change meaning the 
+
+164
+00:12:27.770 --> 00:12:32.370
+gradient doesn't change. 
+Remember gradient is the difference 
+
+165
+00:12:32.370 --> 00:12:36.993
+between consecutive pixels. 
+In the direction of the past. 
+
+166
+00:12:36.993 --> 00:12:40.815
+So this is the curve. 
+So I'm going to travel the curve. 
+
+167
+00:12:40.815 --> 00:12:44.180
+I'm basically going to go from every 
+place. 
+
+168
+00:12:44.180 --> 00:12:48.545
+In the image to a scribble. 
+I'm going to look for a path, and I'm 
+
+169
+00:12:48.545 --> 00:12:53.913
+going to say, is my probability of being 
+foreground changing a lot around this 
+
+170
+00:12:53.913 --> 00:12:56.919
+path? 
+If it's changing a lot, I'm going to pay 
+
+171
+00:12:56.919 --> 00:13:00.426
+a big price. 
+If it's not changing a lot, I'm going to 
+
+172
+00:13:00.426 --> 00:13:03.790
+pay a small price. 
+Then I can take another path. 
+
+173
+00:13:03.790 --> 00:13:10.517
+I'm going to see which path, is, shorter, 
+with this weight, and I'm going to do 
+
+174
+00:13:10.517 --> 00:13:16.980
+this same, for another point, in this 
+scribble, I'm going basically do that 
+
+175
+00:13:16.980 --> 00:13:24.062
+for, every point in this scribble, so I'm 
+computing to, every single point, in this 
+
+176
+00:13:24.062 --> 00:13:28.399
+scribble. 
+What's the, path, where my probability of 
+
+177
+00:13:28.399 --> 00:13:35.304
+fil, be in foreground, is, smaller, than 
+I have to do basically the same, for this 
+
+178
+00:13:35.304 --> 00:13:37.240
+scribbles. 
+Of background. 
+
+179
+00:13:37.240 --> 00:13:43.465
+So for this pixel I'm going to say what's 
+the probability, whats it cost of getting 
+
+180
+00:13:43.465 --> 00:13:47.440
+to the background and then I'm going to 
+compare that. 
+
+181
+00:13:47.440 --> 00:13:53.478
+So in pictures when we do this 
+computation which again can be done 
+
+182
+00:13:53.478 --> 00:13:56.578
+extremely fast. 
+We have the scribbles. 
+
+183
+00:13:56.578 --> 00:14:00.950
+This was the probability we computed 
+before, this image. 
+
+184
+00:14:00.950 --> 00:14:06.383
+This is an image where the colors blue 
+means low. 
+
+185
+00:14:06.383 --> 00:14:09.266
+Red means large. 
+Same here. 
+
+186
+00:14:09.266 --> 00:14:14.220
+Basically blue. 
+Going to red we are basically from small 
+
+187
+00:14:14.220 --> 00:14:18.232
+to large. 
+We are basically saying that every pixel 
+
+188
+00:14:18.232 --> 00:14:24.652
+here has a very large distance basically 
+to the foreground, but pixels here have 
+
+189
+00:14:24.652 --> 00:14:29.226
+very low distance to the foreground and 
+the inverse here. 
+
+190
+00:14:29.226 --> 00:14:35.566
+So I want to repeat that once again, we 
+first computed the probability based on 
+
+191
+00:14:35.566 --> 00:14:40.060
+the color distributions that the user has 
+marked for us. 
+
+192
+00:14:40.060 --> 00:14:46.706
+Then we say okay and I'm just going to 
+use a figure to illustrate that. 
+
+193
+00:14:46.706 --> 00:14:52.180
+We basically say from every pixel. 
+In the image. 
+
+194
+00:14:52.180 --> 00:14:58.257
+They just compute curves that start at 
+the pixel, finish at the scribble. 
+
+195
+00:14:58.257 --> 00:15:02.816
+And let's see what's the cost of 
+traveling that curve. 
+
+196
+00:15:02.816 --> 00:15:09.400
+And the cost is given by this function. 
+The less it changes the probability of 
+
+197
+00:15:09.400 --> 00:15:15.620
+being foreground, the lower the cost. 
+We do the same to the background for 
+
+198
+00:15:15.620 --> 00:15:19.736
+every pixel. 
+And then we say, is it cheaper for you to 
+
+199
+00:15:19.736 --> 00:15:25.561
+get to the foreground scribble, than it 
+is for you to get to the background 
+
+200
+00:15:25.561 --> 00:15:28.978
+scribble, then I call you a foreground 
+pixel. 
+
+201
+00:15:28.978 --> 00:15:33.560
+If it's the other way around, I call you 
+a background pixel. 
+
+202
+00:15:33.560 --> 00:15:39.773
+There you see all the computations are 
+done computing this minimal effort curve 
+
+203
+00:15:39.773 --> 00:15:45.054
+gone by the image only once. 
+Once you have done that for every pixel, 
+
+204
+00:15:45.054 --> 00:15:51.650
+basically you draw the boundary. 
+Of the probability of being background or 
+
+205
+00:15:51.650 --> 00:15:56.490
+foreground, and you get your very, very 
+nice segmentation. 
+
+206
+00:15:56.490 --> 00:16:01.470
+Relatively simple algorithm. Now, we can 
+do a bit more. 
+
+207
+00:16:01.470 --> 00:16:07.329
+This was based on scribbles that were 
+marked somewhere so there was a 
+
+208
+00:16:07.329 --> 00:16:12.938
+foreground scribble here. 
+And there were a few background scribbles 
+
+209
+00:16:12.938 --> 00:16:17.039
+around. 
+But now we have a first estimate of where 
+
+210
+00:16:17.039 --> 00:16:21.811
+our boundary between foreground and 
+background should be. 
+
+211
+00:16:21.811 --> 00:16:27.084
+We can explore that in a second stage 
+which is fully automatic. 
+
+212
+00:16:27.084 --> 00:16:32.580
+And the basic idea is very simple. 
+Okay, let's just go back. 
+
+213
+00:16:32.580 --> 00:16:40.140
+This was what our first estimate was. 
+Let's just move inside, the object a bit, 
+
+214
+00:16:40.140 --> 00:16:47.896
+and let's move outside the object a bit 
+full automatic fashion, and we can call 
+
+215
+00:16:47.896 --> 00:16:50.973
+this now. 
+A foreground scribble. 
+
+216
+00:16:50.973 --> 00:16:57.032
+Not the one that we mark before, we call 
+this one now, which is automatically 
+
+217
+00:16:57.032 --> 00:17:02.771
+computed, we call it a foreground 
+scribble and we call this a background 
+
+218
+00:17:02.771 --> 00:17:06.757
+scribble. 
+And I can do my algorithm once again but 
+
+219
+00:17:06.757 --> 00:17:11.780
+I can do the estimation of the 
+probability of being foreground. 
+
+220
+00:17:12.960 --> 00:17:18.814
+Now based on that scribble which is very, 
+very close to the boundary, so it 
+
+221
+00:17:18.814 --> 00:17:24.589
+probably have better information, about 
+where that boundary should be. And 
+
+222
+00:17:24.589 --> 00:17:28.545
+actually moreover, we can actually do 
+that locally. 
+
+223
+00:17:28.545 --> 00:17:34.399
+If I want to refine this boundary, I can 
+only look at this scribble, and this 
+
+224
+00:17:34.399 --> 00:17:41.113
+piece of the scribble, compute my 
+probability and refine it then go into a 
+
+225
+00:17:41.113 --> 00:17:47.128
+different region, and also only use that 
+to refine this and so on. So I can travel 
+
+226
+00:17:47.128 --> 00:17:52.474
+around my first estimate, get new 
+estimates of what should be foreground 
+
+227
+00:17:52.474 --> 00:17:58.488
+and what should be background, and get a 
+really, really very accurate segmentation 
+
+228
+00:17:58.488 --> 00:18:02.127
+from that. 
+So, we'll run twice the algorithm, first 
+
+229
+00:18:02.127 --> 00:18:05.840
+we let the user help us to find this 
+distribution. 
+
+230
+00:18:05.840 --> 00:18:11.752
+Second, we let the initial stage to tell 
+us how to compute that distribution, and 
+
+231
+00:18:11.752 --> 00:18:16.778
+then we get a really, really nice 
+segmentation as you can see, we can 
+
+232
+00:18:16.778 --> 00:18:20.030
+basically get very accurate at the 
+boundary. 
+
+233
+00:18:20.030 --> 00:18:26.175
+Very basically, we get the errors and we 
+get really, really good results with 
+
+234
+00:18:26.175 --> 00:18:30.021
+that. 
+So, let me give you a few examples of 
+
+235
+00:18:30.021 --> 00:18:36.915
+this and we see them basically here. 
+We have in every role examples and we can 
+
+236
+00:18:36.915 --> 00:18:40.380
+see this prevail. 
+This is the binary segmentation. 
+
+237
+00:18:40.380 --> 00:18:44.760
+And then as we already talked, I can put 
+it in a different background. 
+
+238
+00:18:44.760 --> 00:18:50.473
+Here basically different images different 
+images so basically every row has a 
+
+239
+00:18:50.473 --> 00:18:56.480
+different example its very important when 
+you do any image process algorithm that 
+
+240
+00:18:56.480 --> 00:19:02.487
+works for a lot of data you don't want to 
+design an algorithm that works for only 
+
+241
+00:19:02.487 --> 00:19:08.128
+one type of data you want to be as global 
+as possible unless you have a very 
+
+242
+00:19:08.128 --> 00:19:14.062
+particular application in mind and then 
+its very important to show that it works 
+
+243
+00:19:14.062 --> 00:19:19.500
+for a large variety of images. 
+Now you may wonder, what happens. 
+
+244
+00:19:19.500 --> 00:19:25.870
+Do I need the user to be an expert? 
+Do I need the user to basically be. 
+
+245
+00:19:25.870 --> 00:19:29.527
+You know. 
+Have complete knowledge of the algorithms 
+
+246
+00:19:29.527 --> 00:19:34.905
+and mark these scribbles exactly where 
+they should be to give me the hints. 
+
+247
+00:19:34.905 --> 00:19:39.638
+Of course, if that's needed, then this 
+algorithm is not very useful. 
+
+248
+00:19:39.638 --> 00:19:45.374
+We want the user to basically work with 
+the algorithm in a very relaxed fashion, 
+
+249
+00:19:45.374 --> 00:19:48.435
+so. 
+Here is just an example that this type of 
+
+250
+00:19:48.435 --> 00:19:53.381
+algorithm inside normally very robust. 
+So we have the same image, and very 
+
+251
+00:19:53.381 --> 00:19:59.004
+different foreground, scribbles the blues 
+and very different background scribbles, 
+
+252
+00:19:59.004 --> 00:20:02.845
+the greens. 
+And we see that basically the results are 
+
+253
+00:20:02.845 --> 00:20:06.330
+the same. 
+You see the boundary between foreground 
+
+254
+00:20:06.330 --> 00:20:10.739
+and background being basically identical 
+in all of the images. 
+
+255
+00:20:10.739 --> 00:20:16.145
+So we want really the user to be very, 
+very friendly with the images and the 
+
+256
+00:20:16.145 --> 00:20:19.132
+algorithm not to ask too much of the 
+user. 
+
+257
+00:20:19.132 --> 00:20:24.039
+Actually, it ask very little. 
+It basically, all that the algorithm asks 
+
+258
+00:20:24.039 --> 00:20:29.531
+is the user to say, please mark me 
+foreground and basically go and please 
+
+259
+00:20:29.531 --> 00:20:34.441
+mark me, background. 
+I used a different colors in my pen than 
+
+260
+00:20:34.441 --> 00:20:37.960
+in the image, but the message is very 
+clear. 
+
+261
+00:20:37.960 --> 00:20:46.250
+So, this is an example of interactive 
+image segmentation the user has help us. 
+
+262
+00:20:46.250 --> 00:20:49.570
+We're going to see a couple of additional 
+videos. 
+
+263
+00:20:49.570 --> 00:20:55.129
+One, we are basically going to be running 
+this inside Adobe Photoshop, one of the 
+
+264
+00:20:55.129 --> 00:20:58.450
+examples. 
+The other, we're going to do interactive 
+
+265
+00:20:58.450 --> 00:21:04.442
+video segmentation in one of the next 
+videos is one of the basically algorithms 
+
+266
+00:21:04.442 --> 00:21:09.785
+inside one of Adobe's products that I'm 
+going to give you details about this. 
+
+267
+00:21:09.785 --> 00:21:13.756
+So I'll see you in the next videos. 
+Thank you very much. 

@@ -1,0 +1,210 @@
+We're going to use a very simple diagram 
+to demonstrate and to present the model. Again we are on the search for a model 
+for a signal X that has N dimensions. What is N? 
+For example if we consider 8x8 blocks. As in jpeg we have that N is equal to 64 
+why 64? We take an 8x8 block or image patch and 
+we take one row after another. We concatenate them and we get N = 64. 
+This is the signal we are looking to model. 
+Now. The next step and actually one of the 
+main components of Sparse Modelling is the Dictionary. 
+The Dictionary is a matrix which is N by K. 
+N is the dimension of the signal we are looking to model. 
+K is the size of the dictionary. We have K columns. 
+Every column is called an atom. It's kind of an image, kind of a patch. 
+Because every column is 64-dimensional. And we have K such columns. 
+Very often, k. Is larger than n. 
+That's not necessary, but happens very often. 
+For example, when we are going to do image renouncing as we are using as an 
+example. If case larger than n, then we say that 
+the dictionary is over complete. Now, if K is equal to N, then the 
+dictionary's complete. For example, Fourier or discrete cosine 
+transform are complete dictionaries. If K is less than N, we say that a 
+dictionary is under-complete. Now we have the dictionary. 
+The second element of sparse modeling is. This vector alpha. 
+And what we have is a vector, alpha, that has to have dimensions, K, and we 
+multiply the matrix, D, the dictionary, by the vector, alpha, and we produce the 
+signal that we're trying to model. What's particular of this vector alpha, 
+is the number of non zero entries of the vector is very small. 
+We represent those by this red dot. We have, at most, L non zero entries. 
+And when we multiply this matrix, the Dictionary D by alpha. 
+What we are doing is having a linear combination of the atoms. 
+Corresponding to the non-zero entries. So, we are combining, this is the second 
+one. It means it's picking the second atom. 
+This is picking its corresponding atom. And this is picking its corresponding 
+atom. And we basically have a linear 
+combination according to the coefficients here of those L atoms. 
+And because these are only a few non-zero coefficients, this vector is very sparse. 
+And from that, the concept of sparse modeling. 
+So what we have is basically. A signal. 
+Represented as a product of the dictionary, and a vector alpha. 
+With only a few non zero entries. A very sparse vector. 
+Now, this model is, first of all, very, very simple. 
+Once we have the dictionary, d. And alpha will obtain the signal just by 
+a simple product. This dictionary, we're going to discuss a 
+lot about it in this video, in the future videos. 
+But for now, it's a fixed dictionary of dimensions N by K, as we have seen in the 
+previous slide. Now, the model is extremely rich. 
+Let's just do some numbers. If we have a dictionary of size K, 
+meaning K atoms, and we pick L. We have L choose out of K possibilities. 
+So if L is three we can pick any three out of K. 
+Once we pick them, each one of those selections define a subspace, a very low 
+dimensional subspace. Once we pick, we do that selection, the 
+signal, it's just a linear combination of the corresponding atoms and that's a 
+linear subspace. But we have many of them. 
+We have L out of K, a lot of them. So the model is extremely, extremely rich 
+and, hopefully, that will help us to represent. 
+Basically any signal of interest. So, the model is simple, the model is 
+very rich. And also, the model is actually familiar 
+to us. This is not the first time that we see 
+such a model of taking basically a signal and representing it as a linear 
+combination of a dictionary with only a few atoms of that dictionary. 
+Let's think for a minute, or for a few seconds, when have we seen already this 
+model? We. 
+Remember what we have learned in the last few weeks. 
+We have seen this model. In JPEG. 
+When, or how, in JPEG D. Is basically the cosine basis. 
+In JPEG we took and eight*8 block. We did a transform into the cosine 
+domain. So d is the cosine basis. 
+And alpha is basically the coefficient of the cosine transform. 
+And we saw that, for example, when we quantize. 
+A lot of the, these great cosine transform coefficients became zero. 
+So basically alpha was 64-dimensional. But a lot of it was zero. 
+So it was a very, very sparse vector. And it achieved an extremely good 
+representation of the eight by eight patch. 
+With just a few provisions, so JPEG is a great example of the power of sparsity. 
+Let me just give you another extreme example of how we can represent signals 
+in a very sparse fashion. Consider that D includes all the signals 
+of interest. So if you're talking about images, this 
+has huge matrix, K basically goes over all the possible images. 
+If that happens, then every time you want to represent a signal x, an image. 
+You only go and pick the corresponding atom. 
+The corresponding column in d. And that means that our sparsity is one. 
+So this extreme example is only to illustrate that we can do sparse 
+representations of signals. Of course, it's not very practical; 
+because imagine that you cannot put all the patches or all the images in one 
+dictionary. That would be huge, and it won't be very 
+useful. The JPEG is, as we say, probably the most 
+successful image processing algorithm, and it's based on Sparse Representations. 
+So, that's what we want. We want to Sparse Representation of 
+sigmas. And the basic idea once again is that the 
+signal is a linear combination of a few atoms because alpha is sparse. 
+How do we measure Sparsity, is the next question? 
+The way we are going to measure Sparsity is with. 
+This, which is called the LP norm for a given P. 
+Remember, alpha is nothing else than a K dimensional vector. And what we are doing 
+here with this formula is that we take every entry of alpha, and we take the 
+absolute value, and we elevate to the P power, and we add all of them. 
+And that's the LP norm of the vector. Let's illustrate this for different 
+values of P. If p is equal to two, we don't really get 
+what we want, because what we want is to penalize. 
+With an equal amount, every time one of the entries of alpha is non-zero. 
+And when it's zero, don't penalize at all. 
+So, that happens. Zero, no penalization. 
+But then the penalization increases quadratically with actually demanding to 
+lose the entry. We don't want that. 
+We want kind of an equal penalization. As long as it's non-zero, it gets 
+penalized. What happen when P is equal to one. 
+At least the penalization now is proportional. 
+Directly proportional and linearly proportional to the magnitude of the 
+entry, is not quadratic, that's better, but doesn't look like it is good. 
+We are going to see, later on that this is actually a very good penalty function. 
+This L1. L for P = 1 It doesn't look like. 
+But we are going to see that, under certain conditions, this is exactly what 
+we are looking for. But before we get into that, let's keep 
+looking for the ideal case. If now, P becomes less than one, then we 
+start to have what we really want. A penalty of zero if the coefficient is 
+zero. And then the penalty starts to flatten 
+out, meaning. As long as the coefficient is non-zero, 
+we get the same penalty. If we further decrease p less than one, 
+I'm getting close to zero, we get exactly what we want. 
+Zero penalty and equal penalty for everybody that is non-zero. 
+So the way we are going to measure sparsity is with this function. 
+For P equal zero. And that's often written. 
+As in this fashion with a zero here, and a zero there. 
+This is what's called a L0 pseudonorm. It's not really a norm, and that's why 
+it's called the pseudonorm, although very often, it's called also the norm, with 
+the understanding that it's not exactly a norm, and this is how we are going to 
+measure sparcity. We are going to count the number of 
+non-zero elements in the vector alpha. [SOUND] So this is what we basically have 
+here. Signal represented as a linear 
+combination of atoms from this, that we're not allowed to pick more than l of 
+those atoms. So back to our problem of image 
+denoising. The Maximum-A-posteriori estimation of 
+image denoising. What we have, is that we want to 
+represent our signal. Very closely, this is the measurement and 
+this is what we want to be. We want to have a close representation, 
+meaning very close. X have to be as close as possible to Y as 
+long as it belonged to the right model and then we replace X by the alpha. 
+Because we know that now we're going to be representing the signal as. 
+The dictionary multiplied by alpha that not every alpha we basically must have 
+the no more than L entries in alpha are non zero. 
+To give a. Illustrative representation, and of 
+course we get back. The signal by the alpha, where alpha is 
+the optimal. So, in a, in a very simple pictorial 
+representation, what we have is D alpha, this is D, has dimensions N by K. 
+This is alpha, that has dimensions K. We'll subtract Y. 
+That's aware approximation error. But we are not allowed to pick any alpha. 
+We're only allowed to pick alpha that has at most L non-zeros, which means that we 
+are going to be approximating Y by, at most. 
+L columns, the linear combination of at most L columns of D. 
+And from now on, the representation is given by alpha. 
+Instead of X we use alpha and we know if we want to recover the signal we 
+basically multiply by D. Now what we have obtained is a very low 
+dimensional representation of. Our signal, and a low dimensional 
+approximation of y. And the idea is that, if we reduce the 
+dimension of y. Basically, we are getting rid of the 
+noise. Because we are not allowing to use all of 
+the items. We're only allowing to use very few, 
+projecting the signal into a low dimension. 
+And therefore, reducing the noise. It's the same as we saw with the points. 
+We have points. On the plane. 
+That if we say that we are only allowed to represent all these points with a 
+straight line. With feet of straight line and we're 
+basically projecting the points onto the straight line and by that we are 
+denoising the points because we go into a much lower dimension. 
+In this case we just go from two to one, but that illustrates the concept that 
+we're going to a lower dimension of space and by that we get rid of the noise. 
+In order to represent the noise we will need many additional atoms and that's why 
+we are restricting alpha to be sparse. Now. 
+Are we done? We are only at the very beginning of this 
+week. So for sure we are not done. 
+Let me illustrate a few of the problems that we need to still solve. 
+Now. We were talking about this, minimize the 
+error under the constraint that you are not allowed to pick more than L non zero 
+entries in alpha. Is this the problem we need to solve? 
+Maybe we can solve it in this way. Let us constrain here the error. 
+You don't want more than the given error and find the sparse's possible vector 
+that achieves this error. Or we can actually have a combination of 
+the sparsity and error and try to optimize for alpha such that it minimizes 
+the sum of the two terms with a coefficient lambda. 
+So, we have three possibilities here. Sometimes the three are equivalent. 
+Sometimes they are not. Which one shall we be using? 
+Another problem. In this case, a theoretical problem. 
+Will we always find an alpha? So, I give you a y. 
+I give you a dictionary. Will I be able to find, for example, an 
+alpha that is sparse enough, and represents this signal up to certain 
+error. Is that possible? 
+And if I find it, will that be unique? Will there be only one alpha? 
+Will any alpha have the same support, the same non-zero entries? 
+When is that possible? And of course what about a dictionary? 
+Which dictionary should I use in order to get alpha as sparse as possible? 
+This is going to be something that we are going to discuss quite a lot during this 
+week. And these are some of the questions these 
+very nice sparse modelling and sparse representations open. 
+So what have we done? We basically started with image denoising 
+as an example and we say, we need to model the signal, we need to understand 
+what do we mean by image denoising, what type of clean signal are we looking for. 
+And that basically opened a question to say, we need to define models. 
+When we say we need to define models, we basically. 
+Describe a model, which is the sparse model. 
+The signal is a linear combination of a few elements. 
+A few atoms of a given dictionary. Once we define that, are we done? 
+Of course no. We have all these questions that we just 
+mentioned, theoretical, computational, how do I compute that alpha and, of 
+course, how do I compute a dictionary that is appropriate for the type of 
+signals that we are looking for? So these are some of the questions that 
+we are going to address during the next few videos. 
+And I'm looking forward to that. This is, as I say, a very, very exciting 
+topic. And very, very active topic in image 
+processing right now. Thank you very much. 
+Looking forward to seeing you in the next video.

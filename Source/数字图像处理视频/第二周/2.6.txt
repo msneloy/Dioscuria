@@ -1,0 +1,251 @@
+While JPEG is the most important image 
+compression algorithm, and as we discussed before, probably the most 
+important image processing algorithm overall, there are other techniques for 
+image and video compression which are very important. 
+And I want to describe the basic underlying, the concepts behind two of 
+them. One is JPEG-LS, and the other is MPEG. 
+JPEG-LS basically permits us to compress lossless, basically without any loss of 
+information, preserving exactly the pixel value at every single pixel in the image. 
+An MPEG is the one that we use to compress video, 
+and you probably have MPEG in your mobile phones as well, 
+and you have seen videos on the internet that are compressed with MPEG. 
+So let's describe the underlying concept between these two very important image 
+and video compressing, image and video procession techniques as what? 
+And we're going to start with JPEG-LS concepts, basically. 
+And the idea behind that is what's called predictive lossless compression. 
+So for comparison, I left here the basic diagram that we have seen so many times 
+already for JPEG-LS, while this is the basic diagram for 
+predictive coding. And the basic idea of predictive coding 
+is very, very simple. It's even simpler than the idea of JPEG. 
+And let's just illustrate that with an example. 
+We're just draw a small portion of an image. 
+And, in predictive coding, the first thing that we have to define, is an 
+order. We're going to compress one pixel after 
+another. And, let's say that we define what's 
+called, a roster order, that we basically go from left to right, and we'll encode 
+the first row, then we code, the second row, and we keep going. 
+So let's say that we have encoded everything and now we need to encode this 
+pixel. The idea of predictive coding is to 
+guess, to predict the value of this pixel based only on the past. 
+We cannot predict it based on the future because the decoder doesn't know the 
+future. That the caller has only received all 
+this pictures. So we could, for example say, okay, I'm 
+going to guess, I'm going to predict that the value of this pixel is identical to 
+the value of the previous pixel. And then what we do is, after we do the 
+prediction, we basically compute the error, between my prediction and the 
+actual value. And what we encode, let's say with 
+Huffman coding here, is the error. And the decoder basically is going to 
+emulate what the encoder is doing. It's basically going to say, okay, I'm 
+going to do the same prediction. That you did. 
+I know the past, exactly as you know it, and I'm going to predict that this pixel, 
+with this value, so the color and the color talk with each other. 
+They are using exactly the same prediction strategy. 
+So, I predicted this one, and you gave me the error. 
+I basically add to my prediction the error, and I have this pixel value. 
+And then I continue to the next pixel. I do exactly the same. 
+Process. And the basic idea is that if you are 
+very good at predicting this error is going to be very close to zero, all the 
+time. It's not going to have any possible 
+value. It's going to have values around zero, 
+and that's exactly if you remember what encoders like Huffman coding likes. 
+To have values that appear a lot, so we can give a very short code to them, 
+and some values, once in a while you're going to make a big mistake in your 
+prediction. Don't worry, 
+because you're going to encode error, and basically when, 
+by encoding the error, you're going to have lossless compression. 
+So once in a while you make a big mistake. 
+Then Huffman will use a larger code for that mistake, but because that happens 
+once and awhile, it won't be so problematic, and your going to be able to 
+still compress. So, a lot of the art in predictive 
+lossless compression is in designing, in designing your predictor. 
+Such that the error is as small as possible all the time. 
+Hopefully, zero. If you're great in predicting, it's 
+going to be always zero. And it's going to be able to compress a 
+lot. But at least it's going to be very, very 
+close to zero if you're doing smart predictors. 
+And then the decoder is going to just do a very, very simple decoding. 
+So know that overall this structure of a predictive lossless compression technique 
+is a bit simpler than the one of JPEG. Ofcourse it's not going to be able to 
+achieve as much compression. Base is going to be lossless which is 
+very important. So lets just illustrate a couple of 
+possible. Predictors. 
+So we have our image. An. 
+We're going to, basically, drop the liters, again, let us see that all these 
+have been encoded. And lets just consider now, that what I 
+want to do is predict, this pixel. So, one thing I can do, is predict it 
+based on the past. Just on this pixel. 
+So I can say that I predict this to be F of X minus one Y, and then, if I'm the 
+encoder, I'm going to take actual F of XY. 
+I'm going to substract, so my error at this pixel will be F. 
+Of X minus one, Y minus F. Xy. 
+And this what I'm going to basically save through half my coding. 
+And then once again the decoder is going to emulate my predictor, it's 
+going to say oh you predicted this, you gave me an error, I add the error to my 
+prediction, I get this pixel value. Very, very simple operation, in 
+particular for the decoder, it's a, it's a really, really simple operation. 
+So, one possible predictor is just to use the past. 
+Another is basically to use the two previous pixels. 
+Let's say an average of the three, two previous pixels. 
+Some other predictors, like, for example JPEG-LS, we'll actually consider a bit 
+more. We'll basically try to use, 
+be a bit smarter, and maybe use all this region. 
+Say, okay, why only to use the one on the left? 
+Maybe I can also use the one on top of you, and the one basically diagonal. 
+And, you can do normal combinations of them. 
+As I say, you could, if you were to use these two, you could basically average 
+them. You can also average these three. 
+Actually JPEG-LS does a bit more elaborated technique. 
+So JPEG-LS is the standard for lossless image compression. 
+It's actually the algorithm that is in the Mars rovers. 
+One of the algorithms that, that are in the Mars rovers for image compression is 
+JPEG-LS and it has. a bit smarter. 
+It tries to find basically where edges are in the image. 
+But it's also are very simple, remember compression has to be simple in order to 
+become a standard, so that everybody can implement them and they can run very 
+fast. And we have seen that concept appear 
+already in JPEG. It also appears in JPEG-LS, and it will 
+appear as well in MPEG. So you could use this region. 
+Basically you could use as I said the whole past. 
+You could basically say I'm going to write to use only these pixels. 
+maybe if I have encoded already, if I'm in the middle of a very large image, I 
+could basically use my whole pass, past data, 
+all the way to here. The problem is that if you do that, 
+you're going to have to remember a lot of pixels, it's going to take a lot of 
+memory, if you just used everything in the past, it's just too much. 
+So JPEG-LS has most modern predictive lossless compression techniques. 
+This is, may be the previous role, at most two roles before, but not much more 
+than that. Otherwise, SSA becomes too complex and 
+too much memory. So, that's basically the idea of 
+predictive coding. Now let's see how effective this is with 
+just a very simple image. So this is a nice image from earth, taken 
+from outer space. And this is a distribution. 
+Remember we talked about histograms. This is the distribution of pixel values. 
+Okay? So you see Huffman might like this 
+because there are some concentration of pixel values around 150, but there is 
+still a very, very wide distribution. Now if we do predictive coding with one 
+of the predictors I just mentioned. So we go roster like this and at every 
+point we basically predict the value based on some very small neighborhood 
+around that value. Then the error is distributed as here. So 
+we predict, we compute the error as I've shown in the previous slide, and we plot 
+the distribution of error, the histogram. But look how nice it is, it's a smart 
+predictor and it's a relatively nice image. 
+And then we basically get a strong concentration around zero, and you can 
+observe here a plot of the prediction error and as expected when then are big 
+changes, your prediction doesn't know that a 
+change is about to happen. So that's where you make most of the mistakes. 
+In regions that are relatively uniform, you don't make a lot of mistakes, so 
+that's why you get a lot of zeros. And okay, once in a while, there's a big 
+change you make a mistake and Huffman is going to take more bits to represent that 
+prediction error, but that happens once in a while. 
+So most of your errors of the prediction are very small, 
+and that's really, really good. So that's basically the underlying idea 
+of JPEG-LS, or any predictive lossless encoder or compression. 
+Now, you can add quantization as well. In a predictive coding, or in a 
+predictive image compression technique. So basically you quantize the error. 
+The same way that we saw how to quantize transform coefficients, you quantize the 
+error. And with that, you can achieve more 
+compression. You can actually have control on how much 
+error. So if you are allowing +-plus minus 1 
+pixel value of error, of quantization in your error, 
+then you know that your reconstructed image will differ, 
+will differ from the original image only by +-plus minus 1 grey value. 
+So you can have a lot of control. Because you're not working the transform 
+domain, you're working the image domain. 
+And that's also part of JPEG-LS, that you can add quantization to your 
+errors. basically, the decoder will receive a 
+quantized error, and will reproduce a pixel that has a small variation compared 
+to the original pixel. One very important thing to have in mind 
+is that when you introduce quantization, you have to do your prediction based on 
+the quantized error. So let's just do the same drawing that we had before. 
+If we are going to predict this pixel based on this one, 
+then remember, the decoder is going to only have the 
+quantized version of that after it has reconstructed the quantized error. 
+So at the encoder, you have to also emulate what the decoder is doing and 
+consider only the quantized version of your pixel. 
+If you were to predict based on the original version, then you're predicting 
+based on something that the decoder doesn't have. 
+And that's why it's the quantized value that enters the area of the predictor in 
+this drawing. That's just something to have in mind in 
+case you're designing basically a predictive loss, a predictive lossless 
+and lossy image compression. If you want to have quantization, 
+remember, you cannot use anything in image compression that the decoder 
+doesn't have. As an encoder, you have only, 
+you are only allowed to use things that the decoder is going to see. 
+Otherwise, this basically is not a symmetric system, and it won't work. 
+So, that's just the only thing to have in mind. 
+And as I say JPEG-LS includes a quantization. 
+So this is the basic underlying idea of lossless, 
+predictive coding, or lossy, but with control, loss. 
+Now, that's not the only way that we can do prediction. 
+And basically MPEG, which is the standard for video compression, is also based on 
+prediction. But now, I have actually multiple frames. 
+So remember in video, we have let's say 30 frames a second. 
+So in order to predict, for example, this frame, 
+I can use past frames to predict it. And, the basic idea is very simple. 
+If I'm filming a scene that is completely static, then every frame will be 
+identical to the previous frame. And MPEG is trying to take advantage of 
+that. It's trying to say, okay, 
+let's just look at the region in an image and let's see if that region, 
+this basic constant, and you can do it in multiple fashions, 
+and we're not going to discuss all the details behind MPEG. 
+But for example, you can actually say okay, I'm going to see if this region 
+here; if there is a similar region around it, it doesn't have to be exactly at the 
+same place, it can be around it. It can basically look for similar regions 
+in previous frames, maybe in only in one frame, maybe only in three frames before 
+me, it's going to look for similar regions and it's going to basically also 
+try to encode only the error. So it's going to do prediction in time. 
+Okay? And it's a very, very simple idea, and 
+that works extremely well. We know that MPEG actually compresses a 
+lot, thanks to the fact that for example, this 
+is a good example. The only thing that is moving in this video is me. 
+The whole background is constant. So, if you pick blocks in the background, 
+you're going to find in previous frames basically identical blocks and then the 
+prediction error will be zero and that's great for the encoder. 
+So here is an example with basically we have the same image that we had before 
+but basically we have two frames of that image one and two and we do a very simple 
+prediction here, which basically we say, okay, the second image is identical to 
+the first image. If there is not a lot of motion, we see 
+that prediction is really, really good. Most of the time it's zero, as we have 
+seen before for the special predictor. This is a temporary predictor. 
+Once again, every pixel here is predicted as to be identical to the pixel in the 
+same position in the previous image. We can be smarter. 
+We can look for that pixel in a region around it, and then we are going to 
+encode both the value and the offset So, did I find it to the left, or did I find 
+it, eh, eh, downwards. 
+But here it was the simplest possible thing. 
+Just basically exactly in the same position. 
+And this is the difference, and this is the distribution of the error. 
+So basically, if I know this frame. I'm going to be able to reproduce this 
+frame very, very efficiently by copying the previous frame, and adding the, this 
+image, which is the error image. Copying the previous frame is free, 
+because I already have it. The decoder array has it. 
+And compressing this, because it's so concentrated in zero, it's really, really 
+very efficient with techniques with Huffman coding. 
+I add these two images, I get this one, and then I continue to the next frame. 
+And of course, if there is a lot of motion, the error image won't be as 
+simple, but hopefully it will be simple enough that Huffman can take advantages 
+of it. And this is the basic block diagram of 
+MPEG, or video compression techniques. It's very similar to what we have seen 
+for JPEG. It basically has DCT, quantization, 
+variable length coding like half man. It only has this additional component 
+here, which is basically encoding the prediction in time. 
+So it's the one that takes care of doing this motion estimation and saying, okay, 
+I want to take this block from a region in the past. 
+But the basic structure is the samic structure, 
+plus this that takes into account that I'm not compressing just one image, 
+and basically compressing multiple frames, 
+and many of them are very similar. So, once again, predictive coding. 
+Here actually is a combination between the techniques that we have seen for 
+JPEG, and the techniques that we have seen for 
+predictive coding. Both together produce MPEG. 
+With this, we basically have concluded the basic underlying concepts of image 
+and video compression. So we have discussed JPEG, we have 
+discussed JPEG-LS, and we have discussed MPEG. 
+We did transform, we did predictive coding, we did quantization, we did 
+basically Huffman coding. The whole building blocks of compression, 
+which is what we basically use daily in image and video processing. 
+In the next video, which is going to be a bonus video, if you have time, I 
+recommend you to watch it. I'm going to describe very briefly what's 
+called run length coding, just to complete the picture. 
+But, if you don't have time, you can just skip that video, and next week go into 
+the next unit. Thank you very much.

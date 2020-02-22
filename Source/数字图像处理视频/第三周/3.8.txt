@@ -1,0 +1,54 @@
+Hello and welcome back. 
+Now that we know, the underlying framework of non-vocal means, let's just 
+demo it in real time. Non-local means denoising works using the 
+resources in the image processing online journal. 
+This is a website that I have provided a link in their webpage for this class, is 
+a journal that has a lot of online algorithms for image processing. 
+And I strongly suggest that you visit it if you want to play with a lot of the 
+state of the art in image processing. So the journal has first a full 
+description of the algorithm. It has also code that you can download and use in 
+your own computer, but also has an online demo and that's what we are going to do 
+next. You can upload your own images, or you 
+can basically use the images already available on the website, just to 
+illustrate and to help you understand the algorithm better. 
+So let's just pick this image, for example. 
+And it's here. And we're going to run the algorithm. 
+We're going to add some noise to the image to see how non-local means will 
+de-noise that, and we're going to ask you to run. 
+So, now it's running, we see this. This algorithm can be made to run very 
+fast, but now it's running on a server and it's running on an implementation 
+that is not optimized for that. But here we have the result. 
+So we see, let's just illustrate the details. 
+We see here is the noisy image. Basically, the original image with the 
+other noise, and now we see the de-noised image. 
+Again, this is the noisy image, this is the de-noised image, and this is the 
+original. So we see that there are differences, but 
+certainly the de-noised image is much better than the noisy image. 
+Now, we can actually see the difference between the de-noised image and the 
+original image. Once again, this is the noisy image, 
+the de-noised image, the original image, and the difference. 
+They just run with a different image. So let's just select a new input here, 
+and we can pick a different image, for example, these dice. 
+And we can pick a different level of noise, and just put a lot of noise to see 
+what happens here, and then let's just run it. 
+Once again, while this is running, remember, the goal of non-local means is 
+to look for regions, say, okay, if I want to de-noise this 
+region, I'm going to look for similar regions around and average them. 
+The larger the noise, the more the algorithm will take, because it's goign 
+to try to average more and more patches to help us reduce the noise, the noise 
+even further. So here is, again, the noisy image the 
+algorithm has finished. This is the noisy. 
+This is the de-noised image. This is the original, 
+and this is the difference. So we think it has done a very, very good 
+job in de-noising this image. Noisy? 
+De-noise. Noisy, de-noise. 
+Original image and the difference. This image doesn't have a lot of texture. 
+And that's why these type of algorithms work really, really, well. 
+There, when there is a lot of texture, the algorithm still works very well, 
+but for every denoise image denoising algorithm, dealing with texture is a bit 
+more difficult. So let's just conclude this by showing 
+this once again. Noisy, de-noise, original, and 
+difference. And once again, you can just go into the 
+ipo.im website and play with this or any other algorithm that is available there, 
+and you can upload your own images and see how it works. 
+Thank you, and see you in the next video.
