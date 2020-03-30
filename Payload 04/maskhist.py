@@ -6,8 +6,8 @@ img = cv2.imread("source.jpg")
 
 mask = np.zeros(img.shape[:2], np.uint8)
 
-cv2.circle(mask, (500, 200), 100, 255, -1)
-cv2.circle(mask, (200, 200), 100, 255, -1)
+cv2.circle(mask, (350, 100), 100, 255, -1)
+cv2.circle(mask, (100, 100), 100, 255, -1)
 
 masked_img = cv2.bitwise_and(img, img, mask=mask)
 
