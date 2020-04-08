@@ -17,4 +17,5 @@ cv2.imwrite("dialation.jpg", dialation)
 
 cv2.imwrite("opening.jpg", opening)
 cv2.imwrite("closing.jpg", closing)
+
 cv2.waitKey(0)
