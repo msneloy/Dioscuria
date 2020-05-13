@@ -30,7 +30,8 @@ while True:
 
     # Draw the face bounding boxes
     for box in boxes:
-        cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 2)
+        cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0),
+                      2)
 
     # Show the tracked eyes and face
     cv2.imshow("Tracking", frame)
