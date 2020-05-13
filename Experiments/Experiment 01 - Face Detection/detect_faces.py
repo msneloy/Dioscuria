@@ -1,19 +1,23 @@
-from __future__ import print_function
-from pyimagesearch.facedetector import FaceDetector
-import argparse
+from utilities.facedetector import FaceDetector
 import cv2
-ap = argparse.ArgumentParser()
-ap.add_argument("-f", "--face", required=True,
-                help="path to where the face cascade resides")
-ap.add_argument("-i", "--image", required=True,
-                help="path to where the image file resides")
-args = vars(ap.parse_args())
-image = cv2.imread(args["image"])
+
+# Define paths
+image_path = 'images/obama.png'
+cascade_path = 'cascades/haarcascade_frontalface_default.xml'
+
+# Load the image and convert it to greyscale
+image = cv2.imread(image_path)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-fd = FaceDetector(args["face"])
-faceRects = fd.detect(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-print("I found {} face(s)".format(len(faceRects)))
-for (x, y, w, h) in faceRects:
-cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+# Find faces in the image
+detector = FaceDetector(cascade_path)
+face_boxes = detector.detect(gray, 1.2, 5)
+print("{} face(s) found".format(len(face_boxes)))
+
+# Loop over the faces and draw a rectangle around each
+for (x, y, w, h) in face_boxes:
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+# Show the detected faces
 cv2.imshow("Faces", image)
 cv2.waitKey(0)
